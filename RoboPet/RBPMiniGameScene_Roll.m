@@ -12,7 +12,7 @@
 
 typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     CollisionCategoryPlayer = 0x1 << 0,
-    CollisionCategoryWall = 0x1 << 1
+    CollisionCategoryWall = 0x1 << 1,
 };
 
 
@@ -26,6 +26,8 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 @property (strong, nonatomic) SKSpriteNode *player;
 @property (strong, nonatomic) CMMotionManager *motion;
 
+@property (strong, nonatomic) NSMutableArray *pickups;
+
 @end
 
 
@@ -34,7 +36,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 
 @implementation RBPMiniGameScene_Roll
 
-#pragma mark - SKScene
+#pragma mark - Init
 
 - (void)didMoveToView:(SKView *)view
 {
@@ -57,8 +59,8 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     self.player.physicsBody.restitution = 1.0;
     self.player.physicsBody.usesPreciseCollisionDetection = YES;
     self.player.physicsBody.categoryBitMask = CollisionCategoryPlayer;
-    self.player.physicsBody.collisionBitMask = CollisionCategoryWall;
     self.player.physicsBody.contactTestBitMask = CollisionCategoryWall;
+    //self.player.physicsBody.collisionBitMask = ;
     
     // Start in centre
     self.player.position = CGPointMake(self.size.width / 2, self.size.height / 2);
@@ -87,7 +89,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     topWall.physicsBody.dynamic = NO;
     topWall.physicsBody.categoryBitMask = CollisionCategoryWall;
     topWall.physicsBody.affectedByGravity = NO;
-    topWall.position = CGPointMake(self.size.width / 2.0, self.size.height + topWall.size.height);
+    topWall.position = CGPointMake(self.size.width / 2, self.size.height + topWall.size.height);
     [self addChild:topWall];
     
     SKSpriteNode *bottomWall = [SKSpriteNode spriteNodeWithColor:[UIColor clearColor] size:CGSizeMake(self.size.width, 1)];
@@ -98,7 +100,30 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     bottomWall.position = CGPointMake(self.size.width / 2, -bottomWall.size.height);
     [self addChild:bottomWall];
     
+    [self generatePickup];
 }
+
+#pragma mark - RBPMiniGameScene_Roll
+
+/**
+ *  Generates a pickup in a random location
+ */
+- (void)generatePickup
+{
+    // Instantiate pickup
+    SKSpriteNode *pickup = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(100, 100)];
+    
+    // Generate random position
+    CGFloat xPosition = arc4random_uniform(self.size.width); // +- pickup half width +- padding
+    CGFloat yPosition = arc4random_uniform(self.size.height); // +- pickup half height +- padding
+    pickup.position = CGPointMake(xPosition, yPosition);
+    
+    // Add to scene
+    [self addChild:pickup];
+    [self.pickups addObject:pickup];
+}
+
+#pragma mark - SKScene
 
 - (void)update:(CFTimeInterval)currentTime
 {
@@ -116,12 +141,24 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     // Apply new forces
     [self.player.physicsBody applyImpulse:impulseVector];
     self.physicsWorld.gravity = gravityVector;
+    
+    
+    // Check pickup intersection
+    for (SKNode *pickup in self.pickups) {
+        if ([self.player intersectsNode:pickup]) {
+            [pickup removeFromParent];
+            [self.pickups removeObject:pickup];
+            [self generatePickup];
+        }
+    }
 }
 
 #pragma mark - SKPhysicsContactDelegate
 
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
+    
+    
 //    CGVector collisionImpluse = CGVectorMake(contact.contactNormal.dx * contact.collisionImpulse,
 //                                             contact.contactNormal.dy * contact.collisionImpulse);
 //    [self.player.physicsBody applyImpulse:collisionImpluse atPoint:contact.contactPoint];
@@ -129,6 +166,17 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 
 - (void)didEndContact:(SKPhysicsContact *)contact
 {
+}
+
+#pragma mark - Internal
+
+- (NSMutableArray *)pickups
+{
+    if (!_pickups) {
+        _pickups = [[NSMutableArray alloc] initWithCapacity:1];
+    }
+    
+    return _pickups;
 }
 
 @end
