@@ -10,6 +10,8 @@
 		2E061CEB1C512C1A0024D24C /* RBPMainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E061CEA1C512C1A0024D24C /* RBPMainMenuScene.m */; };
 		2E2417E31C526C2B003FD5E7 /* RBPMiniGameScene_Music.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2417E01C526C2B003FD5E7 /* RBPMiniGameScene_Music.m */; };
 		2E2417E41C526C2B003FD5E7 /* RBPMiniGameSceneViewController_Music.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2417E21C526C2B003FD5E7 /* RBPMiniGameSceneViewController_Music.m */; };
+		2E2417E91C5270CC003FD5E7 /* RBPMiniGameScene_Jump.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2417E61C5270CC003FD5E7 /* RBPMiniGameScene_Jump.m */; };
+		2E2417EA1C5270CC003FD5E7 /* RBPMiniGameSceneViewController_Jump.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2417E81C5270CC003FD5E7 /* RBPMiniGameSceneViewController_Jump.m */; };
 		2E81DAFF1C51AB6500654843 /* RBPMiniGameSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E81DAFE1C51AB6500654843 /* RBPMiniGameSceneViewController.m */; };
 		2E81DB041C51ACAA00654843 /* RBPMiniGameSceneViewController_Roll.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E81DB031C51ACAA00654843 /* RBPMiniGameSceneViewController_Roll.m */; };
 		2E81DB091C51AE3F00654843 /* RBPBaseSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E81DB081C51AE3F00654843 /* RBPBaseSceneViewController.m */; };
@@ -31,6 +33,10 @@
 		2E2417E01C526C2B003FD5E7 /* RBPMiniGameScene_Music.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameScene_Music.m; sourceTree = "<group>"; };
 		2E2417E11C526C2B003FD5E7 /* RBPMiniGameSceneViewController_Music.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameSceneViewController_Music.h; sourceTree = "<group>"; };
 		2E2417E21C526C2B003FD5E7 /* RBPMiniGameSceneViewController_Music.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameSceneViewController_Music.m; sourceTree = "<group>"; };
+		2E2417E51C5270CC003FD5E7 /* RBPMiniGameScene_Jump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameScene_Jump.h; sourceTree = "<group>"; };
+		2E2417E61C5270CC003FD5E7 /* RBPMiniGameScene_Jump.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameScene_Jump.m; sourceTree = "<group>"; };
+		2E2417E71C5270CC003FD5E7 /* RBPMiniGameSceneViewController_Jump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameSceneViewController_Jump.h; sourceTree = "<group>"; };
+		2E2417E81C5270CC003FD5E7 /* RBPMiniGameSceneViewController_Jump.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameSceneViewController_Jump.m; sourceTree = "<group>"; };
 		2E81DAF41C519D9300654843 /* RBPMiniGameSceneViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameSceneViewControllerDelegate.h; sourceTree = "<group>"; };
 		2E81DAFD1C51AB6500654843 /* RBPMiniGameSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameSceneViewController.h; sourceTree = "<group>"; };
 		2E81DAFE1C51AB6500654843 /* RBPMiniGameSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameSceneViewController.m; sourceTree = "<group>"; };
@@ -184,6 +190,10 @@
 		2E8CA02E1C51256D009D9F1F /* Jump */ = {
 			isa = PBXGroup;
 			children = (
+				2E2417E51C5270CC003FD5E7 /* RBPMiniGameScene_Jump.h */,
+				2E2417E61C5270CC003FD5E7 /* RBPMiniGameScene_Jump.m */,
+				2E2417E71C5270CC003FD5E7 /* RBPMiniGameSceneViewController_Jump.h */,
+				2E2417E81C5270CC003FD5E7 /* RBPMiniGameSceneViewController_Jump.m */,
 			);
 			name = Jump;
 			sourceTree = "<group>";
@@ -265,8 +275,10 @@
 				2E8CA0141C51238C009D9F1F /* AppDelegate.m in Sources */,
 				2E81DB041C51ACAA00654843 /* RBPMiniGameSceneViewController_Roll.m in Sources */,
 				2E8CA0111C51238C009D9F1F /* main.m in Sources */,
+				2E2417E91C5270CC003FD5E7 /* RBPMiniGameScene_Jump.m in Sources */,
 				2E8CA0341C51259D009D9F1F /* RBPMiniGameScene_Roll.m in Sources */,
 				2E81DAFF1C51AB6500654843 /* RBPMiniGameSceneViewController.m in Sources */,
+				2E2417EA1C5270CC003FD5E7 /* RBPMiniGameSceneViewController_Jump.m in Sources */,
 				2E061CEB1C512C1A0024D24C /* RBPMainMenuScene.m in Sources */,
 				2E2417E31C526C2B003FD5E7 /* RBPMiniGameScene_Music.m in Sources */,
 			);

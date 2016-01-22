@@ -1,18 +1,18 @@
 //
-//  RBPMiniGameScene_Music.m
+//  RBPMiniGameScene_Jump.m
 //  RoboPet
 //
 //  Created by Pat Sluth on 2016-01-20.
 //  Copyright (c) 2016 Pat Sluth. All rights reserved.
 //
 
-#import "RBPMiniGameScene_Music.h"
+#import "RBPMiniGameScene_Jump.h"
 
 
 
 
 
-@interface RBPMiniGameScene_Music()
+@interface RBPMiniGameScene_Jump()
 {
 }
 
@@ -22,7 +22,7 @@
 
 
 
-@implementation RBPMiniGameScene_Music
+@implementation RBPMiniGameScene_Jump
 
 #pragma mark - SKScene
 
@@ -32,7 +32,7 @@
 
     // Setup view here
     
-    SKLabelNode *label = [SKLabelNode labelNodeWithText:@"Music Mini Game"];
+    SKLabelNode *label = [SKLabelNode labelNodeWithText:@"Jump Mini Game"];
     label.position = CGPointMake(self.size.width / 2, self.size.height / 2);
     [self addChild:label];
 }

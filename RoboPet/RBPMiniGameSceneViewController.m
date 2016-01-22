@@ -31,6 +31,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIButton *backButton = [[UIButton alloc] init];
+    [backButton addTarget:self action:@selector(backButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    backButton.translatesAutoresizingMaskIntoConstraints = NO;
+    backButton.backgroundColor = [UIColor lightGrayColor];
+    [backButton setTitle:@"Back" forState:UIControlStateNormal];
+    [self.view addSubview:backButton];
+    
+    [backButton.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:10].active = YES;
+    [backButton.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:10.0].active = YES;
+    [backButton.widthAnchor constraintEqualToConstant:100].active = YES;
+    [backButton.heightAnchor constraintEqualToConstant:40].active = YES;
+}
+
+#pragma mark - RBPMiniGameSceneViewController
+
+- (void)backButtonClicked:(UIButton *)button
+{
+    [self.delegate miniGameDidFinish:self];
 }
 
 #pragma mark - Internal

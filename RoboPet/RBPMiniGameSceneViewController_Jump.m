@@ -1,20 +1,20 @@
 //
-//  RBPMiniGameSceneViewController_Roll.m
+//  RBPMiniGameSceneViewController_Jump.m
 //  RoboPet
 //
 //  Created by Pat Sluth on 2016-01-21.
 //  Copyright © 2016 Pat Sluth. All rights reserved.
 //
 
-#import "RBPMiniGameSceneViewController_Roll.h"
+#import "RBPMiniGameSceneViewController_Jump.h"
 
-#import "RBPMiniGameScene_Roll.h"
-
-
+#import "RBPMiniGameScene_Jump.h"
 
 
 
-@interface RBPMiniGameSceneViewController_Roll ()
+
+
+@interface RBPMiniGameSceneViewController_Jump ()
 {
 }
 
@@ -24,9 +24,7 @@
 
 
 
-@implementation RBPMiniGameSceneViewController_Roll
-
-@dynamic view;
+@implementation RBPMiniGameSceneViewController_Jump
 
 #pragma mark - Init
 
@@ -39,7 +37,7 @@
 
 - (Class)sceneClass;
 {
-    return [RBPMiniGameScene_Roll class];
+    return [RBPMiniGameScene_Jump class];
 }
 
 - (void)didReceiveMemoryWarning

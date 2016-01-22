@@ -40,7 +40,6 @@
     return [RBPMiniGameScene_Music class];
 }
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
