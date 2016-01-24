@@ -12,6 +12,8 @@
 		2E2417E41C526C2B003FD5E7 /* RBPMiniGameSceneViewController_Music.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2417E21C526C2B003FD5E7 /* RBPMiniGameSceneViewController_Music.m */; };
 		2E2417E91C5270CC003FD5E7 /* RBPMiniGameScene_Jump.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2417E61C5270CC003FD5E7 /* RBPMiniGameScene_Jump.m */; };
 		2E2417EA1C5270CC003FD5E7 /* RBPMiniGameSceneViewController_Jump.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2417E81C5270CC003FD5E7 /* RBPMiniGameSceneViewController_Jump.m */; };
+		2E6C278F1C55397A002AA48D /* Sparks.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2E6C278D1C55397A002AA48D /* Sparks.sks */; };
+		2E6C27901C55397A002AA48D /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E6C278E1C55397A002AA48D /* spark.png */; };
 		2E81DAFF1C51AB6500654843 /* RBPMiniGameSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E81DAFE1C51AB6500654843 /* RBPMiniGameSceneViewController.m */; };
 		2E81DB041C51ACAA00654843 /* RBPMiniGameSceneViewController_Roll.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E81DB031C51ACAA00654843 /* RBPMiniGameSceneViewController_Roll.m */; };
 		2E81DB091C51AE3F00654843 /* RBPBaseSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E81DB081C51AE3F00654843 /* RBPBaseSceneViewController.m */; };
@@ -37,6 +39,8 @@
 		2E2417E61C5270CC003FD5E7 /* RBPMiniGameScene_Jump.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameScene_Jump.m; sourceTree = "<group>"; };
 		2E2417E71C5270CC003FD5E7 /* RBPMiniGameSceneViewController_Jump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameSceneViewController_Jump.h; sourceTree = "<group>"; };
 		2E2417E81C5270CC003FD5E7 /* RBPMiniGameSceneViewController_Jump.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameSceneViewController_Jump.m; sourceTree = "<group>"; };
+		2E6C278D1C55397A002AA48D /* Sparks.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Sparks.sks; sourceTree = "<group>"; };
+		2E6C278E1C55397A002AA48D /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		2E81DAF41C519D9300654843 /* RBPMiniGameSceneViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameSceneViewControllerDelegate.h; sourceTree = "<group>"; };
 		2E81DAFD1C51AB6500654843 /* RBPMiniGameSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameSceneViewController.h; sourceTree = "<group>"; };
 		2E81DAFE1C51AB6500654843 /* RBPMiniGameSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameSceneViewController.m; sourceTree = "<group>"; };
@@ -172,6 +176,8 @@
 				2E81DB031C51ACAA00654843 /* RBPMiniGameSceneViewController_Roll.m */,
 				2E8CA0321C51259D009D9F1F /* RBPMiniGameScene_Roll.h */,
 				2E8CA0331C51259D009D9F1F /* RBPMiniGameScene_Roll.m */,
+				2E6C278D1C55397A002AA48D /* Sparks.sks */,
+				2E6C278E1C55397A002AA48D /* spark.png */,
 			);
 			name = Roll;
 			sourceTree = "<group>";
@@ -256,9 +262,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E6C27901C55397A002AA48D /* spark.png in Resources */,
 				2E8CA01F1C51238C009D9F1F /* LaunchScreen.storyboard in Resources */,
 				2E8CA01C1C51238C009D9F1F /* Assets.xcassets in Resources */,
 				2E8CA01A1C51238C009D9F1F /* Main.storyboard in Resources */,
+				2E6C278F1C55397A002AA48D /* Sparks.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
