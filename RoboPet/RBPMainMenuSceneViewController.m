@@ -35,19 +35,44 @@
 {
     [super viewDidLoad];
     
-    // Temp
+    // Temporary buttons
     UIButton *jumpButton = [[UIButton alloc] init];
     [jumpButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
     jumpButton.translatesAutoresizingMaskIntoConstraints = NO;
     jumpButton.backgroundColor = [UIColor lightGrayColor];
     [jumpButton setTitle:@"Jump" forState:UIControlStateNormal];
     [self.view addSubview:jumpButton];
-    
-    [jumpButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor constant:-150.0].active = YES;
-    [jumpButton.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor constant:0.0].active = YES;
-    [jumpButton.widthAnchor constraintEqualToConstant:100].active = YES;
-    [jumpButton.heightAnchor constraintEqualToConstant:100].active = YES;
-    
+	
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:jumpButton
+														  attribute:NSLayoutAttributeCenterX
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeCenterX
+														 multiplier:1.0
+														   constant:-150.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:jumpButton
+														  attribute:NSLayoutAttributeCenterY
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeCenterY
+														 multiplier:1.0
+														   constant:0.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:jumpButton
+														  attribute:NSLayoutAttributeWidth
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:nil
+														  attribute:NSLayoutAttributeNotAnAttribute
+														 multiplier:1.0
+														   constant:100.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:jumpButton
+														  attribute:NSLayoutAttributeHeight
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:nil
+														  attribute:NSLayoutAttributeNotAnAttribute
+														 multiplier:1.0
+														   constant:100.0]];
+	
+	
     
     UIButton *musicButton = [[UIButton alloc] init];
     [musicButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -56,12 +81,37 @@
     [musicButton setTitle:@"Music" forState:UIControlStateNormal];
     [self.view addSubview:musicButton];
     
-    [musicButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor constant:0.0].active = YES;
-    [musicButton.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor constant:0.0].active = YES;
-    [musicButton.widthAnchor constraintEqualToConstant:100].active = YES;
-    [musicButton.heightAnchor constraintEqualToConstant:100].active = YES;
-    
-    
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:musicButton
+														  attribute:NSLayoutAttributeCenterX
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeCenterX
+														 multiplier:1.0
+														   constant:0.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:musicButton
+														  attribute:NSLayoutAttributeCenterY
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeCenterY
+														 multiplier:1.0
+														   constant:0.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:musicButton
+														  attribute:NSLayoutAttributeWidth
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:nil
+														  attribute:NSLayoutAttributeNotAnAttribute
+														 multiplier:1.0
+														   constant:100.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:musicButton
+														  attribute:NSLayoutAttributeHeight
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:nil
+														  attribute:NSLayoutAttributeNotAnAttribute
+														 multiplier:1.0
+														   constant:100.0]];
+	
+	
+	
     UIButton *rollButton = [[UIButton alloc] init];
     [rollButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
     rollButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -69,10 +119,34 @@
     [rollButton setTitle:@"Roll" forState:UIControlStateNormal];
     [self.view addSubview:rollButton];
     
-    [rollButton.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor constant:150.0].active = YES;
-    [rollButton.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor constant:0.0].active = YES;
-    [rollButton.widthAnchor constraintEqualToConstant:100].active = YES;
-    [rollButton.heightAnchor constraintEqualToConstant:100].active = YES;
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:rollButton
+														  attribute:NSLayoutAttributeCenterX
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeCenterX
+														 multiplier:1.0
+														   constant:150.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:rollButton
+														  attribute:NSLayoutAttributeCenterY
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeCenterY
+														 multiplier:1.0
+														   constant:0.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:rollButton
+														  attribute:NSLayoutAttributeWidth
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:nil
+														  attribute:NSLayoutAttributeNotAnAttribute
+														 multiplier:1.0
+														   constant:100.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:rollButton
+														  attribute:NSLayoutAttributeHeight
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:nil
+														  attribute:NSLayoutAttributeNotAnAttribute
+														 multiplier:1.0
+														   constant:100.0]];
 }
 
 #pragma mark - RBPMainMenuSceneViewController

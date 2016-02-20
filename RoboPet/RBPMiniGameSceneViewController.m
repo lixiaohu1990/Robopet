@@ -38,11 +38,35 @@
     backButton.backgroundColor = [UIColor lightGrayColor];
     [backButton setTitle:@"Back" forState:UIControlStateNormal];
     [self.view addSubview:backButton];
-    
-    [backButton.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:10].active = YES;
-    [backButton.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:10.0].active = YES;
-    [backButton.widthAnchor constraintEqualToConstant:100].active = YES;
-    [backButton.heightAnchor constraintEqualToConstant:40].active = YES;
+	
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:backButton
+														  attribute:NSLayoutAttributeLeft
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeLeft
+														 multiplier:1.0
+														   constant:10.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:backButton
+														  attribute:NSLayoutAttributeTop
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeTop
+														 multiplier:1.0
+														   constant:10.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:backButton
+														  attribute:NSLayoutAttributeWidth
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:nil
+														  attribute:NSLayoutAttributeNotAnAttribute
+														 multiplier:1.0
+														   constant:100.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:backButton
+														  attribute:NSLayoutAttributeHeight
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:nil
+														  attribute:NSLayoutAttributeNotAnAttribute
+														 multiplier:1.0
+														   constant:40.0]];
 }
 
 #pragma mark - RBPMiniGameSceneViewController

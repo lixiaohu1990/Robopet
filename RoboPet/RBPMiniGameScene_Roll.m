@@ -41,8 +41,8 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 - (void)didMoveToView:(SKView *)view
 {
     [super didMoveToView:view];
-    
-   self.physicsWorld.contactDelegate = self;
+	
+	self.physicsWorld.contactDelegate = self;
     
     
     // Setup motion data
@@ -104,7 +104,6 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	bottomWall.physicsBody.affectedByGravity = NO;
 	bottomWall.position = CGPointMake(self.size.width / 2, -bottomWall.size.height);
 	[self addChild:bottomWall];
-	
 	
 	// Setup particles
 	SKEmitterNode *leftWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];

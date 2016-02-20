@@ -12,6 +12,7 @@
 		2E2417E41C526C2B003FD5E7 /* RBPMiniGameSceneViewController_Music.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2417E21C526C2B003FD5E7 /* RBPMiniGameSceneViewController_Music.m */; };
 		2E2417E91C5270CC003FD5E7 /* RBPMiniGameScene_Jump.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2417E61C5270CC003FD5E7 /* RBPMiniGameScene_Jump.m */; };
 		2E2417EA1C5270CC003FD5E7 /* RBPMiniGameSceneViewController_Jump.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2417E81C5270CC003FD5E7 /* RBPMiniGameSceneViewController_Jump.m */; };
+		2E5E4B1C1C6CDFD400D67CDB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E4B1B1C6CDFD400D67CDB /* LaunchScreen.xib */; };
 		2E6C278F1C55397A002AA48D /* Sparks.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2E6C278D1C55397A002AA48D /* Sparks.sks */; };
 		2E6C27901C55397A002AA48D /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E6C278E1C55397A002AA48D /* spark.png */; };
 		2E81DAFF1C51AB6500654843 /* RBPMiniGameSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E81DAFE1C51AB6500654843 /* RBPMiniGameSceneViewController.m */; };
@@ -22,7 +23,6 @@
 		2E8CA0171C51238C009D9F1F /* RBPMainMenuSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8CA0161C51238C009D9F1F /* RBPMainMenuSceneViewController.m */; };
 		2E8CA01A1C51238C009D9F1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E8CA0181C51238C009D9F1F /* Main.storyboard */; };
 		2E8CA01C1C51238C009D9F1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E8CA01B1C51238C009D9F1F /* Assets.xcassets */; };
-		2E8CA01F1C51238C009D9F1F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E8CA01D1C51238C009D9F1F /* LaunchScreen.storyboard */; };
 		2E8CA0271C5123BB009D9F1F /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E8CA0261C5123BB009D9F1F /* CoreMotion.framework */; };
 		2E8CA0341C51259D009D9F1F /* RBPMiniGameScene_Roll.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8CA0331C51259D009D9F1F /* RBPMiniGameScene_Roll.m */; };
 		2E8CA0361C5125D4009D9F1F /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E8CA0351C5125D4009D9F1F /* SpriteKit.framework */; };
@@ -39,6 +39,7 @@
 		2E2417E61C5270CC003FD5E7 /* RBPMiniGameScene_Jump.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameScene_Jump.m; sourceTree = "<group>"; };
 		2E2417E71C5270CC003FD5E7 /* RBPMiniGameSceneViewController_Jump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameSceneViewController_Jump.h; sourceTree = "<group>"; };
 		2E2417E81C5270CC003FD5E7 /* RBPMiniGameSceneViewController_Jump.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameSceneViewController_Jump.m; sourceTree = "<group>"; };
+		2E5E4B1B1C6CDFD400D67CDB /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = ../LaunchScreen.xib; sourceTree = "<group>"; };
 		2E6C278D1C55397A002AA48D /* Sparks.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Sparks.sks; sourceTree = "<group>"; };
 		2E6C278E1C55397A002AA48D /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		2E81DAF41C519D9300654843 /* RBPMiniGameSceneViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameSceneViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -56,7 +57,6 @@
 		2E8CA0161C51238C009D9F1F /* RBPMainMenuSceneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RBPMainMenuSceneViewController.m; sourceTree = "<group>"; };
 		2E8CA0191C51238C009D9F1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2E8CA01B1C51238C009D9F1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2E8CA01E1C51238C009D9F1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E8CA0201C51238C009D9F1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E8CA0261C5123BB009D9F1F /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		2E8CA0321C51259D009D9F1F /* RBPMiniGameScene_Roll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameScene_Roll.h; sourceTree = "<group>"; };
@@ -149,8 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				2E8CA0181C51238C009D9F1F /* Main.storyboard */,
+				2E5E4B1B1C6CDFD400D67CDB /* LaunchScreen.xib */,
 				2E8CA01B1C51238C009D9F1F /* Assets.xcassets */,
-				2E8CA01D1C51238C009D9F1F /* LaunchScreen.storyboard */,
 				2E8CA0201C51238C009D9F1F /* Info.plist */,
 			);
 			name = Resources;
@@ -262,8 +262,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E5E4B1C1C6CDFD400D67CDB /* LaunchScreen.xib in Resources */,
 				2E6C27901C55397A002AA48D /* spark.png in Resources */,
-				2E8CA01F1C51238C009D9F1F /* LaunchScreen.storyboard in Resources */,
 				2E8CA01C1C51238C009D9F1F /* Assets.xcassets in Resources */,
 				2E8CA01A1C51238C009D9F1F /* Main.storyboard in Resources */,
 				2E6C278F1C55397A002AA48D /* Sparks.sks in Resources */,
@@ -301,14 +301,6 @@
 				2E8CA0191C51238C009D9F1F /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		2E8CA01D1C51238C009D9F1F /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2E8CA01E1C51238C009D9F1F /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -403,7 +395,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = RoboPet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.patsluth.RoboPet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -418,7 +410,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = RoboPet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.patsluth.RoboPet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
