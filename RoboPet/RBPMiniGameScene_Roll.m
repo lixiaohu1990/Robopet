@@ -107,24 +107,28 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	
 	// Setup particles
 	SKEmitterNode *leftWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
+	leftWallParticles.targetNode = self;
 	leftWallParticles.position = leftWall.position;
 	leftWallParticles.zRotation = M_PI_2;
 	leftWallParticles.targetNode = self.scene;
 	[self addChild:leftWallParticles];
 	
 	SKEmitterNode *rightWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
+	rightWallParticles.targetNode = self;
 	rightWallParticles.position = rightWall.position;
 	rightWallParticles.zRotation = M_PI_2;
 	rightWallParticles.targetNode = self.scene;
 	[self addChild:rightWallParticles];
 	
 	SKEmitterNode *topWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
+	topWallParticles.targetNode = self;
 	topWallParticles.position = topWall.position;
 	topWallParticles.zRotation = M_PI;
 	topWallParticles.targetNode = self.scene;
 	[self addChild:topWallParticles];
 	
 	SKEmitterNode *bottomWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
+	bottomWallParticles.targetNode = self;
 	bottomWallParticles.position = bottomWall.position;
 	bottomWallParticles.zRotation = M_PI;
 	bottomWallParticles.targetNode = self.scene;
@@ -214,6 +218,15 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     }
     
     return _pickups;
+}
+
+- (void)dealloc
+{
+	for (SKNode *node in self.children) {
+		if ([node isKindOfClass:[SKEmitterNode class]]) {
+			((SKEmitterNode *)node).targetNode = nil;
+		}
+	}
 }
 
 @end
