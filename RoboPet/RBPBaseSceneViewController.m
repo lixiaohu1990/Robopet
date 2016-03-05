@@ -8,6 +8,8 @@
 
 #import "RBPBaseSceneViewController.h"
 
+#import "RBPBaseScene.h"
+
 
 
 
@@ -34,12 +36,20 @@
     
     CGSize sceneSize = CGSizeMake(self.view.bounds.size.width * [UIScreen mainScreen].scale,
                                   self.view.bounds.size.height * [UIScreen mainScreen].scale);
-    
-    Class sceneClass = [self sceneClass];
-    
-    SKScene *scene = [sceneClass sceneWithSize:sceneSize];
+	
+	
+	Class sceneClass = [self sceneClass];
+	NSAssert(sceneClass, @"sceneClass cannot be nil");
+	NSAssert([sceneClass isSubclassOfClass:[RBPBaseScene class]],
+			 ([NSString stringWithFormat:@"%@ must be subclass of %@", sceneClass, [RBPBaseScene class]]));
+    RBPBaseScene *scene = [sceneClass sceneWithSize:sceneSize];
     scene.scaleMode = SKSceneScaleModeFill;
-    
+	
+	
+	NSAssert([self backgroundImageName], @"backgroundImageName cannot be nil");
+	[scene setBackgroundImageName:[self backgroundImageName]];
+	
+	
     [self.view presentScene:scene];
     
 #ifdef DEBUG
@@ -55,6 +65,26 @@
 - (Class)sceneClass;
 {
     return [SKScene class];
+}
+
+- (NSString *)backgroundImageName
+{
+	return nil;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+	return UIInterfaceOrientationLandscapeRight;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	return (interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+}
+
+- (BOOL)shouldAutorotate
+{
+	return NO;
 }
 
 - (void)didReceiveMemoryWarning

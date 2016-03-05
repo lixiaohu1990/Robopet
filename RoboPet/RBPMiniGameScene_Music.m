@@ -26,9 +26,9 @@
 
 #pragma mark - SKScene
 
-- (void)didMoveToView:(SKView *)view
+- (void)initialize
 {
-    [super didMoveToView:view];
+    [super initialize];
 
     // Setup view here
     

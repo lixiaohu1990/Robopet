@@ -8,11 +8,13 @@
 
 @import SpriteKit;
 
+#import "RBPMiniGameScene.h"
 
 
 
 
-@interface RBPMiniGameScene_Roll : SKScene
+
+@interface RBPMiniGameScene_Roll : RBPMiniGameScene
 {
 }
 

@@ -6,13 +6,13 @@
 //  Copyright © 2016 Pat Sluth. All rights reserved.
 //
 
-@import SpriteKit;
+#import "RBPBaseScene.h"
 
 
 
 
 
-@interface RBPMainMenuScene : SKScene
+@interface RBPMainMenuScene : RBPBaseScene
 {
 }
 

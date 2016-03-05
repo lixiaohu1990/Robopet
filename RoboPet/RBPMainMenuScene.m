@@ -24,11 +24,13 @@
 
 @implementation RBPMainMenuScene
 
+#pragma mark - Init
+
 - (void)didMoveToView:(SKView *)view
 {
-    [super didMoveToView:view];
-    
-    // Setup view here
+	[super didMoveToView:view];
+	
+	// Setup view here
 }
 
 @end

@@ -14,6 +14,11 @@
 #import "RBPMiniGameSceneViewController_Roll.h"
 
 
+//TODO: REMOVE
+#import "RBPMiniGamePauseViewController.h"
+#import "MZFormSheetPresentationViewController.h"
+
+
 
 
 
@@ -153,7 +158,7 @@
 
 - (void)clickedLoadMiniGameButton:(UIButton *)button
 {
-    NSString *buttonTitle = [button titleForState:UIControlStateNormal];
+	NSString *buttonTitle = [button titleForState:UIControlStateNormal];
     RBPMiniGameSceneViewController *miniGameViewController = nil;
     
     if ([buttonTitle isEqualToString:@"Jump"]) {
@@ -182,6 +187,11 @@
 - (Class)sceneClass;
 {
     return [RBPMainMenuScene class];
+}
+
+- (NSString *)backgroundImageName
+{
+	return @"mainmenu_background";
 }
 
 #pragma mark - Internal

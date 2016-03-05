@@ -21,7 +21,18 @@
 
 @property (strong, nonatomic) SKView *view;
 
+/**
+ *  Override in subclass
+ *
+ *  @return Class
+ */
 - (Class)sceneClass;
+/**
+ *  Override in subclass
+ *
+ *  @return NSString
+ */
+- (NSString *)backgroundImageName;
 
 @end
 

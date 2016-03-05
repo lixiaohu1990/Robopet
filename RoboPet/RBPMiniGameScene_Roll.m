@@ -38,9 +38,11 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 
 #pragma mark - Init
 
-- (void)didMoveToView:(SKView *)view
+- (void)initialize
 {
-    [super didMoveToView:view];
+	[super initialize];
+	self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"roll_background"]];
+	
 	
 	self.physicsWorld.contactDelegate = self;
     
@@ -49,11 +51,11 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     self.motion = [[CMMotionManager alloc] init];
     [self.motion startAccelerometerUpdates];
     [self.motion startGyroUpdates];
-    
+
     
     // Setup player
-    self.player = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(50, 50)];
-    self.player.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:25];
+    self.player = [SKSpriteNode spriteNodeWithImageNamed:@"robot_top"];
+	self.player.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.player.size.height / 2.0];//[UIScreen mainScreen].scale];
     self.player.physicsBody.allowsRotation = NO;
     self.player.physicsBody.friction = 0.5;
     self.player.physicsBody.restitution = 1.0;
@@ -106,25 +108,25 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	[self addChild:bottomWall];
 	
 	// Setup particles
-	SKEmitterNode *leftWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
-	leftWallParticles.position = leftWall.position;
-	leftWallParticles.zRotation = M_PI_2;
-	[self addChild:leftWallParticles];
-	
-	SKEmitterNode *rightWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
-	rightWallParticles.position = rightWall.position;
-	rightWallParticles.zRotation = M_PI_2;
-	[self addChild:rightWallParticles];
-	
-	SKEmitterNode *topWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
-	topWallParticles.position = topWall.position;
-	topWallParticles.zRotation = M_PI;
-	[self addChild:topWallParticles];
-	
-	SKEmitterNode *bottomWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
-	bottomWallParticles.position = bottomWall.position;
-	bottomWallParticles.zRotation = M_PI;
-	[self addChild:bottomWallParticles];
+//	SKEmitterNode *leftWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
+//	leftWallParticles.position = leftWall.position;
+//	leftWallParticles.zRotation = M_PI_2;
+//	[self addChild:leftWallParticles];
+//	
+//	SKEmitterNode *rightWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
+//	rightWallParticles.position = rightWall.position;
+//	rightWallParticles.zRotation = M_PI_2;
+//	[self addChild:rightWallParticles];
+//	
+//	SKEmitterNode *topWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
+//	topWallParticles.position = topWall.position;
+//	topWallParticles.zRotation = M_PI;
+//	[self addChild:topWallParticles];
+//	
+//	SKEmitterNode *bottomWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
+//	bottomWallParticles.position = bottomWall.position;
+//	bottomWallParticles.zRotation = M_PI;
+//	[self addChild:bottomWallParticles];
 }
 
 #pragma mark - RBPMiniGameScene_Roll
@@ -137,32 +139,50 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	//TODO: check distance from player
 	
     // Instantiate pickup
-    SKSpriteNode *pickup = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(100, 100)];
-	CGSize pickupHalfSize = CGSizeMake(pickup.size.width / 2, pickup.size.height / 2);
 	
-    // Generate random position
+	SKSpriteNode *newPickup = nil;
+	
+	// Search for disabled pickup
+	for (SKSpriteNode *pickup in self.pickups) {
+		
+		if (pickup.hidden == YES) {
+			newPickup = pickup;
+			break;
+		}
+		
+	}
+	
+	// If no disabled pick, create a new one
+	if (!newPickup) {
+		
+		newPickup = [SKSpriteNode spriteNodeWithImageNamed:@"battery"];
+		// Add to scene
+		[self addChild:newPickup];
+		[self.pickups addObject:newPickup];
+		
+	}
+	
+	
+	// Generate random position
+	CGSize pickupHalfSize = CGSizeMake(newPickup.size.width / 2, newPickup.size.height / 2);
+	
 	// TODO: padding?
 	CGFloat xPosition = arc4random_uniform(self.size.width);
 	CGFloat yPosition = arc4random_uniform(self.size.height);
+	
 	// Clamp positions so pickup is never offscreen
-	xPosition = MIN(xPosition, self.size.width - pickupHalfSize.width);
-	xPosition = MAX(xPosition, pickupHalfSize.width);
-	yPosition = MIN(yPosition, self.size.height - pickupHalfSize.height);
-	yPosition = MAX(yPosition, pickupHalfSize.height);
+	xPosition = MAX(pickupHalfSize.width, MIN(xPosition, self.size.width - pickupHalfSize.width));
+	yPosition = MAX(pickupHalfSize.height, MIN(yPosition, self.size.height - pickupHalfSize.height));
 	
-	
-    pickup.position = CGPointMake(xPosition, yPosition);
-    
-    // Add to scene
-    [self addChild:pickup];
-    [self.pickups addObject:pickup];
+    newPickup.position = CGPointMake(xPosition, yPosition);
+	newPickup.hidden = NO;
 }
 
 #pragma mark - SKScene
 
 - (void)update:(CFTimeInterval)currentTime
 {
-    // Apply impulse force in the opposite direction of the gyroscope for precise deceleration control
+	// Apply impulse force in the opposite direction of the gyroscope for precise deceleration control
     CGVector impulseVector = CGVectorMake(self.motion.gyroData.rotationRate.x, self.motion.gyroData.rotationRate.y);
     
     if (ABS(impulseVector.dx) < 0.5) { impulseVector.dx = 0.0; }
@@ -180,11 +200,18 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     
     // Check pickup intersection
     for (SKNode *pickup in self.pickups) {
-        if ([self.player intersectsNode:pickup]) {
-            [pickup removeFromParent];
-            [self.pickups removeObject:pickup];
+		
+		if (!pickup.hidden && [self.player intersectsNode:pickup]) { // Did collect pickup
+			
+			[self.progressView incrementProgress:0.25 animated:YES];
+			
+			pickup.hidden = YES;
             [self generatePickup];
+			
+			break;
+			
         }
+		
     }
 }
 

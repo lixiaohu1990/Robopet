@@ -33,11 +33,21 @@
     [super viewDidLoad];
 }
 
+- (RBPProgressView *)progressViewInternal
+{
+	return [RBPProgressView wellnessBar];
+}
+
 #pragma mark - RBPBaseSceneViewController
 
 - (Class)sceneClass;
 {
     return [RBPMiniGameScene_Jump class];
+}
+
+- (NSString *)backgroundImageName
+{
+	return @"jump_background";
 }
 
 - (void)didReceiveMemoryWarning

@@ -33,11 +33,21 @@
     [super viewDidLoad];
 }
 
+- (RBPProgressView *)progressViewInternal
+{
+	return [RBPProgressView happinessBar];
+}
+
 #pragma mark - RBPBaseSceneViewController
 
 - (Class)sceneClass;
 {
     return [RBPMiniGameScene_Music class];
+}
+
+- (NSString *)backgroundImageName
+{
+	return @"music_background";
 }
 
 - (void)didReceiveMemoryWarning

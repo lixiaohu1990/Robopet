@@ -10,17 +10,26 @@
 @import SpriteKit;
 
 #import "RBPBaseSceneViewController.h"
+
 #import "RBPMiniGameSceneViewControllerDelegate.h"
+#import "RBPMiniGamePauseViewControllerDelegate.h"
+
+#import "RBPProgressView.h"
 
 
 
 
 
-@interface RBPMiniGameSceneViewController : RBPBaseSceneViewController
+@interface RBPMiniGameSceneViewController : RBPBaseSceneViewController <RBPMiniGamePauseViewControllerDelegate>
 {
 }
 
 @property (weak, nonatomic) id<RBPMiniGameSceneViewControllerDelegate> delegate;
+
+/**
+ *  The progress view for this mini games level
+ */
+@property (strong, nonatomic) RBPProgressView *progressView;
 
 @end
 

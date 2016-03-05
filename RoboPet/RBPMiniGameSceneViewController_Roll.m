@@ -35,11 +35,21 @@
     [super viewDidLoad];
 }
 
+- (RBPProgressView *)progressViewInternal
+{
+	return [RBPProgressView energyBar];
+}
+
 #pragma mark - RBPBaseSceneViewController
 
 - (Class)sceneClass;
 {
     return [RBPMiniGameScene_Roll class];
+}
+
+- (NSString *)backgroundImageName
+{
+	return @"roll_background";
 }
 
 - (void)didReceiveMemoryWarning
