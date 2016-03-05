@@ -26,27 +26,24 @@
 
 @implementation RBPMiniGameScene
 
-- (void)didMoveToView:(SKView *)view
-{
-	[super didMoveToView:view];
-	
-	[self initialize];
-}
+#pragma mark - Init
 
 - (void)initialize
 {
-	
 }
 
 - (void)restart
 {
-	for (SKNode *node in self.children) {
-		[node removeFromParent];
-	}
+	[super restart];
+}
+
+#pragma mark - SKScene
+
+- (void)setPaused:(BOOL)paused
+{
+	[super setPaused:paused];
 	
-	self.paused = NO;
-	
-	[self initialize];
+	[self.progressView setProgress:self.progressView.progress animated:NO];
 }
 
 @end

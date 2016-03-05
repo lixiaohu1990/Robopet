@@ -23,9 +23,19 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 {
 }
 
+/**
+ *  Player node
+ */
 @property (strong, nonatomic) SKSpriteNode *player;
+
+/**
+ *  Device motion data manager
+ */
 @property (strong, nonatomic) CMMotionManager *motion;
 
+/**
+ *  Array of resusable pickups
+ */
 @property (strong, nonatomic) NSMutableArray *pickups;
 
 @end
@@ -55,9 +65,10 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     
     // Setup player
     self.player = [SKSpriteNode spriteNodeWithImageNamed:@"robot_top"];
+	self.player.size = CGSizeMake(self.player.size.width * 0.5, self.player.size.height * 0.5);
 	self.player.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.player.size.height / 2.0];//[UIScreen mainScreen].scale];
-    self.player.physicsBody.allowsRotation = NO;
-    self.player.physicsBody.friction = 0.5;
+    self.player.physicsBody.allowsRotation = YES;
+    self.player.physicsBody.friction = 0.7;
     self.player.physicsBody.restitution = 1.0;
     self.player.physicsBody.usesPreciseCollisionDetection = YES;
     self.player.physicsBody.categoryBitMask = CollisionCategoryPlayer;
@@ -71,6 +82,11 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	[self setupWalls];
 	
     [self generatePickup];
+}
+
+- (void)restart
+{
+	[super restart];
 }
 
 - (void)setupWalls
@@ -106,6 +122,14 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	bottomWall.physicsBody.affectedByGravity = NO;
 	bottomWall.position = CGPointMake(self.size.width / 2, -bottomWall.size.height);
 	[self addChild:bottomWall];
+	
+	
+	
+	
+	
+	
+	
+	//self.physicsWorld.gravity = CGVectorMake(0, 0);
 	
 	// Setup particles
 //	SKEmitterNode *leftWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
@@ -156,6 +180,8 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	if (!newPickup) {
 		
 		newPickup = [SKSpriteNode spriteNodeWithImageNamed:@"battery"];
+		newPickup.size = CGSizeMake(newPickup.size.width * 0.5, newPickup.size.height * 0.5);
+		newPickup.hidden = YES;
 		// Add to scene
 		[self addChild:newPickup];
 		[self.pickups addObject:newPickup];
@@ -164,7 +190,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	
 	
 	// Generate random position
-	CGSize pickupHalfSize = CGSizeMake(newPickup.size.width / 2, newPickup.size.height / 2);
+	CGSize pickupHalfSize = CGSizeMake(newPickup.size.width * 0.5, newPickup.size.height * 0.5);
 	
 	// TODO: padding?
 	CGFloat xPosition = arc4random_uniform(self.size.width);
@@ -182,33 +208,70 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 
 - (void)update:(CFTimeInterval)currentTime
 {
-	// Apply impulse force in the opposite direction of the gyroscope for precise deceleration control
-    CGVector impulseVector = CGVectorMake(self.motion.gyroData.rotationRate.x, self.motion.gyroData.rotationRate.y);
-    
-    if (ABS(impulseVector.dx) < 0.5) { impulseVector.dx = 0.0; }
-    if (ABS(impulseVector.dy) < 0.5) { impulseVector.dy = 0.0; }
-    
-    // Modify gravity based on accelerometer to move the player
-    CGVector gravityVector = CGVectorMake(self.motion.accelerometerData.acceleration.y * -9.8,
-                                       self.motion.accelerometerData.acceleration.x * 9.8);
-    
-    
+	// only incremental decrease when we aren't at a high velocity
+//	if (![self.progressView isAnimating]) {
+//		[self.progressView incrementProgress:-0.15 animationDuration:3.0];
+//	}
+	
+	
+	
+	// *****************
+	// Rotate player
+	// *****************
+	
+	// Legs of triangle for rotation calculation
+	CGFloat adjacent = self.player.position.x - (10 * -self.player.physicsBody.velocity.dx);
+	CGFloat opposite = self.player.position.y - (10 * self.player.physicsBody.velocity.dy);
+	
+	CGFloat angle = atan2(opposite, adjacent);
+	angle = -angle - M_PI_2; // iOS starts in different quadrant
+	CGFloat deltaAngle = angle - self.player.zRotation;
+	
+	if (ABS(deltaAngle) > M_PI_2) { // clamp large angle changes for smooth rotations
+		deltaAngle = copysign(0.005, -deltaAngle); //preserve direction
+		angle += deltaAngle;
+	}
+	
+	self.player.zRotation = angle;
+	
+	
+	// ****************
     // Apply new forces
+	// ****************
+	
+	// Apply impulse force in the opposite direction of the gyroscope for precise deceleration control
+	CGVector impulseVector = CGVectorMake(self.motion.gyroData.rotationRate.x, self.motion.gyroData.rotationRate.y);
+	
+	if (ABS(impulseVector.dx) < 0.5) { impulseVector.dx = 0.0; }
+	if (ABS(impulseVector.dy) < 0.5) { impulseVector.dy = 0.0; }
+	
+	// Modify gravity based on accelerometer to move the player
+	CGVector gravityVector = CGVectorMake(self.motion.accelerometerData.acceleration.y * -9.8,
+										  self.motion.accelerometerData.acceleration.x * 9.8);
+	
     [self.player.physicsBody applyImpulse:impulseVector];
     self.physicsWorld.gravity = gravityVector;
+	
+	if (![self isPlayerVelocityToHigh]) { // start allowing larger velocity once it is under control
+		
+		if (self.player.physicsBody.linearDamping > 0.1) {
+			self.player.physicsBody.linearDamping -= 0.05;
+		}
+		
+	}
     
     
-    // Check pickup intersection
+	// *****************
+	// Check for pickups
+	// *****************
     for (SKNode *pickup in self.pickups) {
 		
 		if (!pickup.hidden && [self.player intersectsNode:pickup]) { // Did collect pickup
 			
-			[self.progressView incrementProgress:0.25 animated:YES];
+			[self.progressView incrementProgress:0.3 animated:YES];
 			
 			pickup.hidden = YES;
             [self generatePickup];
-			
-			break;
 			
         }
 		
@@ -217,11 +280,23 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 
 #pragma mark - SKPhysicsContactDelegate
 
+- (BOOL)isPlayerVelocityToHigh
+{
+	return (ABS(self.player.physicsBody.velocity.dx) > 3000 || ABS(self.player.physicsBody.velocity.dy) > 3000);
+}
+
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
-//    CGVector collisionImpluse = CGVectorMake(contact.contactNormal.dx * contact.collisionImpulse,
-//                                             contact.contactNormal.dy * contact.collisionImpulse);
-//    [self.player.physicsBody applyImpulse:collisionImpluse atPoint:contact.contactPoint];
+	if (![self isPlayerVelocityToHigh]) {
+		
+		CGVector collisionImpluse = CGVectorMake(contact.contactNormal.dx * contact.collisionImpulse * 0.25,
+												 contact.contactNormal.dy * contact.collisionImpulse * 0.25);
+		[self.player.physicsBody applyImpulse:collisionImpluse atPoint:contact.contactPoint];
+		
+	}
+	
+	self.player.physicsBody.linearDamping = MAX(1.0, self.player.physicsBody.linearDamping) * 1.75;
+	[self.progressView incrementProgress:-0.2 animated:YES];
 }
 
 - (void)didEndContact:(SKPhysicsContact *)contact

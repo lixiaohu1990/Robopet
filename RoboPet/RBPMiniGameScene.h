@@ -20,9 +20,6 @@
 
 @property (weak, nonatomic) RBPProgressView *progressView;
 
-- (void)initialize;
-- (void)restart;
-
 @end
 
 

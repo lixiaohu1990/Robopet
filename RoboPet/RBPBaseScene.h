@@ -18,6 +18,9 @@
 
 - (void)setBackgroundImageName:(NSString *)imageName;
 
+- (void)initialize;
+- (void)restart;
+
 @end
 
 

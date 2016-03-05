@@ -24,18 +24,25 @@
 
 @implementation RBPMiniGameScene_Jump
 
-#pragma mark - SKScene
+#pragma mark - Init
 
 - (void)initialize
 {
 	[super initialize];
-
-    // Setup view here
-    
-    SKLabelNode *label = [SKLabelNode labelNodeWithText:@"Jump Mini Game"];
-    label.position = CGPointMake(self.size.width / 2, self.size.height / 2);
-    [self addChild:label];
+	
+	// Setup view here
+	
+	SKLabelNode *label = [SKLabelNode labelNodeWithText:@"Jump Mini Game"];
+	label.position = CGPointMake(self.size.width / 2, self.size.height / 2);
+	[self addChild:label];
 }
+
+- (void)restart
+{
+	[super restart];
+}
+
+#pragma mark - SKScene
 
 - (void)update:(CFTimeInterval)currentTime
 {

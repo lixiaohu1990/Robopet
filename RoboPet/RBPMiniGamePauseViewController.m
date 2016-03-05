@@ -39,8 +39,8 @@
 	
 	
 	self.view = [[UIView alloc] init];
-	self.view.alpha = 1.0;
-	self.view.backgroundColor = [UIColor darkGrayColor];
+	self.view.alpha = 0.8;
+	self.view.backgroundColor = [UIColor blackColor];
 	
 	self.navigationItem.title = @"Paused";
 	

@@ -26,11 +26,14 @@
 
 #pragma mark - Init
 
-- (void)didMoveToView:(SKView *)view
+- (void)initialize
 {
-	[super didMoveToView:view];
 	
-	// Setup view here
+}
+
+- (void)restart
+{
+	[super restart];
 }
 
 @end

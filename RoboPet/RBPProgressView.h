@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class RBPProgressView;
+
+
+
+
+
+@protocol RBPProgressViewDelegate <NSObject>
+
+@optional
+
+- (void)progressDidReachZero:(RBPProgressView *)progressView;
+
+@end
+
 
 
 
@@ -17,6 +31,8 @@
 }
 
 - (id)initWithDefaultsKey:(NSString *)defaultsKey;
+
+@property (weak, nonatomic) id<RBPProgressViewDelegate> delegate;
 
 /**
  *  NSUserDefaults key for this bars progress level
@@ -41,12 +57,28 @@
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 
 /**
+ *  Set progress animated
+ *
+ *  @param progress
+ *  @param animationDuration
+ */
+- (void)setProgress:(CGFloat)progress animationDuration:(CGFloat)animationDuration;
+
+/**
  *  Increment progress value
  *
  *  @param increment
  *  @param animated
  */
 - (void)incrementProgress:(CGFloat)increment animated:(BOOL)animated;
+
+/**
+ *  Increment progress value animated
+ *
+ *  @param increment
+ *  @param animationDuration
+ */
+- (void)incrementProgress:(CGFloat)increment animationDuration:(CGFloat)animationDuration;
 
 /**
  *  Instantiate a RBPProgressView linked to the wellness level
@@ -68,6 +100,8 @@
  *  @return RBPProgressView
  */
 + (RBPProgressView *)energyBar;
+
+- (BOOL)isAnimating;
 
 @end
 

@@ -20,7 +20,7 @@
 
 
 
-@interface RBPMiniGameSceneViewController : RBPBaseSceneViewController <RBPMiniGamePauseViewControllerDelegate>
+@interface RBPMiniGameSceneViewController : RBPBaseSceneViewController <RBPMiniGamePauseViewControllerDelegate, RBPProgressViewDelegate>
 {
 }
 
@@ -30,6 +30,11 @@
  *  The progress view for this mini games level
  */
 @property (strong, nonatomic) RBPProgressView *progressView;
+
+/**
+ *  Call this when mini game has ended (game over)
+ */
+- (void)miniGameDidFinish;
 
 @end
 

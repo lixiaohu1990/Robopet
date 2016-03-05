@@ -26,6 +26,32 @@
 
 @implementation RBPBaseScene
 
+#pragma mark - Init
+
+- (void)didMoveToView:(SKView *)view
+{
+	[super didMoveToView:view];
+	
+	[self initialize];
+}
+
+- (void)initialize
+{
+}
+
+- (void)restart
+{
+	for (SKNode *node in self.children) {
+		if (node != self.backgroundImageNode) {
+			[node removeFromParent];
+		}
+	}
+	
+	self.paused = NO;
+	
+	[self initialize];
+}
+
 - (void)setBackgroundImageName:(NSString *)imageName
 {
 	if (self.backgroundImageNode) {
@@ -40,6 +66,12 @@
 	
 	[self addChild:self.backgroundImageNode];
 }
+
+#pragma mark - SKScene
+
+//- (void)update:(CFTimeInterval)currentTime
+//{
+//}
 
 @end
 

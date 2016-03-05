@@ -9,13 +9,7 @@
 #import "RBPMainMenuSceneViewController.h"
 
 #import "RBPMainMenuScene.h"
-//#import "RBPMiniGameSceneViewController_Jump.h"
-//#import "RBPMiniGameSceneViewController_Music.h"
-#import "RBPMiniGameSceneViewController_Roll.h"
-
-
-//TODO: REMOVE
-#import "RBPMiniGamePauseViewController.h"
+#import "RBPMiniGameSceneViewController.h"
 #import "MZFormSheetPresentationViewController.h"
 
 
@@ -170,8 +164,19 @@
     }
     
     if (miniGameViewController) {
-        miniGameViewController.delegate = self;
-        [self showViewController:miniGameViewController sender:self];
+		
+		miniGameViewController.delegate = self;
+		
+		MZFormSheetPresentationViewController *formSheet = [[MZFormSheetPresentationViewController alloc]
+															initWithContentViewController:miniGameViewController];
+		
+		// Full Screen and Centred
+		formSheet.presentationController.contentViewSize = self.view.bounds.size;
+		formSheet.presentationController.shouldCenterHorizontally = formSheet.presentationController.shouldCenterVertically = YES;
+		formSheet.contentViewControllerTransitionStyle =  MZFormSheetPresentationTransitionStyleDropDown;
+		
+		[self presentViewController:formSheet animated:YES completion:nil];
+		
     }
 }
 

@@ -211,6 +211,7 @@
 				2ECC2A511C8B6E8A00C5DA0C /* RBPBaseScene.m */,
 				2E061CEC1C512C200024D24C /* MainMenu */,
 				2E8CA02B1C512549009D9F1F /* MiniGames */,
+				2EA91F721C8B93D1006BFF35 /* Shared */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -277,6 +278,17 @@
 			name = Jump;
 			sourceTree = "<group>";
 		};
+		2EA91F721C8B93D1006BFF35 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				2ECC2A401C8B392E00C5DA0C /* RBPProgressView.h */,
+				2ECC2A411C8B392E00C5DA0C /* RBPProgressView.m */,
+				2ECC2A4D1C8B62FB00C5DA0C /* RBPSoundManager.h */,
+				2ECC2A4E1C8B62FB00C5DA0C /* RBPSoundManager.m */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
 		2EC4B1681C8513B000AB33CE /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,10 +297,6 @@
 				2EC4B16A1C8513F900AB33CE /* RBPMiniGamePauseViewController.m */,
 				2ECC2A431C8B4C3C00C5DA0C /* RBPMiniGameGameOverViewController.h */,
 				2ECC2A441C8B4C3C00C5DA0C /* RBPMiniGameGameOverViewController.m */,
-				2ECC2A401C8B392E00C5DA0C /* RBPProgressView.h */,
-				2ECC2A411C8B392E00C5DA0C /* RBPProgressView.m */,
-				2ECC2A4D1C8B62FB00C5DA0C /* RBPSoundManager.h */,
-				2ECC2A4E1C8B62FB00C5DA0C /* RBPSoundManager.m */,
 			);
 			name = Shared;
 			sourceTree = "<group>";

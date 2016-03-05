@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger, GameStateType){
 
 @implementation RBPMiniGameScene_Music
 
-#pragma mark - SKScene
+#pragma mark - Init
 
 - (void)initialize
 {
@@ -124,6 +124,13 @@ typedef NS_ENUM(NSInteger, GameStateType){
     GameState = StartCountDown;
     [self updateLabels];
 }
+
+- (void)restart
+{
+	[super restart];
+}
+
+#pragma mark - SKScene
 
 // Respond to touch input on our scene
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

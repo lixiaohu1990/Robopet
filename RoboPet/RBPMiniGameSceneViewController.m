@@ -66,6 +66,8 @@
 	
 	
 	self.progressView = [self progressViewInternal];
+	[self.progressView setProgress:1.0 animated:NO];
+	self.progressView.delegate = self;
 	((RBPMiniGameScene *)self.view.scene).progressView = self.progressView;
 	
 	if (self.progressView) {
@@ -125,24 +127,43 @@
 
 #pragma mark - RBPMiniGameSceneViewController
 
+- (void)miniGameDidFinish
+{
+	RBPMiniGameGameOverViewController *viewController = [[RBPMiniGameGameOverViewController alloc] init];
+	viewController.delegate = self;
+	[self displayPauseViewController:viewController];
+}
+
 - (void)clickedPauseButton:(UIButton *)button
+{
+	RBPMiniGamePauseViewController *viewController = [[RBPMiniGamePauseViewController alloc] init];
+	viewController.delegate = self;
+	[self displayPauseViewController:viewController];
+}
+
+- (void)displayPauseViewController:(RBPMiniGamePauseViewController *)viewController
 {
 	self.view.scene.paused = YES;
 	
-	RBPMiniGameGameOverViewController *pauseViewController = [[RBPMiniGameGameOverViewController alloc] init];
-	pauseViewController.delegate = self;
 	
-	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pauseViewController];
+	[self.progressView setProgress:self.progressView.progress animated:NO];
+	
+	
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
 	MZFormSheetPresentationViewController *formSheet = [[MZFormSheetPresentationViewController alloc]
 														initWithContentViewController:navigationController];
+	
+	
 	CGSize contentViewSize = CGRectApplyAffineTransform(self.view.bounds, CGAffineTransformMakeScale(0.8, 0.7)).size;
-	contentViewSize.height = MIN(contentViewSize.height, 350);
+	contentViewSize.height = MIN(contentViewSize.height, 350); // Clamp height for iPad
 	formSheet.presentationController.contentViewSize = contentViewSize;
-	
+	// Center in view
 	formSheet.presentationController.shouldCenterHorizontally = formSheet.presentationController.shouldCenterVertically = YES;
-	formSheet.presentationController.shouldUseMotionEffect = YES;
+	formSheet.contentViewControllerTransitionStyle =  MZFormSheetPresentationTransitionStyleBounce;
 	
-	[self presentViewController:formSheet animated:YES completion:nil];
+	
+	[self presentViewController:formSheet animated:YES completion:^{
+	}];
 }
 
 #pragma mark - RBPMiniGamePauseViewControllerDelegate
@@ -159,7 +180,7 @@
 {
 	[super dismissViewControllerAnimated:YES
 							  completion:^{
-								  self.view.scene.paused = YES;
+								  self.view.scene.paused = NO;
 							  }];
 }
 
@@ -167,8 +188,18 @@
 {
 	[super dismissViewControllerAnimated:YES
 							  completion:^{
+								  [self.progressView setProgress:1.0 animated:NO];
 								  [((RBPMiniGameScene *)self.view.scene) restart];
 							  }];
+}
+
+#pragma mark - RBPProgressViewDelegate
+
+- (void)progressDidReachZero:(RBPProgressView *)progressView
+{
+	if (!self.view.scene.isPaused) {
+		[self miniGameDidFinish];
+	}
 }
 
 @end
