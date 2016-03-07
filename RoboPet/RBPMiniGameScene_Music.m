@@ -352,8 +352,20 @@ typedef NS_ENUM(NSInteger, GameStateType){
             break;
             
         case PlayerTransition:
-            UserPromptLabel.text = @"...";
-            break;
+			UserPromptLabel.text = @"...";
+			break;
+			
+		case GameOverTransition:
+			UserPromptLabel.text = @"...";
+			break;
+			
+		case GameOver:
+			UserPromptLabel.text = @"...";
+			break;
+			
+		default:
+			UserPromptLabel.text = @"...";
+			break;
     }
 }
 

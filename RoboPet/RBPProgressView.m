@@ -19,8 +19,9 @@
 
 @property (readwrite, nonatomic) CGFloat initialProgress;
 
-@property (strong, nonatomic) UIView *progressFill;
-@property (strong, nonatomic) NSLayoutConstraint *progressConstraint;
+@property (strong, nonatomic) UIImageView *progressBackground;
+@property (strong, nonatomic) UIImageView *progressFill;
+@property (strong, nonatomic) NSLayoutConstraint *progressFillConstraint;
 
 @end
 
@@ -60,7 +61,48 @@
 		self.translatesAutoresizingMaskIntoConstraints = NO;
 		self.backgroundColor = [UIColor whiteColor];
 		
-		self.progressFill = [[UIView alloc] init];
+		
+		UIImage *progressBackgroundImage = [[UIImage imageNamed:@"progressbar"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+		self.progressBackground = [[UIImageView alloc] initWithImage:progressBackgroundImage];
+		self.progressBackground.tintColor = [UIColor blackColor];
+		self.progressBackground.contentMode = UIViewContentModeScaleToFill;
+		self.progressBackground.translatesAutoresizingMaskIntoConstraints = NO;
+		[self addSubview:self.progressBackground];
+		
+		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.progressBackground
+														 attribute:NSLayoutAttributeTop
+														 relatedBy:NSLayoutRelationEqual
+															toItem:self
+														 attribute:NSLayoutAttributeTop
+														multiplier:1.0
+														  constant:0.0]];
+		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.progressBackground
+														 attribute:NSLayoutAttributeLeft
+														 relatedBy:NSLayoutRelationEqual
+															toItem:self
+														 attribute:NSLayoutAttributeLeft
+														multiplier:1.0
+														  constant:0.0]];
+		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.progressBackground
+														 attribute:NSLayoutAttributeBottom
+														 relatedBy:NSLayoutRelationEqual
+															toItem:self
+														 attribute:NSLayoutAttributeBottom
+														multiplier:1.0
+														  constant:0.0]];
+		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.progressBackground
+														 attribute:NSLayoutAttributeRight
+														 relatedBy:NSLayoutRelationEqual
+															toItem:self
+														 attribute:NSLayoutAttributeRight
+														multiplier:1.0
+														  constant:0.0]];
+
+		
+		
+		UIImage *progressFillImage = [[UIImage imageNamed:@"progressbar_fill"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+		self.progressFill = [[UIImageView alloc] initWithImage:progressFillImage];
+		self.progressFill.contentMode = UIViewContentModeScaleToFill;
 		self.progressFill.translatesAutoresizingMaskIntoConstraints = NO;
 		[self addSubview:self.progressFill];
 		
@@ -85,14 +127,14 @@
 														 attribute:NSLayoutAttributeBottom
 														multiplier:1.0
 														  constant:0.0]];
-		self.progressConstraint = [NSLayoutConstraint constraintWithItem:self.progressFill
+		self.progressFillConstraint = [NSLayoutConstraint constraintWithItem:self.progressFill
 															   attribute:NSLayoutAttributeRight
 															   relatedBy:NSLayoutRelationEqual
 																  toItem:self
 															   attribute:NSLayoutAttributeLeft
 															  multiplier:1.0
 																constant:0.0];
-		[self addConstraint:self.progressConstraint];
+		[self addConstraint:self.progressFillConstraint];
 		
 		
 	}
@@ -139,7 +181,7 @@
 					 animations:^{
 						 
 	
-						 self.progressConstraint.constant = CGRectGetWidth(self.bounds) * progress;
+						 self.progressFillConstraint.constant = CGRectGetWidth(self.bounds) * progress;
 						 [self layoutIfNeeded];
 						 
 					 }
@@ -170,7 +212,7 @@
 {
 	RBPProgressView *bar = [[RBPProgressView alloc] initWithDefaultsKey:@"wellnessLevel"];
 	
-	bar.progressFill.backgroundColor = [UIColor blueColor];
+	bar.progressFill.tintColor = [UIColor redColor];
 	
 	return bar;
 }
@@ -179,7 +221,7 @@
 {
 	RBPProgressView *bar = [[RBPProgressView alloc] initWithDefaultsKey:@"happinessLevel"];
 	
-	bar.progressFill.backgroundColor = [UIColor purpleColor];
+	bar.progressFill.tintColor = [UIColor orangeColor];
 	
 	return bar;
 }
@@ -188,7 +230,7 @@
 {
 	RBPProgressView *bar = [[RBPProgressView alloc] initWithDefaultsKey:@"energyLevel"];
 	
-	bar.progressFill.backgroundColor = [UIColor cyanColor];
+	bar.progressFill.tintColor = [UIColor cyanColor];
 	
 	return bar;
 }

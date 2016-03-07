@@ -44,9 +44,12 @@
 	UIButton *pauseButton = [[UIButton alloc] init];
 	[pauseButton addTarget:self action:@selector(clickedPauseButton:) forControlEvents:UIControlEventTouchUpInside];
 	pauseButton.translatesAutoresizingMaskIntoConstraints = NO;
-	pauseButton.backgroundColor = [UIColor lightGrayColor];
-	[pauseButton setTitle:@"   Pause   " forState:UIControlStateNormal];
-	[pauseButton sizeToFit];
+	
+	//pauseButton.backgroundColor = [UIColor lightGrayColor];
+	//[pauseButton setTitle:@"   Pause   " forState:UIControlStateNormal];
+	//[pauseButton sizeToFit];
+	[pauseButton setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+	
 	[self.view addSubview:pauseButton];
 	
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:pauseButton
@@ -63,6 +66,20 @@
 														  attribute:NSLayoutAttributeTop
 														 multiplier:1.0
 														   constant:PADDING]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:pauseButton
+														  attribute:NSLayoutAttributeHeight
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:nil
+														  attribute:NSLayoutAttributeNotAnAttribute
+														 multiplier:1.0
+														   constant:50.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:pauseButton
+														  attribute:NSLayoutAttributeWidth
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:pauseButton
+														  attribute:NSLayoutAttributeHeight
+														 multiplier:1.0
+														   constant:0.0]];
 	
 	
 	self.progressView = [self progressViewInternal];

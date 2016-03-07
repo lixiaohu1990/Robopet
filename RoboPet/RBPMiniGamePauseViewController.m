@@ -40,7 +40,6 @@
 	
 	self.view = [[UIView alloc] init];
 	self.view.alpha = 0.8;
-	self.view.backgroundColor = [UIColor blackColor];
 	
 	self.navigationItem.title = @"Paused";
 	
@@ -52,6 +51,48 @@
 																			  style:UIBarButtonItemStylePlain
 																			 target:self
 																			 action:@selector(onResume)];
+	
+	
+	
+	
+	
+	
+	UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"transition_screen"]];
+	backgroundView.contentMode = UIViewContentModeScaleToFill;
+	backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
+	[self.view addSubview:backgroundView];
+	
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:backgroundView
+														  attribute:NSLayoutAttributeLeft
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeLeft
+														 multiplier:1.0
+														   constant:0.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:backgroundView
+														  attribute:NSLayoutAttributeBottom
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeBottom
+														 multiplier:1.0
+														   constant:0.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:backgroundView
+														  attribute:NSLayoutAttributeRight
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeRight
+														 multiplier:1.0
+														   constant:0.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:backgroundView
+														  attribute:NSLayoutAttributeTop
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeTop
+														 multiplier:1.0
+														   constant:CGRectGetMaxY(self.navigationController.navigationBar.bounds)]];
+	
+	
+	
 	
 	
 	UIButton *soundButton = [[UIButton alloc] init];
@@ -74,6 +115,20 @@
 														  attribute:NSLayoutAttributeBottom
 														 multiplier:1.0
 														   constant:-PADDING]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:soundButton
+														  attribute:NSLayoutAttributeHeight
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:nil
+														  attribute:NSLayoutAttributeNotAnAttribute
+														 multiplier:1.0
+														   constant:50.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:soundButton
+														  attribute:NSLayoutAttributeWidth
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:soundButton
+														  attribute:NSLayoutAttributeHeight
+														 multiplier:1.0
+														   constant:0.0]];
 	
 	
 	self.wellnessBar = [RBPProgressView wellnessBar];
@@ -186,8 +241,9 @@
 
 - (void)updateSoundButton:(UIButton *)button
 {
-	[button setTitle:[RBPSoundManager soundEnabled] ? @"Mute" : @"UnMute" forState:UIControlStateNormal];
-	[button sizeToFit];
+	//[button setTitle:[RBPSoundManager soundEnabled] ? @"Mute" : @"UnMute" forState:UIControlStateNormal];
+	[button setImage:[UIImage imageNamed:[RBPSoundManager soundEnabled] ? @"sound_on" : @"sound_off"] forState:UIControlStateNormal];
+	//[button sizeToFit];
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
