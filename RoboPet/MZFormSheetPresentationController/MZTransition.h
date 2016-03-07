@@ -76,6 +76,6 @@ typedef NS_ENUM(NSInteger, MZFormSheetPresentationTransitionStyle) {
 
 + (nullable Class)classForTransitionStyle:(MZFormSheetPresentationTransitionStyle)transitionStyle;
 
-+ (NSDictionary * _Nonnull)sharedTransitionClasses;
++ (NSDictionary * __nonnull)sharedTransitionClasses;
 
 @end

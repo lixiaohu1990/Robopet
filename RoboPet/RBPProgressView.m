@@ -243,7 +243,7 @@
 }
 
 //TODO: REMOVE
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	CGFloat x = [[[touches allObjects] firstObject] locationInView:self].x;
 	

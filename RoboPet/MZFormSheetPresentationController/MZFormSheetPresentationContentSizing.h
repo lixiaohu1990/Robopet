@@ -33,10 +33,10 @@
 /**
  *  Allow you to use dynamic content view depends on view controller
  */
-- (BOOL)shouldUseContentViewFrameForPresentationController:(__kindof MZFormSheetPresentationController *)presentationController;
+- (BOOL)shouldUseContentViewFrameForPresentationController:(MZFormSheetPresentationController *)presentationController;
 
 /**
  * Allow you to change frame during rotation and animations for presentedView
  */
-- (CGRect)contentViewFrameForPresentationController:(__kindof MZFormSheetPresentationController *)presentationController currentFrame:(CGRect)currentFrame;
+- (CGRect)contentViewFrameForPresentationController:(MZFormSheetPresentationController *)presentationController currentFrame:(CGRect)currentFrame;
 @end

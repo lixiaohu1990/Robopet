@@ -330,8 +330,8 @@ typedef NS_ENUM(NSInteger, GameStateType){
 
 -(void) updateLabels
 {
-    GameLabel.text = [NSString stringWithFormat: @"Depth: %lu Position: %lu State: %lu",
-                        SimonSaysDepth, SimonSequencePosition, GameState];
+    GameLabel.text = [NSString stringWithFormat: @"Depth: %@ Position: %@ State: %@",
+                        @(SimonSaysDepth), @(SimonSequencePosition), @(GameState)];
     
     switch( GameState )
     {
