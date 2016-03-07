@@ -16,6 +16,8 @@
 {
 }
 
+@property (strong, nonatomic) SKSpriteNode *ground1;
+
 @end
 
 
@@ -32,9 +34,11 @@
 	
 	// Setup view here
 	
-	SKLabelNode *label = [SKLabelNode labelNodeWithText:@"Jump Mini Game"];
-	label.position = CGPointMake(self.size.width / 2, self.size.height / 2);
-	[self addChild:label];
+	
+//	self.ground1 = [SKSpriteNode spriteNodeWithImageNamed:@"jump_ground"];
+//	self.ground1.anchorPoint = CGPointZero;
+//	self.ground1.size = CGSizeMake(self.size.width, self.ground1.size.height);
+//	[self addChild:self.ground1];
 }
 
 - (void)restart
