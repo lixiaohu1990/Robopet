@@ -18,6 +18,12 @@
 {
 }
 
+/**
+ *  The time in seconds since the mini game has been playing
+ *	Does not increment when paused
+ */
+@property (readonly, nonatomic) CFTimeInterval runningTime;
+
 @property (weak, nonatomic) RBPProgressView *progressView;
 
 @end

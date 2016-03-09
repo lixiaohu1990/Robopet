@@ -31,17 +31,8 @@
     [super viewDidLoad];
 	
 	self.navigationItem.title = @"Game Over";
+	self.navigationItem.rightBarButtonItem.title = @"Play Again";
 	
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Play Again"
-																			  style:UIBarButtonItemStylePlain
-																			 target:self
-																			 action:@selector(onPlayAgain)];
-	
-}
-
-- (void)onPlayAgain
-{
-	[self.delegate pauseViewControllerDidSelectPlayAgain];
 }
 
 @end

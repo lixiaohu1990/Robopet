@@ -32,7 +32,7 @@
 {
 	[super didMoveToView:view];
 	
-	[self initialize];
+	[self restart];
 }
 
 - (void)initialize
@@ -46,8 +46,6 @@
 			[node removeFromParent];
 		}
 	}
-	
-	self.paused = NO;
 	
 	[self initialize];
 }

@@ -51,7 +51,6 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 - (void)initialize
 {
 	[super initialize];
-	self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"roll_background"]];
 	
 	
 	self.physicsWorld.contactDelegate = self;
@@ -74,12 +73,12 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     self.player.physicsBody.categoryBitMask = CollisionCategoryPlayer;
     self.player.physicsBody.contactTestBitMask = CollisionCategoryWall;
     //self.player.physicsBody.collisionBitMask = ;
-    
-    // Start in centre
-    self.player.position = CGPointMake(self.size.width / 2, self.size.height / 2);
+    self.player.position = CGPointMake(self.size.width / 2.0, self.size.height / 2.0);
     [self addChild:self.player];
 	
+	
 	[self setupWalls];
+	
 	
     [self generatePickup];
 }
@@ -208,11 +207,12 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 
 - (void)update:(CFTimeInterval)currentTime
 {
+	[super update:currentTime];
+	
 	// only incremental decrease when we aren't at a high velocity
 //	if (![self.progressView isAnimating]) {
 //		[self.progressView incrementProgress:-0.15 animationDuration:3.0];
 //	}
-	
 	
 	
 	// *****************
@@ -220,19 +220,23 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	// *****************
 	
 	// Legs of triangle for rotation calculation
-	CGFloat adjacent = self.player.position.x - (10 * -self.player.physicsBody.velocity.dx);
-	CGFloat opposite = self.player.position.y - (10 * self.player.physicsBody.velocity.dy);
+	CGFloat adjacent = self.player.position.x - (10.0 * -self.player.physicsBody.velocity.dx);
+	CGFloat opposite = self.player.position.y - (10.0 * self.player.physicsBody.velocity.dy);
 	
 	CGFloat angle = atan2(opposite, adjacent);
 	angle = -angle - M_PI_2; // iOS starts in different quadrant
-	CGFloat deltaAngle = angle - self.player.zRotation;
 	
-	if (ABS(deltaAngle) > M_PI_2) { // clamp large angle changes for smooth rotations
-		deltaAngle = copysign(0.005, -deltaAngle); //preserve direction
-		angle += deltaAngle;
-	}
+	[self.player runAction:[SKAction rotateToAngle:angle duration:0.15 shortestUnitArc:YES]];
 	
-	self.player.zRotation = angle;
+	// SKAction seems to handle this internally
+//	CGFloat deltaAngle = angle - self.player.zRotation;
+//	if (ABS(deltaAngle) > M_PI_2) { // clamp large angle changes for smooth rotations
+//		deltaAngle = copysign(0.005, -deltaAngle); //preserve direction
+//		angle += deltaAngle;
+//	}
+//	self.player.rotationz = angle
+	
+	
 	
 	
 	// ****************

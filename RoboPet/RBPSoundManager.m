@@ -26,13 +26,6 @@
 	[[NSUserDefaults standardUserDefaults] setBool:soundEnabled forKey:@"soundEnabled"];
 }
 
-+ (void)playSoundNamed:(NSString *)name
-{
-	if (self.soundEnabled) {
-		// Play sound
-	}
-}
-
 @end
 
 

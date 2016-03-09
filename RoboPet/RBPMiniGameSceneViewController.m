@@ -8,6 +8,8 @@
 
 #import "RBPMiniGameSceneViewController.h"
 
+#import "RBPMiniGamePopupViewController.h"
+#import "RBPMiniGameTutorialViewController.h"
 #import "RBPMiniGamePauseViewController.h"
 #import "RBPMiniGameGameOverViewController.h"
 #import "MZFormSheetPresentationViewController.h"
@@ -39,6 +41,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	self.view.scene.paused = YES;
 	
 	
 	UIButton *pauseButton = [[UIButton alloc] init];
@@ -132,6 +136,15 @@
 	}
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	// Show tutorial view controller
+	RBPMiniGameTutorialViewController *viewController = [[RBPMiniGameTutorialViewController alloc] initWithDataSource:self];
+	[self displayPopupViewController:viewController animated:YES completion:nil];
+}
+
 /**
  *  Override and return an instance of RBPProgressView
  *
@@ -144,23 +157,34 @@
 
 #pragma mark - RBPMiniGameSceneViewController
 
+- (void)miniGameWillStart
+{
+	self.view.scene.paused = NO;
+}
+
+- (void)miniGameWillResume
+{
+	self.view.scene.paused = NO;
+}
+
 - (void)miniGameDidFinish
 {
 	RBPMiniGameGameOverViewController *viewController = [[RBPMiniGameGameOverViewController alloc] init];
-	viewController.delegate = self;
-	[self displayPauseViewController:viewController];
+	[self displayPopupViewController:viewController animated:YES completion:nil];
 }
 
 - (void)clickedPauseButton:(UIButton *)button
 {
 	RBPMiniGamePauseViewController *viewController = [[RBPMiniGamePauseViewController alloc] init];
-	viewController.delegate = self;
-	[self displayPauseViewController:viewController];
+	[self displayPopupViewController:viewController animated:YES completion:nil];
 }
 
-- (void)displayPauseViewController:(RBPMiniGamePauseViewController *)viewController
+- (void)displayPopupViewController:(RBPMiniGamePopupViewController *)viewController
+						  animated:(BOOL)animated
+						completion:(void (^)(void))completion
 {
 	self.view.scene.paused = YES;
+	viewController.delegate = self;
 	
 	
 	[self.progressView setProgress:self.progressView.progress animated:NO];
@@ -179,35 +203,48 @@
 	formSheet.contentViewControllerTransitionStyle =  MZFormSheetPresentationTransitionStyleBounce;
 	
 	
-	[self presentViewController:formSheet animated:YES completion:^{
-	}];
+	[self presentViewController:formSheet animated:animated completion:completion];
 }
 
-#pragma mark - RBPMiniGamePauseViewControllerDelegate
+#pragma mark - RBPMiniGamePopupViewControllerDelegate
 
-- (void)pauseViewControllerDidSelectQuit
+- (void)popupViewController:(RBPMiniGamePopupViewController *)viewController didSelectOption:(NSString *)option
 {
 	[super dismissViewControllerAnimated:YES
 							  completion:^{
-		[self.delegate miniGameDidFinish:self];
-	}];
-}
-
-- (void)pauseViewControllerDidSelectResume
-{
-	[super dismissViewControllerAnimated:YES
-							  completion:^{
-								  self.view.scene.paused = NO;
+								  
+								  if ([viewController isKindOfClass:[RBPMiniGameTutorialViewController class]] &&
+									  [option isEqualToString:@"Play"]) {
+									  
+									  [self miniGameWillStart];
+									  
+								  } else if ([viewController isKindOfClass:[RBPMiniGamePauseViewController class]] &&
+											 [option isEqualToString:@"Resume"]) {
+									  
+									  [self miniGameWillResume];
+									  
+								  } else if ([viewController isKindOfClass:[RBPMiniGameGameOverViewController class]] &&
+											 [option isEqualToString:@"Play Again"]) {
+									  
+									  [self.progressView setProgress:1.0 animated:NO];
+									  [((RBPMiniGameScene *)self.view.scene) restart];
+									  [self miniGameWillStart];
+									  
+								  } else if ([option isEqualToString:@"Quit"]) {
+									  
+									  [self.delegate miniGameDidFinish:self];
+									  
+								  }
+								  
 							  }];
 }
 
-- (void)pauseViewControllerDidSelectPlayAgain
+#pragma mark - RBPMiniGameTutorialViewControllerDataSource
+
+- (NSArray<RBPMiniGameTutorialPage *> *)tutorialPages
 {
-	[super dismissViewControllerAnimated:YES
-							  completion:^{
-								  [self.progressView setProgress:1.0 animated:NO];
-								  [((RBPMiniGameScene *)self.view.scene) restart];
-							  }];
+	// Override me
+	return @[];
 }
 
 #pragma mark - RBPProgressViewDelegate

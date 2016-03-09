@@ -50,6 +50,7 @@
 
 - (void)update:(CFTimeInterval)currentTime
 {
+	[super update:currentTime];
 }
 
 @end

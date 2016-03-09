@@ -38,61 +38,8 @@
     [super viewDidLoad];
 	
 	
-	self.view = [[UIView alloc] init];
-	self.view.alpha = 0.8;
-	
 	self.navigationItem.title = @"Paused";
-	
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Quit"
-																			  style:UIBarButtonItemStylePlain
-																			 target:self
-																			 action:@selector(onQuit)];
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Resume"
-																			  style:UIBarButtonItemStylePlain
-																			 target:self
-																			 action:@selector(onResume)];
-	
-	
-	
-	
-	
-	
-	UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"transition_screen"]];
-	backgroundView.contentMode = UIViewContentModeScaleToFill;
-	backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
-	[self.view addSubview:backgroundView];
-	
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:backgroundView
-														  attribute:NSLayoutAttributeLeft
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.view
-														  attribute:NSLayoutAttributeLeft
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:backgroundView
-														  attribute:NSLayoutAttributeBottom
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.view
-														  attribute:NSLayoutAttributeBottom
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:backgroundView
-														  attribute:NSLayoutAttributeRight
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.view
-														  attribute:NSLayoutAttributeRight
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:backgroundView
-														  attribute:NSLayoutAttributeTop
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.view
-														  attribute:NSLayoutAttributeTop
-														 multiplier:1.0
-														   constant:CGRectGetMaxY(self.navigationController.navigationBar.bounds)]];
-	
-	
-	
+	self.navigationItem.rightBarButtonItem.title = @"Resume";
 	
 	
 	UIButton *soundButton = [[UIButton alloc] init];
@@ -251,16 +198,6 @@
 	[self.wellnessBar setProgress:self.wellnessBar.progress animated:YES];
 	[self.happinessBar setProgress:self.happinessBar.progress animated:YES];
 	[self.energyBar setProgress:self.energyBar.progress animated:YES];
-}
-
-- (void)onQuit
-{
-	[self.delegate pauseViewControllerDidSelectQuit];
-}
-
-- (void)onResume
-{
-	[self.delegate pauseViewControllerDidSelectResume];
 }
 
 @end

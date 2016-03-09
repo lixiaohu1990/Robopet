@@ -191,6 +191,8 @@ typedef NS_ENUM(NSInteger, GameStateType){
 
 -(void) update: (CFTimeInterval) currentTime
 {
+	[super update:currentTime];
+	
     if( LastTick == 0 ) LastTick = currentTime;
     LastTime = currentTime;
     

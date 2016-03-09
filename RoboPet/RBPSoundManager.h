@@ -19,8 +19,6 @@
 + (BOOL)soundEnabled;
 + (void)setSoundEnabled:(BOOL)soundEnabled;
 
-+ (void)playSoundNamed:(NSString *)name;
-
 @end
 
 

@@ -25,6 +25,7 @@
 		2E8CA0271C5123BB009D9F1F /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E8CA0261C5123BB009D9F1F /* CoreMotion.framework */; };
 		2E8CA0341C51259D009D9F1F /* RBPMiniGameScene_Roll.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8CA0331C51259D009D9F1F /* RBPMiniGameScene_Roll.m */; };
 		2E8CA0361C5125D4009D9F1F /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E8CA0351C5125D4009D9F1F /* SpriteKit.framework */; };
+		2EC1D3151C90CABE000096FB /* RBPMiniGameTutorialPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC1D3141C90CABE000096FB /* RBPMiniGameTutorialPage.m */; };
 		2EC2F2B71C8E400600DDA995 /* RBPMiniGameSceneViewController_Jump.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC2F2B61C8E400600DDA995 /* RBPMiniGameSceneViewController_Jump.m */; };
 		2EC4B16B1C8513F900AB33CE /* RBPMiniGamePauseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4B16A1C8513F900AB33CE /* RBPMiniGamePauseViewController.m */; };
 		2EC4B18C1C8531F900AB33CE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2EC4B1711C8531F900AB33CE /* Info.plist */; };
@@ -41,6 +42,9 @@
 		2EC4B1971C8531F900AB33CE /* UIViewController+TargetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4B18B1C8531F900AB33CE /* UIViewController+TargetViewController.m */; };
 		2EC4B1A41C85337300AB33CE /* MZAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4B1A11C85337300AB33CE /* MZAppearance.m */; };
 		2EC4B1A51C85337300AB33CE /* NSInvocation+Copy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4B1A31C85337300AB33CE /* NSInvocation+Copy.m */; };
+		2ECB954B1C8FAA3B009F58FB /* RBPMiniGameTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB954A1C8FAA3B009F58FB /* RBPMiniGameTutorialViewController.m */; };
+		2ECB954E1C8FAABE009F58FB /* RBPMiniGamePopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB954D1C8FAABE009F58FB /* RBPMiniGamePopupViewController.m */; };
+		2ECB95511C8FB56B009F58FB /* RBPMiniGameCountdownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB95501C8FB56B009F58FB /* RBPMiniGameCountdownViewController.m */; };
 		2ECC2A421C8B392E00C5DA0C /* RBPProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC2A411C8B392E00C5DA0C /* RBPProgressView.m */; };
 		2ECC2A451C8B4C3C00C5DA0C /* RBPMiniGameGameOverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC2A441C8B4C3C00C5DA0C /* RBPMiniGameGameOverViewController.m */; };
 		2ECC2A4C1C8B52C900C5DA0C /* RBPMiniGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC2A4B1C8B52C900C5DA0C /* RBPMiniGameScene.m */; };
@@ -81,6 +85,8 @@
 		2E8CA0321C51259D009D9F1F /* RBPMiniGameScene_Roll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameScene_Roll.h; sourceTree = "<group>"; };
 		2E8CA0331C51259D009D9F1F /* RBPMiniGameScene_Roll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameScene_Roll.m; sourceTree = "<group>"; };
 		2E8CA0351C5125D4009D9F1F /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		2EC1D3131C90CABE000096FB /* RBPMiniGameTutorialPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameTutorialPage.h; sourceTree = "<group>"; };
+		2EC1D3141C90CABE000096FB /* RBPMiniGameTutorialPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameTutorialPage.m; sourceTree = "<group>"; };
 		2EC2F2B61C8E400600DDA995 /* RBPMiniGameSceneViewController_Jump.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameSceneViewController_Jump.m; sourceTree = "<group>"; };
 		2EC4B1691C8513F900AB33CE /* RBPMiniGamePauseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGamePauseViewController.h; sourceTree = "<group>"; };
 		2EC4B16A1C8513F900AB33CE /* RBPMiniGamePauseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGamePauseViewController.m; sourceTree = "<group>"; };
@@ -116,11 +122,16 @@
 		2EC4B1A21C85337300AB33CE /* NSInvocation+Copy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+Copy.h"; sourceTree = "<group>"; };
 		2EC4B1A31C85337300AB33CE /* NSInvocation+Copy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+Copy.m"; sourceTree = "<group>"; };
 		2EC4B1A61C8533AF00AB33CE /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		2ECB95491C8FAA3B009F58FB /* RBPMiniGameTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameTutorialViewController.h; sourceTree = "<group>"; };
+		2ECB954A1C8FAA3B009F58FB /* RBPMiniGameTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameTutorialViewController.m; sourceTree = "<group>"; };
+		2ECB954C1C8FAABE009F58FB /* RBPMiniGamePopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGamePopupViewController.h; sourceTree = "<group>"; };
+		2ECB954D1C8FAABE009F58FB /* RBPMiniGamePopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGamePopupViewController.m; sourceTree = "<group>"; };
+		2ECB954F1C8FB56B009F58FB /* RBPMiniGameCountdownViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameCountdownViewController.h; sourceTree = "<group>"; };
+		2ECB95501C8FB56B009F58FB /* RBPMiniGameCountdownViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameCountdownViewController.m; sourceTree = "<group>"; };
 		2ECC2A401C8B392E00C5DA0C /* RBPProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPProgressView.h; sourceTree = "<group>"; };
 		2ECC2A411C8B392E00C5DA0C /* RBPProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPProgressView.m; sourceTree = "<group>"; };
 		2ECC2A431C8B4C3C00C5DA0C /* RBPMiniGameGameOverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameGameOverViewController.h; sourceTree = "<group>"; };
 		2ECC2A441C8B4C3C00C5DA0C /* RBPMiniGameGameOverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameGameOverViewController.m; sourceTree = "<group>"; };
-		2ECC2A461C8B4EC300C5DA0C /* RBPMiniGamePauseViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBPMiniGamePauseViewControllerDelegate.h; sourceTree = "<group>"; };
 		2ECC2A4A1C8B52C900C5DA0C /* RBPMiniGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameScene.h; sourceTree = "<group>"; };
 		2ECC2A4B1C8B52C900C5DA0C /* RBPMiniGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameScene.m; sourceTree = "<group>"; };
 		2ECC2A4D1C8B62FB00C5DA0C /* RBPSoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPSoundManager.h; sourceTree = "<group>"; };
@@ -292,7 +303,14 @@
 		2EC4B1681C8513B000AB33CE /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				2ECC2A461C8B4EC300C5DA0C /* RBPMiniGamePauseViewControllerDelegate.h */,
+				2ECB954F1C8FB56B009F58FB /* RBPMiniGameCountdownViewController.h */,
+				2ECB95501C8FB56B009F58FB /* RBPMiniGameCountdownViewController.m */,
+				2ECB954C1C8FAABE009F58FB /* RBPMiniGamePopupViewController.h */,
+				2ECB954D1C8FAABE009F58FB /* RBPMiniGamePopupViewController.m */,
+				2ECB95491C8FAA3B009F58FB /* RBPMiniGameTutorialViewController.h */,
+				2ECB954A1C8FAA3B009F58FB /* RBPMiniGameTutorialViewController.m */,
+				2EC1D3131C90CABE000096FB /* RBPMiniGameTutorialPage.h */,
+				2EC1D3141C90CABE000096FB /* RBPMiniGameTutorialPage.m */,
 				2EC4B1691C8513F900AB33CE /* RBPMiniGamePauseViewController.h */,
 				2EC4B16A1C8513F900AB33CE /* RBPMiniGamePauseViewController.m */,
 				2ECC2A431C8B4C3C00C5DA0C /* RBPMiniGameGameOverViewController.h */,
@@ -422,9 +440,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EC1D3151C90CABE000096FB /* RBPMiniGameTutorialPage.m in Sources */,
 				2E8CA0171C51238C009D9F1F /* RBPMainMenuSceneViewController.m in Sources */,
 				2EC4B1911C8531F900AB33CE /* MZFormSheetPresentationViewController.m in Sources */,
 				2ECC2A521C8B6E8A00C5DA0C /* RBPBaseScene.m in Sources */,
+				2ECB954E1C8FAABE009F58FB /* RBPMiniGamePopupViewController.m in Sources */,
 				2E81DB091C51AE3F00654843 /* RBPBaseSceneViewController.m in Sources */,
 				2EC4B1921C8531F900AB33CE /* MZFormSheetPresentationViewControllerAnimator.m in Sources */,
 				2E2417E41C526C2B003FD5E7 /* RBPMiniGameSceneViewController_Music.m in Sources */,
@@ -449,7 +469,9 @@
 				2E81DAFF1C51AB6500654843 /* RBPMiniGameSceneViewController.m in Sources */,
 				2E061CEB1C512C1A0024D24C /* RBPMainMenuScene.m in Sources */,
 				2ECC2A421C8B392E00C5DA0C /* RBPProgressView.m in Sources */,
+				2ECB95511C8FB56B009F58FB /* RBPMiniGameCountdownViewController.m in Sources */,
 				2ECC2A4F1C8B62FB00C5DA0C /* RBPSoundManager.m in Sources */,
+				2ECB954B1C8FAA3B009F58FB /* RBPMiniGameTutorialViewController.m in Sources */,
 				2EC4B1901C8531F900AB33CE /* MZFormSheetPresentationController.m in Sources */,
 				2E2417E31C526C2B003FD5E7 /* RBPMiniGameScene_Music.m in Sources */,
 				2EC4B1941C8531F900AB33CE /* MZFormSheetPresentationViewControllerSegue.m in Sources */,

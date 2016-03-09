@@ -18,6 +18,10 @@
 {
 }
 
+@property (readwrite, nonatomic) CFTimeInterval runningTime;
+// So we can calulate delta time
+@property (readwrite, nonatomic) CFTimeInterval previousUpdateTime;
+
 @end
 
 
@@ -28,8 +32,23 @@
 
 #pragma mark - Init
 
+- (id)init
+{
+	self = [super init];
+	
+	if (self) {
+		
+	}
+	
+	return self;
+}
+
 - (void)initialize
 {
+	[super initialize ];
+	
+	self.previousUpdateTime = 0.0;
+	self.runningTime = 0.0;
 }
 
 - (void)restart
@@ -38,6 +57,17 @@
 }
 
 #pragma mark - SKScene
+
+- (void)update:(CFTimeInterval)currentTime
+{
+	[super update:currentTime];
+	
+	// Update the current running time
+	if (self.previousUpdateTime != 0.0) {
+		self.runningTime += currentTime - self.previousUpdateTime;
+	}
+	self.previousUpdateTime = currentTime;
+}
 
 - (void)setPaused:(BOOL)paused
 {

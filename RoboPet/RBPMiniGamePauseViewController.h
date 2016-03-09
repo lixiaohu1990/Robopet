@@ -8,17 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-#import "RBPMiniGamePauseViewControllerDelegate.h"
+#import "RBPMiniGamePopupViewController.h"
 
 
 
 
 
-@interface RBPMiniGamePauseViewController : UIViewController
+@interface RBPMiniGamePauseViewController : RBPMiniGamePopupViewController
 {
 }
-
-@property (weak, nonatomic) id<RBPMiniGamePauseViewControllerDelegate> delegate;
 
 @end
 
