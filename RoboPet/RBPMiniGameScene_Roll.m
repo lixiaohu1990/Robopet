@@ -36,7 +36,12 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 /**
  *  Array of resusable pickups
  */
-@property (strong, nonatomic) NSMutableArray *pickups;
+@property (strong, nonatomic) NSMutableArray<SKSpriteNode *> *pickups;
+
+/**
+ *  Array of reusable bumpers
+ */
+@property (strong, nonatomic) NSMutableArray<SKSpriteNode *> *bumpers;
 
 @end
 
@@ -81,6 +86,9 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	
 	
     [self generatePickup];
+	
+	for (int x = 0; x < 30; x++)
+		[self generateBumper];
 }
 
 - (void)restart
@@ -161,12 +169,9 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 {
 	//TODO: check distance from player
 	
-    // Instantiate pickup
-	
 	SKSpriteNode *newPickup = nil;
 	
-	// Search for disabled pickup
-	for (SKSpriteNode *pickup in self.pickups) {
+	for (SKSpriteNode *pickup in self.pickups) {		// Search for disabled cached object
 		
 		if (pickup.hidden == YES) {
 			newPickup = pickup;
@@ -175,11 +180,10 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 		
 	}
 	
-	// If no disabled pick, create a new one
-	if (!newPickup) {
+	if (!newPickup) {									// If no cached available, create a new one
 		
 		newPickup = [SKSpriteNode spriteNodeWithImageNamed:@"battery"];
-		newPickup.size = CGSizeMake(newPickup.size.width * 0.5, newPickup.size.height * 0.5);
+		newPickup.size = CGSizeMake(newPickup.size.width * 0.35, newPickup.size.height * 0.35);
 		newPickup.hidden = YES;
 		// Add to scene
 		[self addChild:newPickup];
@@ -187,20 +191,92 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 		
 	}
 	
+	[self positionNodeRandomly:newPickup];
+	//random rotation
 	
-	// Generate random position
-	CGSize pickupHalfSize = CGSizeMake(newPickup.size.width * 0.5, newPickup.size.height * 0.5);
+	newPickup.hidden = NO;
+}
+
+/**
+ *  Generates a pickup in a random location
+ */
+- (void)generateBumper
+{
+	//TODO: check distance from player
+	
+	SKSpriteNode *newBumper = nil;
+	
+	for (SKSpriteNode *bumper in self.bumpers) {		// Search for disabled cached object
+		
+		if (bumper.hidden == YES) {
+			newBumper = bumper;
+			break;
+		}
+		
+	}
+	
+	if (!newBumper) {									// If no cached available, create a new one
+		
+		NSString *imageName = (arc4random() % 2 == 0) ? @"bumper_square" : @"bumper_triangle";
+		newBumper = [SKSpriteNode spriteNodeWithImageNamed:imageName];
+		newBumper.size = CGSizeMake(newBumper.size.width * 0.25, newBumper.size.height * 0.25);
+		newBumper.hidden = YES;
+		
+		// Setup physics
+		newBumper.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:imageName] size:newBumper.size];
+		newBumper.physicsBody.dynamic = NO;
+		newBumper.physicsBody.categoryBitMask = CollisionCategoryWall;
+		newBumper.physicsBody.affectedByGravity = NO;
+		
+		// Add to scene
+		[self addChild:newBumper];
+		[self.bumpers addObject:newBumper];
+		
+	}
+	
+	[self positionNodeRandomly:newBumper];
+	
+	newBumper.hidden = NO;
+}
+
+- (void)positionNodeRandomly:(SKSpriteNode *)node
+{
+	CGSize halfSize = CGSizeMake(node.size.width * 0.5, node.size.height * 0.5);
 	
 	// TODO: padding?
 	CGFloat xPosition = arc4random_uniform(self.size.width);
 	CGFloat yPosition = arc4random_uniform(self.size.height);
 	
 	// Clamp positions so pickup is never offscreen
-	xPosition = MAX(pickupHalfSize.width, MIN(xPosition, self.size.width - pickupHalfSize.width));
-	yPosition = MAX(pickupHalfSize.height, MIN(yPosition, self.size.height - pickupHalfSize.height));
+	xPosition = MAX(halfSize.width, MIN(xPosition, self.size.width - halfSize.width));
+	yPosition = MAX(halfSize.height, MIN(yPosition, self.size.height - halfSize.height));
 	
-    newPickup.position = CGPointMake(xPosition, yPosition);
-	newPickup.hidden = NO;
+	node.position = CGPointMake(xPosition, yPosition);
+	
+	// Random rotation
+	NSInteger deg = arc4random() % 360;
+	CGFloat rad = deg / (180.0 * M_PI);
+	node.zRotation = rad;
+	
+	
+	// Make sure newly generated node doesn't intersect player initially
+	if ([self.player intersectsNode:node]) {
+		[self positionNodeRandomly:node];
+	}
+	
+	// Check for intersections of existing bumpers and pickups
+	for (SKNode *bumper in self.bumpers) {
+		if (node != bumper && !bumper.hidden && [node intersectsNode:bumper]) {
+			[self positionNodeRandomly:node];
+			return;
+		}
+	}
+	for (SKNode *pickup in self.pickups) {
+		if (node != pickup && !pickup.hidden && [node intersectsNode:pickup]) {
+			[self positionNodeRandomly:node];
+			return;
+		}
+	}
 }
 
 #pragma mark - SKScene
@@ -208,11 +284,6 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 - (void)update:(CFTimeInterval)currentTime
 {
 	[super update:currentTime];
-	
-	// only incremental decrease when we aren't at a high velocity
-//	if (![self.progressView isAnimating]) {
-//		[self.progressView incrementProgress:-0.15 animationDuration:3.0];
-//	}
 	
 	
 	// *****************
@@ -227,8 +298,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	angle = -angle - M_PI_2; // iOS starts in different quadrant
 	
 	[self.player runAction:[SKAction rotateToAngle:angle duration:0.15 shortestUnitArc:YES]];
-	
-	// SKAction seems to handle this internally
+// SKAction seems to handle this internally
 //	CGFloat deltaAngle = angle - self.player.zRotation;
 //	if (ABS(deltaAngle) > M_PI_2) { // clamp large angle changes for smooth rotations
 //		deltaAngle = copysign(0.005, -deltaAngle); //preserve direction
@@ -309,13 +379,22 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 
 #pragma mark - Internal
 
-- (NSMutableArray *)pickups
+- (NSMutableArray<SKSpriteNode *> *)pickups
 {
     if (!_pickups) {
         _pickups = [[NSMutableArray alloc] initWithCapacity:1];
     }
     
     return _pickups;
+}
+
+- (NSMutableArray<SKSpriteNode *> *)bumpers
+{
+	if (!_bumpers) {
+		_bumpers = [[NSMutableArray alloc] initWithCapacity:1];
+	}
+	
+	return _bumpers;
 }
 
 @end
