@@ -48,10 +48,6 @@
 	UIButton *pauseButton = [[UIButton alloc] init];
 	[pauseButton addTarget:self action:@selector(clickedPauseButton:) forControlEvents:UIControlEventTouchUpInside];
 	pauseButton.translatesAutoresizingMaskIntoConstraints = NO;
-	
-	//pauseButton.backgroundColor = [UIColor lightGrayColor];
-	//[pauseButton setTitle:@"   Pause   " forState:UIControlStateNormal];
-	//[pauseButton sizeToFit];
 	[pauseButton setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
 	
 	[self.view addSubview:pauseButton];

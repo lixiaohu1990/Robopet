@@ -38,6 +38,7 @@
 	
 	
 	self.label = [[UILabel alloc] init];
+	self.label.numberOfLines = 2;
 	self.label.translatesAutoresizingMaskIntoConstraints = NO;
 	self.label.adjustsFontSizeToFitWidth = YES;
 	self.label.textAlignment = NSTextAlignmentCenter;
@@ -86,7 +87,7 @@
 
 - (void)startCountdownWithSartTime:(NSInteger)startTime endTime:(NSInteger)endTime updateBlock:(void (^)(NSInteger currentTime))update
 {
-	if (update) {				// call update block
+	if (update) {					// call update block
 		update(startTime);
 	}
 	
