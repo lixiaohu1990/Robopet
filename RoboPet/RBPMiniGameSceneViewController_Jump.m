@@ -53,10 +53,10 @@
     Ground1Movement = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(Ground1Moving) userInfo:nil repeats:TRUE];
        Ground2Movement = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(Ground2Moving) userInfo:nil repeats:TRUE];
     Box.center = CGPointMake(669, Box.center.y);
-        Box2.center = CGPointMake(869, Box.center.y);
-        Box3.center = CGPointMake(1069 , Box.center.y);
-        Box4.center = CGPointMake(1269, Box.center.y);
-        Box5.center = CGPointMake(1469 , Box.center.y);
+        Box2.center = CGPointMake(1069, Box.center.y);
+        Box3.center = CGPointMake(1469 , Box.center.y);
+        Box4.center = CGPointMake(1869, Box.center.y);
+        Box5.center = CGPointMake(2269 , Box.center.y);
     onGround = TRUE;
     Box.hidden = FALSE;
         Box2.hidden = FALSE;
@@ -117,19 +117,19 @@
     }
     if(Box2.center.x <= -10){
         [self PlaceBoxes2];
-                [self Score];
+        [self Score];
     }
     if(Box3.center.x <= -10){
         [self PlaceBoxes3];
-                [self Score];
+        [self Score];
     }
     if(Box4.center.x <= -10){
         [self PlaceBoxes4];
-                [self Score];
+        [self Score];
     }
     if(Box5.center.x <= -10){
         [self PlaceBoxes5];
-                [self Score];
+        [self Score];
     }
 
     
@@ -185,7 +185,7 @@
 
 -(void)PlaceBoxes{
     
-    Box.center = CGPointMake(869 + arc4random() % (1069 - 769) , Box.center.y);
+    Box.center = CGPointMake(1069 + arc4random() % (2069 - 1069) , Box.center.y);
 
     if (BoxSpeed != 100){
         BoxSpeed = BoxSpeed + 0.2;
@@ -193,25 +193,25 @@
 }
 -(void)PlaceBoxes2{
         
-        Box2.center = CGPointMake(869 + arc4random() % (1269 - 769) , Box.center.y);
+        Box2.center = CGPointMake(1469 + arc4random() % (2469 - 1469) , Box.center.y);
 
 
 }
 -(void)PlaceBoxes3{
 
-            Box3.center = CGPointMake(869 + arc4random() % (1269 - 769)  , Box.center.y);
+            Box3.center = CGPointMake(1469 + arc4random() % (2469 - 1469)  , Box.center.y);
 
 
 }
 -(void)PlaceBoxes4{
                 
-                Box4.center = CGPointMake(869 + arc4random() % (1269 - 769)  , Box.center.y);
+                Box4.center = CGPointMake(1469 + arc4random() % (2469 - 1469)  , Box.center.y);
 
 
 }
 -(void)PlaceBoxes5{
     
-                    Box5.center = CGPointMake(869 + arc4random() % (1269 - 769)  , Box.center.y);
+                    Box5.center = CGPointMake(1469 + arc4random() % (2469 - 1469)  , Box.center.y);
 
 
 }
