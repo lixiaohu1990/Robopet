@@ -10,9 +10,10 @@
 
 #import "RBPMiniGameScene_Roll.h"
 
-typedef NS_OPTIONS(uint32_t, CollisionCategory) {
-    CollisionCategoryPlayer = 0x1 << 0,
-    CollisionCategoryWall = 0x1 << 1,
+typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
+    RBPCollisionCategoryPlayer = 0x1 << 0,
+    RBPCollisionCategoryWall = 0x1 << 1,
+	RBPCollisionCategoryBumper = 0x1 << 2,
 };
 
 
@@ -31,7 +32,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 /**
  *  Device motion data manager
  */
-@property (strong, nonatomic) CMMotionManager *motion;
+@property (strong, nonatomic, readwrite) CMMotionManager *motion;
 
 /**
  *  Array of resusable pickups
@@ -57,38 +58,18 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 {
 	[super initialize];
 	
-	
 	self.physicsWorld.contactDelegate = self;
-    
-    
-    // Setup motion data
-    self.motion = [[CMMotionManager alloc] init];
-    [self.motion startAccelerometerUpdates];
-    [self.motion startGyroUpdates];
-
-    
-    // Setup player
-    self.player = [SKSpriteNode spriteNodeWithImageNamed:@"robot_top"];
-	self.player.size = CGSizeMake(self.player.size.width * 0.5, self.player.size.height * 0.5);
-	self.player.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.player.size.height / 2.0];//[UIScreen mainScreen].scale];
-    self.player.physicsBody.allowsRotation = YES;
-    self.player.physicsBody.friction = 0.7;
-    self.player.physicsBody.restitution = 1.0;
-    self.player.physicsBody.usesPreciseCollisionDetection = YES;
-    self.player.physicsBody.categoryBitMask = CollisionCategoryPlayer;
-    self.player.physicsBody.contactTestBitMask = CollisionCategoryWall;
-    //self.player.physicsBody.collisionBitMask = ;
-    self.player.position = CGPointMake(self.size.width / 2.0, self.size.height / 2.0);
-    [self addChild:self.player];
 	
-	
+	if (self.motion){ }	// Lazy load, make sure this is created and updating
 	[self setupWalls];
-	
+	[self setupPlayer];
 	
     [self generatePickup];
 	
-	for (int x = 0; x < 30; x++)
+	// TODO: REMOVE
+	for (int x = 0; x < 7; x++) {
 		[self generateBumper];
+	}
 }
 
 - (void)restart
@@ -96,12 +77,28 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	[super restart];
 }
 
+- (CMMotionManager *)motion
+{
+	if (!_motion) {
+		_motion = [[CMMotionManager alloc] init];
+	}
+	
+	if (!_motion.accelerometerActive && _motion.accelerometerAvailable) {
+		[_motion startAccelerometerUpdates];
+	}
+	if (!_motion.gyroActive && _motion.gyroAvailable) {
+		[_motion startGyroUpdates];
+	}
+	
+	return _motion;
+}
+
 - (void)setupWalls
 {
 	SKSpriteNode *leftWall = [SKSpriteNode spriteNodeWithColor:[UIColor clearColor] size:CGSizeMake(1, self.size.height)];
 	leftWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:leftWall.size];
 	leftWall.physicsBody.dynamic = NO;
-	leftWall.physicsBody.categoryBitMask = CollisionCategoryWall;
+	leftWall.physicsBody.categoryBitMask = RBPCollisionCategoryWall;
 	leftWall.physicsBody.affectedByGravity = NO;
 	leftWall.position = CGPointMake(-leftWall.size.width, self.size.height / 2);
 	[self addChild:leftWall];
@@ -109,7 +106,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	SKSpriteNode *rightWall = [SKSpriteNode spriteNodeWithColor:[UIColor clearColor] size:CGSizeMake(1, self.size.height)];
 	rightWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:rightWall.size];
 	rightWall.physicsBody.dynamic = NO;
-	rightWall.physicsBody.categoryBitMask = CollisionCategoryWall;
+	rightWall.physicsBody.categoryBitMask = RBPCollisionCategoryWall;
 	rightWall.physicsBody.affectedByGravity = NO;
 	rightWall.position = CGPointMake(self.size.width + rightWall.size.width, self.size.height / 2);
 	[self addChild:rightWall];
@@ -117,7 +114,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	SKSpriteNode *topWall = [SKSpriteNode spriteNodeWithColor:[UIColor clearColor] size:CGSizeMake(self.size.width, 1)];
 	topWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:topWall.size];
 	topWall.physicsBody.dynamic = NO;
-	topWall.physicsBody.categoryBitMask = CollisionCategoryWall;
+	topWall.physicsBody.categoryBitMask = RBPCollisionCategoryWall;
 	topWall.physicsBody.affectedByGravity = NO;
 	topWall.position = CGPointMake(self.size.width / 2, self.size.height + topWall.size.height);
 	[self addChild:topWall];
@@ -125,39 +122,60 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	SKSpriteNode *bottomWall = [SKSpriteNode spriteNodeWithColor:[UIColor clearColor] size:CGSizeMake(self.size.width, 1)];
 	bottomWall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:bottomWall.size];
 	bottomWall.physicsBody.dynamic = NO;
-	bottomWall.physicsBody.categoryBitMask = CollisionCategoryWall;
+	bottomWall.physicsBody.categoryBitMask = RBPCollisionCategoryWall;
 	bottomWall.physicsBody.affectedByGravity = NO;
 	bottomWall.position = CGPointMake(self.size.width / 2, -bottomWall.size.height);
 	[self addChild:bottomWall];
 	
 	
-	
-	
-	
-	
-	
 	//self.physicsWorld.gravity = CGVectorMake(0, 0);
 	
 	// Setup particles
-//	SKEmitterNode *leftWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
-//	leftWallParticles.position = leftWall.position;
-//	leftWallParticles.zRotation = M_PI_2;
-//	[self addChild:leftWallParticles];
-//	
-//	SKEmitterNode *rightWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
-//	rightWallParticles.position = rightWall.position;
-//	rightWallParticles.zRotation = M_PI_2;
-//	[self addChild:rightWallParticles];
-//	
-//	SKEmitterNode *topWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
-//	topWallParticles.position = topWall.position;
-//	topWallParticles.zRotation = M_PI;
-//	[self addChild:topWallParticles];
-//	
-//	SKEmitterNode *bottomWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
-//	bottomWallParticles.position = bottomWall.position;
-//	bottomWallParticles.zRotation = M_PI;
-//	[self addChild:bottomWallParticles];
+	//	SKEmitterNode *leftWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
+	//	leftWallParticles.position = leftWall.position;
+	//	leftWallParticles.zRotation = M_PI_2;
+	//	[self addChild:leftWallParticles];
+	//
+	//	SKEmitterNode *rightWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
+	//	rightWallParticles.position = rightWall.position;
+	//	rightWallParticles.zRotation = M_PI_2;
+	//	[self addChild:rightWallParticles];
+	//
+	//	SKEmitterNode *topWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
+	//	topWallParticles.position = topWall.position;
+	//	topWallParticles.zRotation = M_PI;
+	//	[self addChild:topWallParticles];
+	//
+	//	SKEmitterNode *bottomWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
+	//	bottomWallParticles.position = bottomWall.position;
+	//	bottomWallParticles.zRotation = M_PI;
+	//	[self addChild:bottomWallParticles];
+}
+
+- (void)setupPlayer
+{
+	self.player = [SKSpriteNode spriteNodeWithImageNamed:@"robot_top"];
+	self.player.size = CGSizeMake(self.player.size.width * 0.5, self.player.size.height * 0.5);
+	
+	//TODO: pick better physicsBody
+	self.player.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.player.size.height * 0.5];
+	//self.player.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:@"robot_top"] size:self.player.size];
+	
+	self.player.physicsBody.allowsRotation = YES;
+	self.player.physicsBody.friction = 0.7;
+	self.player.physicsBody.restitution = 1.0;
+	self.player.physicsBody.usesPreciseCollisionDetection = YES;
+	self.player.physicsBody.categoryBitMask = RBPCollisionCategoryPlayer;
+	self.player.physicsBody.contactTestBitMask = RBPCollisionCategoryWall | RBPCollisionCategoryBumper;
+	self.player.physicsBody.collisionBitMask = self.player.physicsBody.contactTestBitMask;
+	
+	[self centrePlayer];
+	[self addChild:self.player];
+}
+
+- (void)centrePlayer
+{
+	self.player.position = CGPointMake(self.size.width / 2.0, self.size.height / 2.0);
 }
 
 #pragma mark - RBPMiniGameScene_Roll
@@ -219,13 +237,15 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 		
 		NSString *imageName = (arc4random() % 2 == 0) ? @"bumper_square" : @"bumper_triangle";
 		newBumper = [SKSpriteNode spriteNodeWithImageNamed:imageName];
-		newBumper.size = CGSizeMake(newBumper.size.width * 0.25, newBumper.size.height * 0.25);
+		
+		CGFloat sizeScale = MAX(0.15, arc4random_uniform(30) / 100.0); // Random scale between x% and y%
+		newBumper.size = CGSizeMake(newBumper.size.width * sizeScale, newBumper.size.height * sizeScale);
 		newBumper.hidden = YES;
 		
 		// Setup physics
 		newBumper.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:imageName] size:newBumper.size];
 		newBumper.physicsBody.dynamic = NO;
-		newBumper.physicsBody.categoryBitMask = CollisionCategoryWall;
+		newBumper.physicsBody.categoryBitMask = RBPCollisionCategoryBumper;
 		newBumper.physicsBody.affectedByGravity = NO;
 		
 		// Add to scene
@@ -237,6 +257,10 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	[self positionNodeRandomly:newBumper];
 	
 	newBumper.hidden = NO;
+	// Rotate bumpers
+	CGFloat randomDuration = MAX(1.0, arc4random_uniform(200) / 100.0); // Random duration between 1.0 and 2.0 seconds
+	NSInteger angle = M_PI_2 * ((arc4random_uniform(2) == 1) ? 1 : -1);	// Random angle direction
+	[newBumper runAction:[SKAction repeatActionForever:[SKAction rotateByAngle:angle duration:randomDuration]]];
 }
 
 - (void)positionNodeRandomly:(SKSpriteNode *)node
@@ -244,18 +268,16 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	CGSize halfSize = CGSizeMake(node.size.width * 0.5, node.size.height * 0.5);
 	
 	// TODO: padding?
-	CGFloat xPosition = arc4random_uniform(self.size.width);
-	CGFloat yPosition = arc4random_uniform(self.size.height);
+	NSInteger xPosition = arc4random_uniform(self.size.width);
+	NSInteger yPosition = arc4random_uniform(self.size.height);
 	
 	// Clamp positions so pickup is never offscreen
 	xPosition = MAX(halfSize.width, MIN(xPosition, self.size.width - halfSize.width));
 	yPosition = MAX(halfSize.height, MIN(yPosition, self.size.height - halfSize.height));
 	
 	node.position = CGPointMake(xPosition, yPosition);
-	
-	// Random rotation
 	NSInteger deg = arc4random() % 360;
-	CGFloat rad = deg / (180.0 * M_PI);
+	CGFloat rad = deg * (M_PI / 180.0);
 	node.zRotation = rad;
 	
 	
@@ -265,13 +287,13 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	}
 	
 	// Check for intersections of existing bumpers and pickups
-	for (SKNode *bumper in self.bumpers) {
+	for (SKSpriteNode *bumper in self.bumpers) {
 		if (node != bumper && !bumper.hidden && [node intersectsNode:bumper]) {
 			[self positionNodeRandomly:node];
 			return;
 		}
 	}
-	for (SKNode *pickup in self.pickups) {
+	for (SKSpriteNode *pickup in self.pickups) {
 		if (node != pickup && !pickup.hidden && [node intersectsNode:pickup]) {
 			[self positionNodeRandomly:node];
 			return;
@@ -279,12 +301,49 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	}
 }
 
+- (void)playerDidCollectPickup:(SKSpriteNode *)pickup
+{
+	pickup.hidden = YES;
+	[self generatePickup];
+	
+	[self generateBumper];
+	
+	[self.progressView incrementProgress:0.3 animated:YES];
+}
+
+- (void)pulseNode:(SKNode *)node scale:(CGFloat)scale duration:(CGFloat)duration
+{
+	if ([node actionForKey:@"pulseScale"]) {
+		return;
+	}
+	
+	SKAction *action = [SKAction scaleTo:scale duration:duration * 0.5];
+	SKAction *actionCompletion = [SKAction runBlock:^{
+		[node runAction:[SKAction scaleTo:1.0 duration:duration * 0.5] withKey:@"pulseScale"];
+	}];
+	
+	[node runAction:[SKAction sequence:@[action, actionCompletion]] withKey:@"pulseScale"];
+}
+
+- (void)pulseNode:(SKNode *)node color:(UIColor *)color duration:(CGFloat)duration
+{
+	if ([node actionForKey:@"pulseColor"]) {
+		return;
+	}
+	
+	SKAction *action = [SKAction colorizeWithColor:[UIColor redColor] colorBlendFactor:0.5 duration:duration * 0.5];
+	SKAction *actionCompletion = [SKAction runBlock:^{
+		[node runAction:[SKAction colorizeWithColor:[UIColor whiteColor] colorBlendFactor:1.0 duration:duration * 0.5] withKey:@"pulseScale"];
+	}];
+	
+	[node runAction:[SKAction sequence:@[action, actionCompletion]] withKey:@"pulseColor"];
+}
+
 #pragma mark - SKScene
 
 - (void)update:(CFTimeInterval)currentTime
 {
 	[super update:currentTime];
-	
 	
 	// *****************
 	// Rotate player
@@ -329,7 +388,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	if (![self isPlayerVelocityToHigh]) { // start allowing larger velocity once it is under control
 		
 		if (self.player.physicsBody.linearDamping > 0.1) {
-			self.player.physicsBody.linearDamping -= 0.05;
+			self.player.physicsBody.linearDamping *= 0.85;
 		}
 		
 	}
@@ -338,17 +397,10 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	// *****************
 	// Check for pickups
 	// *****************
-    for (SKNode *pickup in self.pickups) {
-		
-		if (!pickup.hidden && [self.player intersectsNode:pickup]) { // Did collect pickup
-			
-			[self.progressView incrementProgress:0.3 animated:YES];
-			
-			pickup.hidden = YES;
-            [self generatePickup];
-			
+    for (SKSpriteNode *pickup in self.pickups) {
+		if (!pickup.hidden && [self.player intersectsNode:pickup]) {
+			[self playerDidCollectPickup:pickup];
         }
-		
     }
 }
 
@@ -356,11 +408,16 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 
 - (BOOL)isPlayerVelocityToHigh
 {
-	return (ABS(self.player.physicsBody.velocity.dx) > 3000 || ABS(self.player.physicsBody.velocity.dy) > 3000);
+	return (ABS(self.player.physicsBody.velocity.dx) > 1000 || ABS(self.player.physicsBody.velocity.dy) > 1000);
 }
 
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
+	if (contact.bodyA.node != self.player && contact.bodyB.node != self.player) {
+		return;
+	}
+	
+	
 	if (![self isPlayerVelocityToHigh]) {
 		
 		CGVector collisionImpluse = CGVectorMake(contact.contactNormal.dx * contact.collisionImpulse * 0.25,
@@ -370,7 +427,18 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 	}
 	
 	self.player.physicsBody.linearDamping = MAX(1.0, self.player.physicsBody.linearDamping) * 1.75;
-	[self.progressView incrementProgress:-0.2 animated:YES];
+	//[self.progressView incrementProgress:-0.2 animated:YES];
+	
+	
+	
+	// Animated
+	if (contact.bodyA.categoryBitMask == RBPCollisionCategoryBumper) {
+		[self pulseNode:contact.bodyA.node scale:1.3 duration:0.4];
+	} else if (contact.bodyB.categoryBitMask == RBPCollisionCategoryBumper) {
+		[self pulseNode:contact.bodyB.node scale:1.3 duration:0.4];
+	}
+	
+	[self pulseNode:self.player color:[UIColor redColor] duration:0.35];
 }
 
 - (void)didEndContact:(SKPhysicsContact *)contact
@@ -382,7 +450,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 - (NSMutableArray<SKSpriteNode *> *)pickups
 {
     if (!_pickups) {
-        _pickups = [[NSMutableArray alloc] initWithCapacity:1];
+        _pickups = [[NSMutableArray alloc] init];
     }
     
     return _pickups;
@@ -391,7 +459,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 - (NSMutableArray<SKSpriteNode *> *)bumpers
 {
 	if (!_bumpers) {
-		_bumpers = [[NSMutableArray alloc] initWithCapacity:1];
+		_bumpers = [[NSMutableArray alloc] init];
 	}
 	
 	return _bumpers;

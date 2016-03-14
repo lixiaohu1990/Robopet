@@ -47,6 +47,7 @@
     [super viewDidLoad];
 	
 	self.navigationItem.title = @"Tutorial";
+	self.navigationItem.leftBarButtonItem.title = @"Dont Show Again";
 	self.navigationItem.rightBarButtonItem.title = @"Play";
 	
 	self.navigationItem.rightBarButtonItem.enabled = NO;
@@ -171,6 +172,30 @@
 	if (self.pageControl.currentPage == self.scrollView.tag - 1) {
 		self.navigationItem.rightBarButtonItem.enabled = YES;
 	}
+}
+
+#pragma mark - Internal
+
+- (void)clickedBarButton:(UIBarButtonItem *)barButtonItem
+{
+	[super clickedBarButton:barButtonItem];
+	
+	if (barButtonItem == self.navigationItem.leftBarButtonItem) { // Don't show again
+		NSString *key = [RBPMiniGameTutorialViewController showTutorialDefaultsKeyForDelegate:self.delegate];
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:key];
+	}
+}
+
++ (NSString *)showTutorialDefaultsKeyForDelegate:(id<RBPMiniGamePopupViewControllerDelegate>)delegate
+{
+	return [NSString stringWithFormat:@"ShowTutorial_%@", NSStringFromClass([delegate class])];
+}
+
++ (BOOL)shouldShowTutorialForDelegate:(id<RBPMiniGamePopupViewControllerDelegate>)delegate
+{
+	NSString *key = [RBPMiniGameTutorialViewController showTutorialDefaultsKeyForDelegate:delegate];
+	id value = [[NSUserDefaults standardUserDefaults] valueForKey:key];
+	return (value == nil) ? YES : [value boolValue];
 }
 
 @end

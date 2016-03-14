@@ -16,7 +16,7 @@
 {
 }
 
-@property (strong, nonatomic) UILabel *label;
+@property (strong, nonatomic, readwrite) UILabel *label;
 
 @end
 
@@ -44,18 +44,12 @@
 	self.label.textColor = [UIColor whiteColor];
 	[self.view addSubview:self.label];
 	
+	
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.label
 														  attribute:NSLayoutAttributeLeft
 														  relatedBy:NSLayoutRelationEqual
 															 toItem:self.view
 														  attribute:NSLayoutAttributeLeft
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.label
-														  attribute:NSLayoutAttributeTop
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.view
-														  attribute:NSLayoutAttributeTop
 														 multiplier:1.0
 														   constant:0.0]];
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.label
@@ -66,10 +60,17 @@
 														 multiplier:1.0
 														   constant:0.0]];
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.label
-														  attribute:NSLayoutAttributeBottom
+														  attribute:NSLayoutAttributeCenterX
 														  relatedBy:NSLayoutRelationEqual
 															 toItem:self.view
-														  attribute:NSLayoutAttributeBottom
+														  attribute:NSLayoutAttributeCenterX
+														 multiplier:1.0
+														   constant:0.0]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.label
+														  attribute:NSLayoutAttributeCenterY
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeCenterY
 														 multiplier:1.0
 														   constant:0.0]];
 }
@@ -103,7 +104,8 @@
 					 animations:^{
 						 
 						 self.label.transform = CGAffineTransformScale(self.label.transform, 1.15, 1.15);
-						 self.label.text = [NSString stringWithFormat:@"%lu", startTime];
+						 self.text = [NSString stringWithFormat:@"%lu", startTime];
+						 
 						 
 					 }
 					 completion:^(BOOL finished) {
@@ -123,6 +125,19 @@
 										  }];
 						 
 					 }];
+}
+
+#pragma mark - Internal
+
+- (void)setText:(NSString *)text
+{
+	_text = text;
+	
+	[UIView performWithoutAnimation:^{
+		
+		self.label.text = _text;
+		
+	}];
 }
 
 @end

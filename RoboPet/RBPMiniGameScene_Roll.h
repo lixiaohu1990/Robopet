@@ -7,6 +7,7 @@
 //
 
 @import SpriteKit;
+@import CoreMotion;
 
 #import "RBPMiniGameScene.h"
 
@@ -17,6 +18,11 @@
 @interface RBPMiniGameScene_Roll : RBPMiniGameScene
 {
 }
+
+/**
+ *  Device motion data manager
+ */
+@property (strong, nonatomic, readonly) CMMotionManager *motion;
 
 @end
 

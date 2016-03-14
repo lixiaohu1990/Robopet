@@ -22,6 +22,8 @@
 {
 }
 
+@property (weak, nonatomic) RBPMiniGameScene_Roll *game;
+
 @end
 
 
@@ -67,11 +69,6 @@
 - (void)miniGameWillStart
 {
 	RBPMiniGameCountdownViewController *viewController = [[RBPMiniGameCountdownViewController alloc] init];
-	
-	
-	
-	
-	
 	MZFormSheetPresentationViewController *formSheet = [[MZFormSheetPresentationViewController alloc]
 														initWithContentViewController:viewController];
 	
@@ -85,6 +82,21 @@
 	
 	
 	[self presentViewController:formSheet animated:NO completion:^{
+		[self performSelector:@selector(displayCountdownViewController:) withObject:viewController afterDelay:0.0];
+	}];
+}
+	 
+- (void)displayCountdownViewController:(RBPMiniGameCountdownViewController *)viewController
+{
+	// Main Thread
+	dispatch_async(dispatch_get_main_queue(), ^(void) {
+		
+		// Don't start countdown until Device is flat
+		if (ABS(self.game.motion.accelerometerData.acceleration.x) > 0.2 || ABS(self.game.motion.accelerometerData.acceleration.y) > 0.2) {
+			viewController.text = @"Hold Device Flat";
+			[self performSelector:@selector(displayCountdownViewController:) withObject:viewController afterDelay:1.0];
+			return;
+		}
 		
 		[viewController startCountdownWithSartTime:3 endTime:1 updateBlock:^(NSInteger currentTime) {
 			
@@ -95,7 +107,9 @@
 			}
 			
 		}];
-	}];
+		
+	});
+	
 }
 
 - (void)miniGameWillResume
@@ -117,6 +131,13 @@
 	pageThree.textView.text = @"Avoid bumpers and walls";
 	
 	return @[pageOne, pageTwo, pageThree];
+}
+
+#pragma mark - Internal
+
+- (RBPMiniGameScene_Roll *)game
+{
+	return (RBPMiniGameScene_Roll *)self.view.scene;
 }
 
 @end

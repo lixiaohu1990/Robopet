@@ -16,6 +16,8 @@
 {
 }
 
+@property (strong, nonatomic) NSString *text;
+
 - (void)startCountdownWithSartTime:(NSInteger)startTime endTime:(NSInteger)endTime updateBlock:(void (^)(NSInteger currentTime))update;
 
 @end

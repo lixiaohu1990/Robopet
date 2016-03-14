@@ -41,6 +41,8 @@
 
 @property (weak, nonatomic) id<RBPMiniGameTutorialViewControllerDataSource> dataSource;
 
++ (BOOL)shouldShowTutorialForDelegate:(id<RBPMiniGamePopupViewControllerDelegate>)delegate;
+
 @end
 
 

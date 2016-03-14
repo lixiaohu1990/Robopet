@@ -22,6 +22,7 @@
 		
 		// Setup PageControl
 		self.textView = [[UITextView alloc] init];
+		self.textView.userInteractionEnabled = NO;
 		self.textView.translatesAutoresizingMaskIntoConstraints = NO;
 		[self addSubview:self.textView];
 		

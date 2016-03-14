@@ -79,6 +79,8 @@
 														   constant:CGRectGetMaxY(self.navigationController.navigationBar.bounds)]];
 }
 
+#pragma mark - Internal
+
 - (void)clickedBarButton:(UIBarButtonItem *)barButtonItem
 {
 	if (self.delegate) {

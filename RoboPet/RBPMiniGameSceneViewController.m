@@ -140,9 +140,14 @@
 {
 	[super viewWillAppear:animated];
 	
-	// Show tutorial view controller
-	RBPMiniGameTutorialViewController *viewController = [[RBPMiniGameTutorialViewController alloc] initWithDataSource:self];
-	[self displayPopupViewController:viewController animated:YES completion:nil];
+	
+	if ([RBPMiniGameTutorialViewController shouldShowTutorialForDelegate:self]) {
+		RBPMiniGameTutorialViewController *viewController = [[RBPMiniGameTutorialViewController alloc] initWithDataSource:self];
+		[self displayPopupViewController:viewController animated:YES completion:nil];
+	} else {
+		[self miniGameWillStart];
+	}
+	
 }
 
 /**
@@ -233,6 +238,10 @@
 								  } else if ([option isEqualToString:@"Quit"]) {
 									  
 									  [self.delegate miniGameDidFinish:self];
+									  
+								  } else {
+									  
+									  [self miniGameWillStart];
 									  
 								  }
 								  
