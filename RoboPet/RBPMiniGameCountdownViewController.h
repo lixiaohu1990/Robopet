@@ -18,6 +18,13 @@
 
 @property (strong, nonatomic) NSString *text;
 
+/**
+ *  Start countdown
+ *
+ *  @param startTime
+ *  @param endTime
+ *  @param update block called every second
+ */
 - (void)startCountdownWithSartTime:(NSInteger)startTime endTime:(NSInteger)endTime updateBlock:(void (^)(NSInteger currentTime))update;
 
 @end

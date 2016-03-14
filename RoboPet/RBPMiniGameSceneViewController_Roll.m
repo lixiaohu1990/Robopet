@@ -92,21 +92,25 @@
 	dispatch_async(dispatch_get_main_queue(), ^(void) {
 		
 		// Don't start countdown until Device is flat
-		if (ABS(self.game.motion.accelerometerData.acceleration.x) > 0.2 || ABS(self.game.motion.accelerometerData.acceleration.y) > 0.2) {
-			viewController.text = @"Hold Device Flat";
+		if (ABS(self.game.motion.accelerometerData.acceleration.x) > 0.2 ||
+			ABS(self.game.motion.accelerometerData.acceleration.y) > 0.2) {
+			
+			viewController.text = @"Rotate Device\nHorizontally";
 			[self performSelector:@selector(displayCountdownViewController:) withObject:viewController afterDelay:1.0];
-			return;
+			
+		} else {
+			
+			[viewController startCountdownWithSartTime:3 endTime:1 updateBlock:^(NSInteger currentTime) {
+				
+				if (currentTime < 1) {
+					[self dismissViewControllerAnimated:YES completion:^{
+						[super miniGameWillStart];
+					}];
+				}
+				
+			}];
+			
 		}
-		
-		[viewController startCountdownWithSartTime:3 endTime:1 updateBlock:^(NSInteger currentTime) {
-			
-			if (currentTime < 1) {
-				[self dismissViewControllerAnimated:YES completion:^{
-					[super miniGameWillStart];
-				}];
-			}
-			
-		}];
 		
 	});
 	
