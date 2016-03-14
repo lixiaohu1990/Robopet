@@ -46,29 +46,43 @@
 -(IBAction)PlayAgain:(id)sender{
     
     PlayAgain.hidden = TRUE;
-    BoxSpeed = 5.0;
     RobotMovement = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(RobotMoving)
                                                    userInfo:nil repeats:TRUE];
     
     BoxMovement = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(BoxMoving) userInfo:nil repeats:TRUE];
     Ground1Movement = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(Ground1Moving) userInfo:nil repeats:TRUE];
        Ground2Movement = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(Ground2Moving) userInfo:nil repeats:TRUE];
-    [self PlaceBoxes];
+    Box.center = CGPointMake(669, Box.center.y);
+        Box2.center = CGPointMake(869, Box.center.y);
+        Box3.center = CGPointMake(1069 , Box.center.y);
+        Box4.center = CGPointMake(1269, Box.center.y);
+        Box5.center = CGPointMake(1469 , Box.center.y);
     onGround = TRUE;
     Box.hidden = FALSE;
+        Box2.hidden = FALSE;
+        Box3.hidden = FALSE;
+        Box4.hidden = FALSE;
+        Box5.hidden = FALSE;
     Robot.hidden = FALSE;
     ScoreNumber = 0;
     Ground1.hidden = FALSE;
     Ground2.hidden = FALSE;
     ScoreLabel.text = [NSString stringWithFormat:@"Score:%i", ScoreNumber];
+        BoxSpeed = 5.0;
+    
     
     
     
 }
 
+
 -(void)BoxMoving{
     
     Box.center = CGPointMake(Box.center.x - BoxSpeed, Box.center.y);
+    Box2.center = CGPointMake(Box2.center.x - BoxSpeed, Box2.center.y);
+    Box3.center = CGPointMake(Box3.center.x - BoxSpeed, Box3.center.y);
+    Box4.center = CGPointMake(Box4.center.x - BoxSpeed, Box4.center.y);
+    Box5.center = CGPointMake(Box5.center.x - BoxSpeed, Box5.center.y);
     
 
     if( CGRectIntersectsRect(Robot.frame, Box.frame)){
@@ -76,8 +90,46 @@
         [self GameOver];
         
     }
+    if( CGRectIntersectsRect(Robot.frame, Box2.frame)){
+        
+        [self GameOver];
+        
+    }
+    if( CGRectIntersectsRect(Robot.frame, Box3.frame)){
+        
+        [self GameOver];
+        
+    }
+    if( CGRectIntersectsRect(Robot.frame, Box4.frame)){
+        
+        [self GameOver];
+        
+    }
+    if( CGRectIntersectsRect(Robot.frame, Box5.frame)){
+        
+        [self GameOver];
+        
+    }
     if(Box.center.x <= -10){
         [self PlaceBoxes];
+        [self Score];
+        
+    }
+    if(Box2.center.x <= -10){
+        [self PlaceBoxes2];
+                [self Score];
+    }
+    if(Box3.center.x <= -10){
+        [self PlaceBoxes3];
+                [self Score];
+    }
+    if(Box4.center.x <= -10){
+        [self PlaceBoxes4];
+                [self Score];
+    }
+    if(Box5.center.x <= -10){
+        [self PlaceBoxes5];
+                [self Score];
     }
 
     
@@ -107,8 +159,14 @@
     
     [BoxMovement invalidate];
     [RobotMovement invalidate];
+    [Ground1Movement invalidate];
+    [Ground2Movement invalidate];
     PlayAgain.hidden = FALSE;
     Box.hidden = TRUE;
+        Box2.hidden = TRUE;
+        Box3.hidden = TRUE;
+        Box4.hidden = TRUE;
+        Box5.hidden = TRUE;
     Robot.hidden = TRUE;
     Ground1.hidden =TRUE;
     Ground2.hidden = TRUE;
@@ -118,19 +176,47 @@
 
 -(void)Score{
     
+    
     ScoreNumber = ScoreNumber + 1;
+    ScoreLabel.text = [NSString stringWithFormat:@"Score:%i", ScoreNumber];
+
     
 }
 
 -(void)PlaceBoxes{
     
-    Box.center = CGPointMake(670, 297);
-        ScoreLabel.text = [NSString stringWithFormat:@"Score:%i", ScoreNumber];
+    Box.center = CGPointMake(769 + arc4random() % (1069 - 769) , Box.center.y);
+
     if (BoxSpeed != 100){
         BoxSpeed = BoxSpeed + 0.2;
     }
-    
 }
+-(void)PlaceBoxes2{
+        
+        Box2.center = CGPointMake(769 + arc4random() % (1069 - 769) , Box.center.y);
+
+
+}
+-(void)PlaceBoxes3{
+
+            Box3.center = CGPointMake(769 + arc4random() % (1069 - 769)  , Box.center.y);
+
+
+}
+-(void)PlaceBoxes4{
+                
+                Box4.center = CGPointMake(769 + arc4random() % (1069 - 769)  , Box.center.y);
+
+
+}
+-(void)PlaceBoxes5{
+    
+                    Box5.center = CGPointMake(769 + arc4random() % (1069 - 769)  , Box.center.y);
+
+
+}
+
+
 -(void)PlaceGround1{
     
     Ground1.center = CGPointMake(1014, 346);
