@@ -185,7 +185,7 @@
 
 -(void)PlaceBoxes{
     
-    Box.center = CGPointMake(769 + arc4random() % (1069 - 769) , Box.center.y);
+    Box.center = CGPointMake(869 + arc4random() % (1069 - 769) , Box.center.y);
 
     if (BoxSpeed != 100){
         BoxSpeed = BoxSpeed + 0.2;
@@ -193,25 +193,25 @@
 }
 -(void)PlaceBoxes2{
         
-        Box2.center = CGPointMake(769 + arc4random() % (1069 - 769) , Box.center.y);
+        Box2.center = CGPointMake(869 + arc4random() % (1269 - 769) , Box.center.y);
 
 
 }
 -(void)PlaceBoxes3{
 
-            Box3.center = CGPointMake(769 + arc4random() % (1069 - 769)  , Box.center.y);
+            Box3.center = CGPointMake(869 + arc4random() % (1269 - 769)  , Box.center.y);
 
 
 }
 -(void)PlaceBoxes4{
                 
-                Box4.center = CGPointMake(769 + arc4random() % (1069 - 769)  , Box.center.y);
+                Box4.center = CGPointMake(869 + arc4random() % (1269 - 769)  , Box.center.y);
 
 
 }
 -(void)PlaceBoxes5{
     
-                    Box5.center = CGPointMake(769 + arc4random() % (1069 - 769)  , Box.center.y);
+                    Box5.center = CGPointMake(869 + arc4random() % (1269 - 769)  , Box.center.y);
 
 
 }
