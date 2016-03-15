@@ -105,7 +105,7 @@
 					 animations:^{
 						 
 						 self.label.transform = CGAffineTransformScale(self.label.transform, 1.15, 1.15);
-						 self.text = [NSString stringWithFormat:@"%lu", startTime];
+						 self.text = [NSString stringWithFormat:@"%lu", (long)startTime];
 						 
 						 
 					 }

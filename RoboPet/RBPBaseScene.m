@@ -16,6 +16,7 @@
 {
 }
 
+@property (readwrite, nonatomic) BOOL currentPausedValue;
 @property (strong, nonatomic) SKSpriteNode *backgroundImageNode;
 
 @end
@@ -32,7 +33,26 @@
 {
 	[super didMoveToView:view];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(applicationDidEnterBackground:)
+												 name:UIApplicationDidEnterBackgroundNotification
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(applicationDidBecomeActive:)
+												 name:UIApplicationDidBecomeActiveNotification
+											   object:nil];
+	
 	[self restart];
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+	self.currentPausedValue = self.paused;
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification
+{
+	self.paused = self.currentPausedValue;
 }
 
 - (void)initialize
@@ -63,6 +83,11 @@
 	self.backgroundImageNode.size = self.size;
 	
 	[self addChild:self.backgroundImageNode];
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - SKScene

@@ -63,9 +63,9 @@ typedef NS_ENUM(NSInteger, GameStateType){
     CGSize sceneSize = self.scene.size;
     
     // Click Zone Setup
-    NumberOfSprites = 4;
+    NumberOfSprites = 5;
     SimonSequenceLength = NumberOfSprites * 3;
-    float s_size = sceneSize.width / ( NumberOfSprites + 1 );
+    float s_size = sceneSize.width / ( NumberOfSprites + 2 );
     float s_spacing = s_size * 0.1;
     
     // Calculate sprite measurements
@@ -111,11 +111,13 @@ typedef NS_ENUM(NSInteger, GameStateType){
     }
     
     GameLabel = [SKLabelNode new];
+	GameLabel.fontColor = [UIColor blackColor];
     GameLabel.position = CGPointMake(self.size.width / 2, self.size.height / 4);
     [self addChild: GameLabel];
     
     // User Prompt
-    UserPromptLabel = [SKLabelNode new];
+	UserPromptLabel = [SKLabelNode new];
+	UserPromptLabel.fontColor = [UIColor blackColor];
     UserPromptLabel.position = CGPointMake(self.size.width / 2, self.size.height - self.size.height / 4);
     [self addChild: UserPromptLabel];
     
@@ -225,7 +227,7 @@ typedef NS_ENUM(NSInteger, GameStateType){
 // Startup time, when first entering the scene
 -(void) doStartCountDownStateUpdate
 {
-    if( [self checkTime: 2.0] )
+    if( [self checkTime: 0.1] )
     {
         [self changeGameState: SimonTransition];
     }

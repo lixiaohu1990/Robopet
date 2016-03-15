@@ -67,7 +67,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
     [self generatePickup];
 	
 	// TODO: REMOVE
-	for (int x = 0; x < 7; x++) {
+	for (int x = 0; x < 4; x++) {
 		[self generateBumper];
 	}
 }
