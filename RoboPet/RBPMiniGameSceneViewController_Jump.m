@@ -272,11 +272,6 @@
     [super viewDidLoad];
 }
 
-- (RBPProgressView *)progressViewInternal
-{
-	return [RBPProgressView wellnessBar];
-}
-
 - (void)configureTutorialViewController:(RBPMiniGameTutorialViewController *)viewController
 {
 }

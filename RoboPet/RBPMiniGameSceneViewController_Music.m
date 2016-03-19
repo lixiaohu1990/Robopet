@@ -12,9 +12,6 @@
 
 #import "RBPMiniGameTutorialViewController.h"
 
-#import "RBPMiniGameCountdownViewController.h"
-#import "MZFormSheetPresentationViewController.h"
-
 
 
 
@@ -36,11 +33,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-}
-
-- (RBPProgressView *)progressViewInternal
-{
-	return [RBPProgressView happinessBar];
 }
 
 #pragma mark - RBPBaseSceneViewController
@@ -75,39 +67,6 @@
 	pageThree.textView.text = @"Tutorial Page 3";
 	
 	return @[pageOne, pageTwo, pageThree];
-}
-
-
-
-
-- (void)miniGameWillStart
-{
-	RBPMiniGameCountdownViewController *viewController = [[RBPMiniGameCountdownViewController alloc] init];
-	MZFormSheetPresentationViewController *formSheet = [[MZFormSheetPresentationViewController alloc]
-														initWithContentViewController:viewController];
-	
-	
-	CGSize contentViewSize = CGRectApplyAffineTransform(self.view.bounds, CGAffineTransformMakeScale(0.25, 0.0)).size;
-	contentViewSize.height = contentViewSize.width; // Square
-	formSheet.presentationController.contentViewSize = contentViewSize;
-	// Center in view
-	formSheet.presentationController.shouldCenterHorizontally = formSheet.presentationController.shouldCenterVertically = YES;
-	formSheet.contentViewControllerTransitionStyle =  MZFormSheetPresentationTransitionStyleBounce;
-	
-	
-	[self presentViewController:formSheet animated:NO completion:^{
-		
-		[viewController startCountdownWithSartTime:3 endTime:1 updateBlock:^(NSInteger currentTime) {
-			
-			if (currentTime < 1) {
-				[self dismissViewControllerAnimated:YES completion:^{
-					[super miniGameWillStart];
-				}];
-			}
-			
-		}];
-		
-	}];
 }
 
 @end

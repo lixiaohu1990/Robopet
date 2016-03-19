@@ -16,7 +16,6 @@
 {
 }
 
-@property (readwrite, nonatomic) BOOL currentPausedValue;
 @property (strong, nonatomic) SKSpriteNode *backgroundImageNode;
 
 @end
@@ -33,26 +32,7 @@
 {
 	[super didMoveToView:view];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(applicationDidEnterBackground:)
-												 name:UIApplicationDidEnterBackgroundNotification
-											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(applicationDidBecomeActive:)
-												 name:UIApplicationDidBecomeActiveNotification
-											   object:nil];
-	
 	[self restart];
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-	self.currentPausedValue = self.paused;
-}
-
-- (void)applicationDidBecomeActive:(NSNotification *)notification
-{
-	self.paused = self.currentPausedValue;
 }
 
 - (void)initialize
@@ -70,6 +50,8 @@
 	[self initialize];
 }
 
+#pragma mark - RBPBaseScene
+
 - (void)setBackgroundImageName:(NSString *)imageName
 {
 	if (self.backgroundImageNode) {
@@ -85,9 +67,11 @@
 	[self addChild:self.backgroundImageNode];
 }
 
-- (void)dealloc
+- (CGFloat)distanceFromNode:(SKNode *)node toNode:(SKNode *)toNode
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	CGFloat rise = node.position.y - toNode.position.y;
+	CGFloat run = node.position.x - toNode.position.x;
+	return sqrt((rise * rise) + (run * run));
 }
 
 #pragma mark - SKScene

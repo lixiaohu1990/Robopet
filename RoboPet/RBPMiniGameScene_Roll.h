@@ -24,6 +24,9 @@
  */
 @property (strong, nonatomic, readonly) CMMotionManager *motion;
 
+- (void)generatePickup;
+- (void)generateBumper;
+
 @end
 
 

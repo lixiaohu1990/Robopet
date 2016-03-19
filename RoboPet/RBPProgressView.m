@@ -188,9 +188,7 @@
 					 completion:^(BOOL finished) {
 						 
 						 if (progress <= 0.0001) { // Close enough to 0
-							 if (self.delegate && [self.delegate respondsToSelector:@selector(progressDidReachZero:)]) {
-								 [self.delegate progressDidReachZero:self];
-							 }
+							 
 						 }
 						 
 					 }];

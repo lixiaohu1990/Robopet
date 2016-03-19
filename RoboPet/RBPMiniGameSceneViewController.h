@@ -11,45 +11,34 @@
 
 #import "RBPBaseSceneViewController.h"
 
+#import "RBPMiniGameScene.h"
+
 #import "RBPMiniGameSceneViewControllerDelegate.h"
 #import "RBPMiniGameTutorialViewController.h"
 #import "RBPMiniGameTutorialPage.h"
+#import "RBPMiniGameCountdownViewController.h"
 #import "RBPMiniGamePopupViewController.h"
 
-#import "RBPProgressView.h"
 
 
 
 
-
-@interface RBPMiniGameSceneViewController : RBPBaseSceneViewController <RBPMiniGamePopupViewControllerDelegate,
-																		RBPMiniGameTutorialViewControllerDataSource,
-																		RBPProgressViewDelegate>
+@interface RBPMiniGameSceneViewController : RBPBaseSceneViewController <RBPMiniGameSceneDelegate,
+																		RBPMiniGamePopupViewControllerDelegate,
+																		RBPMiniGameTutorialViewControllerDataSource>
 {
 }
 
+@property (strong, nonatomic, readonly) UILabel *scoreLabel;
+@property (weak, nonatomic) RBPMiniGameScene *minigame;
 
 @property (weak, nonatomic) id<RBPMiniGameSceneViewControllerDelegate> delegate;
 
+- (void)startMiniGame;
+- (void)resumeMiniGame;
 
-/**
- *  The progress view for this mini games level
- */
-@property (strong, nonatomic) RBPProgressView *progressView;
-
-
-/**
- *  Called before mini game will start/restart
- */
-- (void)miniGameWillStart;
-/**
- *  Called when resuming minigame from Pause menu
- */
-- (void)miniGameWillResume;
-/**
- *  Call this when mini game has ended (game over)
- */
-- (void)miniGameDidFinish;
+- (void)startCountdownViewController:(RBPMiniGameCountdownViewController *)viewController;
+- (void)countdownViewControllerDidDismiss:(RBPMiniGameCountdownViewController *)viewController;
 
 @end
 

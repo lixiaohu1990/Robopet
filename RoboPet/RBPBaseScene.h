@@ -21,6 +21,16 @@
 - (void)initialize;
 - (void)restart;
 
+/**
+ *  Calculate distance between nodes (Pythagoras Theorem)
+ *
+ *  @param node
+ *  @param toNode
+ *
+ *  @return CGFloat
+ */
+- (CGFloat)distanceFromNode:(SKNode *)node toNode:(SKNode *)toNode;
+
 @end
 
 

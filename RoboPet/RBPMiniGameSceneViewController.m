@@ -8,8 +8,6 @@
 
 #import "RBPMiniGameSceneViewController.h"
 
-#import "RBPMiniGamePopupViewController.h"
-#import "RBPMiniGameTutorialViewController.h"
 #import "RBPMiniGamePauseViewController.h"
 #import "RBPMiniGameGameOverViewController.h"
 #import "MZFormSheetPresentationViewController.h"
@@ -25,6 +23,8 @@
 @interface RBPMiniGameSceneViewController ()
 {
 }
+
+@property (strong, nonatomic, readwrite) UILabel *scoreLabel;
 
 @end
 
@@ -44,7 +44,46 @@
 	
 	self.view.scene.paused = YES;
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(applicationDidEnterBackground:)
+												 name:UIApplicationDidEnterBackgroundNotification
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(applicationDidBecomeActive:)
+												 name:UIApplicationDidBecomeActiveNotification
+											   object:nil];
 	
+	[self setupScoreLabel];
+	[self setupPauseButton];
+	
+	self.minigame.minigameDelegate = self;
+}
+
+- (void)setupScoreLabel
+{
+	self.scoreLabel = [[UILabel alloc] init];
+	self.scoreLabel.translatesAutoresizingMaskIntoConstraints = NO;
+	
+	[self.view addSubview:self.scoreLabel];
+	
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.scoreLabel
+														  attribute:NSLayoutAttributeLeft
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeLeft
+														 multiplier:1.0
+														   constant:PADDING]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.scoreLabel
+														  attribute:NSLayoutAttributeTop
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.view
+														  attribute:NSLayoutAttributeTop
+														 multiplier:1.0
+														   constant:PADDING]];
+}
+
+- (void)setupPauseButton
+{
 	UIButton *pauseButton = [[UIButton alloc] init];
 	[pauseButton addTarget:self action:@selector(clickedPauseButton:) forControlEvents:UIControlEventTouchUpInside];
 	pauseButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -80,56 +119,6 @@
 														  attribute:NSLayoutAttributeHeight
 														 multiplier:1.0
 														   constant:0.0]];
-	
-	
-	self.progressView = [self progressViewInternal];
-	[self.progressView setProgress:1.0 animated:NO];
-	self.progressView.delegate = self;
-	((RBPMiniGameScene *)self.view.scene).progressView = self.progressView;
-	
-	if (self.progressView) {
-		
-		[self.view addSubview:self.progressView];
-		
-		[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.progressView
-															  attribute:NSLayoutAttributeLeft
-															  relatedBy:NSLayoutRelationEqual
-																 toItem:self.view
-															  attribute:NSLayoutAttributeLeft
-															 multiplier:1.0
-															   constant:PADDING]];
-		[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.progressView
-															  attribute:NSLayoutAttributeTop
-															  relatedBy:NSLayoutRelationEqual
-																 toItem:self.view
-															  attribute:NSLayoutAttributeTop
-															 multiplier:1.0
-															   constant:PADDING]];
-		[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.progressView
-															  attribute:NSLayoutAttributeWidth
-															  relatedBy:NSLayoutRelationEqual
-																 toItem:self.view
-															  attribute:NSLayoutAttributeWidth
-															 multiplier:0.25
-															   constant:0.0]];
-		[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.progressView
-															  attribute:NSLayoutAttributeHeight
-															  relatedBy:NSLayoutRelationEqual
-																 toItem:pauseButton
-															  attribute:NSLayoutAttributeHeight
-															 multiplier:1.0
-															   constant:0.0]];
-		
-	}
-}
-
-- (void)viewDidLayoutSubviews
-{
-	[super viewDidLayoutSubviews];
-	
-	if (self.progressView) {
-		[self.progressView setProgress:self.progressView.progress animated:NO];
-	}
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -141,43 +130,99 @@
 		RBPMiniGameTutorialViewController *viewController = [[RBPMiniGameTutorialViewController alloc] initWithDataSource:self];
 		[self displayPopupViewController:viewController animated:YES completion:nil];
 	} else {
-		[self miniGameWillStart];
+		[self startMiniGame];
 	}
 	
 }
 
-/**
- *  Override and return an instance of RBPProgressView
- *
- *  @return RBPProgressView
- */
-- (RBPProgressView *)progressViewInternal
+- (void)applicationDidEnterBackground:(NSNotification *)notification
 {
-	return nil;
+	// If we havent started the mini game yet, go back to the main menu
+	if (self.minigame.runningTime <= 0.0) {
+		[self.delegate miniGameDidFinish:self];
+	} else if (!self.presentedViewController) {
+		[self displayPauseViewController:NO];
+	}
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification
+{
+	// Fix bug with scenekit unpausing on app resume
+	if (self.presentingViewController != nil) {
+		self.view.scene.paused = YES;
+	}
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - RBPMiniGameSceneViewController
 
-- (void)miniGameWillStart
+- (void)startMiniGame
+{
+	self.minigame.minigameDelegate = self;
+	
+	RBPMiniGameCountdownViewController *viewController = [[RBPMiniGameCountdownViewController alloc] init];
+	MZFormSheetPresentationViewController *formSheet = [[MZFormSheetPresentationViewController alloc]
+														initWithContentViewController:viewController];
+	
+	
+	CGSize contentViewSize = CGRectApplyAffineTransform(self.view.bounds, CGAffineTransformMakeScale(0.25, 0.0)).size;
+	contentViewSize.height = contentViewSize.width; // Square
+	formSheet.presentationController.contentViewSize = contentViewSize;
+	// Center in view
+	formSheet.presentationController.shouldCenterHorizontally = formSheet.presentationController.shouldCenterVertically = YES;
+	formSheet.contentViewControllerTransitionStyle =  MZFormSheetPresentationTransitionStyleBounce;
+	
+	
+	[self presentViewController:formSheet animated:NO completion:^{
+		[self performSelector:@selector(startCountdownViewController:) withObject:viewController afterDelay:0.0];
+	}];
+}
+
+- (void)startCountdownViewController:(RBPMiniGameCountdownViewController *)viewController
+{
+	// Main Thread
+	dispatch_async(dispatch_get_main_queue(), ^(void) {
+		
+		[viewController startCountdownWithSartTime:3
+										   endTime:1
+									   updateBlock:^(NSInteger currentTime) {
+			
+			if (currentTime < 1) {
+				[self dismissViewControllerAnimated:YES
+										 completion:^{
+											 [self countdownViewControllerDidDismiss:viewController];
+				}];
+			}
+			
+		}];
+		
+	});
+	
+}
+
+- (void)countdownViewControllerDidDismiss:(RBPMiniGameCountdownViewController *)viewController
 {
 	self.view.scene.paused = NO;
 }
 
-- (void)miniGameWillResume
+- (void)resumeMiniGame
 {
 	self.view.scene.paused = NO;
-}
-
-- (void)miniGameDidFinish
-{
-	RBPMiniGameGameOverViewController *viewController = [[RBPMiniGameGameOverViewController alloc] init];
-	[self displayPopupViewController:viewController animated:YES completion:nil];
 }
 
 - (void)clickedPauseButton:(UIButton *)button
 {
+	[self displayPauseViewController:YES];
+}
+
+- (void)displayPauseViewController:(BOOL)animated
+{
 	RBPMiniGamePauseViewController *viewController = [[RBPMiniGamePauseViewController alloc] init];
-	[self displayPopupViewController:viewController animated:YES completion:nil];
+	[self displayPopupViewController:viewController animated:animated completion:nil];
 }
 
 - (void)displayPopupViewController:(RBPMiniGamePopupViewController *)viewController
@@ -186,9 +231,6 @@
 {
 	self.view.scene.paused = YES;
 	viewController.delegate = self;
-	
-	
-	[self.progressView setProgress:self.progressView.progress animated:NO];
 	
 	
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
@@ -207,6 +249,20 @@
 	[self presentViewController:formSheet animated:animated completion:completion];
 }
 
+#pragma mark - RBPMiniGameSceneDelegate
+
+- (void)onMiniGameScoreChange:(RBPMiniGameScene *)miniGame
+{
+	self.scoreLabel.text = [NSString stringWithFormat:@"Level: %lu Score: %0.2f", miniGame.difficultyLevel, miniGame.score];
+	[self.scoreLabel sizeToFit];
+}
+
+- (void)onMiniGameGameOver:(RBPMiniGameScene *)miniGame
+{
+	RBPMiniGameGameOverViewController *viewController = [[RBPMiniGameGameOverViewController alloc] init];
+	[self displayPopupViewController:viewController animated:YES completion:nil];
+}
+
 #pragma mark - RBPMiniGamePopupViewControllerDelegate
 
 - (void)popupViewController:(RBPMiniGamePopupViewController *)viewController didSelectOption:(NSString *)option
@@ -217,19 +273,19 @@
 								  if ([viewController isKindOfClass:[RBPMiniGameTutorialViewController class]] &&
 									  [option isEqualToString:@"Play"]) {
 									  
-									  [self miniGameWillStart];
+									  [self startMiniGame];
 									  
 								  } else if ([viewController isKindOfClass:[RBPMiniGamePauseViewController class]] &&
 											 [option isEqualToString:@"Resume"]) {
 									  
-									  [self miniGameWillResume];
+									  [self resumeMiniGame];
 									  
 								  } else if ([viewController isKindOfClass:[RBPMiniGameGameOverViewController class]] &&
 											 [option isEqualToString:@"Play Again"]) {
 									  
-									  [self.progressView setProgress:1.0 animated:NO];
-									  [((RBPMiniGameScene *)self.view.scene) restart];
-									  [self miniGameWillStart];
+									  
+									  [self.minigame restart];
+									  [self startMiniGame];
 									  
 								  } else if ([option isEqualToString:@"Quit"]) {
 									  
@@ -237,7 +293,7 @@
 									  
 								  } else {
 									  
-									  [self miniGameWillStart];
+									  [self startMiniGame];
 									  
 								  }
 								  
@@ -252,13 +308,11 @@
 	return @[];
 }
 
-#pragma mark - RBPProgressViewDelegate
+#pragma mark - Internal
 
-- (void)progressDidReachZero:(RBPProgressView *)progressView
+- (RBPMiniGameScene *)minigame
 {
-	if (!self.view.scene.isPaused) {
-		[self miniGameDidFinish];
-	}
+	return (RBPMiniGameScene *)self.view.scene;
 }
 
 @end

@@ -33,7 +33,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+	
+	
     CGSize sceneSize = CGSizeMake(self.view.bounds.size.width * [UIScreen mainScreen].scale,
                                   self.view.bounds.size.height * [UIScreen mainScreen].scale);
 	
@@ -60,6 +61,7 @@
     self.view.showsPhysics = YES;
     self.view.showsFields = YES;
 #endif
+	
 }
 
 - (Class)sceneClass;

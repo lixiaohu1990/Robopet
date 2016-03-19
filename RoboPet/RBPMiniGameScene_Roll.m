@@ -10,10 +10,18 @@
 
 #import "RBPMiniGameScene_Roll.h"
 
+#import "RBPMiniGameRollBattery.h"
+#import "RBPMiniGameRollBumper.h"
+
+
+
+
+
 typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
-    RBPCollisionCategoryPlayer = 0x1 << 0,
-    RBPCollisionCategoryWall = 0x1 << 1,
-	RBPCollisionCategoryBumper = 0x1 << 2,
+	RBPCollisionCategoryNone = 0x1 << 0,
+    RBPCollisionCategoryPlayer = 0x1 << 1,
+    RBPCollisionCategoryWall = 0x1 << 2,
+	RBPCollisionCategoryBumper = 0x1 << 3,
 };
 
 
@@ -28,6 +36,15 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
  *  Player node
  */
 @property (strong, nonatomic) SKSpriteNode *player;
+/**
+ *  Invisible node to rotate player to
+ */
+@property (strong, nonatomic) SKSpriteNode *playerRotationNode;
+
+/**
+ *  Array of walls
+ */
+@property (strong, nonatomic) NSArray<SKSpriteNode *> *walls;
 
 /**
  *  Device motion data manager
@@ -37,12 +54,12 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 /**
  *  Array of resusable pickups
  */
-@property (strong, nonatomic) NSMutableArray<SKSpriteNode *> *pickups;
+@property (strong, nonatomic) NSMutableArray<RBPMiniGameRollBattery *> *pickups;
 
 /**
  *  Array of reusable bumpers
  */
-@property (strong, nonatomic) NSMutableArray<SKSpriteNode *> *bumpers;
+@property (strong, nonatomic) NSMutableArray<RBPMiniGameRollBumper *> *bumpers;
 
 @end
 
@@ -63,18 +80,25 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	if (self.motion){ }	// Lazy load, make sure this is created and updating
 	[self setupWalls];
 	[self setupPlayer];
-	
-    [self generatePickup];
-	
-	// TODO: REMOVE
-	for (int x = 0; x < 4; x++) {
-		[self generateBumper];
-	}
 }
 
 - (void)restart
 {
 	[super restart];
+}
+
+- (void)setPaused:(BOOL)paused
+{
+	BOOL temp = self.paused;
+	
+	[super setPaused:paused];
+	
+	if (temp && !paused && self.runningTime <= 0.01) {
+		
+		[self generatePickup];
+		[self generateBumpersForDifficulty:self.difficultyLevel afterDelay:0.0];
+		
+	}
 }
 
 - (CMMotionManager *)motion
@@ -127,29 +151,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	bottomWall.position = CGPointMake(self.size.width / 2, -bottomWall.size.height);
 	[self addChild:bottomWall];
 	
-	
-	//self.physicsWorld.gravity = CGVectorMake(0, 0);
-	
-	// Setup particles
-	//	SKEmitterNode *leftWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
-	//	leftWallParticles.position = leftWall.position;
-	//	leftWallParticles.zRotation = M_PI_2;
-	//	[self addChild:leftWallParticles];
-	//
-	//	SKEmitterNode *rightWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
-	//	rightWallParticles.position = rightWall.position;
-	//	rightWallParticles.zRotation = M_PI_2;
-	//	[self addChild:rightWallParticles];
-	//
-	//	SKEmitterNode *topWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
-	//	topWallParticles.position = topWall.position;
-	//	topWallParticles.zRotation = M_PI;
-	//	[self addChild:topWallParticles];
-	//
-	//	SKEmitterNode *bottomWallParticles = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"Sparks" ofType:@"sks"]];
-	//	bottomWallParticles.position = bottomWall.position;
-	//	bottomWallParticles.zRotation = M_PI;
-	//	[self addChild:bottomWallParticles];
+	self.walls = @[leftWall, rightWall, topWall, bottomWall];
 }
 
 - (void)setupPlayer
@@ -162,6 +164,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	//self.player.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:@"robot_top"] size:self.player.size];
 	
 	self.player.physicsBody.allowsRotation = YES;
+	self.player.physicsBody.mass = 100000;
 	self.player.physicsBody.friction = 0.7;
 	self.player.physicsBody.restitution = 1.0;
 	self.player.physicsBody.usesPreciseCollisionDetection = YES;
@@ -171,11 +174,20 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	
 	[self centrePlayer];
 	[self addChild:self.player];
+	
+	
+	self.playerRotationNode = [SKSpriteNode spriteNodeWithColor:[UIColor clearColor] size:CGSizeMake(25, 25)];
+	[self addChild:self.playerRotationNode];
+	
+	SKConstraint *constraint = [SKConstraint orientToNode:self.playerRotationNode offset:[SKRange rangeWithConstantValue:-M_PI_2]];
+	constraint.referenceNode = self.scene;
+	self.player.constraints = @[constraint];
+	
 }
 
 - (void)centrePlayer
 {
-	self.player.position = CGPointMake(self.size.width / 2.0, self.size.height / 2.0);
+	self.player.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.5);
 }
 
 #pragma mark - RBPMiniGameScene_Roll
@@ -185,34 +197,40 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
  */
 - (void)generatePickup
 {
-	//TODO: check distance from player
+	__block RBPMiniGameRollBattery *newPickup = nil;
 	
-	SKSpriteNode *newPickup = nil;
-	
-	for (SKSpriteNode *pickup in self.pickups) {		// Search for disabled cached object
-		
-		if (pickup.hidden == YES) {
-			newPickup = pickup;
-			break;
+	[self.pickups enumerateObjectsUsingBlock:^(RBPMiniGameRollBattery * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+		if (!obj.parent) {
+			newPickup = obj;
+			stop = (BOOL *)YES;
 		}
+	}];
+	
+	if (!newPickup) {
+		
+		newPickup = [[RBPMiniGameRollBattery alloc] init];
+		newPickup.size = CGSizeMake(newPickup.size.width * 0.35, newPickup.size.height * 0.35);
 		
 	}
 	
-	if (!newPickup) {									// If no cached available, create a new one
+	newPickup.alpha = 0.0;
+	
+	if ([self randomlyPositionNode:newPickup attemptCount:0]) {
 		
-		newPickup = [SKSpriteNode spriteNodeWithImageNamed:@"battery"];
-		newPickup.size = CGSizeMake(newPickup.size.width * 0.35, newPickup.size.height * 0.35);
-		newPickup.hidden = YES;
-		// Add to scene
-		[self addChild:newPickup];
 		[self.pickups addObject:newPickup];
 		
+		[newPickup runAction:[SKAction fadeAlphaTo:1.0 duration:0.25] completion:^{
+			[newPickup startDrainWithDuration:30.0 completion:^(RBPMiniGameRollBattery *battery) {
+				[battery removeFromParent];
+				[self.minigameDelegate onMiniGameGameOver:self];
+			}];
+		}];
+		
+	} else {
+		
+		[newPickup removeFromParent];
+		
 	}
-	
-	[self positionNodeRandomly:newPickup];
-	//random rotation
-	
-	newPickup.hidden = NO;
 }
 
 /**
@@ -220,123 +238,137 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
  */
 - (void)generateBumper
 {
-	//TODO: check distance from player
+	__block RBPMiniGameRollBumper *newBumper = nil;
 	
-	SKSpriteNode *newBumper = nil;
-	
-	for (SKSpriteNode *bumper in self.bumpers) {		// Search for disabled cached object
-		
-		if (bumper.hidden == YES) {
-			newBumper = bumper;
-			break;
+	[self.bumpers enumerateObjectsUsingBlock:^(RBPMiniGameRollBumper * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+		if (!obj.parent) {
+			newBumper = obj;
+			stop = (BOOL *)YES;
 		}
-		
-	}
+	}];
 	
-	if (!newBumper) {									// If no cached available, create a new one
+	if (!newBumper) {
 		
-		NSString *imageName = (arc4random() % 2 == 0) ? @"bumper_square" : @"bumper_triangle";
-		newBumper = [SKSpriteNode spriteNodeWithImageNamed:imageName];
-		
-		CGFloat sizeScale = MAX(0.15, arc4random_uniform(30) / 100.0); // Random scale between x% and y%
-		newBumper.size = CGSizeMake(newBumper.size.width * sizeScale, newBumper.size.height * sizeScale);
-		newBumper.hidden = YES;
-		
-		// Setup physics
-		newBumper.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:imageName] size:newBumper.size];
-		newBumper.physicsBody.dynamic = NO;
+		newBumper = [[RBPMiniGameRollBumper alloc] init];
 		newBumper.physicsBody.categoryBitMask = RBPCollisionCategoryBumper;
-		newBumper.physicsBody.affectedByGravity = NO;
-		
-		// Add to scene
-		[self addChild:newBumper];
-		[self.bumpers addObject:newBumper];
 		
 	}
 	
-	[self positionNodeRandomly:newBumper];
+	[newBumper setScale:0.0];
 	
-	newBumper.hidden = NO;
-	// Rotate bumpers
-	CGFloat randomDuration = MAX(1.0, arc4random_uniform(200) / 100.0); // Random duration between 1.0 and 2.0 seconds
-	NSInteger angle = M_PI_2 * ((arc4random_uniform(2) == 1) ? 1 : -1);	// Random angle direction
-	[newBumper runAction:[SKAction repeatActionForever:[SKAction rotateByAngle:angle duration:randomDuration]]];
+	if ([self randomlyPositionNode:newBumper attemptCount:0]) {
+		
+		[self.bumpers addObject:newBumper];
+		[self randomlyRotateNode:newBumper];
+		
+		[newBumper runAction:[SKAction scaleTo:1.0 duration:0.25]];
+		
+		[newBumper startRotating];
+		
+	} else {
+		
+		[newBumper removeFromParent];
+		
+	}
 }
 
-- (void)positionNodeRandomly:(SKSpriteNode *)node
+- (void)generateBumpersForDifficulty:(NSUInteger)difficulty afterDelay:(CGFloat)delay
 {
-	CGSize halfSize = CGSizeMake(node.size.width * 0.5, node.size.height * 0.5);
+	[self.bumpers removeAllObjects];
+	// x second delay
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)),
+				   dispatch_get_main_queue(), ^{
+					   for (int x = 0; x < MAX(3, difficulty); x++) { // 3 bumpers at a minimum
+						   [self generateBumper];
+					   }
+				   });
+}
+
+/**
+ *  Attempt to randomly position a node such that no other node intersects it
+ *
+ *  @param node
+ *  @param attemptCount
+ *
+ *  @return success
+ */
+- (BOOL)randomlyPositionNode:(SKSpriteNode *)node attemptCount:(NSInteger)attemptCount
+{
+	if (attemptCount > 100) {
+		return NO;
+	}
 	
-	// TODO: padding?
-	NSInteger xPosition = arc4random_uniform(self.size.width);
-	NSInteger yPosition = arc4random_uniform(self.size.height);
+	if (!node.parent) {
+		[self addChild:node];
+	}
 	
-	// Clamp positions so pickup is never offscreen
-	xPosition = MAX(halfSize.width, MIN(xPosition, self.size.width - halfSize.width));
-	yPosition = MAX(halfSize.height, MIN(yPosition, self.size.height - halfSize.height));
-	
+	// Random position within the scene bounds with x% padding on each side
+	CGFloat xPosition = MAX(self.size.width * 0.15, arc4random_uniform(self.size.width * 0.85));
+	CGFloat yPosition = MAX(self.size.height * 0.15, arc4random_uniform(self.size.height * 0.85));
 	node.position = CGPointMake(xPosition, yPosition);
+	
+	
+	// Check distance from player
+	if ([self distanceFromNode:node toNode:self.player] < MAX(self.player.size.width, self.player.size.height) * 2.0) {
+		return [self randomlyPositionNode:node attemptCount:attemptCount + 1];
+	}
+	
+	// Check distance from bumpers
+	for (SKSpriteNode *bumper in self.bumpers) {
+		if (node != bumper && bumper.parent &&
+			[self distanceFromNode:node toNode:bumper] < MAX(self.player.size.width, self.player.size.height)) {
+			return [self randomlyPositionNode:node attemptCount:attemptCount + 1];
+		}
+	}
+	
+	// Check distance from pickups
+	for (SKSpriteNode *pickup in self.pickups) {
+		if (node != pickup && pickup.parent &&
+			[self distanceFromNode:node toNode:pickup] < MAX(self.player.size.width, self.player.size.height)) {
+			return [self randomlyPositionNode:node attemptCount:attemptCount + 1];
+		}
+	}
+	
+	return YES;
+}
+
+- (void)randomlyRotateNode:(SKSpriteNode *)node
+{
 	NSInteger deg = arc4random() % 360;
 	CGFloat rad = deg * (M_PI / 180.0);
 	node.zRotation = rad;
-	
-	
-	// Make sure newly generated node doesn't intersect player initially
-	if ([self.player intersectsNode:node]) {
-		[self positionNodeRandomly:node];
-	}
-	
-	// Check for intersections of existing bumpers and pickups
-	for (SKSpriteNode *bumper in self.bumpers) {
-		if (node != bumper && !bumper.hidden && [node intersectsNode:bumper]) {
-			[self positionNodeRandomly:node];
-			return;
-		}
-	}
-	for (SKSpriteNode *pickup in self.pickups) {
-		if (node != pickup && !pickup.hidden && [node intersectsNode:pickup]) {
-			[self positionNodeRandomly:node];
-			return;
-		}
-	}
-}
-
-- (void)playerDidCollectPickup:(SKSpriteNode *)pickup
-{
-	pickup.hidden = YES;
-	[self generatePickup];
-	
-	[self generateBumper];
-	
-	[self.progressView incrementProgress:0.3 animated:YES];
 }
 
 - (void)pulseNode:(SKNode *)node scale:(CGFloat)scale duration:(CGFloat)duration
 {
-	if ([node actionForKey:@"pulseScale"]) {
+	static NSString *pulseScaleKey = @"pulseScaleActionKey";
+	
+	if ([node actionForKey:pulseScaleKey]) {
 		return;
 	}
 	
 	SKAction *action = [SKAction scaleTo:scale duration:duration * 0.5];
 	SKAction *actionCompletion = [SKAction runBlock:^{
-		[node runAction:[SKAction scaleTo:1.0 duration:duration * 0.5] withKey:@"pulseScale"];
+		[node runAction:[SKAction scaleTo:1.0 duration:duration * 0.5] withKey:pulseScaleKey];
 	}];
 	
-	[node runAction:[SKAction sequence:@[action, actionCompletion]] withKey:@"pulseScale"];
+	[node runAction:[SKAction sequence:@[action, actionCompletion]] withKey:pulseScaleKey];
 }
 
 - (void)pulseNode:(SKNode *)node color:(UIColor *)color duration:(CGFloat)duration
 {
-	if ([node actionForKey:@"pulseColor"]) {
+	static NSString *pulseColorKey = @"pulseColorActionKey";
+	
+	if ([node actionForKey:pulseColorKey]) {
 		return;
 	}
 	
 	SKAction *action = [SKAction colorizeWithColor:[UIColor redColor] colorBlendFactor:0.5 duration:duration * 0.5];
 	SKAction *actionCompletion = [SKAction runBlock:^{
-		[node runAction:[SKAction colorizeWithColor:[UIColor whiteColor] colorBlendFactor:1.0 duration:duration * 0.5] withKey:@"pulseScale"];
+		[node runAction:[SKAction colorizeWithColor:[UIColor whiteColor] colorBlendFactor:1.0 duration:duration * 0.5] withKey:pulseColorKey];
 	}];
 	
-	[node runAction:[SKAction sequence:@[action, actionCompletion]] withKey:@"pulseColor"];
+	[node runAction:[SKAction sequence:@[action, actionCompletion]] withKey:pulseColorKey];
 }
 
 #pragma mark - SKScene
@@ -345,27 +377,26 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 {
 	[super update:currentTime];
 	
+	
 	// *****************
 	// Rotate player
 	// *****************
 	
 	// Legs of triangle for rotation calculation
-	CGFloat adjacent = self.player.position.x - (10.0 * -self.player.physicsBody.velocity.dx);
-	CGFloat opposite = self.player.position.y - (10.0 * self.player.physicsBody.velocity.dy);
+	CGFloat adjacent = self.player.position.x + self.player.physicsBody.velocity.dx;
+	CGFloat opposite = self.player.position.y + self.player.physicsBody.velocity.dy;
+	CGFloat currentAngle = self.player.zRotation + M_PI_2;
 	
-	CGFloat angle = atan2(opposite, adjacent);
-	angle = -angle - M_PI_2; // iOS starts in different quadrant
+	// This will ensure the rotation node is always outside of the players radius, making the rotation smoother
+	// when the velocity is ~0
+	CGFloat playerHalfWidth = self.player.size.width * 0.5;
+	CGFloat xMin = cos(currentAngle) * playerHalfWidth;
+	CGFloat yMin = sin(currentAngle) * playerHalfWidth;
 	
-	[self.player runAction:[SKAction rotateToAngle:angle duration:0.15 shortestUnitArc:YES]];
-// SKAction seems to handle this internally
-//	CGFloat deltaAngle = angle - self.player.zRotation;
-//	if (ABS(deltaAngle) > M_PI_2) { // clamp large angle changes for smooth rotations
-//		deltaAngle = copysign(0.005, -deltaAngle); //preserve direction
-//		angle += deltaAngle;
-//	}
-//	self.player.rotationz = angle
+	adjacent += xMin;
+	opposite += yMin;
 	
-	
+	self.playerRotationNode.position = CGPointMake(adjacent, opposite);
 	
 	
 	// ****************
@@ -397,10 +428,24 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	// *****************
 	// Check for pickups
 	// *****************
-    for (SKSpriteNode *pickup in self.pickups) {
-		if (!pickup.hidden && [self.player intersectsNode:pickup]) {
-			[self playerDidCollectPickup:pickup];
-        }
+    for (RBPMiniGameRollBattery *pickup in self.pickups) {
+		if (pickup.parent && [self.children containsObject:pickup]) {
+			
+			if ([pickup intersectsNode:self.player]) {
+				
+				self.score += pickup.chargePercentage;
+				[pickup removeFromParent];
+				
+				
+				// x second delay
+				dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)),
+							   dispatch_get_main_queue(), ^{
+								   [self generatePickup];
+							   });
+				
+			}
+			
+		}
     }
 }
 
@@ -420,13 +465,13 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	
 	if (![self isPlayerVelocityToHigh]) {
 		
-		CGVector collisionImpluse = CGVectorMake(contact.contactNormal.dx * contact.collisionImpulse * 0.25,
-												 contact.contactNormal.dy * contact.collisionImpulse * 0.25);
+		CGVector collisionImpluse = CGVectorMake(contact.contactNormal.dx * contact.collisionImpulse * 0.15,
+												 contact.contactNormal.dy * contact.collisionImpulse * 0.15);
 		[self.player.physicsBody applyImpulse:collisionImpluse atPoint:contact.contactPoint];
 		
 	}
 	
-	self.player.physicsBody.linearDamping = MAX(1.0, self.player.physicsBody.linearDamping) * 1.75;
+	self.player.physicsBody.linearDamping = MAX(1.0, self.player.physicsBody.linearDamping) * 2.0;
 	//[self.progressView incrementProgress:-0.2 animated:YES];
 	
 	
@@ -447,7 +492,34 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 
 #pragma mark - Internal
 
-- (NSMutableArray<SKSpriteNode *> *)pickups
+- (void)setScore:(CGFloat)score
+{
+	[super setScore:score];
+	
+	//self.difficultyLevel = (score / 3) + 1;
+	self.difficultyLevel = score + 1;
+}
+
+- (void)setDifficultyLevel:(NSUInteger)difficultyLevel
+{
+	NSUInteger temp = self.difficultyLevel;
+	
+	[super setDifficultyLevel:difficultyLevel];
+	
+	if (temp > 0 && temp < self.difficultyLevel) { // Difficulty did increase
+		
+		for (SKSpriteNode *bumper in self.bumpers) {
+			[bumper runAction:[SKAction scaleTo:0.0 duration:0.25] completion:^{
+				[bumper removeFromParent];
+			}];
+		}
+		
+		[self generateBumpersForDifficulty:self.difficultyLevel afterDelay:1.0];
+		
+	}
+}
+
+- (NSMutableArray<RBPMiniGameRollBattery *> *)pickups
 {
     if (!_pickups) {
         _pickups = [[NSMutableArray alloc] init];
@@ -456,7 +528,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
     return _pickups;
 }
 
-- (NSMutableArray<SKSpriteNode *> *)bumpers
+- (NSMutableArray<RBPMiniGameRollBumper *> *)bumpers
 {
 	if (!_bumpers) {
 		_bumpers = [[NSMutableArray alloc] init];

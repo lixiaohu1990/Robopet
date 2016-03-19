@@ -14,25 +14,11 @@
 
 
 
-@protocol RBPProgressViewDelegate <NSObject>
-
-@optional
-
-- (void)progressDidReachZero:(RBPProgressView *)progressView;
-
-@end
-
-
-
-
-
 @interface RBPProgressView : UIView
 {
 }
 
 - (id)initWithDefaultsKey:(NSString *)defaultsKey;
-
-@property (weak, nonatomic) id<RBPProgressViewDelegate> delegate;
 
 /**
  *  NSUserDefaults key for this bars progress level

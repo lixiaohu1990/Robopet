@@ -8,10 +8,6 @@
 
 #import "RBPMiniGameSceneViewController_Roll.h"
 
-#import "RBPMiniGameCountdownViewController.h"
-#import "RBPMiniGameTutorialViewController.h"
-#import "MZFormSheetPresentationViewController.h"
-
 #import "RBPMiniGameScene_Roll.h"
 
 
@@ -22,7 +18,7 @@
 {
 }
 
-@property (weak, nonatomic) RBPMiniGameScene_Roll *game;
+@property (weak, nonatomic) RBPMiniGameScene_Roll *minigame;
 
 @end
 
@@ -33,17 +29,13 @@
 @implementation RBPMiniGameSceneViewController_Roll
 
 @dynamic view;
+@dynamic minigame;
 
 #pragma mark - Init
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-}
-
-- (RBPProgressView *)progressViewInternal
-{
-	return [RBPProgressView energyBar];
 }
 
 #pragma mark - RBPBaseSceneViewController
@@ -66,59 +58,20 @@
 
 #pragma mark - RBPMiniGameSceneViewController
 
-- (void)miniGameWillStart
+- (void)startCountdownViewController:(RBPMiniGameCountdownViewController *)viewController
 {
-	RBPMiniGameCountdownViewController *viewController = [[RBPMiniGameCountdownViewController alloc] init];
-	MZFormSheetPresentationViewController *formSheet = [[MZFormSheetPresentationViewController alloc]
-														initWithContentViewController:viewController];
-	
-	
-	CGSize contentViewSize = CGRectApplyAffineTransform(self.view.bounds, CGAffineTransformMakeScale(0.25, 0.0)).size;
-	contentViewSize.height = contentViewSize.width; // Square
-	formSheet.presentationController.contentViewSize = contentViewSize;
-	// Center in view
-	formSheet.presentationController.shouldCenterHorizontally = formSheet.presentationController.shouldCenterVertically = YES;
-	formSheet.contentViewControllerTransitionStyle =  MZFormSheetPresentationTransitionStyleBounce;
-	
-	
-	[self presentViewController:formSheet animated:NO completion:^{
-		[self performSelector:@selector(displayCountdownViewController:) withObject:viewController afterDelay:0.0];
-	}];
-}
-	 
-- (void)displayCountdownViewController:(RBPMiniGameCountdownViewController *)viewController
-{
-	// Main Thread
-	dispatch_async(dispatch_get_main_queue(), ^(void) {
+	// Don't start countdown until Device is flat
+	if (ABS(self.minigame.motion.accelerometerData.acceleration.x) > 0.2 ||
+		ABS(self.minigame.motion.accelerometerData.acceleration.y) > 0.2) {
 		
-		// Don't start countdown until Device is flat
-		if (ABS(self.game.motion.accelerometerData.acceleration.x) > 0.2 ||
-			ABS(self.game.motion.accelerometerData.acceleration.y) > 0.2) {
-			
-			viewController.text = @"Rotate Device\nHorizontally";
-			[self performSelector:@selector(displayCountdownViewController:) withObject:viewController afterDelay:1.0];
-			
-		} else {
-			
-			[viewController startCountdownWithSartTime:3 endTime:1 updateBlock:^(NSInteger currentTime) {
-				
-				if (currentTime < 1) {
-					[self dismissViewControllerAnimated:YES completion:^{
-						[super miniGameWillStart];
-					}];
-				}
-				
-			}];
-			
-		}
+		viewController.text = @"Rotate Device\nHorizontally";
+		[self performSelector:@selector(startCountdownViewController:) withObject:viewController afterDelay:1.0];
 		
-	});
-	
-}
-
-- (void)miniGameWillResume
-{
-	[super miniGameWillResume];
+	} else {
+		
+		[super startCountdownViewController:viewController];
+		
+	}
 }
 
 #pragma mark - RBPMiniGameTutorialViewControllerDataSource
@@ -139,7 +92,7 @@
 
 #pragma mark - Internal
 
-- (RBPMiniGameScene_Roll *)game
+- (RBPMiniGameScene_Roll *)minigame
 {
 	return (RBPMiniGameScene_Roll *)self.view.scene;
 }

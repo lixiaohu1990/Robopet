@@ -47,6 +47,8 @@
 {
 	[super initialize ];
 	
+	self.difficultyLevel = 1;
+	self.score = 0;
 	self.previousUpdateTime = 0.0;
 	self.runningTime = 0.0;
 }
@@ -72,8 +74,22 @@
 - (void)setPaused:(BOOL)paused
 {
 	[super setPaused:paused];
+}
+
+#pragma mark - Internal
+
+- (void)setMinigameDelegate:(id<RBPMiniGameSceneDelegate>)minigameDelegate
+{
+	_minigameDelegate = minigameDelegate;
 	
-	[self.progressView setProgress:self.progressView.progress animated:NO];
+	self.score = self.score; // Update delegate
+}
+
+- (void)setScore:(CGFloat)score
+{
+	_score = score;
+	
+	[self.minigameDelegate onMiniGameScoreChange:self];
 }
 
 @end
