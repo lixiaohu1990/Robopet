@@ -50,6 +50,7 @@
 		2ECC2A4C1C8B52C900C5DA0C /* RBPMiniGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC2A4B1C8B52C900C5DA0C /* RBPMiniGameScene.m */; };
 		2ECC2A4F1C8B62FB00C5DA0C /* RBPSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC2A4E1C8B62FB00C5DA0C /* RBPSoundManager.m */; };
 		2ECC2A521C8B6E8A00C5DA0C /* RBPBaseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC2A511C8B6E8A00C5DA0C /* RBPBaseScene.m */; };
+		CC2D85DE1C9F4CC50011E31D /* RBPMiniGameMusic_TutorialPages.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC2D85DD1C9F4CC50011E31D /* RBPMiniGameMusic_TutorialPages.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +140,7 @@
 		2ECC2A4E1C8B62FB00C5DA0C /* RBPSoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPSoundManager.m; sourceTree = "<group>"; };
 		2ECC2A501C8B6E8A00C5DA0C /* RBPBaseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPBaseScene.h; sourceTree = "<group>"; };
 		2ECC2A511C8B6E8A00C5DA0C /* RBPBaseScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPBaseScene.m; sourceTree = "<group>"; };
+		CC2D85DD1C9F4CC50011E31D /* RBPMiniGameMusic_TutorialPages.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RBPMiniGameMusic_TutorialPages.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +280,7 @@
 				2E2417E21C526C2B003FD5E7 /* RBPMiniGameSceneViewController_Music.m */,
 				2E2417DF1C526C2B003FD5E7 /* RBPMiniGameScene_Music.h */,
 				2E2417E01C526C2B003FD5E7 /* RBPMiniGameScene_Music.m */,
+				CC2D85DD1C9F4CC50011E31D /* RBPMiniGameMusic_TutorialPages.xib */,
 			);
 			name = Music;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 			files = (
 				2EB192871C9E061B000440A7 /* RBPMiniGameRoll_TutorialPages.xib in Resources */,
 				2E211C151C99DEC500A65B47 /* LaunchScreen.xib in Resources */,
+				CC2D85DE1C9F4CC50011E31D /* RBPMiniGameMusic_TutorialPages.xib in Resources */,
 				2EC4B18C1C8531F900AB33CE /* Info.plist in Resources */,
 				2EB192851C9DD83C000440A7 /* Assets.xcassets in Resources */,
 				2E23B92C1C8E391100F9E94E /* Main.storyboard in Resources */,

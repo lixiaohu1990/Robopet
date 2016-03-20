@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10112" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10083"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,30 +11,6 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zYf-8i-zTP" userLabel="0">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="battery_full" translatesAutoresizingMaskIntoConstraints="NO" id="hIa-d4-HqX">
-                            <rect key="frame" x="227" y="250" width="147" height="50"/>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collect Battery before it drains!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8GC-jW-zs0" userLabel="label">
-                            <rect key="frame" x="0.0" y="330" width="600" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21" id="pgP-S5-FHg"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="hIa-d4-HqX" firstAttribute="centerY" secondItem="zYf-8i-zTP" secondAttribute="centerY" constant="-25" id="4VQ-Wk-3AH"/>
-                        <constraint firstItem="8GC-jW-zs0" firstAttribute="centerY" secondItem="zYf-8i-zTP" secondAttribute="centerY" constant="40" id="8a2-wS-qex"/>
-                        <constraint firstItem="hIa-d4-HqX" firstAttribute="centerX" secondItem="zYf-8i-zTP" secondAttribute="centerX" id="YmR-bg-ggL"/>
-                        <constraint firstAttribute="trailing" secondItem="8GC-jW-zs0" secondAttribute="trailing" id="gyx-77-HzR"/>
-                        <constraint firstItem="8GC-jW-zs0" firstAttribute="leading" secondItem="zYf-8i-zTP" secondAttribute="leading" id="ule-mj-0Wt"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40R-qP-zC5" userLabel="1">
                     <rect key="frame" x="600" y="0.0" width="600" height="600"/>
                     <subviews>
@@ -88,6 +64,30 @@
                         <constraint firstItem="jYC-oX-kxV" firstAttribute="centerY" secondItem="DFC-gm-5sK" secondAttribute="centerY" constant="-25" id="Ycf-RJ-XD2"/>
                         <constraint firstAttribute="trailing" secondItem="VhM-Ch-XHt" secondAttribute="trailing" id="e47-8j-x5W"/>
                         <constraint firstItem="VhM-Ch-XHt" firstAttribute="leading" secondItem="DFC-gm-5sK" secondAttribute="leading" id="oxu-gp-QLx"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zYf-8i-zTP" userLabel="0">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="battery_full" translatesAutoresizingMaskIntoConstraints="NO" id="hIa-d4-HqX">
+                            <rect key="frame" x="227" y="250" width="147" height="50"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collect Battery before it drains!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8GC-jW-zs0" userLabel="label">
+                            <rect key="frame" x="0.0" y="330" width="600" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="pgP-S5-FHg"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="hIa-d4-HqX" firstAttribute="centerY" secondItem="zYf-8i-zTP" secondAttribute="centerY" constant="-25" id="4VQ-Wk-3AH"/>
+                        <constraint firstItem="8GC-jW-zs0" firstAttribute="centerY" secondItem="zYf-8i-zTP" secondAttribute="centerY" constant="40" id="8a2-wS-qex"/>
+                        <constraint firstItem="hIa-d4-HqX" firstAttribute="centerX" secondItem="zYf-8i-zTP" secondAttribute="centerX" id="YmR-bg-ggL"/>
+                        <constraint firstAttribute="trailing" secondItem="8GC-jW-zs0" secondAttribute="trailing" id="gyx-77-HzR"/>
+                        <constraint firstItem="8GC-jW-zs0" firstAttribute="leading" secondItem="zYf-8i-zTP" secondAttribute="leading" id="ule-mj-0Wt"/>
                     </constraints>
                 </view>
             </subviews>

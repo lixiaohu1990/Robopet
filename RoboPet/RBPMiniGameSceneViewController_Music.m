@@ -24,8 +24,6 @@
 
 
 
-
-
 @implementation RBPMiniGameSceneViewController_Music
 
 #pragma mark - Init
@@ -57,7 +55,7 @@
 
 - (UIScrollView *)tutorialScrollView;
 {
-	return nil;
+    return [[[NSBundle mainBundle] loadNibNamed:@"RBPMiniGameMusic_TutorialPages" owner:nil options:nil] firstObject];
 }
 
 @end

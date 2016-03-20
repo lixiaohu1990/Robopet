@@ -27,7 +27,6 @@ typedef NS_ENUM(NSInteger, GameStateType){
     
     // Game Feedback
     SKLabelNode* UserPromptLabel;
-    SKLabelNode* GameLabel;
     
     // Used by checkTime to check for elapsed time
     CFTimeInterval LastTick; // For checkTime
@@ -47,11 +46,36 @@ typedef NS_ENUM(NSInteger, GameStateType){
     NSInteger PlaybackStep;         // Used into animating / stepping through each state
 }
 
+// Preloaded assets
+
+@property (strong, nonatomic) SKAction *action_SoundD;
+@property (strong, nonatomic) SKAction *action_SoundF;
+@property (strong, nonatomic) SKAction *action_SoundA;
+@property (strong, nonatomic) SKAction *action_SoundC;
+@property (strong, nonatomic) SKAction *action_SoundE;
+
 @end
 
 
 
 @implementation RBPMiniGameScene_Music
+
++ (instancetype) sceneWithSize: (CGSize) size
+{
+    RBPMiniGameScene_Music *scene = [super sceneWithSize:size];
+    
+    if (scene) { // Preload assets
+        
+        scene.action_SoundD = [SKAction playSoundFileNamed:@"music_d_note" waitForCompletion:NO];
+        scene.action_SoundF = [SKAction playSoundFileNamed:@"music_f_note" waitForCompletion:NO];
+        scene.action_SoundA = [SKAction playSoundFileNamed:@"music_a_note" waitForCompletion:NO];
+        scene.action_SoundC = [SKAction playSoundFileNamed:@"music_c_note" waitForCompletion:NO];
+        scene.action_SoundE = [SKAction playSoundFileNamed:@"music_e_note" waitForCompletion:NO];
+        
+    }
+    
+    return scene;
+}
 
 #pragma mark - Init
 
@@ -64,7 +88,7 @@ typedef NS_ENUM(NSInteger, GameStateType){
     
     // Click Zone Setup
     NumberOfSprites = 5;
-    SimonSequenceLength = NumberOfSprites * 3;
+    SimonSequenceLength = NumberOfSprites * 40;
     float s_size = sceneSize.width / ( NumberOfSprites + 2 );
     float s_spacing = s_size * 0.1;
     
@@ -105,20 +129,13 @@ typedef NS_ENUM(NSInteger, GameStateType){
     
     // Create the simon says randomized sequence
     SimonSaysSequence = [[NSMutableArray alloc] initWithCapacity: SimonSequenceLength ];
-    for( int i = 0; i < SimonSequenceLength; i++ )
-    {
-        [SimonSaysSequence addObject: [self randomNumber: 0 to: NumberOfSprites ]];
-    }
-    
-    GameLabel = [SKLabelNode new];
-	GameLabel.fontColor = [UIColor blackColor];
-    GameLabel.position = CGPointMake(self.size.width / 2, self.size.height / 4);
-    [self addChild: GameLabel];
+    [self addRandomToSequence]; // Add first light to remember
     
     // User Prompt
 	UserPromptLabel = [SKLabelNode new];
 	UserPromptLabel.fontColor = [UIColor blackColor];
-    UserPromptLabel.position = CGPointMake(self.size.width / 2, self.size.height - self.size.height / 4);
+    UserPromptLabel.fontSize = self.size.height * 0.08;
+    UserPromptLabel.position = CGPointMake(self.size.width / 2, self.size.height - self.size.height / 4 - UserPromptLabel.fontSize / 2 );
     [self addChild: UserPromptLabel];
     
     // Start with a memory of 1
@@ -133,6 +150,11 @@ typedef NS_ENUM(NSInteger, GameStateType){
 }
 
 #pragma mark - SKScene
+
+-(void) addRandomToSequence
+{
+    [SimonSaysSequence addObject: [self randomNumber: 0 to: NumberOfSprites ]];
+}
 
 // Respond to touch input on our scene
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -184,9 +206,50 @@ typedef NS_ENUM(NSInteger, GameStateType){
         // If less than depth, move to next guess
         if( SimonSequencePosition < SimonSaysDepth )
         {
-            [self changeBulb: [self getBulbIndex: SimonSequencePosition] on: true];
+            NSInteger expectedIndex = [self getBulbIndex: SimonSequencePosition];
+            
             PlaybackStep = 1;
             LastTick = LastTime; // Measure elasped time from 'now'
+            
+            // Turn on bulb touched
+            [self changeBulb: nth on: true];
+            
+            // Play tone
+            switch (nth) {
+                case 0:
+                    // Play D Tone
+                    [RBPSoundManager runSoundAction:self.action_SoundD onNode: UserPromptLabel];
+                    break;
+                case 1:
+                    // Play F Tone
+                    [RBPSoundManager runSoundAction:self.action_SoundF onNode: UserPromptLabel];
+                    break;
+                case 2:
+                    // Play A Tone
+                    [RBPSoundManager runSoundAction:self.action_SoundA onNode: UserPromptLabel];
+                    break;
+                case 3:
+                    // Play C Tone
+                    [RBPSoundManager runSoundAction:self.action_SoundC onNode: UserPromptLabel];
+                    break;
+                case 4:
+                    // Play E Tone
+                    [RBPSoundManager runSoundAction:self.action_SoundE onNode: UserPromptLabel];
+                    break;
+            }
+            
+            // Didn't touch exepcted
+            if( nth != expectedIndex )
+            {
+                // Woah, wrong one!
+                // GAME OVER!
+                [self.minigameDelegate onMiniGameGameOver:self];
+            }
+            // Touched expected
+            else
+            {
+                // Yay, good job!
+            }
         }
     }
 }
@@ -268,8 +331,18 @@ typedef NS_ENUM(NSInteger, GameStateType){
         // Change state to simon playback and make one longer.
         if( SimonSequencePosition >= SimonSaysDepth )
         {
+            // Increase chain size and increment level
+            SimonSaysDepth++;
+            self.difficultyLevel++;
+            
+            // Add score
+            self.score += ceil( pow( 1.075, SimonSequencePosition ) / 1.315 );
+            
+            // Add next light to sequence
+            [self addRandomToSequence];
+            
+            // Go to simon transition state
             [self changeGameState: SimonTransition];
-            SimonSaysDepth++; // Make chain longer
         }
     }
 }
@@ -334,9 +407,6 @@ typedef NS_ENUM(NSInteger, GameStateType){
 
 -(void) updateLabels
 {
-    GameLabel.text = [NSString stringWithFormat: @"Depth: %@ Position: %@ State: %@",
-                        @(SimonSaysDepth), @(SimonSequencePosition), @(GameState)];
-    
     switch( GameState )
     {
         case StartCountDown:
@@ -360,11 +430,11 @@ typedef NS_ENUM(NSInteger, GameStateType){
 			break;
 			
 		case GameOverTransition:
-			UserPromptLabel.text = @"...";
+			UserPromptLabel.text = @"Ouch!";
 			break;
 			
 		case GameOver:
-			UserPromptLabel.text = @"...";
+			UserPromptLabel.text = @"Game Over!";
 			break;
 			
 		default:
