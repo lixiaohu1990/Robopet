@@ -25,7 +25,7 @@
  *  @param animated
  *  @param completion 
  */
-- (void)updateScoresAnimated:(BOOL)animated completion:(void (^ __nullable)(BOOL finished))completion;
+- (void)updateScoresAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion;
 /**
  *  Update the progress bar to the current minigames score
  *

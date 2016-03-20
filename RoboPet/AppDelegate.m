@@ -62,20 +62,18 @@
 		CGFloat levelDecreasePercentage = time / 86400; // 86400 seconds in a day
 		levelDecreasePercentage = MAX(0.0, MIN(1.0, levelDecreasePercentage)); // Clamp between 0.0 and 1.0 (%)
 		
-		NSLog(@"wellnessProgress: %f", [RBPProgressView wellnessProgress]);
-		NSLog(@"happinessProgress: %f", [RBPProgressView happinessProgress]);
-		NSLog(@"energyProgress: %f", [RBPProgressView energyProgress]);
-		
 		[RBPProgressView setWellnessProgress:[RBPProgressView wellnessProgress] - levelDecreasePercentage];
 		[RBPProgressView setHappinessProgress:[RBPProgressView happinessProgress] - levelDecreasePercentage];
 		[RBPProgressView setEnergyProgress:[RBPProgressView energyProgress] - levelDecreasePercentage];
 		
-		NSLog(@"Time between last app activity %@", @(time));
-		NSLog(@"Decrease percentage %f% %@", levelDecreasePercentage);
-		
-		NSLog(@"wellnessProgress: %f", [RBPProgressView wellnessProgress]);
-		NSLog(@"happinessProgress: %f", [RBPProgressView happinessProgress]);
-		NSLog(@"energyProgress: %f", [RBPProgressView energyProgress]);
+#ifdef DEBUG
+		NSLog(@" ");
+		NSLog(@"****************************************************************");
+		NSLog(@"Time Inactive: [%.1f seconds]", time);
+		NSLog(@"Progress Percentage Decrease: [%.2f %%]", levelDecreasePercentage);
+		NSLog(@"****************************************************************");
+		NSLog(@" ");
+#endif
 		
 	}
 }
