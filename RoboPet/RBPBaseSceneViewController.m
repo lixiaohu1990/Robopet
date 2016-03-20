@@ -47,11 +47,14 @@
     scene.scaleMode = SKSceneScaleModeFill;
 	
 	
+//	[SKTexture preloadTextures:[self texturesToPreload] withCompletionHandler:^{
+//	}];
+	
 	NSAssert([self backgroundImageName], @"backgroundImageName cannot be nil");
 	[scene setBackgroundImageName:[self backgroundImageName]];
 	
+	[self.view presentScene:scene];
 	
-    [self.view presentScene:scene];
     
 #ifdef DEBUG
     self.view.showsFPS = YES;
@@ -64,14 +67,29 @@
 	
 }
 
+/**
+ *  Override me
+ */
 - (Class)sceneClass;
 {
     return [SKScene class];
 }
 
+/**
+ *  Override me
+ */
 - (NSString *)backgroundImageName
 {
-	return nil;
+	return @"";
+}
+
+/**
+ *  Override me
+ */
+- (NSArray *)texturesToPreload
+{
+	return @[[SKTexture textureWithImageNamed:[self backgroundImageName]],
+			 ];
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation

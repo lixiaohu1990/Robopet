@@ -8,6 +8,8 @@
 
 #import "RBPMiniGamePopupViewController.h"
 
+#define PADDING 10
+
 
 
 
@@ -31,7 +33,7 @@
     [super viewDidLoad];
 	
 	self.view = [[UIView alloc] init];
-	self.view.alpha = 0.8;
+	self.view.backgroundColor = [UIColor colorWithRed:(249.0 / 255.0) green:(240.0 / 255.0) blue:(201.0 / 255.0) alpha:1.0];
 	
 	
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Quit"
@@ -44,7 +46,11 @@
 																			 action:@selector(clickedBarButton:)];
 	
 	
-	UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"transition_screen"]];
+	UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"transition_screen_gradient"]];
+	backgroundView.userInteractionEnabled = YES;
+	backgroundView.clipsToBounds = YES;
+	backgroundView.layer.cornerRadius = PADDING;
+	backgroundView.layer.masksToBounds = YES;
 	backgroundView.contentMode = UIViewContentModeScaleToFill;
 	backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.view addSubview:backgroundView];
@@ -55,28 +61,30 @@
 															 toItem:self.view
 														  attribute:NSLayoutAttributeLeft
 														 multiplier:1.0
-														   constant:0.0]];
+														   constant:PADDING]];
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:backgroundView
 														  attribute:NSLayoutAttributeBottom
 														  relatedBy:NSLayoutRelationEqual
 															 toItem:self.view
 														  attribute:NSLayoutAttributeBottom
 														 multiplier:1.0
-														   constant:0.0]];
+														   constant:-PADDING]];
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:backgroundView
 														  attribute:NSLayoutAttributeRight
 														  relatedBy:NSLayoutRelationEqual
 															 toItem:self.view
 														  attribute:NSLayoutAttributeRight
 														 multiplier:1.0
-														   constant:0.0]];
+														   constant:-PADDING]];
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:backgroundView
 														  attribute:NSLayoutAttributeTop
 														  relatedBy:NSLayoutRelationEqual
 															 toItem:self.view
 														  attribute:NSLayoutAttributeTop
 														 multiplier:1.0
-														   constant:CGRectGetMaxY(self.navigationController.navigationBar.bounds)]];
+														   constant:CGRectGetMaxY(self.navigationController.navigationBar.bounds) + PADDING]];
+	
+	self.backgroundView = backgroundView;
 }
 
 #pragma mark - Internal

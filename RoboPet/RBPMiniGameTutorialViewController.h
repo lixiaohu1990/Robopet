@@ -21,11 +21,11 @@
 @required
 
 /**
- *  Array of tutorial pages to be shown in order
+ *  Return the scrollview containing your tutorial pages
  *
- *  @return UIView[]
+ *  @return UIScrollView
  */
-- (NSArray<RBPMiniGameTutorialPage *> *)tutorialPages;
+- (UIScrollView *)tutorialScrollView;
 
 @end
 

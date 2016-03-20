@@ -296,18 +296,9 @@
 
 #pragma mark - RBPMiniGameTutorialViewControllerDataSource
 
-- (NSArray<RBPMiniGameTutorialPage *> *)tutorialPages
+- (UIScrollView *)tutorialScrollView;
 {
-	RBPMiniGameTutorialPage *pageOne = [[RBPMiniGameTutorialPage alloc] init];
-	pageOne.textView.text = @"Tutorial Page 1";
-	
-	RBPMiniGameTutorialPage *pageTwo = [[RBPMiniGameTutorialPage alloc] init];
-	pageTwo.textView.text = @"Tutorial Page 2";
-	
-	RBPMiniGameTutorialPage *pageThree = [[RBPMiniGameTutorialPage alloc] init];
-	pageThree.textView.text = @"Tutorial Page 3";
-	
-	return @[pageOne, pageTwo, pageThree];
+	return nil;
 }
 
 @end

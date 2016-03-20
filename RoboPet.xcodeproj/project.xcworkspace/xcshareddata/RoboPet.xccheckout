@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>CE32ABDF-A689-4B94-865A-85811EA43A93</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>RoboPet</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>30628271EC74885CF9A6F89491C1088B3CFC1F2D</key>
 		<string>https://bitbucket.org/patsluth/robopet.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>RoboPet.xcodeproj/project.xcworkspace</string>
+	<string>RoboPet.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>30628271EC74885CF9A6F89491C1088B3CFC1F2D</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>30628271EC74885CF9A6F89491C1088B3CFC1F2D</string>
 			<key>IDESourceControlWCCName</key>
-			<string>robopet</string>
+			<string>RoboPet</string>
 		</dict>
 	</array>
 </dict>

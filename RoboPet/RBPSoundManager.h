@@ -6,7 +6,8 @@
 //  Copyright © 2016 Pat Sluth. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
+@import SpriteKit;
 
 
 
@@ -18,6 +19,14 @@
 
 + (BOOL)soundEnabled;
 + (void)setSoundEnabled:(BOOL)soundEnabled;
+
+/**
+ *  Play a sound action on a node. Won't play if sound is disabled
+ *
+ *  @param action
+ *  @param node
+ */
++ (void)runSoundAction:(SKAction *)action onNode:(SKNode *)node;
 
 @end
 

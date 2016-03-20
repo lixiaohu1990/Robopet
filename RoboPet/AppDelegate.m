@@ -6,17 +6,31 @@
 //  Copyright © 2016 Pat Sluth. All rights reserved.
 //
 
+@import SpriteKit;
+
 #import "AppDelegate.h"
+
+#import "RBPProgressView.h"
+
+#define LAST_EXIT_DATE_DEFAULTS_KEY @"RBPAppDidExitDefaultsKey"
+
+
+
+
 
 @interface AppDelegate ()
 
 @end
 
+
+
+
+
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     return YES;
 }
 
@@ -28,8 +42,8 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+	// Store date
+	[[NSUserDefaults standardUserDefaults] setValue:[NSDate date] forKey:LAST_EXIT_DATE_DEFAULTS_KEY];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -39,12 +53,36 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSDate *lastDate = [[NSUserDefaults standardUserDefaults] valueForKey:LAST_EXIT_DATE_DEFAULTS_KEY];
+	
+	if (lastDate) {
+		
+		NSTimeInterval time = [[NSDate date] timeIntervalSinceDate:lastDate];
+		
+		CGFloat levelDecreasePercentage = time / 86400; // 86400 seconds in a day
+		levelDecreasePercentage = MAX(0.0, MIN(1.0, levelDecreasePercentage)); // Clamp between 0.0 and 1.0 (%)
+		
+		NSLog(@"wellnessProgress: %f", [RBPProgressView wellnessProgress]);
+		NSLog(@"happinessProgress: %f", [RBPProgressView happinessProgress]);
+		NSLog(@"energyProgress: %f", [RBPProgressView energyProgress]);
+		
+		[RBPProgressView setWellnessProgress:[RBPProgressView wellnessProgress] - levelDecreasePercentage];
+		[RBPProgressView setHappinessProgress:[RBPProgressView happinessProgress] - levelDecreasePercentage];
+		[RBPProgressView setEnergyProgress:[RBPProgressView energyProgress] - levelDecreasePercentage];
+		
+		NSLog(@"Time between last app activity %@", @(time));
+		NSLog(@"Decrease percentage %f% %@", levelDecreasePercentage);
+		
+		NSLog(@"wellnessProgress: %f", [RBPProgressView wellnessProgress]);
+		NSLog(@"happinessProgress: %f", [RBPProgressView happinessProgress]);
+		NSLog(@"energyProgress: %f", [RBPProgressView energyProgress]);
+		
+	}
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+	[self applicationWillEnterForeground:application];
 }
 
 @end

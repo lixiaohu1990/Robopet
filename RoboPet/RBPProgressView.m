@@ -31,16 +31,18 @@
 
 @implementation RBPProgressView
 
+#pragma mark - Init
+
 - (id)initWithDefaultsKey:(NSString *)defaultsKey
 {
 	self = [self init];
 	
 	if (self) {
-		
+	
 		[[NSUserDefaults standardUserDefaults] registerDefaults:@{
-																  @"wellnessLevel": @(1.0),
-																  @"happinessLevel": @(1.0),
-																  @"energyLevel": @(1.0),
+																  WELLNESS_DEFAULTS_KEY: @(1.0),
+																  HAPPINESS_DEFAULTS_KEY: @(1.0),
+																  ENERGY_DEFAULTS_KEY: @(1.0),
 																  }];
 		
 		self.defaultsKey = defaultsKey;
@@ -59,48 +61,13 @@
 		
 		self.clipsToBounds = YES;
 		self.translatesAutoresizingMaskIntoConstraints = NO;
-		self.backgroundColor = [UIColor whiteColor];
+		self.backgroundColor = [UIColor clearColor];
+		self.layer.borderWidth = 3;
 		
 		
-		UIImage *progressBackgroundImage = [[UIImage imageNamed:@"progressbar"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-		self.progressBackground = [[UIImageView alloc] initWithImage:progressBackgroundImage];
-		self.progressBackground.tintColor = [UIColor blackColor];
-		self.progressBackground.contentMode = UIViewContentModeScaleToFill;
-		self.progressBackground.translatesAutoresizingMaskIntoConstraints = NO;
-		[self addSubview:self.progressBackground];
 		
-		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.progressBackground
-														 attribute:NSLayoutAttributeTop
-														 relatedBy:NSLayoutRelationEqual
-															toItem:self
-														 attribute:NSLayoutAttributeTop
-														multiplier:1.0
-														  constant:0.0]];
-		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.progressBackground
-														 attribute:NSLayoutAttributeLeft
-														 relatedBy:NSLayoutRelationEqual
-															toItem:self
-														 attribute:NSLayoutAttributeLeft
-														multiplier:1.0
-														  constant:0.0]];
-		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.progressBackground
-														 attribute:NSLayoutAttributeBottom
-														 relatedBy:NSLayoutRelationEqual
-															toItem:self
-														 attribute:NSLayoutAttributeBottom
-														multiplier:1.0
-														  constant:0.0]];
-		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.progressBackground
-														 attribute:NSLayoutAttributeRight
-														 relatedBy:NSLayoutRelationEqual
-															toItem:self
-														 attribute:NSLayoutAttributeRight
-														multiplier:1.0
-														  constant:0.0]];
-
+		UIImage *progressFillImage = [UIImage imageNamed:@"progressbar_fill"];
 		
-		
-		UIImage *progressFillImage = [[UIImage imageNamed:@"progressbar_fill"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 		self.progressFill = [[UIImageView alloc] initWithImage:progressFillImage];
 		self.progressFill.contentMode = UIViewContentModeScaleToFill;
 		self.progressFill.translatesAutoresizingMaskIntoConstraints = NO;
@@ -137,14 +104,52 @@
 		[self addConstraint:self.progressFillConstraint];
 		
 		
+		self.progressBackground = [[UIImageView alloc] initWithImage:progressFillImage];
+		self.progressBackground.contentMode = UIViewContentModeScaleToFill;
+		self.progressBackground.translatesAutoresizingMaskIntoConstraints = NO;
+		[self.progressFill addSubview:self.progressBackground];
+		
+		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.progressBackground
+														 attribute:NSLayoutAttributeTop
+														 relatedBy:NSLayoutRelationEqual
+															toItem:self.progressFill
+														 attribute:NSLayoutAttributeTop
+														multiplier:1.0
+														  constant:0.0]];
+		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.progressBackground
+														 attribute:NSLayoutAttributeLeft
+														 relatedBy:NSLayoutRelationEqual
+															toItem:self.progressFill
+														 attribute:NSLayoutAttributeLeft
+														multiplier:1.0
+														  constant:0.0]];
+		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.progressBackground
+														 attribute:NSLayoutAttributeBottom
+														 relatedBy:NSLayoutRelationEqual
+															toItem:self.progressFill
+														 attribute:NSLayoutAttributeBottom
+														multiplier:1.0
+														  constant:0.0]];
+		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.progressBackground
+														 attribute:NSLayoutAttributeRight
+														 relatedBy:NSLayoutRelationEqual
+															toItem:self.progressFill
+														 attribute:NSLayoutAttributeRight
+														multiplier:1.0
+														  constant:0.0]];
+		
+		
+		
 	}
 	
 	return self;
 }
 
+#pragma mark - RBPProgressView
+
 - (CGFloat)progress
 {
-	return [[NSUserDefaults standardUserDefaults] floatForKey:self.defaultsKey];
+	return [RBPProgressView progressForKey:self.defaultsKey];
 }
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated
@@ -166,9 +171,10 @@
 {
 	NSAssert(self.defaultsKey && ![self.defaultsKey isEqualToString:@""], @"RBPProgressView dataKey cannot be nil");
 	
-	//clamp and save progress
-	progress = MAX(0.0, MIN(1.0, progress));
-	[[NSUserDefaults standardUserDefaults] setFloat:progress forKey:self.defaultsKey];
+	
+	[RBPProgressView setProgress:progress forKey:self.defaultsKey];
+	progress = [RBPProgressView progressForKey:self.defaultsKey];
+	
 	
 	[self layoutIfNeeded];
 	
@@ -204,35 +210,6 @@
 	[self setProgress:self.progress + increment animationDuration:animationDuration];
 }
 
-#pragma mark - Static
-
-+ (RBPProgressView *)wellnessBar
-{
-	RBPProgressView *bar = [[RBPProgressView alloc] initWithDefaultsKey:@"wellnessLevel"];
-	
-	bar.progressFill.tintColor = [UIColor redColor];
-	
-	return bar;
-}
-
-+ (RBPProgressView *)happinessBar
-{
-	RBPProgressView *bar = [[RBPProgressView alloc] initWithDefaultsKey:@"happinessLevel"];
-	
-	bar.progressFill.tintColor = [UIColor orangeColor];
-	
-	return bar;
-}
-
-+ (RBPProgressView *)energyBar
-{
-	RBPProgressView *bar = [[RBPProgressView alloc] initWithDefaultsKey:@"energyLevel"];
-	
-	bar.progressFill.tintColor = [UIColor cyanColor];
-	
-	return bar;
-}
-
 #pragma mark - Internal
 
 - (BOOL)isAnimating
@@ -249,6 +226,76 @@
 		[self setProgress:self.progress - 0.1 animated:YES];
 	else
 		[self setProgress:self.progress + 0.1 animated:YES];
+}
+
+#pragma mark - Static
+
++ (RBPProgressView *)wellnessBar
+{
+	RBPProgressView *bar = [[RBPProgressView alloc] initWithDefaultsKey:WELLNESS_DEFAULTS_KEY];
+	
+	bar.progressFill.backgroundColor = [UIColor redColor];
+	
+	return bar;
+}
+
++ (RBPProgressView *)happinessBar
+{
+	RBPProgressView *bar = [[RBPProgressView alloc] initWithDefaultsKey:HAPPINESS_DEFAULTS_KEY];
+	
+	bar.progressFill.backgroundColor = [UIColor purpleColor];
+	
+	return bar;
+}
+
++ (RBPProgressView *)energyBar
+{
+	RBPProgressView *bar = [[RBPProgressView alloc] initWithDefaultsKey:ENERGY_DEFAULTS_KEY];
+	
+	bar.progressFill.backgroundColor = [UIColor cyanColor];
+	
+	return bar;
+}
+				
++ (CGFloat)progressForKey:(NSString *)key
+{
+	return [[NSUserDefaults standardUserDefaults] floatForKey:key];
+}
+
++ (void)setProgress:(CGFloat)progress forKey:(NSString *)key
+{
+	progress = MAX(0.0, MIN(1.0, progress)); // Clamp between 0.0 and 1.0 (%)
+	[[NSUserDefaults standardUserDefaults] setFloat:progress forKey:key];
+}
+
++ (CGFloat)wellnessProgress
+{
+	return [self progressForKey:WELLNESS_DEFAULTS_KEY];
+}
+
++ (void)setWellnessProgress:(CGFloat)progress
+{
+	[RBPProgressView setProgress:progress forKey:WELLNESS_DEFAULTS_KEY];
+}
+
++ (CGFloat)happinessProgress
+{
+	return [self progressForKey:HAPPINESS_DEFAULTS_KEY];
+}
+
++ (void)setHappinessProgress:(CGFloat)progress
+{
+	[RBPProgressView setProgress:progress forKey:HAPPINESS_DEFAULTS_KEY];
+}
+
++ (CGFloat)energyProgress
+{
+	return [self progressForKey:ENERGY_DEFAULTS_KEY];
+}
+
++ (void)setEnergyProgress:(CGFloat)progress
+{
+	[RBPProgressView setProgress:progress forKey:ENERGY_DEFAULTS_KEY];
 }
 
 @end

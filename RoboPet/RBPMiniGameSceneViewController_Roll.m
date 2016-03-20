@@ -50,10 +50,20 @@
 	return @"roll_background";
 }
 
-- (void)didReceiveMemoryWarning
+- (NSArray *)texturesToPreload
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+	NSMutableArray *textures = [[super texturesToPreload] mutableCopy];
+	
+	[textures addObjectsFromArray:@[[SKTexture textureWithImageNamed:@"robot_top"],
+									[SKTexture textureWithImageNamed:@"battery_negative_end"],
+									[SKTexture textureWithImageNamed:@"battery_body"],
+									[SKTexture textureWithImageNamed:@"battery_positive_end"],
+									[SKTexture textureWithImageNamed:@"battery_icon"],
+									[SKTexture textureWithImageNamed:@"bumper_0"],
+									[SKTexture textureWithImageNamed:@"bumper_1"],
+									]];
+	
+	return textures;
 }
 
 #pragma mark - RBPMiniGameSceneViewController
@@ -76,18 +86,9 @@
 
 #pragma mark - RBPMiniGameTutorialViewControllerDataSource
 
-- (NSArray<RBPMiniGameTutorialPage *> *)tutorialPages
+- (UIScrollView *)tutorialScrollView;
 {
-	RBPMiniGameTutorialPage *pageOne = [[RBPMiniGameTutorialPage alloc] init];
-	pageOne.textView.text = @"Tilt device to control Robot";
-	
-	RBPMiniGameTutorialPage *pageTwo = [[RBPMiniGameTutorialPage alloc] init];
-	pageTwo.textView.text = @"Collect batteries to increase energy level";
-	
-	RBPMiniGameTutorialPage *pageThree = [[RBPMiniGameTutorialPage alloc] init];
-	pageThree.textView.text = @"Avoid bumpers and walls";
-	
-	return @[pageOne, pageTwo, pageThree];
+	return [[[NSBundle mainBundle] loadNibNamed:@"RBPMiniGameRoll_TutorialPages" owner:nil options:nil] firstObject];
 }
 
 #pragma mark - Internal

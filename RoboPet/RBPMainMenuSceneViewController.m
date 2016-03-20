@@ -308,6 +308,10 @@
 
 - (void)miniGameDidFinish:(RBPMiniGameSceneViewController *)miniGameViewController
 {
+	[self.wellnessBar setProgress:self.wellnessBar.progress animated:NO];
+	[self.happinessBar setProgress:self.happinessBar.progress animated:NO];
+	[self.energyBar setProgress:self.energyBar.progress animated:NO];
+	
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

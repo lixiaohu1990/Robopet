@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" id="iMb-uR-MOX">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zYf-8i-zTP" userLabel="0">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="battery_full" translatesAutoresizingMaskIntoConstraints="NO" id="hIa-d4-HqX">
+                            <rect key="frame" x="227" y="250" width="147" height="50"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collect Battery before it drains!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8GC-jW-zs0" userLabel="label">
+                            <rect key="frame" x="0.0" y="330" width="600" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="pgP-S5-FHg"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="hIa-d4-HqX" firstAttribute="centerY" secondItem="zYf-8i-zTP" secondAttribute="centerY" constant="-25" id="4VQ-Wk-3AH"/>
+                        <constraint firstItem="8GC-jW-zs0" firstAttribute="centerY" secondItem="zYf-8i-zTP" secondAttribute="centerY" constant="40" id="8a2-wS-qex"/>
+                        <constraint firstItem="hIa-d4-HqX" firstAttribute="centerX" secondItem="zYf-8i-zTP" secondAttribute="centerX" id="YmR-bg-ggL"/>
+                        <constraint firstAttribute="trailing" secondItem="8GC-jW-zs0" secondAttribute="trailing" id="gyx-77-HzR"/>
+                        <constraint firstItem="8GC-jW-zs0" firstAttribute="leading" secondItem="zYf-8i-zTP" secondAttribute="leading" id="ule-mj-0Wt"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40R-qP-zC5" userLabel="1">
+                    <rect key="frame" x="600" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="robot_top" translatesAutoresizingMaskIntoConstraints="NO" id="EvD-7z-e2C">
+                            <rect key="frame" x="231" y="225" width="138" height="100"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tilt device to control Robot!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="RGi-So-ERj" userLabel="label">
+                            <rect key="frame" x="0.0" y="330" width="600" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="rff-hY-scB"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="RGi-So-ERj" firstAttribute="leading" secondItem="40R-qP-zC5" secondAttribute="leading" id="7eU-Gb-pq8"/>
+                        <constraint firstAttribute="trailing" secondItem="RGi-So-ERj" secondAttribute="trailing" id="AqE-37-1aU"/>
+                        <constraint firstItem="EvD-7z-e2C" firstAttribute="centerY" secondItem="40R-qP-zC5" secondAttribute="centerY" constant="-25" id="cUO-Ur-jOr"/>
+                        <constraint firstItem="RGi-So-ERj" firstAttribute="centerY" secondItem="40R-qP-zC5" secondAttribute="centerY" constant="40" id="hU7-5l-yQ2"/>
+                        <constraint firstItem="EvD-7z-e2C" firstAttribute="centerX" secondItem="40R-qP-zC5" secondAttribute="centerX" id="wOm-gX-OV3"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DFC-gm-5sK" userLabel="2">
+                    <rect key="frame" x="1200" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bumper_0" translatesAutoresizingMaskIntoConstraints="NO" id="RNX-Cg-cYT">
+                            <rect key="frame" x="65" y="216" width="116" height="119"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bumper_1" translatesAutoresizingMaskIntoConstraints="NO" id="qye-46-1oK">
+                            <rect key="frame" x="419" y="217" width="111" height="115"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avoid Bumpers and Walls!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VhM-Ch-XHt" userLabel="label">
+                            <rect key="frame" x="0.0" y="330" width="600" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="robot_top" translatesAutoresizingMaskIntoConstraints="NO" id="jYC-oX-kxV">
+                            <rect key="frame" x="231" y="225" width="138" height="100"/>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="qye-46-1oK" firstAttribute="leading" secondItem="jYC-oX-kxV" secondAttribute="trailing" constant="50" id="7IB-85-gPa"/>
+                        <constraint firstItem="jYC-oX-kxV" firstAttribute="centerX" secondItem="DFC-gm-5sK" secondAttribute="centerX" id="CXg-JE-oPq"/>
+                        <constraint firstItem="RNX-Cg-cYT" firstAttribute="centerY" secondItem="jYC-oX-kxV" secondAttribute="centerY" id="CdE-dn-sy0"/>
+                        <constraint firstItem="qye-46-1oK" firstAttribute="centerY" secondItem="jYC-oX-kxV" secondAttribute="centerY" id="GKc-hZ-okT"/>
+                        <constraint firstItem="RNX-Cg-cYT" firstAttribute="trailing" secondItem="jYC-oX-kxV" secondAttribute="leading" constant="-50" id="ONy-PJ-Bci"/>
+                        <constraint firstItem="VhM-Ch-XHt" firstAttribute="centerY" secondItem="DFC-gm-5sK" secondAttribute="centerY" constant="40" id="RE3-ys-v7c"/>
+                        <constraint firstItem="jYC-oX-kxV" firstAttribute="centerY" secondItem="DFC-gm-5sK" secondAttribute="centerY" constant="-25" id="Ycf-RJ-XD2"/>
+                        <constraint firstAttribute="trailing" secondItem="VhM-Ch-XHt" secondAttribute="trailing" id="e47-8j-x5W"/>
+                        <constraint firstItem="VhM-Ch-XHt" firstAttribute="leading" secondItem="DFC-gm-5sK" secondAttribute="leading" id="oxu-gp-QLx"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="zYf-8i-zTP" firstAttribute="height" secondItem="iMb-uR-MOX" secondAttribute="height" id="0i0-aw-aNt"/>
+                <constraint firstItem="40R-qP-zC5" firstAttribute="top" secondItem="zYf-8i-zTP" secondAttribute="top" id="7IR-an-bDw"/>
+                <constraint firstAttribute="bottom" secondItem="zYf-8i-zTP" secondAttribute="bottom" id="8dX-tB-AXZ"/>
+                <constraint firstAttribute="leading" secondItem="zYf-8i-zTP" secondAttribute="leading" id="DWw-Xu-ouZ"/>
+                <constraint firstItem="zYf-8i-zTP" firstAttribute="leading" secondItem="iMb-uR-MOX" secondAttribute="leading" id="Gb5-At-wRg"/>
+                <constraint firstItem="zYf-8i-zTP" firstAttribute="top" secondItem="iMb-uR-MOX" secondAttribute="top" id="NkX-xN-KMC"/>
+                <constraint firstItem="DFC-gm-5sK" firstAttribute="leading" secondItem="40R-qP-zC5" secondAttribute="trailing" id="R70-Zq-3Md"/>
+                <constraint firstItem="40R-qP-zC5" firstAttribute="height" secondItem="iMb-uR-MOX" secondAttribute="height" id="Wfa-3r-QXQ"/>
+                <constraint firstItem="DFC-gm-5sK" firstAttribute="top" secondItem="iMb-uR-MOX" secondAttribute="top" id="ekH-El-lUc"/>
+                <constraint firstItem="40R-qP-zC5" firstAttribute="width" secondItem="iMb-uR-MOX" secondAttribute="width" id="fqi-DY-ZXT"/>
+                <constraint firstItem="DFC-gm-5sK" firstAttribute="width" secondItem="iMb-uR-MOX" secondAttribute="width" id="hGR-Op-ySn"/>
+                <constraint firstItem="zYf-8i-zTP" firstAttribute="bottom" secondItem="iMb-uR-MOX" secondAttribute="bottom" id="hiI-GR-Ene"/>
+                <constraint firstItem="40R-qP-zC5" firstAttribute="leading" secondItem="zYf-8i-zTP" secondAttribute="trailing" id="nlB-ct-Bzb"/>
+                <constraint firstItem="zYf-8i-zTP" firstAttribute="width" secondItem="iMb-uR-MOX" secondAttribute="width" id="nwc-ja-Gg5"/>
+                <constraint firstItem="DFC-gm-5sK" firstAttribute="bottom" secondItem="iMb-uR-MOX" secondAttribute="bottom" id="u4a-wa-EPd"/>
+                <constraint firstItem="40R-qP-zC5" firstAttribute="bottom" secondItem="iMb-uR-MOX" secondAttribute="bottom" id="v0J-5C-8mN"/>
+                <constraint firstItem="DFC-gm-5sK" firstAttribute="height" secondItem="iMb-uR-MOX" secondAttribute="height" id="vGw-tP-NOX"/>
+                <constraint firstAttribute="trailing" secondItem="DFC-gm-5sK" secondAttribute="trailing" id="vHh-he-T3K"/>
+                <constraint firstAttribute="top" secondItem="zYf-8i-zTP" secondAttribute="top" id="wKp-cv-Z3Y"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <point key="canvasLocation" x="-11" y="-1052"/>
+        </scrollView>
+    </objects>
+    <resources>
+        <image name="battery_full" width="147" height="50"/>
+        <image name="bumper_0" width="116" height="119"/>
+        <image name="bumper_1" width="111" height="115"/>
+        <image name="robot_top" width="138" height="100"/>
+    </resources>
+</document>

@@ -14,6 +14,8 @@
 
 @implementation RBPSoundManager
 
+#pragma mark - RBPSoundManager
+
 + (BOOL)soundEnabled
 {
 	[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"soundEnabled": @(YES), }];
@@ -24,6 +26,13 @@
 + (void)setSoundEnabled:(BOOL)soundEnabled
 {
 	[[NSUserDefaults standardUserDefaults] setBool:soundEnabled forKey:@"soundEnabled"];
+}
+
++ (void)runSoundAction:(SKAction *)action onNode:(SKNode *)node
+{
+	if ([RBPSoundManager soundEnabled]) {
+		[node runAction:action];
+	}
 }
 
 @end

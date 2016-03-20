@@ -32,6 +32,8 @@
 
 @property (weak, nonatomic) id<RBPMiniGamePopupViewControllerDelegate> delegate;
 
+@property (strong, nonatomic) UIView *backgroundView;
+
 - (void)clickedBarButton:(UIBarButtonItem *)barButtonItem;
 
 @end

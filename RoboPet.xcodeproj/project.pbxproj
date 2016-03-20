@@ -20,12 +20,12 @@
 		2E8CA0111C51238C009D9F1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8CA0101C51238C009D9F1F /* main.m */; };
 		2E8CA0141C51238C009D9F1F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8CA0131C51238C009D9F1F /* AppDelegate.m */; };
 		2E8CA0171C51238C009D9F1F /* RBPMainMenuSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8CA0161C51238C009D9F1F /* RBPMainMenuSceneViewController.m */; };
-		2E8CA01C1C51238C009D9F1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E8CA01B1C51238C009D9F1F /* Assets.xcassets */; };
 		2E8CA0271C5123BB009D9F1F /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E8CA0261C5123BB009D9F1F /* CoreMotion.framework */; };
 		2E8CA0341C51259D009D9F1F /* RBPMiniGameScene_Roll.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8CA0331C51259D009D9F1F /* RBPMiniGameScene_Roll.m */; };
 		2E8CA0361C5125D4009D9F1F /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E8CA0351C5125D4009D9F1F /* SpriteKit.framework */; };
 		2EABE63A1C9C9661006E4591 /* RBPMiniGameRollBumper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EABE6391C9C9661006E4591 /* RBPMiniGameRollBumper.m */; };
-		2EC1D3151C90CABE000096FB /* RBPMiniGameTutorialPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC1D3141C90CABE000096FB /* RBPMiniGameTutorialPage.m */; };
+		2EB192851C9DD83C000440A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EB192841C9DD83C000440A7 /* Assets.xcassets */; };
+		2EB192871C9E061B000440A7 /* RBPMiniGameRoll_TutorialPages.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EB192861C9E061B000440A7 /* RBPMiniGameRoll_TutorialPages.xib */; };
 		2EC2F2B71C8E400600DDA995 /* RBPMiniGameSceneViewController_Jump.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC2F2B61C8E400600DDA995 /* RBPMiniGameSceneViewController_Jump.m */; };
 		2EC4B16B1C8513F900AB33CE /* RBPMiniGamePauseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4B16A1C8513F900AB33CE /* RBPMiniGamePauseViewController.m */; };
 		2EC4B18C1C8531F900AB33CE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2EC4B1711C8531F900AB33CE /* Info.plist */; };
@@ -79,7 +79,6 @@
 		2E8CA0131C51238C009D9F1F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2E8CA0151C51238C009D9F1F /* RBPMainMenuSceneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBPMainMenuSceneViewController.h; sourceTree = "<group>"; };
 		2E8CA0161C51238C009D9F1F /* RBPMainMenuSceneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RBPMainMenuSceneViewController.m; sourceTree = "<group>"; };
-		2E8CA01B1C51238C009D9F1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E8CA0201C51238C009D9F1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E8CA0261C5123BB009D9F1F /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		2E8CA0321C51259D009D9F1F /* RBPMiniGameScene_Roll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameScene_Roll.h; sourceTree = "<group>"; };
@@ -87,8 +86,8 @@
 		2E8CA0351C5125D4009D9F1F /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		2EABE6381C9C9661006E4591 /* RBPMiniGameRollBumper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameRollBumper.h; sourceTree = "<group>"; };
 		2EABE6391C9C9661006E4591 /* RBPMiniGameRollBumper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameRollBumper.m; sourceTree = "<group>"; };
-		2EC1D3131C90CABE000096FB /* RBPMiniGameTutorialPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameTutorialPage.h; sourceTree = "<group>"; };
-		2EC1D3141C90CABE000096FB /* RBPMiniGameTutorialPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameTutorialPage.m; sourceTree = "<group>"; };
+		2EB192841C9DD83C000440A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2EB192861C9E061B000440A7 /* RBPMiniGameRoll_TutorialPages.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RBPMiniGameRoll_TutorialPages.xib; sourceTree = "<group>"; };
 		2EC2F2B61C8E400600DDA995 /* RBPMiniGameSceneViewController_Jump.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameSceneViewController_Jump.m; sourceTree = "<group>"; };
 		2EC4B1691C8513F900AB33CE /* RBPMiniGamePauseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGamePauseViewController.h; sourceTree = "<group>"; };
 		2EC4B16A1C8513F900AB33CE /* RBPMiniGamePauseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGamePauseViewController.m; sourceTree = "<group>"; };
@@ -234,7 +233,7 @@
 			children = (
 				2E23B92B1C8E391100F9E94E /* Main.storyboard */,
 				2E211C141C99DEC500A65B47 /* LaunchScreen.xib */,
-				2E8CA01B1C51238C009D9F1F /* Assets.xcassets */,
+				2EB192841C9DD83C000440A7 /* Assets.xcassets */,
 				2E8CA0201C51238C009D9F1F /* Info.plist */,
 			);
 			name = Resources;
@@ -267,6 +266,7 @@
 				2E211C121C99DE9D00A65B47 /* RBPMiniGameRollBattery.m */,
 				2EABE6381C9C9661006E4591 /* RBPMiniGameRollBumper.h */,
 				2EABE6391C9C9661006E4591 /* RBPMiniGameRollBumper.m */,
+				2EB192861C9E061B000440A7 /* RBPMiniGameRoll_TutorialPages.xib */,
 			);
 			name = Roll;
 			sourceTree = "<group>";
@@ -313,8 +313,6 @@
 				2ECB954D1C8FAABE009F58FB /* RBPMiniGamePopupViewController.m */,
 				2ECB95491C8FAA3B009F58FB /* RBPMiniGameTutorialViewController.h */,
 				2ECB954A1C8FAA3B009F58FB /* RBPMiniGameTutorialViewController.m */,
-				2EC1D3131C90CABE000096FB /* RBPMiniGameTutorialPage.h */,
-				2EC1D3141C90CABE000096FB /* RBPMiniGameTutorialPage.m */,
 				2EC4B1691C8513F900AB33CE /* RBPMiniGamePauseViewController.h */,
 				2EC4B16A1C8513F900AB33CE /* RBPMiniGamePauseViewController.m */,
 				2ECC2A431C8B4C3C00C5DA0C /* RBPMiniGameGameOverViewController.h */,
@@ -428,10 +426,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EB192871C9E061B000440A7 /* RBPMiniGameRoll_TutorialPages.xib in Resources */,
 				2E211C151C99DEC500A65B47 /* LaunchScreen.xib in Resources */,
 				2EC4B18C1C8531F900AB33CE /* Info.plist in Resources */,
+				2EB192851C9DD83C000440A7 /* Assets.xcassets in Resources */,
 				2E23B92C1C8E391100F9E94E /* Main.storyboard in Resources */,
-				2E8CA01C1C51238C009D9F1F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,7 +441,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EC1D3151C90CABE000096FB /* RBPMiniGameTutorialPage.m in Sources */,
 				2E8CA0171C51238C009D9F1F /* RBPMainMenuSceneViewController.m in Sources */,
 				2EC4B1911C8531F900AB33CE /* MZFormSheetPresentationViewController.m in Sources */,
 				2ECC2A521C8B6E8A00C5DA0C /* RBPBaseScene.m in Sources */,

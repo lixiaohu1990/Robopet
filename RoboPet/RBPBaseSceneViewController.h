@@ -27,12 +27,21 @@
  *  @return Class
  */
 - (Class)sceneClass;
+
 /**
  *  Override in subclass
  *
  *  @return NSString
  */
 - (NSString *)backgroundImageName;
+
+/**
+ *  Array of SKTextures to preload
+ *	Override in subclass
+ *
+ *  @return NSArray
+ */
+- (NSArray *)texturesToPreload;
 
 @end
 

@@ -8,6 +8,8 @@
 
 @import SpriteKit;
 
+#import "RBPSoundManager.h"
+
 
 
 
@@ -16,10 +18,10 @@
 {
 }
 
-- (void)setBackgroundImageName:(NSString *)imageName;
-
 - (void)initialize;
 - (void)restart;
+
+- (void)setBackgroundImageName:(NSString *)imageName;
 
 /**
  *  Calculate distance between nodes (Pythagoras Theorem)

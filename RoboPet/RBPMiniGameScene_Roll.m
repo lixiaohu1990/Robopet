@@ -61,6 +61,12 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
  */
 @property (strong, nonatomic) NSMutableArray<RBPMiniGameRollBumper *> *bumpers;
 
+
+// Preloaded assets
+
+@property (strong, nonatomic) SKAction *action_BumperCollisionSound;
+@property (strong, nonatomic) SKAction *action_PickupSound;
+
 @end
 
 
@@ -71,6 +77,20 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 
 #pragma mark - Init
 
++ (instancetype)sceneWithSize:(CGSize)size
+{
+	RBPMiniGameScene_Roll *scene = [super sceneWithSize:size];
+	
+	if (scene) { // Preload assets
+		
+		scene.action_BumperCollisionSound = [SKAction playSoundFileNamed:@"roll_bumper" waitForCompletion:NO];
+		scene.action_PickupSound = [SKAction playSoundFileNamed:@"roll_battery" waitForCompletion:NO];
+		
+	}
+	
+	return scene;
+}
+
 - (void)initialize
 {
 	[super initialize];
@@ -80,25 +100,14 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	if (self.motion){ }	// Lazy load, make sure this is created and updating
 	[self setupWalls];
 	[self setupPlayer];
+	
+	[self generatePickup];
+	[self generateBumpersForDifficulty:self.difficultyLevel afterDelay:0.0];
 }
 
 - (void)restart
 {
 	[super restart];
-}
-
-- (void)setPaused:(BOOL)paused
-{
-	BOOL temp = self.paused;
-	
-	[super setPaused:paused];
-	
-	if (temp && !paused && self.runningTime <= 0.01) {
-		
-		[self generatePickup];
-		[self generateBumpersForDifficulty:self.difficultyLevel afterDelay:0.0];
-		
-	}
 }
 
 - (CMMotionManager *)motion
@@ -157,11 +166,8 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 - (void)setupPlayer
 {
 	self.player = [SKSpriteNode spriteNodeWithImageNamed:@"robot_top"];
-	self.player.size = CGSizeMake(self.player.size.width * 0.5, self.player.size.height * 0.5);
-	
-	//TODO: pick better physicsBody
+	//self.player.size = CGSizeMake(self.player.size.width * 0.5, self.player.size.height * 0.5);
 	self.player.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.player.size.height * 0.5];
-	//self.player.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:@"robot_top"] size:self.player.size];
 	
 	self.player.physicsBody.allowsRotation = YES;
 	self.player.physicsBody.mass = 100000;
@@ -209,7 +215,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	if (!newPickup) {
 		
 		newPickup = [[RBPMiniGameRollBattery alloc] init];
-		newPickup.size = CGSizeMake(newPickup.size.width * 0.35, newPickup.size.height * 0.35);
+		//newPickup.size = CGSizeMake(newPickup.size.width * 0.35, newPickup.size.height * 0.35);
 		
 	}
 	
@@ -220,7 +226,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 		[self.pickups addObject:newPickup];
 		
 		[newPickup runAction:[SKAction fadeAlphaTo:1.0 duration:0.25] completion:^{
-			[newPickup startDrainWithDuration:30.0 completion:^(RBPMiniGameRollBattery *battery) {
+			[newPickup startDrainWithDuration:10.0 completion:^(RBPMiniGameRollBattery *battery) {
 				[battery removeFromParent];
 				[self.minigameDelegate onMiniGameGameOver:self];
 			}];
@@ -433,6 +439,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 			
 			if ([pickup intersectsNode:self.player]) {
 				
+				[RBPSoundManager runSoundAction:self.action_PickupSound onNode:self.player];
 				self.score += pickup.chargePercentage;
 				[pickup removeFromParent];
 				
@@ -458,7 +465,18 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
-	if (contact.bodyA.node != self.player && contact.bodyB.node != self.player) {
+	SKPhysicsBody *playerBody = nil;
+	SKPhysicsBody *otherBody = nil;
+	
+	if (contact.bodyA.node == self.player) {
+		playerBody = contact.bodyA;
+		otherBody = contact.bodyB;
+	} else if (contact.bodyB.node == self.player) {
+		playerBody = contact.bodyB;
+		otherBody = contact.bodyA;
+	}
+	
+	if (!playerBody) {
 		return;
 	}
 	
@@ -474,14 +492,13 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	self.player.physicsBody.linearDamping = MAX(1.0, self.player.physicsBody.linearDamping) * 2.0;
 	//[self.progressView incrementProgress:-0.2 animated:YES];
 	
-	
-	
-	// Animated
-	if (contact.bodyA.categoryBitMask == RBPCollisionCategoryBumper) {
-		[self pulseNode:contact.bodyA.node scale:1.3 duration:0.4];
-	} else if (contact.bodyB.categoryBitMask == RBPCollisionCategoryBumper) {
-		[self pulseNode:contact.bodyB.node scale:1.3 duration:0.4];
+	if (otherBody.categoryBitMask == RBPCollisionCategoryWall) {
+		[RBPSoundManager runSoundAction:self.action_BumperCollisionSound onNode:self.player];
+	} else if (otherBody.categoryBitMask == RBPCollisionCategoryBumper) {
+		[self pulseNode:otherBody.node scale:1.3 duration:0.4];
+		[RBPSoundManager runSoundAction:self.action_BumperCollisionSound onNode:self.player];
 	}
+	
 	
 	[self pulseNode:self.player color:[UIColor redColor] duration:0.35];
 }

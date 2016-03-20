@@ -10,6 +10,10 @@
 
 @class RBPProgressView;
 
+#define WELLNESS_DEFAULTS_KEY @"RBPWellnessLevelDefaultsKey"
+#define HAPPINESS_DEFAULTS_KEY @"RBPHappinessLevelDefaultsKey"
+#define ENERGY_DEFAULTS_KEY @"RBPEnergyLevelDefaultsKey"
+
 
 
 
@@ -66,6 +70,8 @@
  */
 - (void)incrementProgress:(CGFloat)increment animationDuration:(CGFloat)animationDuration;
 
+- (BOOL)isAnimating;
+
 /**
  *  Instantiate a RBPProgressView linked to the wellness level
  *
@@ -87,7 +93,12 @@
  */
 + (RBPProgressView *)energyBar;
 
-- (BOOL)isAnimating;
++ (CGFloat)wellnessProgress;
++ (void)setWellnessProgress:(CGFloat)progress;
++ (CGFloat)happinessProgress;
++ (void)setHappinessProgress:(CGFloat)progress;
++ (CGFloat)energyProgress;
++ (void)setEnergyProgress:(CGFloat)progress;
 
 @end
 

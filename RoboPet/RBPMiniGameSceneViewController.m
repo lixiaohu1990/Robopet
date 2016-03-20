@@ -124,7 +124,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	
+
 	
 	if ([RBPMiniGameTutorialViewController shouldShowTutorialForDelegate:self]) {
 		RBPMiniGameTutorialViewController *viewController = [[RBPMiniGameTutorialViewController alloc] initWithDataSource:self];
@@ -190,13 +190,13 @@
 		[viewController startCountdownWithSartTime:3
 										   endTime:1
 									   updateBlock:^(NSInteger currentTime) {
-			
-			if (currentTime < 1) {
-				[self dismissViewControllerAnimated:YES
-										 completion:^{
-											 [self countdownViewControllerDidDismiss:viewController];
-				}];
-			}
+										   
+										   if (currentTime < 1) {
+											   [self dismissViewControllerAnimated:YES
+																		completion:^{
+																			[self countdownViewControllerDidDismiss:viewController];
+																		}];
+										   }
 			
 		}];
 		
@@ -253,7 +253,7 @@
 
 - (void)onMiniGameScoreChange:(RBPMiniGameScene *)miniGame
 {
-	self.scoreLabel.text = [NSString stringWithFormat:@"Level: %lu Score: %0.2f", miniGame.difficultyLevel, miniGame.score];
+	self.scoreLabel.text = [NSString stringWithFormat:@"Level: %lu Score: %0.1f", miniGame.difficultyLevel, miniGame.score];
 	[self.scoreLabel sizeToFit];
 }
 
@@ -302,10 +302,9 @@
 
 #pragma mark - RBPMiniGameTutorialViewControllerDataSource
 
-- (NSArray<RBPMiniGameTutorialPage *> *)tutorialPages
+- (UIScrollView *)tutorialScrollView;
 {
-	// Override me
-	return @[];
+	return nil;
 }
 
 #pragma mark - Internal

@@ -6,7 +6,11 @@
 //  Copyright © 2016 Pat Sluth. All rights reserved.
 //
 
+@import AudioToolbox;
+
 #import "RBPMiniGameCountdownViewController.h"
+
+#import "RBPSoundManager.h"
 
 
 
@@ -17,6 +21,7 @@
 }
 
 @property (strong, nonatomic, readwrite) UILabel *label;
+@property (nonatomic, readwrite) SystemSoundID tickSound;
 
 @end
 
@@ -74,6 +79,10 @@
 														  attribute:NSLayoutAttributeCenterY
 														 multiplier:1.0
 														   constant:0.0]];
+	
+	// Setup tick sound
+	NSURL *url = [[NSBundle mainBundle] URLForResource:@"minigame_countdown" withExtension:@"caf"];
+	AudioServicesCreateSystemSoundID((__bridge CFURLRef)(url), &_tickSound);
 }
 
 - (void)viewDidLayoutSubviews
@@ -91,12 +100,12 @@
 		update(startTime);
 	}
 	
-	
 	if (startTime < endTime) {		// timer is done
 		self.label.text = nil;
 		return;
 	}
 	
+	AudioServicesPlaySystemSound(self.tickSound);
 	
 	// 1.0 seconds total
 	[UIView animateWithDuration:0.15
@@ -106,7 +115,6 @@
 						 
 						 self.label.transform = CGAffineTransformScale(self.label.transform, 1.15, 1.15);
 						 self.text = [NSString stringWithFormat:@"%lu", (long)startTime];
-						 
 						 
 					 }
 					 completion:^(BOOL finished) {

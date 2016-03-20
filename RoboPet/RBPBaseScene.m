@@ -35,6 +35,8 @@
 	[self restart];
 }
 
+#pragma mark - RBPBaseScene
+
 - (void)initialize
 {
 }
@@ -49,8 +51,6 @@
 	
 	[self initialize];
 }
-
-#pragma mark - RBPBaseScene
 
 - (void)setBackgroundImageName:(NSString *)imageName
 {

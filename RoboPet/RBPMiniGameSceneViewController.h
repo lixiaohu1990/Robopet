@@ -15,7 +15,6 @@
 
 #import "RBPMiniGameSceneViewControllerDelegate.h"
 #import "RBPMiniGameTutorialViewController.h"
-#import "RBPMiniGameTutorialPage.h"
 #import "RBPMiniGameCountdownViewController.h"
 #import "RBPMiniGamePopupViewController.h"
 
