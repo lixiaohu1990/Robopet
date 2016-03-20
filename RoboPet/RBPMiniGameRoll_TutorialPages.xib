@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" id="iMb-uR-MOX">
+        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" id="iMb-uR-MOX">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -94,23 +94,18 @@
             <constraints>
                 <constraint firstItem="zYf-8i-zTP" firstAttribute="height" secondItem="iMb-uR-MOX" secondAttribute="height" id="0i0-aw-aNt"/>
                 <constraint firstItem="40R-qP-zC5" firstAttribute="top" secondItem="zYf-8i-zTP" secondAttribute="top" id="7IR-an-bDw"/>
-                <constraint firstAttribute="bottom" secondItem="zYf-8i-zTP" secondAttribute="bottom" id="8dX-tB-AXZ"/>
+                <constraint firstAttribute="bottom" secondItem="zYf-8i-zTP" secondAttribute="bottom" id="AS9-SY-no1"/>
                 <constraint firstAttribute="leading" secondItem="zYf-8i-zTP" secondAttribute="leading" id="DWw-Xu-ouZ"/>
-                <constraint firstItem="zYf-8i-zTP" firstAttribute="leading" secondItem="iMb-uR-MOX" secondAttribute="leading" id="Gb5-At-wRg"/>
-                <constraint firstItem="zYf-8i-zTP" firstAttribute="top" secondItem="iMb-uR-MOX" secondAttribute="top" id="NkX-xN-KMC"/>
+                <constraint firstAttribute="top" secondItem="zYf-8i-zTP" secondAttribute="top" id="DwX-fo-dWT"/>
                 <constraint firstItem="DFC-gm-5sK" firstAttribute="leading" secondItem="40R-qP-zC5" secondAttribute="trailing" id="R70-Zq-3Md"/>
                 <constraint firstItem="40R-qP-zC5" firstAttribute="height" secondItem="iMb-uR-MOX" secondAttribute="height" id="Wfa-3r-QXQ"/>
                 <constraint firstItem="DFC-gm-5sK" firstAttribute="top" secondItem="iMb-uR-MOX" secondAttribute="top" id="ekH-El-lUc"/>
                 <constraint firstItem="40R-qP-zC5" firstAttribute="width" secondItem="iMb-uR-MOX" secondAttribute="width" id="fqi-DY-ZXT"/>
                 <constraint firstItem="DFC-gm-5sK" firstAttribute="width" secondItem="iMb-uR-MOX" secondAttribute="width" id="hGR-Op-ySn"/>
-                <constraint firstItem="zYf-8i-zTP" firstAttribute="bottom" secondItem="iMb-uR-MOX" secondAttribute="bottom" id="hiI-GR-Ene"/>
                 <constraint firstItem="40R-qP-zC5" firstAttribute="leading" secondItem="zYf-8i-zTP" secondAttribute="trailing" id="nlB-ct-Bzb"/>
                 <constraint firstItem="zYf-8i-zTP" firstAttribute="width" secondItem="iMb-uR-MOX" secondAttribute="width" id="nwc-ja-Gg5"/>
-                <constraint firstItem="DFC-gm-5sK" firstAttribute="bottom" secondItem="iMb-uR-MOX" secondAttribute="bottom" id="u4a-wa-EPd"/>
-                <constraint firstItem="40R-qP-zC5" firstAttribute="bottom" secondItem="iMb-uR-MOX" secondAttribute="bottom" id="v0J-5C-8mN"/>
                 <constraint firstItem="DFC-gm-5sK" firstAttribute="height" secondItem="iMb-uR-MOX" secondAttribute="height" id="vGw-tP-NOX"/>
                 <constraint firstAttribute="trailing" secondItem="DFC-gm-5sK" secondAttribute="trailing" id="vHh-he-T3K"/>
-                <constraint firstAttribute="top" secondItem="zYf-8i-zTP" secondAttribute="top" id="wKp-cv-Z3Y"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>

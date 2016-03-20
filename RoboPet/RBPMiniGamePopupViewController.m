@@ -30,9 +30,10 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+	[super viewDidLoad];
 	
-	self.view = [[UIView alloc] init];
+	
+	self.automaticallyAdjustsScrollViewInsets = NO;
 	self.view.backgroundColor = [UIColor colorWithRed:(249.0 / 255.0) green:(240.0 / 255.0) blue:(201.0 / 255.0) alpha:1.0];
 	
 	
@@ -47,12 +48,12 @@
 	
 	
 	UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"transition_screen_gradient"]];
+	backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
 	backgroundView.userInteractionEnabled = YES;
 	backgroundView.clipsToBounds = YES;
 	backgroundView.layer.cornerRadius = PADDING;
 	backgroundView.layer.masksToBounds = YES;
 	backgroundView.contentMode = UIViewContentModeScaleToFill;
-	backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.view addSubview:backgroundView];
 	
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:backgroundView

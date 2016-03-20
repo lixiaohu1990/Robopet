@@ -8,6 +8,8 @@
 
 #import "RBPSoundManager.h"
 
+#define SOUND_ENABLED_DEFAULTS_KEY @"RBPSoundEnabledDefaultsKey"
+
 
 
 
@@ -18,14 +20,14 @@
 
 + (BOOL)soundEnabled
 {
-	[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"soundEnabled": @(YES), }];
+	[[NSUserDefaults standardUserDefaults] registerDefaults:@{ SOUND_ENABLED_DEFAULTS_KEY: @(YES), }];
 	
-	return [[NSUserDefaults standardUserDefaults] boolForKey:@"soundEnabled"];
+	return [[NSUserDefaults standardUserDefaults] boolForKey:SOUND_ENABLED_DEFAULTS_KEY];
 }
 
 + (void)setSoundEnabled:(BOOL)soundEnabled
 {
-	[[NSUserDefaults standardUserDefaults] setBool:soundEnabled forKey:@"soundEnabled"];
+	[[NSUserDefaults standardUserDefaults] setBool:soundEnabled forKey:SOUND_ENABLED_DEFAULTS_KEY];
 }
 
 + (void)runSoundAction:(SKAction *)action onNode:(SKNode *)node

@@ -35,7 +35,6 @@
 	
 	if (self) {
 		self.dataSource = dataSource;
-		self.automaticallyAdjustsScrollViewInsets = NO;
 	}
 	
 	return self;
@@ -43,7 +42,7 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+	[super viewDidLoad];
 	
 	self.navigationItem.title = @"Tutorial";
 	self.navigationItem.leftBarButtonItem.title = @"Dont Show Again";
@@ -55,7 +54,6 @@
 	
 	[self setupScrollView];
 }
-
 - (void)setupScrollView
 {
 	self.scrollView = [self.dataSource tutorialScrollView];
@@ -111,7 +109,7 @@
 	self.pageControl.numberOfPages = pages;
 	[self.backgroundView addSubview:self.pageControl];
 	
-	[self.pageControl.superview addConstraint:[NSLayoutConstraint constraintWithItem:self.pageControl.superview
+	[self.pageControl.superview addConstraint:[NSLayoutConstraint constraintWithItem:self.pageControl
 														  attribute:NSLayoutAttributeWidth
 														  relatedBy:NSLayoutRelationEqual
 															 toItem:nil
@@ -168,7 +166,7 @@
 
 + (NSString *)showTutorialDefaultsKeyForDelegate:(id<RBPMiniGamePopupViewControllerDelegate>)delegate
 {
-	return [NSString stringWithFormat:@"RBPShowTutorialDefaultsKey%@", NSStringFromClass([delegate class])];
+	return [NSString stringWithFormat:@"RBPShowTutorial%@DefaultsKey", NSStringFromClass([delegate class])];
 }
 
 + (BOOL)shouldShowTutorialForDelegate:(id<RBPMiniGamePopupViewControllerDelegate>)delegate

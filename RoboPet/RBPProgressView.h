@@ -6,13 +6,13 @@
 //  Copyright © 2016 Pat Sluth. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @class RBPProgressView;
 
 #define WELLNESS_DEFAULTS_KEY @"RBPWellnessLevelDefaultsKey"
 #define HAPPINESS_DEFAULTS_KEY @"RBPHappinessLevelDefaultsKey"
 #define ENERGY_DEFAULTS_KEY @"RBPEnergyLevelDefaultsKey"
+
+#define RBPPROGRESSVIEW_ANIMATION_TIME 0.5
 
 
 

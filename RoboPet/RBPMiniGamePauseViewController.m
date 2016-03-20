@@ -11,8 +11,6 @@
 #import "RBPSoundManager.h"
 #import "RBPProgressView.h"
 
-#define PADDING 20.0
-
 
 
 
@@ -20,10 +18,6 @@
 @interface RBPMiniGamePauseViewController ()
 {
 }
-
-@property (strong, nonatomic) RBPProgressView *wellnessBar;
-@property (strong, nonatomic) RBPProgressView *happinessBar;
-@property (strong, nonatomic) RBPProgressView *energyBar;
 
 @end
 
@@ -42,37 +36,37 @@
 	self.navigationItem.rightBarButtonItem.title = @"Resume";
 	
 	
-	UIButton *soundButton = [[UIButton alloc] init];
-	[soundButton addTarget:self action:@selector(clickedSoundButton:) forControlEvents:UIControlEventTouchUpInside];
-	soundButton.translatesAutoresizingMaskIntoConstraints = NO;
-	[self updateSoundButton:soundButton];
-	[self.view addSubview:soundButton];
+	self.soundButton = [[UIButton alloc] init];
+	[self.soundButton addTarget:self action:@selector(clickedSoundButton:) forControlEvents:UIControlEventTouchUpInside];
+	self.soundButton.translatesAutoresizingMaskIntoConstraints = NO;
+	[self updateSoundButton:self.soundButton];
+	[self.view addSubview:self.soundButton];
 	
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:soundButton
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.soundButton
 														  attribute:NSLayoutAttributeRight
 														  relatedBy:NSLayoutRelationEqual
 															 toItem:self.view
 														  attribute:NSLayoutAttributeRight
 														 multiplier:1.0
 														   constant:-PADDING]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:soundButton
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.soundButton
 														  attribute:NSLayoutAttributeBottom
 														  relatedBy:NSLayoutRelationEqual
 															 toItem:self.view
 														  attribute:NSLayoutAttributeBottom
 														 multiplier:1.0
 														   constant:-PADDING]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:soundButton
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.soundButton
 														  attribute:NSLayoutAttributeHeight
 														  relatedBy:NSLayoutRelationEqual
 															 toItem:nil
 														  attribute:NSLayoutAttributeNotAnAttribute
 														 multiplier:1.0
 														   constant:50.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:soundButton
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.soundButton
 														  attribute:NSLayoutAttributeWidth
 														  relatedBy:NSLayoutRelationEqual
-															 toItem:soundButton
+															 toItem:self.soundButton
 														  attribute:NSLayoutAttributeHeight
 														 multiplier:1.0
 														   constant:0.0]];
@@ -105,7 +99,7 @@
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.wellnessBar
 														  attribute:NSLayoutAttributeHeight
 														  relatedBy:NSLayoutRelationEqual
-															 toItem:soundButton
+															 toItem:self.soundButton
 														  attribute:NSLayoutAttributeHeight
 														 multiplier:1.0
 														   constant:0.0]];
@@ -138,7 +132,7 @@
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.happinessBar
 														  attribute:NSLayoutAttributeHeight
 														  relatedBy:NSLayoutRelationEqual
-															 toItem:soundButton
+															 toItem:self.soundButton
 														  attribute:NSLayoutAttributeHeight
 														 multiplier:1.0
 														   constant:0.0]];
@@ -171,7 +165,7 @@
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.energyBar
 														  attribute:NSLayoutAttributeHeight
 														  relatedBy:NSLayoutRelationEqual
-															 toItem:soundButton
+															 toItem:self.soundButton
 														  attribute:NSLayoutAttributeHeight
 														 multiplier:1.0
 														   constant:0.0]];

@@ -226,7 +226,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 		[self.pickups addObject:newPickup];
 		
 		[newPickup runAction:[SKAction fadeAlphaTo:1.0 duration:0.25] completion:^{
-			[newPickup startDrainWithDuration:10.0 completion:^(RBPMiniGameRollBattery *battery) {
+			[newPickup startDrainWithDuration:5.0 completion:^(RBPMiniGameRollBattery *battery) {
 				[battery removeFromParent];
 				[self.minigameDelegate onMiniGameGameOver:self];
 			}];
@@ -353,9 +353,15 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 		return;
 	}
 	
+	// Disable contact while animating so more collisions dont happen
+	uint32_t contanctBitMask = node.physicsBody.contactTestBitMask;
+	node.physicsBody.contactTestBitMask = RBPCollisionCategoryNone;
+	
+	
 	SKAction *action = [SKAction scaleTo:scale duration:duration * 0.5];
 	SKAction *actionCompletion = [SKAction runBlock:^{
 		[node runAction:[SKAction scaleTo:1.0 duration:duration * 0.5] withKey:pulseScaleKey];
+		node.physicsBody.contactTestBitMask = contanctBitMask;
 	}];
 	
 	[node runAction:[SKAction sequence:@[action, actionCompletion]] withKey:pulseScaleKey];
@@ -507,7 +513,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 {
 }
 
-#pragma mark - Internal
+#pragma mark - RBPMiniGameScene
 
 - (void)setScore:(CGFloat)score
 {
@@ -535,6 +541,17 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 		
 	}
 }
+
+- (NSString *)gameOverMessage
+{
+	if (self.score > self.highScore) {
+		return [NSString stringWithFormat:@"NEW HIGH SCORE!!!\n\n%.1f 🔋", self.score];
+	}
+	
+	return [NSString stringWithFormat:@"Score:%.1f 🔋\n\nHigh Score:%.1f 🔋", self.score, self.highScore];
+}
+
+#pragma mark - Internal
 
 - (NSMutableArray<RBPMiniGameRollBattery *> *)pickups
 {

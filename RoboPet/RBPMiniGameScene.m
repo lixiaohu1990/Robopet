@@ -32,15 +32,17 @@
 
 #pragma mark - Init
 
-- (id)init
++ (instancetype)sceneWithSize:(CGSize)size
 {
-	self = [super init];
+	RBPMiniGameScene *scene = [super sceneWithSize:size];
 	
-	if (self) {
+	if (scene) {
+		
+		[[NSUserDefaults standardUserDefaults] registerDefaults:@{ [scene highscoreDefaultsKey]: @(0.0), }];
 		
 	}
 	
-	return self;
+	return scene;
 }
 
 - (void)initialize
@@ -53,9 +55,51 @@
 	self.runningTime = 0.0;
 }
 
+#pragma mark - RBPMiniBaseScene
+
 - (void)restart
 {
 	[super restart];
+}
+
+#pragma mark - RBPMiniGameScene
+
+- (void)setMinigameDelegate:(id<RBPMiniGameSceneDelegate>)minigameDelegate
+{
+	_minigameDelegate = minigameDelegate;
+	
+	self.score = self.score; // Update delegate
+}
+
+- (void)setScore:(CGFloat)score
+{
+	_score = score;
+	
+	if (_score > self.highScore) {
+		self.highScore = _score;
+	}
+	
+	[self.minigameDelegate onMiniGameScoreChange:self];
+}
+
+- (CGFloat)highScore
+{
+	return [[NSUserDefaults standardUserDefaults] floatForKey:[self highscoreDefaultsKey]];
+}
+
+- (void)setHighScore:(CGFloat)highScore
+{
+	[[NSUserDefaults standardUserDefaults] setFloat:highScore forKey:[self highscoreDefaultsKey]];
+}
+
+- (NSString *)highscoreDefaultsKey
+{
+	return [NSString stringWithFormat:@"RBPHighScore%@DefaultsKey", NSStringFromClass([self class])];
+}
+
+- (NSString *)gameOverFormatString
+{
+	return @"Override me to insert game over message";
 }
 
 #pragma mark - SKScene
@@ -74,22 +118,6 @@
 - (void)setPaused:(BOOL)paused
 {
 	[super setPaused:paused];
-}
-
-#pragma mark - Internal
-
-- (void)setMinigameDelegate:(id<RBPMiniGameSceneDelegate>)minigameDelegate
-{
-	_minigameDelegate = minigameDelegate;
-	
-	self.score = self.score; // Update delegate
-}
-
-- (void)setScore:(CGFloat)score
-{
-	_score = score;
-	
-	[self.minigameDelegate onMiniGameScoreChange:self];
 }
 
 @end

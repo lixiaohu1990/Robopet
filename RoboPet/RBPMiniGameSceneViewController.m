@@ -6,6 +6,8 @@
 //  Copyright © 2016 Pat Sluth. All rights reserved.
 //
 
+@import AudioToolbox;
+
 #import "RBPMiniGameSceneViewController.h"
 
 #import "RBPMiniGamePauseViewController.h"
@@ -25,6 +27,8 @@
 }
 
 @property (strong, nonatomic, readwrite) UILabel *scoreLabel;
+
+@property (nonatomic, readwrite) SystemSoundID tickSound;
 
 @end
 
@@ -57,6 +61,11 @@
 	[self setupPauseButton];
 	
 	self.minigame.minigameDelegate = self;
+	
+	
+	// Setup tick sound
+	NSURL *url = [[NSBundle mainBundle] URLForResource:@"minigame_countdown" withExtension:@"caf"];
+	AudioServicesCreateSystemSoundID((__bridge CFURLRef)(url), &_tickSound);
 }
 
 - (void)setupScoreLabel
@@ -196,6 +205,10 @@
 																		completion:^{
 																			[self countdownViewControllerDidDismiss:viewController];
 																		}];
+										   } else {
+											   if ([RBPSoundManager soundEnabled]) {
+												   AudioServicesPlaySystemSound(self.tickSound);
+											   }
 										   }
 			
 		}];
@@ -232,15 +245,16 @@
 	self.view.scene.paused = YES;
 	viewController.delegate = self;
 	
+	CGSize contentViewSize = CGRectApplyAffineTransform(self.view.bounds, CGAffineTransformMakeScale(0.8, 0.7)).size;
+	contentViewSize.height = MIN(contentViewSize.height, 350); // Clamp height for iPad
+	viewController.preferredContentSize = contentViewSize;
+	
 	
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
 	MZFormSheetPresentationViewController *formSheet = [[MZFormSheetPresentationViewController alloc]
 														initWithContentViewController:navigationController];
 	
-	
-	CGSize contentViewSize = CGRectApplyAffineTransform(self.view.bounds, CGAffineTransformMakeScale(0.8, 0.7)).size;
-	contentViewSize.height = MIN(contentViewSize.height, 350); // Clamp height for iPad
-	formSheet.presentationController.contentViewSize = contentViewSize;
+	formSheet.presentationController.contentViewSize = viewController.preferredContentSize;
 	// Center in view
 	formSheet.presentationController.shouldCenterHorizontally = formSheet.presentationController.shouldCenterVertically = YES;
 	formSheet.contentViewControllerTransitionStyle =  MZFormSheetPresentationTransitionStyleBounce;
@@ -259,8 +273,16 @@
 
 - (void)onMiniGameGameOver:(RBPMiniGameScene *)miniGame
 {
-	RBPMiniGameGameOverViewController *viewController = [[RBPMiniGameGameOverViewController alloc] init];
-	[self displayPopupViewController:viewController animated:YES completion:nil];
+	RBPMiniGameGameOverViewController *viewController = [[RBPMiniGameGameOverViewController alloc] initWithMiniGame:self.minigame];
+	[self displayPopupViewController:viewController animated:YES completion:^{
+		
+		[viewController updateScoresAnimated:YES completion:^(BOOL finished) {
+			if (finished){
+				[viewController updateProgressViewAnimated:YES];
+			}
+		}];
+		
+	}];
 }
 
 #pragma mark - RBPMiniGamePopupViewControllerDelegate

@@ -38,18 +38,28 @@
 /**
  *  Defaults to 1
  */
-@property (readwrite, nonatomic) NSUInteger difficultyLevel;
+@property (nonatomic, readwrite) NSUInteger difficultyLevel;
 
 /**
  *  Score
  */
-@property (readwrite, nonatomic) CGFloat score;
+@property (nonatomic, readwrite) CGFloat score;
+
+/**
+ *  High score for this minigame
+ */
+@property (nonatomic, readonly) CGFloat highScore;
+
+/**
+ *  Text for the game over message. Change in subclass by overriding getter
+ */
+@property (weak, nonatomic, readonly) NSString *gameOverMessage;
 
 /**
  *  The time in seconds since the mini game has been playing
  *	Does not increment when paused
  */
-@property (readonly, nonatomic) CFTimeInterval runningTime;
+@property (nonatomic, readonly) CFTimeInterval runningTime;
 
 @end
 

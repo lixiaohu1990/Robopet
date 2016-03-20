@@ -28,7 +28,7 @@
 
 - (void)initialize
 {
-	
+	self.paused = YES;
 }
 
 - (void)restart

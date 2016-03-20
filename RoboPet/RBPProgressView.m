@@ -161,8 +161,7 @@
 		
 	} else {
 		
-		// default to 0.5 second animation time
-		[self setProgress:progress animationDuration:0.5];
+		[self setProgress:progress animationDuration:RBPPROGRESSVIEW_ANIMATION_TIME];
 		
 	}
 }
