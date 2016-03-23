@@ -61,6 +61,11 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
  */
 @property (strong, nonatomic) NSMutableArray<RBPMiniGameRollBumper *> *bumpers;
 
+/**
+ *  Operation to generate bumpers with a delay, to make sure it doesn't happen twice
+ */
+@property (strong, nonatomic) NSMutableArray<NSOperation *> *generateBumperOperations;
+
 
 // Preloaded assets
 
@@ -102,11 +107,16 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	[self setupPlayer];
 	
 	[self generatePickup];
-	[self generateBumpersForDifficulty:self.difficultyLevel afterDelay:0.0];
+	[self generateBumpersForDifficulty:self.difficultyLevel minDelay:0.0 maxDelay:0.0];
 }
 
 - (void)restart
 {
+	for (NSOperation *operation in self.generateBumperOperations) {
+		[operation cancel];
+	}
+	[self.generateBumperOperations removeAllObjects];
+	
 	[super restart];
 }
 
@@ -166,7 +176,6 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 - (void)setupPlayer
 {
 	self.player = [SKSpriteNode spriteNodeWithImageNamed:@"robot_top"];
-	//self.player.size = CGSizeMake(self.player.size.width * 0.5, self.player.size.height * 0.5);
 	self.player.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.player.size.height * 0.5];
 	
 	self.player.physicsBody.allowsRotation = YES;
@@ -215,7 +224,6 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	if (!newPickup) {
 		
 		newPickup = [[RBPMiniGameRollBattery alloc] init];
-		//newPickup.size = CGSizeMake(newPickup.size.width * 0.35, newPickup.size.height * 0.35);
 		
 	}
 	
@@ -226,7 +234,8 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 		[self.pickups addObject:newPickup];
 		
 		[newPickup runAction:[SKAction fadeAlphaTo:1.0 duration:0.25] completion:^{
-			[newPickup startDrainWithDuration:5.0 completion:^(RBPMiniGameRollBattery *battery) {
+			[newPickup startDrainWithDuration:[self batteryDrainDurationForDifficulty:self.difficultyLevel]
+								   completion:^(RBPMiniGameRollBattery *battery) {
 				[battery removeFromParent];
 				[self.minigameDelegate onMiniGameGameOver:self];
 			}];
@@ -278,16 +287,78 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	}
 }
 
-- (void)generateBumpersForDifficulty:(NSUInteger)difficulty afterDelay:(CGFloat)delay
+/**
+ *  Modeled after the equation y = 35/ln(x + 1)
+ *		where x = difficulty
+ *
+ *  @param difficulty
+ *
+ *  @return CGFloat
+ */
+- (CGFloat)batteryDrainDurationForDifficulty:(NSUInteger)difficulty
 {
-	[self.bumpers removeAllObjects];
-	// x second delay
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)),
-				   dispatch_get_main_queue(), ^{
-					   for (int x = 0; x < MAX(3, difficulty); x++) { // 3 bumpers at a minimum
-						   [self generateBumper];
-					   }
-				   });
+	return 35.0 / log(self.difficultyLevel + 1.0);
+}
+
+/**
+ *  Modeled after the equation y = (1 / 5)x + [1 / (x + 1)]
+ *		where x = difficulty
+ *
+ *  @param difficulty
+ *
+ *  @return NSUInteger
+ */
+- (NSUInteger)bumperCountForDifficulty:(NSUInteger)difficulty
+{
+	CGFloat y = (1.0 / 5.0) * difficulty;
+	y += 1.0 / (difficulty + 1.0);
+	
+	return y;
+}
+
+- (void)generateBumpersForDifficulty:(NSUInteger)difficulty minDelay:(CGFloat)minDelay maxDelay:(CGFloat)maxDelay
+{
+	if (self.generateBumperOperations.count > 0) {
+		return;
+	}
+	
+	 __unsafe_unretained RBPMiniGameScene_Roll *weakSelf = self;
+	
+	// remove current bumpers
+	for (SKSpriteNode *bumper in self.bumpers) {
+		[bumper runAction:[SKAction scaleTo:0.0 duration:0.25] completion:^{
+			[bumper removeFromParent];
+		}];
+	}
+	
+	
+	for (NSUInteger x = 0; x < [weakSelf bumperCountForDifficulty:weakSelf.difficultyLevel]; x++) {
+		
+		// Random delay within supplied range
+		CGFloat randomDelay = ((CGFloat)arc4random() / 0x100000000 * (maxDelay - minDelay)) + minDelay;
+		
+		NSBlockOperation *operation = [[NSBlockOperation alloc] init];
+		[self.generateBumperOperations addObject:operation];
+		__unsafe_unretained NSOperation *weakOperation = operation;
+		
+		[operation addExecutionBlock:^{
+			
+			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(randomDelay * NSEC_PER_SEC)),
+						   dispatch_get_main_queue(), ^{
+							   
+							   if (!weakOperation.cancelled) {
+								   [weakSelf generateBumper];
+								   [weakSelf.generateBumperOperations removeObject:weakOperation];
+							   }
+							   
+						   });
+			
+		}];
+		
+		[[NSOperationQueue mainQueue] addOperation:operation];
+		
+	}
+	
 }
 
 /**
@@ -531,13 +602,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	
 	if (temp > 0 && temp < self.difficultyLevel) { // Difficulty did increase
 		
-		for (SKSpriteNode *bumper in self.bumpers) {
-			[bumper runAction:[SKAction scaleTo:0.0 duration:0.25] completion:^{
-				[bumper removeFromParent];
-			}];
-		}
-		
-		[self generateBumpersForDifficulty:self.difficultyLevel afterDelay:1.0];
+		[self generateBumpersForDifficulty:self.difficultyLevel minDelay:0.5 maxDelay:1.25];
 		
 	}
 }
@@ -569,6 +634,15 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	}
 	
 	return _bumpers;
+}
+
+- (NSMutableArray<NSOperation *>*)generateBumperOperations
+{
+	if (!_generateBumperOperations) {
+		_generateBumperOperations = [[NSMutableArray alloc] init];
+	}
+	
+	return _generateBumperOperations;
 }
 
 @end

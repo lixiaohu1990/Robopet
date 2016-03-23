@@ -216,7 +216,8 @@
 	return (self.progressFill.layer.animationKeys && self.progressFill.layer.animationKeys.count > 0);
 }
 
-//TODO: REMOVE
+#ifdef DEBUG
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	CGFloat x = [[[touches allObjects] firstObject] locationInView:self].x;
@@ -226,6 +227,8 @@
 	else
 		[self setProgress:self.progress + 0.1 animated:YES];
 }
+
+#endif
 
 #pragma mark - Static
 

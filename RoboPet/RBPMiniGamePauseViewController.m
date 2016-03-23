@@ -183,7 +183,7 @@
 - (void)updateSoundButton:(UIButton *)button
 {
 	//[button setTitle:[RBPSoundManager soundEnabled] ? @"Mute" : @"UnMute" forState:UIControlStateNormal];
-	[button setImage:[UIImage imageNamed:[RBPSoundManager soundEnabled] ? @"sound_on" : @"sound_off"] forState:UIControlStateNormal];
+	[button setImage:[UIImage imageNamed:[RBPSoundManager soundEnabled] ? @"sound_on_button" : @"sound_off_button"] forState:UIControlStateNormal];
 	//[button sizeToFit];
 }
 
