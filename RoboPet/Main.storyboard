@@ -26,88 +26,10 @@
                     <view key="view" contentMode="scaleToFill" id="Nwe-wT-eny" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jump_background" id="VuE-51-14t">
-                                <rect key="frame" x="0.0" y="0.0" width="673" height="375"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8tY-3y-cOG">
-                                <rect key="frame" x="312" y="105" width="43" height="47"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Start">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="StartGame:" destination="e1X-a4-2jD" eventType="touchUpInside" id="o8V-hH-MG9"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="84x-sk-xVo">
-                                <rect key="frame" x="300" y="155" width="73" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Play Again">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="PlayAgain:" destination="e1X-a4-2jD" eventType="touchUpInside" id="Bhj-Ce-Nsp"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score:  " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mv4-pT-byU" userLabel="Score:">
-                                <rect key="frame" x="536" y="0.0" width="100" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.010140733793377876" green="0.51255911588668823" blue="0.99869281053543091" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="robot_side_whole" id="L0n-eX-hqx">
-                                <rect key="frame" x="63" y="268" width="40" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jumpblock" id="Dnt-hv-O1h">
-                                <rect key="frame" x="669" y="278" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jumpblock" id="2pF-wD-KE6" userLabel="Box2">
-                                <rect key="frame" x="1068" y="278" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jumpblock" id="l8v-jf-jhJ" userLabel="Box3">
-                                <rect key="frame" x="1468" y="278" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jumpblock" id="cDy-1Z-HBu" userLabel="Box4">
-                                <rect key="frame" x="1868" y="278" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jumpblock" id="L6q-MJ-Mfg" userLabel="Box5">
-                                <rect key="frame" x="2268" y="278" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jump_ground" id="58F-rw-PJ6">
-                                <rect key="frame" x="663" y="318" width="673" height="57"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jump_ground" id="f7e-Wu-8HJ">
-                                <rect key="frame" x="0.0" y="318" width="673" height="57"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="0.19319086873069113" blue="0.082919145948080364" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <outlet property="Box" destination="Dnt-hv-O1h" id="ojm-nc-juA"/>
-                        <outlet property="Box2" destination="2pF-wD-KE6" id="T2h-cp-FYd"/>
-                        <outlet property="Box3" destination="l8v-jf-jhJ" id="bhj-67-umV"/>
-                        <outlet property="Box4" destination="cDy-1Z-HBu" id="Bs7-A2-idT"/>
-                        <outlet property="Ground1" destination="f7e-Wu-8HJ" id="chL-Ld-eTP"/>
-                        <outlet property="Ground2" destination="58F-rw-PJ6" id="iM2-uw-SQ8"/>
-                        <outlet property="PlayAgain" destination="84x-sk-xVo" id="g9Q-yd-gmu"/>
-                        <outlet property="Robot" destination="L0n-eX-hqx" id="T5o-Rr-5lH"/>
-                        <outlet property="ScoreLabel" destination="Mv4-pT-byU" id="Biv-t9-3Id"/>
-                        <outlet property="StartGame" destination="8tY-3y-cOG" id="MX8-H9-cNd"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cL4-BL-gRS" sceneMemberID="firstResponder"/>
             </objects>
@@ -142,10 +64,4 @@
             <point key="canvasLocation" x="64" y="178.91999999999999"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="jump_background" width="1133" height="443"/>
-        <image name="jump_ground" width="1133" height="195"/>
-        <image name="jumpblock" width="60" height="60"/>
-        <image name="robot_side_whole" width="238" height="351"/>
-    </resources>
 </document>
