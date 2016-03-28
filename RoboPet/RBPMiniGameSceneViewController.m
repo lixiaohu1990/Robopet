@@ -96,7 +96,7 @@
 	UIButton *pauseButton = [[UIButton alloc] init];
 	[pauseButton addTarget:self action:@selector(clickedPauseButton:) forControlEvents:UIControlEventTouchUpInside];
 	pauseButton.translatesAutoresizingMaskIntoConstraints = NO;
-	[pauseButton setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+	[pauseButton setImage:[UIImage imageNamed:@"pause_button"] forState:UIControlStateNormal];
 	
 	[self.view addSubview:pauseButton];
 	
@@ -246,7 +246,7 @@
 	viewController.delegate = self;
 	
 	CGSize contentViewSize = CGRectApplyAffineTransform(self.view.bounds, CGAffineTransformMakeScale(0.8, 0.7)).size;
-	contentViewSize.height = MIN(contentViewSize.height, 350); // Clamp height for iPad
+	//contentViewSize.height = MIN(contentViewSize.height, 350); // Clamp height for iPad
 	viewController.preferredContentSize = contentViewSize;
 	
 	
@@ -267,7 +267,7 @@
 
 - (void)onMiniGameScoreChange:(RBPMiniGameScene *)miniGame
 {
-	self.scoreLabel.text = [NSString stringWithFormat:@"Level: %lu Score: %0.1f", miniGame.difficultyLevel, miniGame.score];
+	self.scoreLabel.text = [NSString stringWithFormat:@"Score: %0.1f", miniGame.score];
 	[self.scoreLabel sizeToFit];
 }
 

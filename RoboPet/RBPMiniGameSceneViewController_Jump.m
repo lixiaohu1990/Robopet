@@ -65,7 +65,7 @@
 
 - (UIScrollView *)tutorialScrollView;
 {
-	return nil;
+	return [[[NSBundle mainBundle] loadNibNamed:@"RBPMiniGameJump_TutorialPages" owner:nil options:nil] firstObject];
 }
 
 @end

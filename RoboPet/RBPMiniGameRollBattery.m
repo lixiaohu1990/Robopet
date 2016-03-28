@@ -74,7 +74,7 @@ static NSString *batteryDrainActionKey = @"batteryDrainActionKey";
 
 - (BOOL)isDraining
 {
-	return [self.batteryFill actionForKey:batteryDrainActionKey];
+	return ([self.batteryFill actionForKey:batteryDrainActionKey] != nil);
 }
 
 - (void)startDrainWithDuration:(CGFloat)duration completion:(void (^)(RBPMiniGameRollBattery *battery))completion
