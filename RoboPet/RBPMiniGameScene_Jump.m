@@ -148,7 +148,7 @@ bool canJump;
 -(void)loadPlayer{
     self.robot = [SKSpriteNode spriteNodeWithImageNamed:@"robot_side_whole"];
     self.robot.position = CGPointMake(self.frame.size.width/7, 320);
-    self.robot.size = CGSizeMake(self.robot.size.width/1.5, self.robot.size.height/1.5);
+    self.robot.size = CGSizeMake(self.robot.size.width, self.robot.size.height);
     self.robot.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.robot.size];
     self.robot.physicsBody.dynamic = YES;
     self.robot.physicsBody.mass = 10.0;
