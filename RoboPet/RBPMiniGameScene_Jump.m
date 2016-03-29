@@ -184,7 +184,8 @@ bool canJump;
         if( speed < 200){
             speed = speed + 10;
         }
-        srand( time(0) );
+		
+        srand( (unsigned int)time(0) );
         float randomNumber = rand() % 3 + 1.7;
         self.box1.size = CGSizeMake(self.box.size.width*randomNumber, self.box.size.height*randomNumber);
         self.box1.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.box1.size.width, self.box1.size.height)];
@@ -200,7 +201,7 @@ bool canJump;
         if( speed < 200){
             speed = speed + 10;
         }
-        srand( time(0) );
+        srand( (unsigned int)time(0) );
         float randomNumber = rand() % 3 + 1.7;
         self.box2.size = CGSizeMake(self.box.size.width*randomNumber, self.box.size.height*randomNumber);
         self.box2.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.box2.size.width, self.box2.size.height)];
@@ -216,7 +217,7 @@ bool canJump;
         if( speed < 200){
             speed = speed + 10;
         }
-        srand( time(0) );
+        srand( (unsigned int)time(0) );
         float randomNumber = rand() % 3 + 1.7;
         self.box3.size = CGSizeMake(self.box.size.width*randomNumber, self.box.size.height*randomNumber);
         self.box3.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.box3.size.width, self.box3.size.height)];
@@ -232,7 +233,7 @@ bool canJump;
         if( speed < 200){
             speed = speed + 10;
         }
-        srand( time(0) );
+        srand( (unsigned int)time(0) );
         float randomNumber = rand() % 3 + 1.7;
         self.box4.size = CGSizeMake(self.box.size.width*randomNumber, self.box.size.height*randomNumber);
         self.box4.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.box4.size.width, self.box4.size.height)];
