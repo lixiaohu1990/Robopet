@@ -44,7 +44,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 /**
  *  Array of walls
  */
-@property (strong, nonatomic) NSArray<SKSpriteNode *> *walls;
+@property (strong, nonatomic) NSArray *walls;
 
 /**
  *  Device motion data manager
@@ -54,17 +54,17 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 /**
  *  Array of resusable pickups
  */
-@property (strong, nonatomic) NSMutableArray<RBPMiniGameRollBattery *> *pickups;
+@property (strong, nonatomic) NSMutableArray *pickups;
 
 /**
  *  Array of reusable bumpers
  */
-@property (strong, nonatomic) NSMutableArray<RBPMiniGameRollBumper *> *bumpers;
+@property (strong, nonatomic) NSMutableArray *bumpers;
 
 /**
  *  Operation to generate bumpers with a delay, to make sure it doesn't happen twice
  */
-@property (strong, nonatomic) NSMutableArray<NSOperation *> *generateBumperOperations;
+@property (strong, nonatomic) NSMutableArray *generateBumperOperations;
 
 
 // Preloaded assets
@@ -214,7 +214,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 {
 	__block RBPMiniGameRollBattery *newPickup = nil;
 	
-	[self.pickups enumerateObjectsUsingBlock:^(RBPMiniGameRollBattery * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+	[self.pickups enumerateObjectsUsingBlock:^(RBPMiniGameRollBattery *obj, NSUInteger idx, BOOL *stop) {
 		if (!obj.parent) {
 			newPickup = obj;
 			stop = (BOOL *)YES;
@@ -255,7 +255,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 {
 	__block RBPMiniGameRollBumper *newBumper = nil;
 	
-	[self.bumpers enumerateObjectsUsingBlock:^(RBPMiniGameRollBumper * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+	[self.bumpers enumerateObjectsUsingBlock:^(RBPMiniGameRollBumper *obj, NSUInteger idx, BOOL *stop) {
 		if (!obj.parent) {
 			newBumper = obj;
 			stop = (BOOL *)YES;
@@ -618,7 +618,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 
 #pragma mark - Internal
 
-- (NSMutableArray<RBPMiniGameRollBattery *> *)pickups
+- (NSMutableArray *)pickups
 {
     if (!_pickups) {
         _pickups = [[NSMutableArray alloc] init];
@@ -627,7 +627,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
     return _pickups;
 }
 
-- (NSMutableArray<RBPMiniGameRollBumper *> *)bumpers
+- (NSMutableArray *)bumpers
 {
 	if (!_bumpers) {
 		_bumpers = [[NSMutableArray alloc] init];
@@ -636,7 +636,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	return _bumpers;
 }
 
-- (NSMutableArray<NSOperation *>*)generateBumperOperations
+- (NSMutableArray *)generateBumperOperations
 {
 	if (!_generateBumperOperations) {
 		_generateBumperOperations = [[NSMutableArray alloc] init];
