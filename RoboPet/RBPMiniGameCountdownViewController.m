@@ -96,8 +96,14 @@
 		return;
 	}
 	
+	CGFloat duration = 0.15;
+	
+#ifdef DEBUG
+	duration = 0.05;
+#endif
+	
 	// 1.0 seconds total
-	[UIView animateWithDuration:0.15
+	[UIView animateWithDuration:duration
 						  delay:0.0
 						options:UIViewAnimationOptionCurveEaseOut
 					 animations:^{
@@ -108,7 +114,13 @@
 					 }
 					 completion:^(BOOL finished) {
 						 
-						 [UIView animateWithDuration:0.85
+						 CGFloat duration = 0.85;
+						 
+#ifdef DEBUG
+						 duration = 0.05;
+#endif
+						 
+						 [UIView animateWithDuration:duration
 											   delay:0.0
 											 options:UIViewAnimationOptionCurveEaseOut
 										  animations:^{

@@ -220,7 +220,7 @@ typedef NS_ENUM(NSInteger, GameStateType){
                 {
                     // Woah, wrong one!
                     // GAME OVER!
-                    [self.minigameDelegate onMiniGameGameOver:self];
+					[self endMinigame];
                 }
                 // Touched expected
                 else
@@ -470,6 +470,13 @@ typedef NS_ENUM(NSInteger, GameStateType){
     // Update scene
     SKSpriteNode* sprite = SimonSprites[index];
     sprite.texture = enable ? TexBulbOn : TexBulbOff;
+}
+
+#pragma mark - RBPMiniGameScene
+
+- (NSString *)minigameName
+{
+	return @"Simoné Says";
 }
 
 - (NSString *)gameOverMessage

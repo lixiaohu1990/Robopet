@@ -18,6 +18,8 @@
 
 @required
 
+- (NSString *)tutorialTitle;
+
 /**
  *  Return the scrollview containing your tutorial pages
  *

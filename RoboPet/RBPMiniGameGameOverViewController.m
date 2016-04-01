@@ -25,6 +25,8 @@
 
 @property (weak, nonatomic) RBPMiniGameScene *miniGame;
 
+@property (strong, nonatomic) NSString *gameOverMessage;
+
 @property (strong, nonatomic) UITextView *textview;
 
 @end
@@ -43,7 +45,11 @@
 	
 	if (self) {
 		NSAssert(miniGame, @"");
+		
 		self.miniGame = miniGame;
+		
+		self.gameOverMessage = self.miniGame.gameOverMessage;
+		
 	}
 	
 	return self;
@@ -112,7 +118,7 @@
 										 duration:duration
 										  options:UIViewAnimationOptionTransitionFlipFromTop
 									   animations:^{
-										   self.textview.text = self.miniGame.gameOverMessage;
+										   self.textview.text = self.gameOverMessage;
 									   }
 									   completion:completion];
 					   

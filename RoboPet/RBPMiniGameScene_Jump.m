@@ -71,9 +71,7 @@ bool canJump;
 - (void)initialize
 {
     [super initialize];
-    
-    
-    
+	
     
     self.physicsWorld.contactDelegate = self;
     self.physicsWorld.gravity = CGVectorMake(0.0, -9.8);
@@ -111,7 +109,7 @@ bool canJump;
     [self addChild:self.box1];
     self.box2 = [SKSpriteNode spriteNodeWithImageNamed:@"virus"];
     self.box2.position = CGPointMake(self.frame.size.width + 1000, 260);
-    self.box2.size = CGSizeMake(self.box2.size.width/2, self.box2.size.height/2);
+    self.box2.size = CGSizeMake(self.box2.size.width, self.box2.size.height);
     self.box2.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.box2.size.width/2];
     self.box2.physicsBody.dynamic = YES;
     self.box2.physicsBody.categoryBitMask = RBPCollisionCategoryBox;
@@ -129,7 +127,7 @@ bool canJump;
     [self addChild:self.box3];
     self.box4 = [SKSpriteNode spriteNodeWithImageNamed:@"virus"];
     self.box4.position = CGPointMake(self.frame.size.width + 3000, 260);
-    self.box4.size = CGSizeMake(self.box4.size.width/2, self.box4.size.height/2);
+    self.box4.size = CGSizeMake(self.box4.size.width, self.box4.size.height);
     self.box4.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.box4.size.width/2];
     self.box4.physicsBody.categoryBitMask = RBPCollisionCategoryBox;
     self.box4.physicsBody.collisionBitMask = RBPCollisionCategoryFloor | ~RBPCollisionCategoryPlayer;
@@ -194,7 +192,7 @@ bool canJump;
 
         
         speed = speed + 2;
-        srand( time(0) );
+        srand( (unsigned int)time(0) );
         float randomNumber = rand() % 3 + 1.7;
         self.box1.size = CGSizeMake(self.box.size.width*randomNumber, self.box.size.height*randomNumber);
         self.box1.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.box1.size.width, self.box1.size.height)];
@@ -208,8 +206,8 @@ bool canJump;
     }
     if(self.box2.position.x <= 0){
 
-        speed = speed + 2;
-        srand( time(0) );
+		speed = speed + 2;
+		srand( (unsigned int)time(0) );
         float randomNumber = rand() % 3 + 1.7;
         self.box2.size = CGSizeMake(self.box.size.width*randomNumber, self.box.size.height*randomNumber);
     self.box2.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.box2.size.width/2];
@@ -223,8 +221,8 @@ bool canJump;
     }
     if(self.box3.position.x <= 0){
 
-        speed = speed + 2;
-        srand( time(0) );
+		speed = speed + 2;
+		srand( (unsigned int)time(0) );
         float randomNumber = rand() % 3 + 1.7;
         self.box3.size = CGSizeMake(self.box.size.width*randomNumber, self.box.size.height*randomNumber);
         self.box3.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.box3.size.width, self.box3.size.height)];
@@ -237,8 +235,8 @@ bool canJump;
         self.box3.position = CGPointMake(self.box2.position.x + 1000 + randomNumber, 260);
     }
     if(self.box4.position.x <= 0){
-        speed = speed + 2;
-        srand( time(0) );
+		speed = speed + 2;
+		srand( (unsigned int)time(0) );
         float randomNumber = rand() % 3 + 1.7;
         self.box4.size = CGSizeMake(self.box.size.width*randomNumber, self.box.size.height*randomNumber);
     self.box4.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.box2.size.width/2];
@@ -281,11 +279,11 @@ bool canJump;
         if ([RBPSoundManager soundEnabled]) {
             
             [self runAction:self.action_death completion:^{
-                [self.minigameDelegate onMiniGameGameOver:self];
+				[self endMinigame];
             }];
             
         } else {
-            [self.minigameDelegate onMiniGameGameOver:self];
+           [self endMinigame];
         }
         
         
@@ -297,11 +295,11 @@ bool canJump;
         if ([RBPSoundManager soundEnabled]) {
             
             [self runAction:self.action_death completion:^{
-                [self.minigameDelegate onMiniGameGameOver:self];
+                [self endMinigame];
             }];
             
         } else {
-            [self.minigameDelegate onMiniGameGameOver:self];
+            [self endMinigame];
         }
         
     }
@@ -311,11 +309,11 @@ bool canJump;
         if ([RBPSoundManager soundEnabled]) {
             
             [self runAction:self.action_death completion:^{
-                [self.minigameDelegate onMiniGameGameOver:self];
+				[self endMinigame];
             }];
             
         } else {
-            [self.minigameDelegate onMiniGameGameOver:self];
+            [self endMinigame];
         }
         
     }
@@ -324,15 +322,22 @@ bool canJump;
         if ([RBPSoundManager soundEnabled]) {
             
             [self runAction:self.action_death completion:^{
-                [self.minigameDelegate onMiniGameGameOver:self];
+                [self endMinigame];
             }];
             
         } else {
-            [self.minigameDelegate onMiniGameGameOver:self];
+            [self endMinigame];
         }
         
     }
     
+}
+
+#pragma mark - RBPMiniGameScene
+
+- (NSString *)minigameName
+{
+	return @"Leap Virus";
 }
 
 - (void)setScore:(CGFloat)score
@@ -356,7 +361,7 @@ bool canJump;
     //[self stopBouncing];
     [self checkDead];
     [super setScore:score];
-    SKAction *rotation1 = [SKAction rotateByAngle: M_PI/15.0 duration:0];
+    SKAction *rotation1 = [SKAction rotateByAngle: M_PI/30.0 duration:0];
     [self.box2 runAction: rotation1];
     [self.box4 runAction: rotation1];
     

@@ -33,6 +33,11 @@
 {
 }
 
+/**
+ *  Display name of this minigame
+ */
+@property (readonly, nonatomic) NSString *minigameName;
+
 @property (weak, nonatomic) id<RBPMiniGameSceneDelegate> minigameDelegate;
 
 /**
@@ -60,6 +65,8 @@
  *	Does not increment when paused
  */
 @property (nonatomic, readonly) CFTimeInterval runningTime;
+
+- (void)endMinigame;
 
 @end
 

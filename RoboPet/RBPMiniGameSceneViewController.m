@@ -246,7 +246,9 @@
 	viewController.delegate = self;
 	
 	CGSize contentViewSize = CGRectApplyAffineTransform(self.view.bounds, CGAffineTransformMakeScale(0.8, 0.7)).size;
-	//contentViewSize.height = MIN(contentViewSize.height, 350); // Clamp height for iPad
+//	contentViewSize.width = MAX(contentViewSize.height, 500);
+//	contentViewSize.height = contentViewSize.width * 0.65;
+	contentViewSize.height = MIN(contentViewSize.height, 350); // Clamp height for iPad
 	viewController.preferredContentSize = contentViewSize;
 	
 	
@@ -323,6 +325,11 @@
 }
 
 #pragma mark - RBPMiniGameTutorialViewControllerDataSource
+
+- (NSString *)tutorialTitle
+{
+	return self.minigame.minigameName;
+}
 
 - (UIScrollView *)tutorialScrollView;
 {

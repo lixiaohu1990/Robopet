@@ -64,6 +64,18 @@
 
 #pragma mark - RBPMiniGameScene
 
+- (void)endMinigame
+{
+	[self.minigameDelegate onMiniGameGameOver:self];
+	
+	self.highScore = MAX(self.score, self.highScore);
+}
+
+- (NSString *)minigameName
+{
+	return @"";
+}
+
 - (void)setMinigameDelegate:(id<RBPMiniGameSceneDelegate>)minigameDelegate
 {
 	_minigameDelegate = minigameDelegate;
@@ -74,10 +86,6 @@
 - (void)setScore:(CGFloat)score
 {
 	_score = score;
-	
-	if (_score > self.highScore) {
-		self.highScore = _score;
-	}
 	
 	[self.minigameDelegate onMiniGameScoreChange:self];
 }
@@ -97,9 +105,13 @@
 	return [NSString stringWithFormat:@"RBPHighScore%@DefaultsKey", NSStringFromClass([self class])];
 }
 
-- (NSString *)gameOverFormatString
+- (NSString *)gameOverMessage
 {
-	return @"Override me to insert game over message";
+	if (self.score > self.highScore) {
+		return [NSString stringWithFormat:@"NEW HIGH SCORE!!!\n\n%.1f", self.score];
+	}
+	
+	return [NSString stringWithFormat:@"Score:%.1f\n\nHigh Score:%.1f", self.score, self.highScore];
 }
 
 #pragma mark - SKScene

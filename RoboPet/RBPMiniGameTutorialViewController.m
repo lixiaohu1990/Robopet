@@ -44,8 +44,8 @@
 {
 	[super viewDidLoad];
 	
-	self.navigationItem.title = @"Tutorial";
-	self.navigationItem.leftBarButtonItem.title = @"Dont Show Again";
+	self.navigationItem.title = [self.dataSource tutorialTitle];
+	self.navigationItem.leftBarButtonItem.title = @"Never Show";
 	self.navigationItem.rightBarButtonItem.title = @"Play";
 	
 	self.navigationItem.rightBarButtonItem.enabled = NO;

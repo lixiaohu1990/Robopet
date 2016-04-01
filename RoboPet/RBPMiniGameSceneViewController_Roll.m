@@ -86,6 +86,11 @@
 
 #pragma mark - RBPMiniGameTutorialViewControllerDataSource
 
+- (NSString *)tutorialTitle
+{
+	return @"Bumper Ball";
+}
+
 - (UIScrollView *)tutorialScrollView;
 {
 	return [[[NSBundle mainBundle] loadNibNamed:@"RBPMiniGameRoll_TutorialPages" owner:nil options:nil] firstObject];

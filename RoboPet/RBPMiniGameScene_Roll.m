@@ -236,8 +236,8 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 		[newPickup runAction:[SKAction fadeAlphaTo:1.0 duration:0.25] completion:^{
 			[newPickup startDrainWithDuration:[self batteryDrainDurationForDifficulty:self.difficultyLevel]
 								   completion:^(RBPMiniGameRollBattery *battery) {
-				[battery removeFromParent];
-				[self.minigameDelegate onMiniGameGameOver:self];
+									   [battery removeFromParent];
+									   [self endMinigame];
 			}];
 		}];
 		
@@ -586,6 +586,11 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 }
 
 #pragma mark - RBPMiniGameScene
+
+- (NSString *)minigameName
+{
+	return @"Bumper Ball";
+}
 
 - (void)setScore:(CGFloat)score
 {
