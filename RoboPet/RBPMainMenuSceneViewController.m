@@ -218,7 +218,7 @@
 	[jumpButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
 	jumpButton.translatesAutoresizingMaskIntoConstraints = NO;
 	jumpButton.backgroundColor = [UIColor lightGrayColor];
-	[jumpButton setTitle:@"Jump" forState:UIControlStateNormal];
+	[jumpButton setTitle:@"Leap Virus" forState:UIControlStateNormal];
 	[self.view addSubview:jumpButton];
 	
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:jumpButton
@@ -256,7 +256,7 @@
 	[musicButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
 	musicButton.translatesAutoresizingMaskIntoConstraints = NO;
 	musicButton.backgroundColor = [UIColor lightGrayColor];
-	[musicButton setTitle:@"Music" forState:UIControlStateNormal];
+	[musicButton setTitle:@"Simoné Says" forState:UIControlStateNormal];
 	[self.view addSubview:musicButton];
 	
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:musicButton
@@ -294,7 +294,7 @@
 	[rollButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
 	rollButton.translatesAutoresizingMaskIntoConstraints = NO;
 	rollButton.backgroundColor = [UIColor lightGrayColor];
-	[rollButton setTitle:@"Roll" forState:UIControlStateNormal];
+	[rollButton setTitle:@"Bumper Ball" forState:UIControlStateNormal];
 	[self.view addSubview:rollButton];
 	
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:rollButton
@@ -343,11 +343,11 @@
 	NSString *buttonTitle = [button titleForState:UIControlStateNormal];
     RBPMiniGameSceneViewController *miniGameViewController = nil;
     
-    if ([buttonTitle isEqualToString:@"Jump"]) {
+    if ([buttonTitle isEqualToString:@"Leap Virus"]) {
         miniGameViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RBPMiniGameSceneViewController_Jump"];
-    } else if ([buttonTitle isEqualToString:@"Music"]) {
+    } else if ([buttonTitle isEqualToString:@"Simoné Says"]) {
         miniGameViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RBPMiniGameSceneViewController_Music"];
-    } else if ([buttonTitle isEqualToString:@"Roll"]) {
+    } else if ([buttonTitle isEqualToString:@"Bumper Ball"]) {
         miniGameViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RBPMiniGameSceneViewController_Roll"];
     }
     

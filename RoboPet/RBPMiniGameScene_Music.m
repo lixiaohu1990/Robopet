@@ -213,43 +213,59 @@ typedef NS_ENUM(NSInteger, GameStateType){
             
             // Turn on bulb touched
             [self changeBulb: nth on: true];
+            [self playTone: nth completion:^{
+                
+                // Didn't touch exepcted
+                if( nth != expectedIndex )
+                {
+                    // Woah, wrong one!
+                    // GAME OVER!
+                    [self.minigameDelegate onMiniGameGameOver:self];
+                }
+                // Touched expected
+                else
+                {
+                    // Yay, good job!
+                }
+                
+            }];
             
-            // Play tone
-            switch (nth) {
-                case 0:
-                    // Play D Tone
-                    [RBPSoundManager runSoundAction:self.action_SoundD onNode: UserPromptLabel];
-                    break;
-                case 1:
-                    // Play F Tone
-                    [RBPSoundManager runSoundAction:self.action_SoundF onNode: UserPromptLabel];
-                    break;
-                case 2:
-                    // Play A Tone
-                    [RBPSoundManager runSoundAction:self.action_SoundA onNode: UserPromptLabel];
-                    break;
-                case 3:
-                    // Play C Tone
-                    [RBPSoundManager runSoundAction:self.action_SoundC onNode: UserPromptLabel];
-                    break;
-                case 4:
-                    // Play E Tone
-                    [RBPSoundManager runSoundAction:self.action_SoundE onNode: UserPromptLabel];
-                    break;
-            }
             
-            // Didn't touch exepcted
-            if( nth != expectedIndex )
-            {
-                // Woah, wrong one!
-                // GAME OVER!
-                [self.minigameDelegate onMiniGameGameOver:self];
-            }
-            // Touched expected
-            else
-            {
-                // Yay, good job!
-            }
+        }
+    }
+}
+
+-(void) playTone: (NSInteger) nth completion:(void (^)())block;
+{
+    SKAction *soundAction = nil;
+    
+    // Play tone
+    switch (nth) {
+        case 0:
+            // Play D Tone
+            soundAction = self.action_SoundD;
+            break;
+        case 1:
+            // Play F Tone
+            soundAction = self.action_SoundF;
+            break;
+        case 2:
+            // Play A Tone
+            soundAction = self.action_SoundA;
+            break;
+        case 3:
+            // Play C Tone
+            soundAction = self.action_SoundC;
+            break;
+        case 4:
+            // Play E Tone
+            soundAction = self.action_SoundE;
+            break;
+    }
+    
+    if (soundAction) {
+        if ([RBPSoundManager soundEnabled]) {
+            [UserPromptLabel runAction:soundAction completion:block];
         }
     }
 }
@@ -361,6 +377,7 @@ typedef NS_ENUM(NSInteger, GameStateType){
             {
                 case 0:
                     [self changeBulb: [self getBulbIndex: SimonSequencePosition] on: true ];
+                    [self playTone: [self getBulbIndex: SimonSequencePosition] completion:nil];
                     PlaybackStep = 1;
                     break;
                     
@@ -453,6 +470,15 @@ typedef NS_ENUM(NSInteger, GameStateType){
     // Update scene
     SKSpriteNode* sprite = SimonSprites[index];
     sprite.texture = enable ? TexBulbOn : TexBulbOff;
+}
+
+- (NSString *)gameOverMessage
+{
+    if (self.score > 0.0 && self.score >= self.highScore) {
+        return [NSString stringWithFormat:@"NEW HIGH SCORE!!!\n\n%.1f", self.score];
+    }
+    
+    return [NSString stringWithFormat:@"Score:%.1f\nHigh Score:%.1f", self.score, self.highScore];
 }
 
 @end
