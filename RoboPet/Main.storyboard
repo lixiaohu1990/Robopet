@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -9,6 +9,10 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="RBPMainMenuSceneViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wU4-Rt-yCB"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Zc-uK-fMP"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,6 +27,10 @@
         <scene sceneID="Qag-Ui-OD7">
             <objects>
                 <viewController storyboardIdentifier="RBPMiniGameSceneViewController_Jump" id="e1X-a4-2jD" customClass="RBPMiniGameSceneViewController_Jump" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DmR-Xd-4sh"/>
+                        <viewControllerLayoutGuide type="bottom" id="aTK-qt-B0c"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Nwe-wT-eny" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,6 +47,10 @@
         <scene sceneID="Ufe-pr-PZb">
             <objects>
                 <viewController storyboardIdentifier="RBPMiniGameSceneViewController_Music" id="rsG-d8-wtu" customClass="RBPMiniGameSceneViewController_Music" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UzS-mw-xXh"/>
+                        <viewControllerLayoutGuide type="bottom" id="dvF-hN-g7u"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="syS-pK-HT1" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,6 +65,10 @@
         <scene sceneID="fNR-ob-IXe">
             <objects>
                 <viewController storyboardIdentifier="RBPMiniGameSceneViewController_Roll" id="gAP-2B-coI" customClass="RBPMiniGameSceneViewController_Roll" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="c1J-Ma-lYe"/>
+                        <viewControllerLayoutGuide type="bottom" id="5OJ-4c-HyS"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="BnC-KI-rkk" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

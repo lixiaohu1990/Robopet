@@ -33,8 +33,11 @@ bool canJump;
 @property (strong, nonatomic) SKSpriteNode *box4;
 @property (strong, nonatomic) SKSpriteNode *robot;
 
-@property (strong, nonatomic) SKAction *action_BumperCollisionSound;
-@property (strong, nonatomic) SKAction *action_PickupSound;
+@property (strong, nonatomic) SKAction *action_death;
+@property (strong, nonatomic) SKAction *action_jump;
+
+@property (strong, nonatomic) SKAction *rotate1;
+
 
 
 
@@ -55,8 +58,8 @@ bool canJump;
     
     if (scene) { // Preload assets
         
-        scene.action_BumperCollisionSound = [SKAction playSoundFileNamed:@"roll_bumper" waitForCompletion:NO];
-        scene.action_PickupSound = [SKAction playSoundFileNamed:@"roll_battery" waitForCompletion:NO];
+        scene.action_death = [SKAction playSoundFileNamed:@"roll_battery" waitForCompletion:NO];
+        scene.action_jump = [SKAction playSoundFileNamed:@"roll_bumper" waitForCompletion:NO];
         
     }
     
@@ -80,22 +83,19 @@ bool canJump;
     self.ground1 = [SKSpriteNode spriteNodeWithImageNamed:@"jump_ground"];
     self.ground1.anchorPoint = CGPointZero;
     self.ground1.size = CGSizeMake(self.size.width, self.ground1.size.height);
-    self.ground1.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.ground1.size.width*5, self.ground1.size.height*2)];
+    self.ground1.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.ground1.size.width*20, self.ground1.size.height*2)];
     self.ground1.physicsBody.dynamic = NO;
-    
     [self addChild:self.ground1];
-    //  self.ground2 = [SKSpriteNode spriteNodeWithImageNamed:@"jump_ground"];
-    //  self.ground2.anchorPoint = CGPointZero;
+    //self.ground2 = [SKSpriteNode spriteNodeWithImageNamed:@"jump_ground"];
     //  self.ground2.size = CGSizeMake(self.ground2.size.width, self.ground2.size.height);
-    //  self.ground2.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.ground2.size.width*5, self.ground2.size.height*2)];
+    //    self.ground2.position = CGPointMake(self.frame.size.width*2, 100);
+    //  self.ground2.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.ground2.size.width, self.ground2.size.height)];
     //   self.ground2.physicsBody.dynamic = NO;
     //   [self addChild:self.ground2];
-    //   self.ground3 = [SKSpriteNode spriteNodeWithImageNamed:@"jump_ground"];
-    //   self.ground3.anchorPoint = CGPointZero;
-    //   self.ground3.size = CGSizeMake(self.ground3.size.width, self.ground3.size.height);
-    //  self.ground3.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.ground3.size.width*5, self.ground3.size.height*2)];
-    //    self.ground3.physicsBody.dynamic = NO;
-    //    [self addChild:self.ground3];
+
+    
+    
+    
     self.box = [SKSpriteNode spriteNodeWithImageNamed:@"jumpblock"];
     self.box1.size = CGSizeMake(self.box1.size.width*2, self.box1.size.height*2);
     self.box.hidden = YES;
@@ -108,10 +108,10 @@ bool canJump;
     self.box1.physicsBody.collisionBitMask = RBPCollisionCategoryFloor | ~RBPCollisionCategoryPlayer;
     self.box1.physicsBody.allowsRotation = NO;
     [self addChild:self.box1];
-    self.box2 = [SKSpriteNode spriteNodeWithImageNamed:@"jumpblock"];
+    self.box2 = [SKSpriteNode spriteNodeWithImageNamed:@"virus"];
     self.box2.position = CGPointMake(self.frame.size.width + 1000, 260);
-    self.box2.size = CGSizeMake(self.box2.size.width*2, self.box2.size.height*2);
-    self.box2.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.box2.size.width, self.box2.size.height)];
+    self.box2.size = CGSizeMake(self.box2.size.width/2, self.box2.size.height/2);
+    self.box2.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.box2.size.width/2];
     self.box2.physicsBody.dynamic = YES;
     self.box2.physicsBody.categoryBitMask = RBPCollisionCategoryBox;
     self.box2.physicsBody.collisionBitMask = RBPCollisionCategoryFloor | ~RBPCollisionCategoryPlayer;
@@ -126,10 +126,10 @@ bool canJump;
     self.box3.physicsBody.collisionBitMask = RBPCollisionCategoryFloor | ~RBPCollisionCategoryPlayer;
     self.box3.physicsBody.allowsRotation = NO;
     [self addChild:self.box3];
-    self.box4 = [SKSpriteNode spriteNodeWithImageNamed:@"jumpblock"];
+    self.box4 = [SKSpriteNode spriteNodeWithImageNamed:@"virus"];
     self.box4.position = CGPointMake(self.frame.size.width + 3000, 260);
-    self.box4.size = CGSizeMake(self.box4.size.width*2, self.box4.size.height*2);
-    self.box4.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.box4.size.width, self.box4.size.height)];
+    self.box4.size = CGSizeMake(self.box4.size.width/2, self.box4.size.height/2);
+    self.box4.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.box4.size.width/2];
     self.box4.physicsBody.categoryBitMask = RBPCollisionCategoryBox;
     self.box4.physicsBody.collisionBitMask = RBPCollisionCategoryFloor | ~RBPCollisionCategoryPlayer;
     self.box4.physicsBody.dynamic = YES;
@@ -166,7 +166,9 @@ bool canJump;
     
     if(canJump == YES){
         self.robot.physicsBody.velocity = CGVectorMake(0.0, 800);
+        [RBPSoundManager runSoundAction:self.action_jump onNode:self.robot];
     }
+
     
 }
 
@@ -179,11 +181,18 @@ bool canJump;
     
 }
 
+-(void) moveGround{
+
+    self.ground1.physicsBody.velocity = CGVectorMake(-300 - speed, 0);
+    self.ground2.physicsBody.velocity = CGVectorMake(-300 - speed, 0);
+    
+}
+
 -(void) placeBoxes{
     if(self.box1.position.x <= 0){
-        if( speed < 200){
-            speed = speed + 10;
-        }
+
+        
+        speed = speed + 2;
         srand( time(0) );
         float randomNumber = rand() % 3 + 1.7;
         self.box1.size = CGSizeMake(self.box.size.width*randomNumber, self.box.size.height*randomNumber);
@@ -197,13 +206,12 @@ bool canJump;
         self.box1.position = CGPointMake(self.box4.position.x + 1000 + randomNumber, 260);
     }
     if(self.box2.position.x <= 0){
-        if( speed < 200){
-            speed = speed + 10;
-        }
+
+        speed = speed + 2;
         srand( time(0) );
         float randomNumber = rand() % 3 + 1.7;
         self.box2.size = CGSizeMake(self.box.size.width*randomNumber, self.box.size.height*randomNumber);
-        self.box2.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.box2.size.width, self.box2.size.height)];
+    self.box2.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.box2.size.width/2];
         self.box2.physicsBody.dynamic = YES;
         self.box2.physicsBody.categoryBitMask = RBPCollisionCategoryBox;
         self.box2.physicsBody.collisionBitMask = RBPCollisionCategoryFloor | ~RBPCollisionCategoryPlayer;
@@ -213,9 +221,8 @@ bool canJump;
         self.box2.position = CGPointMake(self.box1.position.x + 1000 + randomNumber, 260);
     }
     if(self.box3.position.x <= 0){
-        if( speed < 200){
-            speed = speed + 10;
-        }
+
+        speed = speed + 2;
         srand( time(0) );
         float randomNumber = rand() % 3 + 1.7;
         self.box3.size = CGSizeMake(self.box.size.width*randomNumber, self.box.size.height*randomNumber);
@@ -229,13 +236,12 @@ bool canJump;
         self.box3.position = CGPointMake(self.box2.position.x + 1000 + randomNumber, 260);
     }
     if(self.box4.position.x <= 0){
-        if( speed < 200){
-            speed = speed + 10;
-        }
+
+        speed = speed + 2;
         srand( time(0) );
         float randomNumber = rand() % 3 + 1.7;
         self.box4.size = CGSizeMake(self.box.size.width*randomNumber, self.box.size.height*randomNumber);
-        self.box4.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.box4.size.width, self.box4.size.height)];
+    self.box4.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.box2.size.width/2];
         self.box4.physicsBody.dynamic = YES;
         self.box4.physicsBody.categoryBitMask = RBPCollisionCategoryBox;
         self.box4.physicsBody.collisionBitMask = RBPCollisionCategoryFloor | ~RBPCollisionCategoryPlayer;
@@ -272,30 +278,58 @@ bool canJump;
     
     if ([self.robot intersectsNode:self.box1]) {
         
+        if ([RBPSoundManager soundEnabled]) {
+            
+            [self runAction:self.action_death completion:^{
+                [self.minigameDelegate onMiniGameGameOver:self];
+            }];
+            
+        } else {
+            [self.minigameDelegate onMiniGameGameOver:self];
+        }
         
-        [RBPSoundManager runSoundAction:self.action_PickupSound onNode:self.robot];
-        [self.minigameDelegate onMiniGameGameOver:self];
         
         
     }
     if ([self.robot intersectsNode:self.box2]) {
         
         
-        [RBPSoundManager runSoundAction:self.action_PickupSound onNode:self.robot];
-        [self.minigameDelegate onMiniGameGameOver:self];
+        if ([RBPSoundManager soundEnabled]) {
+            
+            [self runAction:self.action_death completion:^{
+                [self.minigameDelegate onMiniGameGameOver:self];
+            }];
+            
+        } else {
+            [self.minigameDelegate onMiniGameGameOver:self];
+        }
         
     }
     if ([self.robot intersectsNode:self.box3]) {
         
         
-        [RBPSoundManager runSoundAction:self.action_PickupSound onNode:self.robot];
-        [self.minigameDelegate onMiniGameGameOver:self];
+        if ([RBPSoundManager soundEnabled]) {
+            
+            [self runAction:self.action_death completion:^{
+                [self.minigameDelegate onMiniGameGameOver:self];
+            }];
+            
+        } else {
+            [self.minigameDelegate onMiniGameGameOver:self];
+        }
         
     }
     if ([self.robot intersectsNode:self.box4]) {
         
-        [RBPSoundManager runSoundAction:self.action_PickupSound onNode:self.robot];
-        [self.minigameDelegate onMiniGameGameOver:self];
+        if ([RBPSoundManager soundEnabled]) {
+            
+            [self runAction:self.action_death completion:^{
+                [self.minigameDelegate onMiniGameGameOver:self];
+            }];
+            
+        } else {
+            [self.minigameDelegate onMiniGameGameOver:self];
+        }
         
     }
     
@@ -316,11 +350,16 @@ bool canJump;
     self.physicsWorld.gravity = CGVectorMake(0, -5.0);
     [super update:currentTime];
     [self moveBoxes];
+    [self moveGround];
     [self placeBoxes];
     [self canJump];
     //[self stopBouncing];
     [self checkDead];
     [super setScore:score];
+    SKAction *rotation1 = [SKAction rotateByAngle: M_PI/15.0 duration:0];
+    [self.box2 runAction: rotation1];
+    [self.box4 runAction: rotation1];
+    
     
     
     

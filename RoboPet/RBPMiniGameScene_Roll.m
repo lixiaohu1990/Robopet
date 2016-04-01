@@ -528,9 +528,11 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 							   });
 				
 			}
-			
+		
+            
 		}
     }
+    self.physicsWorld.gravity = CGVectorMake(10,10);
 }
 
 #pragma mark - SKPhysicsContactDelegate
