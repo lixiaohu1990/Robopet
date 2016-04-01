@@ -60,6 +60,7 @@ bool canJump;
         
         scene.action_death = [SKAction playSoundFileNamed:@"roll_battery" waitForCompletion:NO];
         scene.action_jump = [SKAction playSoundFileNamed:@"roll_bumper" waitForCompletion:NO];
+
         
     }
     
@@ -236,7 +237,6 @@ bool canJump;
         self.box3.position = CGPointMake(self.box2.position.x + 1000 + randomNumber, 260);
     }
     if(self.box4.position.x <= 0){
-
         speed = speed + 2;
         srand( time(0) );
         float randomNumber = rand() % 3 + 1.7;
