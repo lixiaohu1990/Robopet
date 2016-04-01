@@ -88,8 +88,8 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	
 	if (scene) { // Preload assets
 		
-		scene.action_BumperCollisionSound = [SKAction playSoundFileNamed:@"roll_bumper" waitForCompletion:NO];
-		scene.action_PickupSound = [SKAction playSoundFileNamed:@"roll_battery" waitForCompletion:NO];
+		scene.action_BumperCollisionSound = [SKAction playSoundFileNamed:@"roll_bumper.caf" waitForCompletion:NO];
+		scene.action_PickupSound = [SKAction playSoundFileNamed:@"roll_battery.caf" waitForCompletion:NO];
 		
 	}
 	
@@ -528,7 +528,8 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 							   });
 				
 			}
-			
+		
+            
 		}
     }
 }
