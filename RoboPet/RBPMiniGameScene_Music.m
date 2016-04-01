@@ -66,11 +66,11 @@ typedef NS_ENUM(NSInteger, GameStateType){
     
     if (scene) { // Preload assets
         
-        scene.action_SoundD = [SKAction playSoundFileNamed:@"music_d_note.caf" waitForCompletion:NO];
-        scene.action_SoundF = [SKAction playSoundFileNamed:@"music_f_note.caf" waitForCompletion:NO];
-        scene.action_SoundA = [SKAction playSoundFileNamed:@"music_a_note.caf" waitForCompletion:NO];
-        scene.action_SoundC = [SKAction playSoundFileNamed:@"music_c_note.caf" waitForCompletion:NO];
-        scene.action_SoundE = [SKAction playSoundFileNamed:@"music_e_note.caf" waitForCompletion:NO];
+        scene.action_SoundD = [SKAction playSoundFileNamed:@"Sounds/music_d_note.caf" waitForCompletion:NO];
+        scene.action_SoundF = [SKAction playSoundFileNamed:@"Sounds/music_f_note.caf" waitForCompletion:NO];
+        scene.action_SoundA = [SKAction playSoundFileNamed:@"Sounds/music_a_note.caf" waitForCompletion:NO];
+        scene.action_SoundC = [SKAction playSoundFileNamed:@"Sounds/music_c_note.caf" waitForCompletion:NO];
+        scene.action_SoundE = [SKAction playSoundFileNamed:@"Sounds/music_e_note.caf" waitForCompletion:NO];
         
     }
     

@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,7 +16,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zYf-8i-zTP" userLabel="0">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="jumpblock" translatesAutoresizingMaskIntoConstraints="NO" id="hIa-d4-HqX">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jumpblock" translatesAutoresizingMaskIntoConstraints="NO" id="hIa-d4-HqX">
                             <rect key="frame" x="270" y="245" width="60" height="60"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earn points by avoiding the boxes!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8GC-jW-zs0" userLabel="label">
@@ -45,11 +47,15 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="robot_side_whole" translatesAutoresizingMaskIntoConstraints="NO" id="jYC-oX-kxV">
-                            <rect key="frame" x="250" y="201" width="100" height="148"/>
+                            <rect key="frame" x="225" y="201" width="150" height="148"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="jYC-oX-kxV" secondAttribute="height" multiplier="75:74" id="AHS-6X-MKM"/>
+                            </constraints>
                         </imageView>
                     </subviews>
                     <constraints>
                         <constraint firstItem="jYC-oX-kxV" firstAttribute="centerX" secondItem="DFC-gm-5sK" secondAttribute="centerX" id="CXg-JE-oPq"/>
+                        <constraint firstItem="jYC-oX-kxV" firstAttribute="width" secondItem="DFC-gm-5sK" secondAttribute="width" multiplier="0.25" id="ETt-AR-8ZN"/>
                         <constraint firstItem="VhM-Ch-XHt" firstAttribute="centerY" secondItem="DFC-gm-5sK" secondAttribute="centerY" constant="60" id="RE3-ys-v7c"/>
                         <constraint firstItem="jYC-oX-kxV" firstAttribute="centerY" secondItem="DFC-gm-5sK" secondAttribute="centerY" constant="-25" id="Ycf-RJ-XD2"/>
                         <constraint firstAttribute="trailing" secondItem="VhM-Ch-XHt" secondAttribute="trailing" id="e47-8j-x5W"/>

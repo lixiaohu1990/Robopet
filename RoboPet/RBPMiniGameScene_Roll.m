@@ -88,8 +88,8 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	
 	if (scene) { // Preload assets
 		
-		scene.action_BumperCollisionSound = [SKAction playSoundFileNamed:@"roll_bumper.caf" waitForCompletion:NO];
-		scene.action_PickupSound = [SKAction playSoundFileNamed:@"roll_battery.caf" waitForCompletion:NO];
+		scene.action_BumperCollisionSound = [SKAction playSoundFileNamed:@"Sounds/roll_bumper.caf" waitForCompletion:NO];
+		scene.action_PickupSound = [SKAction playSoundFileNamed:@"Sounds/roll_battery.caf" waitForCompletion:NO];
 		
 	}
 	
@@ -615,7 +615,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 
 - (NSString *)gameOverMessage
 {
-	if (self.score > self.highScore) {
+	if (self.score >= self.highScore) {
 		return [NSString stringWithFormat:@"NEW HIGH SCORE!!!\n\n%.1f 🔋", self.score];
 	}
 	

@@ -65,7 +65,7 @@
 	self.textview = [[UITextView alloc] init];
 	self.textview.translatesAutoresizingMaskIntoConstraints = NO;
 	self.textview.userInteractionEnabled = NO;
-	self.textview.font = [UIFont systemFontOfSize:20];
+	self.textview.font = [UIFont systemFontOfSize:16];
 	self.textview.textColor = [UIColor whiteColor];
 	self.textview.backgroundColor = [UIColor clearColor];
 	

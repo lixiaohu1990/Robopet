@@ -64,7 +64,7 @@
 	
 	
 	// Setup tick sound
-	NSURL *url = [[NSBundle mainBundle] URLForResource:@"minigame_countdown" withExtension:@"caf"];
+	NSURL *url = [[NSBundle mainBundle] URLForResource:@"Sounds/minigame_countdown" withExtension:@"caf"];
 	AudioServicesCreateSystemSoundID((__bridge CFURLRef)(url), &_tickSound);
 }
 

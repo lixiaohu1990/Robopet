@@ -76,7 +76,7 @@
 													 [UIImage imageNamed:@"intro_2.png"],
 													 [UIImage imageNamed:@"intro_3.png"]
 													 ];
-	self.introSlideshowImageView.animationDuration = 15.0;
+	self.introSlideshowImageView.animationDuration = 10.0;
 	self.introSlideshowImageView.animationRepeatCount = 1;
 	[self.view addSubview:self.introSlideshowImageView];
 	
