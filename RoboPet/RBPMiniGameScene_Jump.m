@@ -194,7 +194,7 @@ bool canJump;
 
         
         speed = speed + 2;
-        srand( time(0) );
+        srand( (unsigned)time(0) );
         float randomNumber = rand() % 3 + 1.7;
         self.box1.size = CGSizeMake(self.box.size.width*randomNumber, self.box.size.height*randomNumber);
         self.box1.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.box1.size.width, self.box1.size.height)];
@@ -204,27 +204,39 @@ bool canJump;
         self.box1.physicsBody.allowsRotation = NO;
         score = score+1;
         randomNumber = randomNumber * 100;
-        self.box1.position = CGPointMake(self.box4.position.x + 1000 + randomNumber, 260);
+        int randomBool = rand() % 2 + 1;
+        if(randomBool == 1){
+            self.box1.position = CGPointMake(self.box4.position.x + 1000 + randomNumber, 260);
+        }
+        else {
+            self.box1.position = CGPointMake(self.box4.position.x + 1000 - randomNumber, 260);
+        }
     }
     if(self.box2.position.x <= 0){
 
         speed = speed + 2;
-        srand( time(0) );
+        srand( (unsigned)time(0) );
         float randomNumber = rand() % 3 + 1.7;
         self.box2.size = CGSizeMake(self.box.size.width*randomNumber, self.box.size.height*randomNumber);
-    self.box2.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.box2.size.width/2];
+    self.box2.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.box.size.width*randomNumber/2];
         self.box2.physicsBody.dynamic = YES;
         self.box2.physicsBody.categoryBitMask = RBPCollisionCategoryBox;
         self.box2.physicsBody.collisionBitMask = RBPCollisionCategoryFloor | ~RBPCollisionCategoryPlayer;
         self.box2.physicsBody.allowsRotation = NO;
         score = score+1;
         randomNumber = randomNumber * 100;
-        self.box2.position = CGPointMake(self.box1.position.x + 1000 + randomNumber, 260);
+        int randomBool = rand() % 2 + 1;
+        if(randomBool == 1){
+            self.box2.position = CGPointMake(self.box1.position.x + 1000 + randomNumber, 260);
+        }
+        else {
+            self.box2.position = CGPointMake(self.box1.position.x + 1000 - randomNumber, 260);
+        }
     }
     if(self.box3.position.x <= 0){
 
         speed = speed + 2;
-        srand( time(0) );
+        srand( (unsigned)time(0) );
         float randomNumber = rand() % 3 + 1.7;
         self.box3.size = CGSizeMake(self.box.size.width*randomNumber, self.box.size.height*randomNumber);
         self.box3.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.box3.size.width, self.box3.size.height)];
@@ -234,21 +246,33 @@ bool canJump;
         self.box3.physicsBody.allowsRotation = NO;
         score = score+1;
         randomNumber = randomNumber * 100;
-        self.box3.position = CGPointMake(self.box2.position.x + 1000 + randomNumber, 260);
+        int randomBool = rand() % 2 + 1;
+        if(randomBool == 1){
+            self.box3.position = CGPointMake(self.box2.position.x + 1000 + randomNumber, 260);
+        }
+        else {
+            self.box3.position = CGPointMake(self.box2.position.x + 1000 - randomNumber, 260);
+        }
     }
     if(self.box4.position.x <= 0){
         speed = speed + 2;
-        srand( time(0) );
+        srand( (unsigned)time(0) );
         float randomNumber = rand() % 3 + 1.7;
         self.box4.size = CGSizeMake(self.box.size.width*randomNumber, self.box.size.height*randomNumber);
-    self.box4.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.box2.size.width/2];
+    self.box4.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.box.size.width*randomNumber/2];
         self.box4.physicsBody.dynamic = YES;
         self.box4.physicsBody.categoryBitMask = RBPCollisionCategoryBox;
         self.box4.physicsBody.collisionBitMask = RBPCollisionCategoryFloor | ~RBPCollisionCategoryPlayer;
         self.box4.physicsBody.allowsRotation = NO;
         score = score+1;
         randomNumber = randomNumber * 100;
-        self.box4.position = CGPointMake(self.box3.position.x + 1000 + randomNumber, 260);
+        int randomBool = rand() % 2 + 1;
+        if(randomBool == 1){
+            self.box4.position = CGPointMake(self.box3.position.x + 1000 + randomNumber, 260);
+        }
+        else {
+            self.box4.position = CGPointMake(self.box3.position.x + 1000 - randomNumber, 260);
+        }
     }
 }
 
@@ -335,9 +359,28 @@ bool canJump;
     
 }
 
+#pragma mark - RBPMiniGameScene
+
 - (void)setScore:(CGFloat)score
 {
     [super setScore:score];
+    
+    //self.difficultyLevel = (score / 3) + 1;
+//    self.difficultyLevel = score + 1;
+}
+
+- (void)setDifficultyLevel:(NSUInteger)difficultyLevel
+{
+    [super setDifficultyLevel:difficultyLevel];
+}
+
+- (NSString *)gameOverMessage
+{
+    if (self.score >= self.highScore && self.score != 0) {
+        return [NSString stringWithFormat:@"NEW HIGH SCORE!!!\n\n%.1f", self.score];
+    }
+    
+    return [NSString stringWithFormat:@"Score:%.1f\n\nHigh Score:%.1f", self.score, self.highScore];
 }
 
 

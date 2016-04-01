@@ -35,8 +35,9 @@
 
 - (void)viewDidLoad
 {
-
     [super viewDidLoad];
+    
+    self.scoreLabel.textColor = [UIColor whiteColor];
 }
 
 - (void)configureTutorialViewController:(RBPMiniGameTutorialViewController *)viewController

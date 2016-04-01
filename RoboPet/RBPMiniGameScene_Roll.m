@@ -610,7 +610,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 
 - (NSString *)gameOverMessage
 {
-	if (self.score > self.highScore) {
+	if (self.score >= self.highScore) {
 		return [NSString stringWithFormat:@"NEW HIGH SCORE!!!\n\n%.1f 🔋", self.score];
 	}
 	
