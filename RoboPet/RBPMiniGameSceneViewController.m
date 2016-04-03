@@ -245,19 +245,18 @@
 	self.view.scene.paused = YES;
 	viewController.delegate = self;
 	
+	
 	CGSize contentViewSize = CGRectApplyAffineTransform(self.view.bounds, CGAffineTransformMakeScale(0.8, 0.7)).size;
 //	contentViewSize.width = MAX(contentViewSize.height, 500);
 //	contentViewSize.height = contentViewSize.width * 0.65;
 	contentViewSize.height = MIN(contentViewSize.height, 350); // Clamp height for iPad
-	viewController.preferredContentSize = contentViewSize;
-	
 	
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+	
+	
 	MZFormSheetPresentationViewController *formSheet = [[MZFormSheetPresentationViewController alloc]
 														initWithContentViewController:navigationController];
-	
-	formSheet.presentationController.contentViewSize = viewController.preferredContentSize;
-	// Center in view
+	formSheet.presentationController.contentViewSize = contentViewSize;
 	formSheet.presentationController.shouldCenterHorizontally = formSheet.presentationController.shouldCenterVertically = YES;
 	formSheet.contentViewControllerTransitionStyle =  MZFormSheetPresentationTransitionStyleBounce;
 	

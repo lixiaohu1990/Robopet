@@ -227,23 +227,45 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 		
 	}
 	
-	newPickup.alpha = 0.0;
 	
-	if ([self randomlyPositionNode:newPickup attemptCount:0]) {
+	
+	
+	
+	void (^pickupPositioned)(RBPMiniGameRollBattery *pickup) = ^(RBPMiniGameRollBattery *pickup){
 		
-		[self.pickups addObject:newPickup];
+		pickup.alpha = 0.0;
 		
-		[newPickup runAction:[SKAction fadeAlphaTo:1.0 duration:0.25] completion:^{
-			[newPickup startDrainWithDuration:[self batteryDrainDurationForDifficulty:self.difficultyLevel]
+		[self.pickups addObject:pickup];
+		
+		[pickup runAction:[SKAction fadeAlphaTo:1.0 duration:0.25] completion:^{
+			[pickup startDrainWithDuration:[self batteryDrainDurationForDifficulty:self.difficultyLevel]
 								   completion:^(RBPMiniGameRollBattery *battery) {
 									   [battery removeFromParent];
 									   [self endMinigame];
-			}];
+								   }];
 		}];
 		
-	} else {
+	};
+	
+	
+	
+	
+	if ([self randomlyPositionNode:newPickup attemptCount:0]) {
 		
-		[newPickup removeFromParent];
+		pickupPositioned(newPickup);
+		
+	} else { // Failed to find a random position, so remove a bumper and position it there
+		
+		for (SKNode *node in self.children) {
+			if ([node isKindOfClass:[RBPMiniGameRollBumper class]]) {
+				
+				newPickup.position = node.position;
+				pickupPositioned(newPickup);
+				[node removeFromParent];
+				
+				break;
+			}
+		}
 		
 	}
 }
@@ -256,7 +278,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	__block RBPMiniGameRollBumper *newBumper = nil;
 	
 	[self.bumpers enumerateObjectsUsingBlock:^(RBPMiniGameRollBumper *obj, NSUInteger idx, BOOL *stop) {
-		if (!obj.parent) {
+		if (!obj.parent && !obj.hasActions) {
 			newBumper = obj;
 			stop = (BOOL *)YES;
 		}
@@ -343,7 +365,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 		
 		[operation addExecutionBlock:^{
 			
-			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(randomDelay * NSEC_PER_SEC)),
+			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (0.25 + randomDelay * NSEC_PER_SEC)),
 						   dispatch_get_main_queue(), ^{
 							   
 							   if (!weakOperation.cancelled) {
@@ -393,7 +415,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	// Check distance from bumpers
 	for (SKSpriteNode *bumper in self.bumpers) {
 		if (node != bumper && bumper.parent &&
-			[self distanceFromNode:node toNode:bumper] < MAX(self.player.size.width, self.player.size.height)) {
+			[self distanceFromNode:node toNode:bumper] < MAX(self.player.size.width, self.player.size.height) * 1.5) {
 			return [self randomlyPositionNode:node attemptCount:attemptCount + 1];
 		}
 	}
@@ -401,7 +423,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	// Check distance from pickups
 	for (SKSpriteNode *pickup in self.pickups) {
 		if (node != pickup && pickup.parent &&
-			[self distanceFromNode:node toNode:pickup] < MAX(self.player.size.width, self.player.size.height)) {
+			[self distanceFromNode:node toNode:pickup] < MAX(self.player.size.width, self.player.size.height) * 1.5) {
 			return [self randomlyPositionNode:node attemptCount:attemptCount + 1];
 		}
 	}
@@ -567,8 +589,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 		
 	}
 	
-	self.player.physicsBody.linearDamping = MAX(1.0, self.player.physicsBody.linearDamping) * 2.0;
-	//[self.progressView incrementProgress:-0.2 animated:YES];
+	self.player.physicsBody.linearDamping = MAX(1.0, self.player.physicsBody.linearDamping) * 3.0;
 	
 	if (otherBody.categoryBitMask == RBPCollisionCategoryWall) {
 		[RBPSoundManager runSoundAction:self.action_BumperCollisionSound onNode:self.player];

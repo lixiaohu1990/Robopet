@@ -31,7 +31,7 @@
 	
 	if (self) {
 		
-		CGFloat sizeScale = MAX(0.5, arc4random_uniform(150) / 100.0); // Random scale between x% and y%
+		CGFloat sizeScale = MAX(0.5, arc4random_uniform(115) / 100.0); // Random scale between x% and y%
 		self.size = CGSizeMake(self.size.width * sizeScale, self.size.height * sizeScale);
 		
 		// Setup physics
