@@ -99,9 +99,9 @@
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.wellnessBar
 														  attribute:NSLayoutAttributeHeight
 														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.soundButton
+															 toItem:self.view
 														  attribute:NSLayoutAttributeHeight
-														 multiplier:1.0
+														 multiplier:0.2
 														   constant:0.0]];
 	
 	
@@ -132,9 +132,9 @@
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.happinessBar
 														  attribute:NSLayoutAttributeHeight
 														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.soundButton
+															 toItem:self.view
 														  attribute:NSLayoutAttributeHeight
-														 multiplier:1.0
+														 multiplier:0.2
 														   constant:0.0]];
 	
 	
@@ -165,10 +165,10 @@
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.energyBar
 														  attribute:NSLayoutAttributeHeight
 														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.soundButton
+															 toItem:self.view
 														  attribute:NSLayoutAttributeHeight
-														 multiplier:1.0
-														   constant:0.0]];
+														 multiplier:0.2
+														   constant:1.0]];
 	
 }
 

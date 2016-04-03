@@ -310,7 +310,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 }
 
 /**
- *  Modeled after the equation y = 35/ln(x + 1)
+ *  y = 35/ln(x + 1)
  *		where x = difficulty
  *
  *  @param difficulty
@@ -323,7 +323,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 }
 
 /**
- *  Modeled after the equation y = (1 / 5)x + [1 / (x + 1)]
+ *  y = (1 / 5)x + [1 / (x + 1)]
  *		where x = difficulty
  *
  *  @param difficulty
