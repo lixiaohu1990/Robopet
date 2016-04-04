@@ -16,7 +16,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zYf-8i-zTP" userLabel="0">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jumpblock" translatesAutoresizingMaskIntoConstraints="NO" id="hIa-d4-HqX">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="jumpblock" translatesAutoresizingMaskIntoConstraints="NO" id="hIa-d4-HqX">
                             <rect key="frame" x="270" y="245" width="60" height="60"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earn points by avoiding the boxes!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8GC-jW-zs0" userLabel="label">
@@ -82,7 +82,7 @@
         </scrollView>
     </objects>
     <resources>
-        <image name="jumpblock" width="60" height="60"/>
+        <image name="jumpblock" width="100" height="100"/>
         <image name="robot_side_whole" width="100" height="148"/>
     </resources>
 </document>
