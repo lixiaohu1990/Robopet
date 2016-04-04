@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -16,10 +15,10 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zYf-8i-zTP" userLabel="0">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="jumpblock" translatesAutoresizingMaskIntoConstraints="NO" id="hIa-d4-HqX">
-                            <rect key="frame" x="270" y="245" width="60" height="60"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jumpblock" translatesAutoresizingMaskIntoConstraints="NO" id="hIa-d4-HqX">
+                            <rect key="frame" x="250" y="225" width="100" height="100"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earn points by avoiding the boxes!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8GC-jW-zs0" userLabel="label">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Earn points by avoiding the boxes!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8GC-jW-zs0" userLabel="label">
                             <rect key="frame" x="0.0" y="330" width="600" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="pgP-S5-FHg"/>
@@ -30,8 +29,8 @@
                         </label>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="8GC-jW-zs0" firstAttribute="top" secondItem="hIa-d4-HqX" secondAttribute="bottom" constant="20" id="0ZU-Wt-5ri"/>
                         <constraint firstItem="hIa-d4-HqX" firstAttribute="centerY" secondItem="zYf-8i-zTP" secondAttribute="centerY" constant="-25" id="4VQ-Wk-3AH"/>
-                        <constraint firstItem="8GC-jW-zs0" firstAttribute="centerY" secondItem="zYf-8i-zTP" secondAttribute="centerY" constant="40" id="8a2-wS-qex"/>
                         <constraint firstItem="hIa-d4-HqX" firstAttribute="centerX" secondItem="zYf-8i-zTP" secondAttribute="centerX" id="YmR-bg-ggL"/>
                         <constraint firstAttribute="trailing" secondItem="8GC-jW-zs0" secondAttribute="trailing" id="gyx-77-HzR"/>
                         <constraint firstItem="8GC-jW-zs0" firstAttribute="leading" secondItem="zYf-8i-zTP" secondAttribute="leading" id="ule-mj-0Wt"/>
@@ -41,22 +40,19 @@
                     <rect key="frame" x="600" y="0.0" width="600" height="600"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to jump!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VhM-Ch-XHt" userLabel="label">
-                            <rect key="frame" x="0.0" y="350" width="600" height="20.5"/>
+                            <rect key="frame" x="0.0" y="445" width="600" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="robot_side_whole" translatesAutoresizingMaskIntoConstraints="NO" id="jYC-oX-kxV">
-                            <rect key="frame" x="225" y="201" width="150" height="148"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="jYC-oX-kxV" secondAttribute="height" multiplier="75:74" id="AHS-6X-MKM"/>
-                            </constraints>
+                            <rect key="frame" x="250" y="125" width="100" height="300"/>
                         </imageView>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="VhM-Ch-XHt" firstAttribute="top" secondItem="jYC-oX-kxV" secondAttribute="bottom" constant="20" id="75s-7Y-SlY"/>
                         <constraint firstItem="jYC-oX-kxV" firstAttribute="centerX" secondItem="DFC-gm-5sK" secondAttribute="centerX" id="CXg-JE-oPq"/>
-                        <constraint firstItem="jYC-oX-kxV" firstAttribute="width" secondItem="DFC-gm-5sK" secondAttribute="width" multiplier="0.25" id="ETt-AR-8ZN"/>
-                        <constraint firstItem="VhM-Ch-XHt" firstAttribute="centerY" secondItem="DFC-gm-5sK" secondAttribute="centerY" constant="60" id="RE3-ys-v7c"/>
+                        <constraint firstItem="jYC-oX-kxV" firstAttribute="height" secondItem="DFC-gm-5sK" secondAttribute="height" multiplier="0.5" id="ETt-AR-8ZN"/>
                         <constraint firstItem="jYC-oX-kxV" firstAttribute="centerY" secondItem="DFC-gm-5sK" secondAttribute="centerY" constant="-25" id="Ycf-RJ-XD2"/>
                         <constraint firstAttribute="trailing" secondItem="VhM-Ch-XHt" secondAttribute="trailing" id="e47-8j-x5W"/>
                         <constraint firstItem="VhM-Ch-XHt" firstAttribute="leading" secondItem="DFC-gm-5sK" secondAttribute="leading" id="oxu-gp-QLx"/>
