@@ -151,7 +151,11 @@
 {
 	// Temporary buttons
 	UIButton *jumpButton = [[UIButton alloc] init];
+        UIImage *btnImage = [UIImage imageNamed:@"jumpbutton1"];
+
 	[jumpButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
+    [jumpButton setImage:btnImage forState:UIControlStateNormal];
+
 	jumpButton.translatesAutoresizingMaskIntoConstraints = NO;
 	jumpButton.backgroundColor = [UIColor lightGrayColor];
 	[jumpButton setTitle:@"Leap Virus" forState:UIControlStateNormal];
@@ -189,7 +193,11 @@
 	
 	
 	UIButton *musicButton = [[UIButton alloc] init];
+    UIImage *btnImage1 = [UIImage imageNamed:@"musicbutton1"];
+
 	[musicButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
+    [musicButton setImage:btnImage1 forState:UIControlStateNormal];
+
 	musicButton.translatesAutoresizingMaskIntoConstraints = NO;
 	musicButton.backgroundColor = [UIColor lightGrayColor];
 	[musicButton setTitle:@"Simoné Says" forState:UIControlStateNormal];
@@ -227,7 +235,11 @@
 	
 	
 	UIButton *rollButton = [[UIButton alloc] init];
+    UIImage *btnImage2 = [UIImage imageNamed:@"rollbutton1"];
+
 	[rollButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
+    [rollButton setImage:btnImage2 forState:UIControlStateNormal];
+
 	rollButton.translatesAutoresizingMaskIntoConstraints = NO;
 	rollButton.backgroundColor = [UIColor lightGrayColor];
 	[rollButton setTitle:@"Bumper Ball" forState:UIControlStateNormal];
