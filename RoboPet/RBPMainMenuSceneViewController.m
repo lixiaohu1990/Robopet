@@ -14,7 +14,6 @@
 
 #import "RBPProgressView.h"
 
-#define HAS_SHOWN_INTRO_SLIDESHOW_DEFAULTS_KEY @"RBPHasShownIntroSlideshowDefaultsKey"
 #define PADDING 20.0
 
 
@@ -24,8 +23,6 @@
 @interface RBPMainMenuSceneViewController ()
 {
 }
-
-@property (strong, nonatomic) UIImageView *introSlideshowImageView;
 
 @property (strong, nonatomic) RBPProgressView *wellnessBar;
 @property (strong, nonatomic) RBPProgressView *happinessBar;
@@ -45,69 +42,8 @@
 {
     [super viewDidLoad];
 	
-	
 	[self setupProgressBars];
 	[self setupMiniGameButtons];
-	
-	[self setupIntroView];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-	[super viewWillAppear:animated];
-	
-	if (self.introSlideshowImageView) {
-		[self.introSlideshowImageView startAnimating];
-	}
-}
-
-- (void)setupIntroView
-{
-	if ([[NSUserDefaults standardUserDefaults] valueForKey:HAS_SHOWN_INTRO_SLIDESHOW_DEFAULTS_KEY]) {
-		return;
-	}
-	
-	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:HAS_SHOWN_INTRO_SLIDESHOW_DEFAULTS_KEY];
-	
-	self.introSlideshowImageView = [[UIImageView alloc] init];
-	self.introSlideshowImageView.translatesAutoresizingMaskIntoConstraints = NO;
-	self.introSlideshowImageView.animationImages = @[
-													 [UIImage imageNamed:@"intro_1.png"],
-													 [UIImage imageNamed:@"intro_2.png"],
-													 [UIImage imageNamed:@"intro_3.png"]
-													 ];
-	self.introSlideshowImageView.animationDuration = 10.0;
-	self.introSlideshowImageView.animationRepeatCount = 1;
-	[self.view addSubview:self.introSlideshowImageView];
-	
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.introSlideshowImageView
-														  attribute:NSLayoutAttributeLeft
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.view
-														  attribute:NSLayoutAttributeLeft
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.introSlideshowImageView
-														  attribute:NSLayoutAttributeBottom
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.view
-														  attribute:NSLayoutAttributeBottom
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.introSlideshowImageView
-														  attribute:NSLayoutAttributeRight
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.view
-														  attribute:NSLayoutAttributeRight
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.introSlideshowImageView
-														  attribute:NSLayoutAttributeTop
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.view
-														  attribute:NSLayoutAttributeTop
-														 multiplier:1.0
-														   constant:0.0]];
 }
 
 - (void)setupProgressBars

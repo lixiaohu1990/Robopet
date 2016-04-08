@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="P9b-na-dCu">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Main Menu Scene View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="RBPMainMenuSceneViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HmT-jR-GoA"/>
+                        <viewControllerLayoutGuide type="bottom" id="SUV-h8-taa"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.9509927611981297" blue="0.11180317392949013" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="MuG-B3-qNN"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -23,6 +31,10 @@
         <scene sceneID="Qag-Ui-OD7">
             <objects>
                 <viewController storyboardIdentifier="RBPMiniGameSceneViewController_Jump" id="e1X-a4-2jD" customClass="RBPMiniGameSceneViewController_Jump" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DMg-lk-Tbj"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZKZ-fo-Aay"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Nwe-wT-eny" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,6 +51,10 @@
         <scene sceneID="Ufe-pr-PZb">
             <objects>
                 <viewController storyboardIdentifier="RBPMiniGameSceneViewController_Music" id="rsG-d8-wtu" customClass="RBPMiniGameSceneViewController_Music" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1fO-U0-ed3"/>
+                        <viewControllerLayoutGuide type="bottom" id="zT0-Q0-Vo0"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="syS-pK-HT1" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,6 +69,10 @@
         <scene sceneID="fNR-ob-IXe">
             <objects>
                 <viewController storyboardIdentifier="RBPMiniGameSceneViewController_Roll" id="gAP-2B-coI" customClass="RBPMiniGameSceneViewController_Roll" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DYm-Up-A8D"/>
+                        <viewControllerLayoutGuide type="bottom" id="oGt-YT-A09"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="BnC-KI-rkk" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -61,7 +81,152 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZvN-uy-pHm" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="64" y="178.91999999999999"/>
+            <point key="canvasLocation" x="192" y="178"/>
+        </scene>
+        <!--Intro Tutorial View Controller-->
+        <scene sceneID="e20-zy-GfC">
+            <objects>
+                <viewController autoresizesArchivedViewToFullSize="NO" id="P9b-na-dCu" customClass="RBPIntroTutorialViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="D0p-18-rDV"/>
+                        <viewControllerLayoutGuide type="bottom" id="CWh-bE-yDT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9pi-sm-y9E">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_screen_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="wmO-SE-wfr">
+                                <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHz-Zv-7ZE" userLabel="label_detail">
+                                <rect key="frame" x="16" y="0.0" width="288" height="142"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Placeholder
+Text</string>
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="27" name="HelveticaNeue-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="robot_front_1" translatesAutoresizingMaskIntoConstraints="NO" id="gzw-p6-06o" userLabel="robot">
+                                <rect key="frame" x="52" y="162" width="215" height="380"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gzw-p6-06o" secondAttribute="height" multiplier="17:30" id="AKg-qD-7fz"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uwf-d9-3Tu" userLabel="minigamePane">
+                                <rect key="frame" x="307" y="209" width="176" height="285"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transition_screen_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="C0s-he-Kqz">
+                                        <rect key="frame" x="10" y="10" width="156" height="265"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="bulb-on" translatesAutoresizingMaskIntoConstraints="NO" id="CNT-0A-KGX">
+                                        <rect key="frame" x="66" y="34" width="44" height="216"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="virus" translatesAutoresizingMaskIntoConstraints="NO" id="UK0-AO-gdU">
+                                        <rect key="frame" x="20" y="92" width="44" height="100"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="battery_full" translatesAutoresizingMaskIntoConstraints="NO" id="6r6-m0-2EC">
+                                        <rect key="frame" x="112" y="117" width="44" height="50"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.94117647059999998" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="6r6-m0-2EC" firstAttribute="trailing" secondItem="Uwf-d9-3Tu" secondAttribute="trailing" constant="-20" id="2VU-cB-4OD"/>
+                                    <constraint firstItem="UK0-AO-gdU" firstAttribute="width" secondItem="Uwf-d9-3Tu" secondAttribute="width" multiplier="1:4" id="Aal-Pa-aX9"/>
+                                    <constraint firstItem="6r6-m0-2EC" firstAttribute="centerY" secondItem="Uwf-d9-3Tu" secondAttribute="centerY" id="Ajm-p9-hLr"/>
+                                    <constraint firstItem="CNT-0A-KGX" firstAttribute="centerX" secondItem="Uwf-d9-3Tu" secondAttribute="centerX" id="GX0-c4-82m"/>
+                                    <constraint firstItem="CNT-0A-KGX" firstAttribute="centerY" secondItem="Uwf-d9-3Tu" secondAttribute="centerY" id="LBv-N5-0Uz"/>
+                                    <constraint firstItem="C0s-he-Kqz" firstAttribute="leading" secondItem="Uwf-d9-3Tu" secondAttribute="leading" constant="10" id="UD6-20-zQc"/>
+                                    <constraint firstItem="CNT-0A-KGX" firstAttribute="width" secondItem="Uwf-d9-3Tu" secondAttribute="width" multiplier="1:4" id="V6k-j7-br4"/>
+                                    <constraint firstAttribute="trailing" secondItem="C0s-he-Kqz" secondAttribute="trailing" constant="10" id="ZuW-bE-XXl"/>
+                                    <constraint firstItem="C0s-he-Kqz" firstAttribute="top" secondItem="Uwf-d9-3Tu" secondAttribute="top" constant="10" id="dZy-NF-Iee"/>
+                                    <constraint firstItem="UK0-AO-gdU" firstAttribute="leading" secondItem="Uwf-d9-3Tu" secondAttribute="leading" constant="20" id="hv7-Dc-l50"/>
+                                    <constraint firstItem="CNT-0A-KGX" firstAttribute="top" secondItem="Uwf-d9-3Tu" secondAttribute="top" constant="34" id="mVa-X3-9cr"/>
+                                    <constraint firstItem="UK0-AO-gdU" firstAttribute="centerY" secondItem="Uwf-d9-3Tu" secondAttribute="centerY" id="noW-Yr-1mS"/>
+                                    <constraint firstAttribute="bottom" secondItem="C0s-he-Kqz" secondAttribute="bottom" constant="10" id="pPS-rh-2ax"/>
+                                    <constraint firstItem="6r6-m0-2EC" firstAttribute="width" secondItem="Uwf-d9-3Tu" secondAttribute="width" multiplier="1:4" id="yk4-Wl-OVL"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1oT-JM-Z6o" userLabel="label_bottom">
+                                <rect key="frame" x="36" y="542" width="248" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="aPz-qH-Xo6"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="TOUCH TO SKIP">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="robot_front_2" translatesAutoresizingMaskIntoConstraints="NO" id="Rza-FG-xVy" userLabel="robot">
+                                <rect key="frame" x="78" y="2000" width="204" height="244"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="robot_front_3" translatesAutoresizingMaskIntoConstraints="NO" id="Erp-O1-PTY" userLabel="robot">
+                                <rect key="frame" x="88" y="2000" width="204" height="244"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qHz-Zv-7ZE" firstAttribute="leading" secondItem="9pi-sm-y9E" secondAttribute="leadingMargin" id="2Wp-ZM-NaQ"/>
+                            <constraint firstItem="gzw-p6-06o" firstAttribute="centerX" secondItem="9pi-sm-y9E" secondAttribute="centerX" id="3iv-PL-Lep"/>
+                            <constraint firstItem="wmO-SE-wfr" firstAttribute="top" secondItem="9pi-sm-y9E" secondAttribute="topMargin" id="8jU-aK-770"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="wmO-SE-wfr" secondAttribute="bottom" id="AH2-xa-dzr"/>
+                            <constraint firstItem="gzw-p6-06o" firstAttribute="bottom" secondItem="1oT-JM-Z6o" secondAttribute="top" id="Bck-yu-vy5"/>
+                            <constraint firstItem="wmO-SE-wfr" firstAttribute="leading" secondItem="9pi-sm-y9E" secondAttribute="leadingMargin" constant="-20" id="Vhs-0X-Nuj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qHz-Zv-7ZE" secondAttribute="trailing" id="ZiP-XJ-g35"/>
+                            <constraint firstItem="Uwf-d9-3Tu" firstAttribute="leading" secondItem="gzw-p6-06o" secondAttribute="trailing" constant="40" id="aY0-Ye-Esd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1oT-JM-Z6o" secondAttribute="trailing" constant="20" id="dxp-XN-SGr"/>
+                            <constraint firstItem="Uwf-d9-3Tu" firstAttribute="width" secondItem="9pi-sm-y9E" secondAttribute="width" multiplier="0.55" id="eDG-oa-f5q"/>
+                            <constraint firstItem="1oT-JM-Z6o" firstAttribute="leading" secondItem="9pi-sm-y9E" secondAttribute="leadingMargin" constant="20" id="evp-Id-xd3"/>
+                            <constraint firstItem="Uwf-d9-3Tu" firstAttribute="centerY" secondItem="gzw-p6-06o" secondAttribute="centerY" id="gFG-ni-6R1"/>
+                            <constraint firstItem="Uwf-d9-3Tu" firstAttribute="height" secondItem="gzw-p6-06o" secondAttribute="height" multiplier="0.75" id="htl-OY-vb5"/>
+                            <constraint firstItem="qHz-Zv-7ZE" firstAttribute="top" secondItem="D0p-18-rDV" secondAttribute="bottom" id="kTG-gi-Xl3"/>
+                            <constraint firstItem="gzw-p6-06o" firstAttribute="top" secondItem="qHz-Zv-7ZE" secondAttribute="bottom" constant="20" id="kcb-Pt-U9K"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wmO-SE-wfr" secondAttribute="trailing" constant="-20" id="oQi-qn-Uoj"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="1oT-JM-Z6o" secondAttribute="bottom" id="x0l-BH-d0E"/>
+                            <constraint firstItem="qHz-Zv-7ZE" firstAttribute="height" secondItem="9pi-sm-y9E" secondAttribute="height" multiplier="0.25" id="xFK-0w-Dn4"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="labelBottom" destination="1oT-JM-Z6o" id="f7i-r0-uO8"/>
+                        <outlet property="labelDetail" destination="qHz-Zv-7ZE" id="q5e-a0-ZCn"/>
+                        <outlet property="minigamePane" destination="Uwf-d9-3Tu" id="ymQ-mn-UAd"/>
+                        <outlet property="robot" destination="gzw-p6-06o" id="kFr-jy-cof"/>
+                        <outlet property="robotCenterXConstraint" destination="3iv-PL-Lep" id="qaN-bX-f5r"/>
+                        <segue destination="BYZ-38-t0r" kind="modal" identifier="RBPMainMenuSceneViewController" modalTransitionStyle="coverVertical" id="KyG-hB-Q9j"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VsD-wO-m0A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1260" y="-612"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="battery_full" width="147" height="50"/>
+        <image name="bulb-on" width="389" height="389"/>
+        <image name="launch_screen_gradient" width="1" height="640"/>
+        <image name="robot_front_1" width="204" height="244"/>
+        <image name="robot_front_2" width="204" height="244"/>
+        <image name="robot_front_3" width="204" height="244"/>
+        <image name="transition_screen_gradient" width="1" height="640"/>
+        <image name="virus" width="100" height="100"/>
+    </resources>
 </document>
