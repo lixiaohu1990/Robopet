@@ -21,7 +21,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.9509927611981297" blue="0.11180317392949013" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="MuG-B3-qNN"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -123,20 +122,20 @@ Text</string>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uwf-d9-3Tu" userLabel="minigamePane">
-                                <rect key="frame" x="307" y="209" width="176" height="285"/>
+                                <rect key="frame" x="307" y="228" width="176" height="247"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transition_screen_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="C0s-he-Kqz">
-                                        <rect key="frame" x="10" y="10" width="156" height="265"/>
+                                        <rect key="frame" x="10" y="10" width="156" height="227"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="bulb-on" translatesAutoresizingMaskIntoConstraints="NO" id="CNT-0A-KGX">
-                                        <rect key="frame" x="66" y="34" width="44" height="216"/>
+                                        <rect key="frame" x="66" y="34" width="44" height="178"/>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="virus" translatesAutoresizingMaskIntoConstraints="NO" id="UK0-AO-gdU">
-                                        <rect key="frame" x="20" y="92" width="44" height="100"/>
+                                        <rect key="frame" x="20" y="73" width="44" height="100"/>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="battery_full" translatesAutoresizingMaskIntoConstraints="NO" id="6r6-m0-2EC">
-                                        <rect key="frame" x="112" y="117" width="44" height="50"/>
+                                        <rect key="frame" x="112" y="98" width="44" height="50"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97647058819999999" green="0.94117647059999998" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -196,7 +195,7 @@ Text</string>
                             <constraint firstItem="Uwf-d9-3Tu" firstAttribute="width" secondItem="9pi-sm-y9E" secondAttribute="width" multiplier="0.55" id="eDG-oa-f5q"/>
                             <constraint firstItem="1oT-JM-Z6o" firstAttribute="leading" secondItem="9pi-sm-y9E" secondAttribute="leadingMargin" constant="20" id="evp-Id-xd3"/>
                             <constraint firstItem="Uwf-d9-3Tu" firstAttribute="centerY" secondItem="gzw-p6-06o" secondAttribute="centerY" id="gFG-ni-6R1"/>
-                            <constraint firstItem="Uwf-d9-3Tu" firstAttribute="height" secondItem="gzw-p6-06o" secondAttribute="height" multiplier="0.75" id="htl-OY-vb5"/>
+                            <constraint firstItem="Uwf-d9-3Tu" firstAttribute="height" secondItem="gzw-p6-06o" secondAttribute="height" multiplier="0.65" id="htl-OY-vb5"/>
                             <constraint firstItem="qHz-Zv-7ZE" firstAttribute="top" secondItem="D0p-18-rDV" secondAttribute="bottom" id="kTG-gi-Xl3"/>
                             <constraint firstItem="gzw-p6-06o" firstAttribute="top" secondItem="qHz-Zv-7ZE" secondAttribute="bottom" constant="20" id="kcb-Pt-U9K"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wmO-SE-wfr" secondAttribute="trailing" constant="-20" id="oQi-qn-Uoj"/>
@@ -211,12 +210,12 @@ Text</string>
                         <outlet property="minigamePane" destination="Uwf-d9-3Tu" id="ymQ-mn-UAd"/>
                         <outlet property="robot" destination="gzw-p6-06o" id="kFr-jy-cof"/>
                         <outlet property="robotCenterXConstraint" destination="3iv-PL-Lep" id="qaN-bX-f5r"/>
-                        <segue destination="BYZ-38-t0r" kind="modal" identifier="RBPMainMenuSceneViewController" modalTransitionStyle="coverVertical" id="KyG-hB-Q9j"/>
+                        <segue destination="BYZ-38-t0r" kind="modal" identifier="RBPMainMenuSceneViewController" modalPresentationStyle="fullScreen" id="KyG-hB-Q9j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VsD-wO-m0A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1260" y="-612"/>
+            <point key="canvasLocation" x="-1198" y="-538"/>
         </scene>
     </scenes>
     <resources>

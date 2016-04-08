@@ -268,7 +268,7 @@
 
 - (void)onMiniGameScoreChange:(RBPMiniGameScene *)miniGame
 {
-	self.scoreLabel.text = [NSString stringWithFormat:@"Score: %0.1f", miniGame.score];
+	self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", (long)miniGame.score];
 	[self.scoreLabel sizeToFit];
 }
 

@@ -310,7 +310,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 }
 
 /**
- *  y = 25/ln(x + 1)
+ *  y = 35/ln(x + 1)
  *		where x = difficulty
  *
  *  @param difficulty
@@ -319,7 +319,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
  */
 - (CGFloat)batteryDrainDurationForDifficulty:(NSUInteger)difficulty
 {
-	return 25.0 / log(self.difficultyLevel + 1.0);
+	return 35.0 / log(self.difficultyLevel + 1.0);
 }
 
 /**
@@ -617,8 +617,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 {
 	[super setScore:score];
 	
-	//self.difficultyLevel = (score / 3) + 1;
-	self.difficultyLevel = score + 1;
+	self.difficultyLevel = (score / 3) + 1;
 }
 
 - (void)setDifficultyLevel:(NSUInteger)difficultyLevel
@@ -637,10 +636,10 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 - (NSString *)gameOverMessage
 {
 	if (self.score >= self.highScore) {
-		return [NSString stringWithFormat:@"NEW HIGH SCORE!!!\n\n%.1f 🔋", self.score];
+		return [NSString stringWithFormat:@"NEW HIGH SCORE!!!\n\n%lu 🔋", (NSInteger)self.score];
 	}
 	
-	return [NSString stringWithFormat:@"Score:%.1f 🔋\n\nHigh Score:%.1f 🔋", self.score, self.highScore];
+	return [NSString stringWithFormat:@"Score:%lu 🔋\n\nHigh Score:%lu 🔋", (NSInteger)self.score, (NSInteger)self.highScore];
 }
 
 #pragma mark - Internal

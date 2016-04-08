@@ -8,6 +8,7 @@
 
 #import "RBPIntroTutorialViewController.h"
 
+
 #define HAS_SHOWN_INTRO_SLIDESHOW_DEFAULTS_KEY @"RBPHasShownIntroSlideshowDefaultsKey"
 
 #define STAGE_1_DETAIL_MESSAGE @"HI! I'M COMPUBOT\nI'M YOUR NEW ROBOT PET"
@@ -48,7 +49,6 @@
 {
 	[super viewDidLoad];
 }
-
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
@@ -59,6 +59,9 @@
 	self.labelDetail.alpha = 0.0;
 	self.labelBottom.alpha = 0.0;
 	self.minigamePane.alpha = 0.0;
+	
+	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+	[self.view addGestureRecognizer:tap];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -87,15 +90,23 @@
 	
 	for (UIView *subview in self.view.subviews) {
 		[subview.layer removeAllAnimations];
+		[subview removeFromSuperview];
 	}
 	[self.view.layer removeAllAnimations];
+	
+	self.labelDetail = nil;
+	self.labelBottom = nil;
+	self.robot = nil;
+	self.minigamePane = nil;
 }
 
 #pragma mark - RBPIntroTutorialViewController
 
 - (void)pushMainMenu
 {
-	[self performSegueWithIdentifier:@"RBPMainMenuSceneViewController" sender:nil];
+	if (!self.presentedViewController) {
+		[self performSegueWithIdentifier:@"RBPMainMenuSceneViewController" sender:nil];
+	}
 }
 
 - (void)startAnimation
@@ -162,13 +173,21 @@
 					 }];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (void)onTap:(UITapGestureRecognizer *)tap
 {
 	// Cancel our perform selector after delay to show main menu
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(pushMainMenu) object:nil];
 	[self pushMainMenu];
+	
+	[self.view removeGestureRecognizer:tap];
 }
 
+/**
+ *  Helper method to auto update the attributed text
+ *
+ *  @param text
+ *  @param label
+ */
 - (void)setText:(NSString *)text onLabel:(UILabel *)label
 {
 	label.attributedText = [[NSAttributedString alloc] initWithString:text
