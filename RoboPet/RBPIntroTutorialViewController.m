@@ -53,11 +53,11 @@
 {
 	[super viewWillAppear:animated];
 	
-	[self setText:STAGE_1_DETAIL_MESSAGE onLabel:self.labelDetail];
-	[self setText:self.labelBottom.text onLabel:self.labelBottom];
-	
 	self.minigamePane.layer.cornerRadius = 10;
 	self.minigamePane.clipsToBounds = YES;
+	
+	self.labelDetail.alpha = 0.0;
+	self.labelBottom.alpha = 0.0;
 	self.minigamePane.alpha = 0.0;
 }
 
@@ -98,60 +98,75 @@
 	[self performSegueWithIdentifier:@"RBPMainMenuSceneViewController" sender:nil];
 }
 
+- (void)startAnimation
+{
+	[self.view layoutIfNeeded];
+	
+	[self setText:STAGE_1_DETAIL_MESSAGE onLabel:self.labelDetail];
+	[self setText:self.labelBottom.text onLabel:self.labelBottom];
+	
+	[UIView animateWithDuration:0.25
+						  delay:0.0
+						options:UIViewAnimationOptionCurveEaseInOut
+					 animations:^{
+						 
+						 self.labelDetail.alpha = 1.0;
+						 self.labelBottom.alpha = 1.0;
+								
+					 } completion:^(BOOL finished) {
+						 
+						 // Stage 1
+						 [UIView animateWithDuration:STAGE_1_ANIMATION_DURATION
+											   delay:STAGE_1_ANIMATION_DELAY
+											 options:UIViewAnimationOptionCurveEaseInOut
+										  animations:^{
+											  
+											  // move to left 15% of screen
+											  self.robotCenterXConstraint.constant = CGRectGetWidth(self.view.bounds) * -0.30;
+											  self.minigamePane.alpha = 1.0;
+											  [self.view layoutIfNeeded];
+											  
+										  } completion:^(BOOL finished) {
+											  
+											  if (finished) {
+												  
+												  [self setText:STAGE_2_DETAIL_MESSAGE onLabel:self.labelDetail];
+												  self.robot.image = [UIImage imageNamed:@"robot_front_2"];
+												  
+												  // Stage 1
+												  [UIView animateWithDuration:STAGE_2_ANIMATION_DURATION
+																		delay:STAGE_2_ANIMATION_DELAY
+																	  options:UIViewAnimationOptionCurveEaseInOut
+																   animations:^{
+																	   
+																	   self.robotCenterXConstraint.constant = 0.0;
+																	   self.minigamePane.alpha = 0.0;
+																	   [self.view layoutIfNeeded];
+																	   
+																   } completion:^(BOOL finished) {
+																	   
+																	   if (finished) {
+																		   
+																		   [self setText:STAGE_3_DETAIL_MESSAGE onLabel:self.labelDetail];
+																		   self.robot.image = [UIImage imageNamed:@"robot_front_3"];
+																		   [self performSelector:@selector(pushMainMenu) withObject:nil afterDelay:STAGE_3_ANIMATION_DELAY];
+																		   
+																	   }
+																	   
+																   }];
+												  
+											  }
+											  
+										  }];
+						 
+					 }];
+}
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
 	// Cancel our perform selector after delay to show main menu
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(pushMainMenu) object:nil];
 	[self pushMainMenu];
-}
-
-- (void)startAnimation
-{
-	[self.view layoutIfNeeded];
-	
-	// Stage 1
-	[UIView animateWithDuration:STAGE_1_ANIMATION_DURATION
-						  delay:STAGE_1_ANIMATION_DELAY
-						options:UIViewAnimationOptionCurveEaseInOut
-					 animations:^{
-						 
-						 // move to left 15% of screen
-						 self.robotCenterXConstraint.constant = CGRectGetWidth(self.view.bounds) * -0.30;
-						 self.minigamePane.alpha = 1.0;
-						 [self.view layoutIfNeeded];
-							
-						} completion:^(BOOL finished) {
-							
-							if (finished) {
-								
-								[self setText:STAGE_2_DETAIL_MESSAGE onLabel:self.labelDetail];
-								self.robot.image = [UIImage imageNamed:@"robot_front_2"];
-								
-								// Stage 1
-								[UIView animateWithDuration:STAGE_2_ANIMATION_DURATION
-													  delay:STAGE_2_ANIMATION_DELAY
-													options:UIViewAnimationOptionCurveEaseInOut
-												 animations:^{
-													 
-													 self.robotCenterXConstraint.constant = 0.0;
-													 self.minigamePane.alpha = 0.0;
-													 [self.view layoutIfNeeded];
-													 
-												 } completion:^(BOOL finished) {
-													 
-													 if (finished) {
-														 
-														 [self setText:STAGE_3_DETAIL_MESSAGE onLabel:self.labelDetail];
-														 self.robot.image = [UIImage imageNamed:@"robot_front_3"];
-														 [self performSelector:@selector(pushMainMenu) withObject:nil afterDelay:STAGE_3_ANIMATION_DELAY];
-														 
-													 }
-													 
-												 }];
-								
-							}
-							
-						}];
 }
 
 - (void)setText:(NSString *)text onLabel:(UILabel *)label
