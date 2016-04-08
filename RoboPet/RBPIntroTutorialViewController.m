@@ -67,8 +67,11 @@
 	
 	if ([[NSUserDefaults standardUserDefaults] valueForKey:HAS_SHOWN_INTRO_SLIDESHOW_DEFAULTS_KEY]) {
 		
-		//[self pushMainMenu];
+#ifdef DEBUG
 		[self startAnimation];
+#else
+		[self pushMainMenu];
+#endif
 		
 	} else {
 		
