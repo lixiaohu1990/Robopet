@@ -310,7 +310,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 }
 
 /**
- *  y = 35/ln(x + 1)
+ *  y = 20/ln(x + 1)
  *		where x = difficulty
  *
  *  @param difficulty
@@ -319,7 +319,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
  */
 - (CGFloat)batteryDrainDurationForDifficulty:(NSUInteger)difficulty
 {
-	return 35.0 / log(self.difficultyLevel + 1.0);
+	return 20.0 / log(self.difficultyLevel + 1.0);
 }
 
 /**
@@ -617,7 +617,8 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 {
 	[super setScore:score];
 	
-	self.difficultyLevel = (score / 3) + 1;
+	// self.difficultyLevel = (score / 3) + 1;
+	self.difficultyLevel = (NSUInteger)score;
 }
 
 - (void)setDifficultyLevel:(NSUInteger)difficultyLevel
