@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -97,7 +98,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_screen_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="wmO-SE-wfr">
                                 <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHz-Zv-7ZE" userLabel="label_detail">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="qHz-Zv-7ZE" userLabel="label_detail">
                                 <rect key="frame" x="16" y="0.0" width="288" height="142"/>
                                 <attributedString key="attributedText">
                                     <fragment>
@@ -110,7 +111,7 @@ Text</string>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
-                                <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
@@ -121,7 +122,7 @@ Text</string>
                                     <constraint firstAttribute="width" secondItem="gzw-p6-06o" secondAttribute="height" multiplier="17:30" id="AKg-qD-7fz"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uwf-d9-3Tu" userLabel="minigamePane">
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uwf-d9-3Tu" userLabel="minigamePane">
                                 <rect key="frame" x="307" y="228" width="176" height="247"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transition_screen_gradient" translatesAutoresizingMaskIntoConstraints="NO" id="C0s-he-Kqz">
@@ -156,8 +157,14 @@ Text</string>
                                     <constraint firstItem="6r6-m0-2EC" firstAttribute="width" secondItem="Uwf-d9-3Tu" secondAttribute="width" multiplier="1:4" id="yk4-Wl-OVL"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1oT-JM-Z6o" userLabel="label_bottom">
-                                <rect key="frame" x="36" y="542" width="248" height="26"/>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="robot_front_2" translatesAutoresizingMaskIntoConstraints="NO" id="Rza-FG-xVy" userLabel="robot">
+                                <rect key="frame" x="78" y="2000" width="204" height="244"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="robot_front_3" translatesAutoresizingMaskIntoConstraints="NO" id="Erp-O1-PTY" userLabel="robot">
+                                <rect key="frame" x="88" y="2000" width="204" height="244"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1oT-JM-Z6o" userLabel="label_bottom">
+                                <rect key="frame" x="160" y="542" width="144" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="aPz-qH-Xo6"/>
                                 </constraints>
@@ -165,21 +172,15 @@ Text</string>
                                     <fragment content="TOUCH TO SKIP">
                                         <attributes>
                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
+                                            <font key="NSFont" size="22" name="HelveticaNeue-Bold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
-                                <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="robot_front_2" translatesAutoresizingMaskIntoConstraints="NO" id="Rza-FG-xVy" userLabel="robot">
-                                <rect key="frame" x="78" y="2000" width="204" height="244"/>
-                            </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="robot_front_3" translatesAutoresizingMaskIntoConstraints="NO" id="Erp-O1-PTY" userLabel="robot">
-                                <rect key="frame" x="88" y="2000" width="204" height="244"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -191,9 +192,9 @@ Text</string>
                             <constraint firstItem="wmO-SE-wfr" firstAttribute="leading" secondItem="9pi-sm-y9E" secondAttribute="leadingMargin" constant="-20" id="Vhs-0X-Nuj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qHz-Zv-7ZE" secondAttribute="trailing" id="ZiP-XJ-g35"/>
                             <constraint firstItem="Uwf-d9-3Tu" firstAttribute="leading" secondItem="gzw-p6-06o" secondAttribute="trailing" constant="40" id="aY0-Ye-Esd"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="1oT-JM-Z6o" secondAttribute="trailing" constant="20" id="dxp-XN-SGr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1oT-JM-Z6o" secondAttribute="trailing" id="dxp-XN-SGr"/>
                             <constraint firstItem="Uwf-d9-3Tu" firstAttribute="width" secondItem="9pi-sm-y9E" secondAttribute="width" multiplier="0.55" id="eDG-oa-f5q"/>
-                            <constraint firstItem="1oT-JM-Z6o" firstAttribute="leading" secondItem="9pi-sm-y9E" secondAttribute="leadingMargin" constant="20" id="evp-Id-xd3"/>
+                            <constraint firstItem="1oT-JM-Z6o" firstAttribute="leading" secondItem="9pi-sm-y9E" secondAttribute="centerXWithinMargins" id="evp-Id-xd3"/>
                             <constraint firstItem="Uwf-d9-3Tu" firstAttribute="centerY" secondItem="gzw-p6-06o" secondAttribute="centerY" id="gFG-ni-6R1"/>
                             <constraint firstItem="Uwf-d9-3Tu" firstAttribute="height" secondItem="gzw-p6-06o" secondAttribute="height" multiplier="0.65" id="htl-OY-vb5"/>
                             <constraint firstItem="qHz-Zv-7ZE" firstAttribute="top" secondItem="D0p-18-rDV" secondAttribute="bottom" id="kTG-gi-Xl3"/>

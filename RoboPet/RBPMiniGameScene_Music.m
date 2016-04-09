@@ -479,15 +479,6 @@ typedef NS_ENUM(NSInteger, GameStateType){
 	return @"Simoné Says";
 }
 
-- (NSString *)gameOverMessage
-{
-    if (self.score > 0.0 && self.score >= self.highScore) {
-        return [NSString stringWithFormat:@"NEW HIGH SCORE!!!\n\n%lu", (NSInteger)self.score];
-    }
-    
-    return [NSString stringWithFormat:@"Score:%lu\nHigh Score:%lu", (NSInteger)self.score, (NSInteger)self.highScore];
-}
-
 @end
 
 

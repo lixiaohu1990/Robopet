@@ -137,6 +137,27 @@
 														  attribute:NSLayoutAttributeBottom
 														 multiplier:1.0
 														   constant:0.0]];
+	
+	
+	// Update labels with attributed font
+	for (UIView *subview in self.scrollView.subviews) {
+		for (UIView *subSubView in subview.subviews) {
+			if ([subSubView isKindOfClass:[UILabel class]]) {
+				
+				UILabel *label = (UILabel *)subSubView;
+				label.adjustsFontSizeToFitWidth = YES;
+				
+				label.attributedText = [[NSMutableAttributedString alloc] initWithString:label.text
+																			  attributes:@{
+																						   NSFontAttributeName : [UIFont boldSystemFontOfSize:21],
+																						   NSStrokeColorAttributeName : [UIColor blackColor],
+																						   NSForegroundColorAttributeName : [UIColor whiteColor],
+																						   NSStrokeWidthAttributeName : @(-3.0)
+																						   }];
+				
+			}
+		}
+	}
 }
 
 #pragma mark - UIScrollViewDelegate

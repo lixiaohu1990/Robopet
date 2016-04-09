@@ -634,15 +634,6 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	}
 }
 
-- (NSString *)gameOverMessage
-{
-	if (self.score >= self.highScore) {
-		return [NSString stringWithFormat:@"NEW HIGH SCORE!!!\n\n%lu 🔋", (NSInteger)self.score];
-	}
-	
-	return [NSString stringWithFormat:@"Score:%lu 🔋\n\nHigh Score:%lu 🔋", (NSInteger)self.score, (NSInteger)self.highScore];
-}
-
 #pragma mark - Internal
 
 - (NSMutableArray *)pickups

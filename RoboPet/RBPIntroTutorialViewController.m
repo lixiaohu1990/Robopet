@@ -12,15 +12,32 @@
 #define HAS_SHOWN_INTRO_SLIDESHOW_DEFAULTS_KEY @"RBPHasShownIntroSlideshowDefaultsKey"
 
 #define STAGE_1_DETAIL_MESSAGE @"HI! I'M COMPUBOT\nI'M YOUR NEW ROBOT PET"
-#define STAGE_1_ANIMATION_DELAY 1.0
-#define STAGE_1_ANIMATION_DURATION 1.0
-
-#define STAGE_2_DETAIL_MESSAGE @"PLAY MINI-GAMES\nTO KEEP ME ENERGIZED, HAPPY AND VIRUS FREE"
-#define STAGE_2_ANIMATION_DELAY 1.0
-#define STAGE_2_ANIMATION_DURATION 1.0
-
+#define STAGE_2_DETAIL_MESSAGE @"PLAY MINI-GAMES\nTO KEEP ME ENERGIZED,\nHAPPY AND VIRUS FREE"
 #define STAGE_3_DETAIL_MESSAGE @"PLEASE TAKE GOOD\nCARE OF ME!"
-#define STAGE_3_ANIMATION_DELAY 1.0
+
+#ifdef DEBUG
+
+	#define STAGE_1_ANIMATION_DELAY 1.0
+	#define STAGE_1_ANIMATION_DURATION 1.0
+
+	#define STAGE_2_ANIMATION_DELAY 1.0
+	#define STAGE_2_ANIMATION_DURATION 1.0
+
+	#define STAGE_3_ANIMATION_DELAY 1.0
+
+#else
+
+	#define STAGE_1_ANIMATION_DELAY 4.0
+	#define STAGE_1_ANIMATION_DURATION 1.5
+
+	#define STAGE_2_ANIMATION_DELAY 4.0
+	#define STAGE_2_ANIMATION_DURATION 1.5
+
+	#define STAGE_3_ANIMATION_DELAY 4.0
+
+#endif
+
+
 
 
 
@@ -59,22 +76,21 @@
 	self.labelDetail.alpha = 0.0;
 	self.labelBottom.alpha = 0.0;
 	self.minigamePane.alpha = 0.0;
-	
-	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
-	[self.view addGestureRecognizer:tap];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 	
+#ifdef DEBUG
+	
+	[self startAnimation];
+	
+#else
+	
 	if ([[NSUserDefaults standardUserDefaults] valueForKey:HAS_SHOWN_INTRO_SLIDESHOW_DEFAULTS_KEY]) {
 		
-#ifdef DEBUG
-		[self startAnimation];
-#else
 		[self pushMainMenu];
-#endif
 		
 	} else {
 		
@@ -82,6 +98,9 @@
 		[self startAnimation];
 		
 	}
+	
+#endif
+	
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -173,13 +192,11 @@
 					 }];
 }
 
-- (void)onTap:(UITapGestureRecognizer *)tap
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
 	// Cancel our perform selector after delay to show main menu
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(pushMainMenu) object:nil];
 	[self pushMainMenu];
-	
-	[self.view removeGestureRecognizer:tap];
 }
 
 /**
@@ -192,9 +209,10 @@
 {
 	label.attributedText = [[NSAttributedString alloc] initWithString:text
 														   attributes:@{
+																		NSFontAttributeName : [UIFont boldSystemFontOfSize:label.font.pointSize],
 																		NSStrokeColorAttributeName : [UIColor blackColor],
 																		NSForegroundColorAttributeName : [UIColor whiteColor],
-																		NSStrokeWidthAttributeName : @(-2.0)
+																		NSStrokeWidthAttributeName : @(-3.0)
 																		}];
 }
 

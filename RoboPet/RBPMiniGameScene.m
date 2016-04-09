@@ -105,15 +105,6 @@
 	return [NSString stringWithFormat:@"RBPHighScore%@DefaultsKey", NSStringFromClass([self class])];
 }
 
-- (NSString *)gameOverMessage
-{
-	if (self.score > self.highScore) {
-		return [NSString stringWithFormat:@"NEW HIGH SCORE!!!\n\n%.1f", self.score];
-	}
-	
-	return [NSString stringWithFormat:@"Score:%.1f\n\nHigh Score:%.1f", self.score, self.highScore];
-}
-
 #pragma mark - SKScene
 
 - (void)update:(CFTimeInterval)currentTime

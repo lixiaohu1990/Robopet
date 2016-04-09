@@ -310,6 +310,7 @@
 		formSheet.presentationController.contentViewSize = self.view.bounds.size;
 		formSheet.presentationController.shouldCenterHorizontally = formSheet.presentationController.shouldCenterVertically = YES;
 		formSheet.contentViewControllerTransitionStyle =  MZFormSheetPresentationTransitionStyleDropDown;
+		formSheet.contentViewCornerRadius = 0.0;
 		
 		[self presentViewController:formSheet animated:YES completion:nil];
 		

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -16,10 +17,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jumpblock" translatesAutoresizingMaskIntoConstraints="NO" id="hIa-d4-HqX">
-                            <rect key="frame" x="250" y="225" width="100" height="100"/>
+                            <rect key="frame" x="165" y="140" width="270" height="270"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Earn points by avoiding the boxes!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8GC-jW-zs0" userLabel="label">
-                            <rect key="frame" x="0.0" y="330" width="600" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earn points by avoiding the boxes!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8GC-jW-zs0" userLabel="label">
+                            <rect key="frame" x="0.0" y="430" width="600" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="pgP-S5-FHg"/>
                             </constraints>
@@ -31,8 +32,10 @@
                     <constraints>
                         <constraint firstItem="8GC-jW-zs0" firstAttribute="top" secondItem="hIa-d4-HqX" secondAttribute="bottom" constant="20" id="0ZU-Wt-5ri"/>
                         <constraint firstItem="hIa-d4-HqX" firstAttribute="centerY" secondItem="zYf-8i-zTP" secondAttribute="centerY" constant="-25" id="4VQ-Wk-3AH"/>
+                        <constraint firstItem="hIa-d4-HqX" firstAttribute="width" secondItem="zYf-8i-zTP" secondAttribute="height" multiplier="0.45" id="RBV-fK-DLA"/>
                         <constraint firstItem="hIa-d4-HqX" firstAttribute="centerX" secondItem="zYf-8i-zTP" secondAttribute="centerX" id="YmR-bg-ggL"/>
                         <constraint firstAttribute="trailing" secondItem="8GC-jW-zs0" secondAttribute="trailing" id="gyx-77-HzR"/>
+                        <constraint firstItem="hIa-d4-HqX" firstAttribute="height" secondItem="zYf-8i-zTP" secondAttribute="height" multiplier="0.45" id="kp8-tE-P4y"/>
                         <constraint firstItem="8GC-jW-zs0" firstAttribute="leading" secondItem="zYf-8i-zTP" secondAttribute="leading" id="ule-mj-0Wt"/>
                     </constraints>
                 </view>

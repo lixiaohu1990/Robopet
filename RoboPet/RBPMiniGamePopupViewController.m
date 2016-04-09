@@ -36,6 +36,12 @@
 	self.automaticallyAdjustsScrollViewInsets = NO;
 	self.view.backgroundColor = [UIColor colorWithRed:(249.0 / 255.0) green:(240.0 / 255.0) blue:(201.0 / 255.0) alpha:1.0];
 	
+//	self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+//	// So the background color doesn't show through the bar
+//	UIView *barBackground = [[UIView alloc] initWithFrame:self.navigationController.navigationBar.frame];
+//	barBackground.backgroundColor = [UIColor whiteColor];
+//	[self.view addSubview:barBackground];
+	
 	
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Quit"
 																			 style:UIBarButtonItemStylePlain

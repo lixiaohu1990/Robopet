@@ -236,7 +236,7 @@
 {
 	RBPProgressView *bar = [[RBPProgressView alloc] initWithDefaultsKey:WELLNESS_DEFAULTS_KEY];
 	
-	bar.progressFill.backgroundColor = [UIColor redColor];
+	bar.progressFill.backgroundColor = bar.tintColor = [UIColor redColor];
 	
 	return bar;
 }
@@ -245,7 +245,7 @@
 {
 	RBPProgressView *bar = [[RBPProgressView alloc] initWithDefaultsKey:HAPPINESS_DEFAULTS_KEY];
 	
-	bar.progressFill.backgroundColor = [UIColor purpleColor];
+	bar.progressFill.backgroundColor = bar.tintColor = [UIColor purpleColor];
 	
 	return bar;
 }
@@ -254,7 +254,7 @@
 {
 	RBPProgressView *bar = [[RBPProgressView alloc] initWithDefaultsKey:ENERGY_DEFAULTS_KEY];
 	
-	bar.progressFill.backgroundColor = [UIColor cyanColor];
+	bar.progressFill.backgroundColor = bar.tintColor = [UIColor cyanColor];
 	
 	return bar;
 }

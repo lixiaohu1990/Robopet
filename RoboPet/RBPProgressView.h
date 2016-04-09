@@ -12,7 +12,7 @@
 #define HAPPINESS_DEFAULTS_KEY @"RBPHappinessLevelDefaultsKey"
 #define ENERGY_DEFAULTS_KEY @"RBPEnergyLevelDefaultsKey"
 
-#define RBPPROGRESSVIEW_ANIMATION_TIME 0.5
+#define RBPPROGRESSVIEW_ANIMATION_TIME 0.65
 
 
 

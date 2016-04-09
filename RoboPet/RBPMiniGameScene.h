@@ -56,11 +56,6 @@
 @property (nonatomic, readonly) CGFloat highScore;
 
 /**
- *  Text for the game over message. Change in subclass by overriding getter
- */
-@property (weak, nonatomic, readonly) NSString *gameOverMessage;
-
-/**
  *  The time in seconds since the mini game has been playing
  *	Does not increment when paused
  */
