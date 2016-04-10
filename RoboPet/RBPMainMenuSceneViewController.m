@@ -156,8 +156,8 @@
 	[jumpButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
     [jumpButton setBackgroundImage:btnImage forState:UIControlStateNormal];
 	jumpButton.translatesAutoresizingMaskIntoConstraints = NO;
-//	[jumpButton setTitle:@"Leap Virus" forState:UIControlStateNormal];
-//    [jumpButton setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+    [jumpButton setTitle:@"Leap Virus" forState:UIControlStateNormal];
+    [jumpButton setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
 	[self.view addSubview:jumpButton];
 	
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:jumpButton
