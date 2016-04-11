@@ -264,10 +264,10 @@ typedef NS_ENUM(NSInteger, GameStateType){
     }
     
     if (soundAction) {
-        if ([RBPSoundManager soundEnabled]) {
-            [UserPromptLabel runAction:soundAction completion:block];
-        }
-    }
+		[RBPSoundManager runSoundAction:soundAction onNode:UserPromptLabel completion:block];
+	} else {
+		block();
+	}
 }
 
 -(void) update: (CFTimeInterval) currentTime

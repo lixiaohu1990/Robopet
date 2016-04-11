@@ -165,7 +165,7 @@ bool canJump;
     
     if(canJump == YES){
         self.robot.physicsBody.velocity = CGVectorMake(0.0, 800);
-        [RBPSoundManager runSoundAction:self.action_jump onNode:self.robot];
+		[RBPSoundManager runSoundAction:self.action_jump onNode:self.robot completion:nil];
     }
 
     
@@ -300,60 +300,32 @@ bool canJump;
 -(void) checkDead{
     
     if ([self.robot intersectsNode:self.box1]) {
-        
-        if ([RBPSoundManager soundEnabled]) {
-            
-            [self runAction:self.action_death completion:^{
-				[self endMinigame];
-            }];
-            
-        } else {
-           [self endMinigame];
-        }
-        
-        
+		
+		[RBPSoundManager runSoundAction:self.action_death onNode:self completion:^{
+			[self endMinigame];
+		}];
         
     }
     if ([self.robot intersectsNode:self.box2]) {
-        
-        
-        if ([RBPSoundManager soundEnabled]) {
-            
-            [self runAction:self.action_death completion:^{
-                [self endMinigame];
-            }];
-            
-        } else {
-            [self endMinigame];
-        }
-        
+		
+		[RBPSoundManager runSoundAction:self.action_death onNode:self completion:^{
+			[self endMinigame];
+		}];
+		
     }
     if ([self.robot intersectsNode:self.box3]) {
         
-        
-        if ([RBPSoundManager soundEnabled]) {
-            
-            [self runAction:self.action_death completion:^{
-				[self endMinigame];
-            }];
-            
-        } else {
-            [self endMinigame];
-        }
-        
+		[RBPSoundManager runSoundAction:self.action_death onNode:self completion:^{
+			[self endMinigame];
+		}];
+		
     }
     if ([self.robot intersectsNode:self.box4]) {
         
-        if ([RBPSoundManager soundEnabled]) {
-            
-            [self runAction:self.action_death completion:^{
-                [self endMinigame];
-            }];
-            
-        } else {
-            [self endMinigame];
-        }
-        
+		[RBPSoundManager runSoundAction:self.action_death onNode:self completion:^{
+			[self endMinigame];
+		}];
+		
     }
     
 }

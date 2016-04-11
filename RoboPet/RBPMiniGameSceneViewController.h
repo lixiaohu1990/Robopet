@@ -6,7 +6,6 @@
 //  Copyright © 2016 Pat Sluth. All rights reserved.
 //
 
-@import UIKit;
 @import SpriteKit;
 
 #import "RBPBaseSceneViewController.h"

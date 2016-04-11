@@ -6,7 +6,6 @@
 //  Copyright © 2016 Pat Sluth. All rights reserved.
 //
 
-@import Foundation;
 @import SpriteKit;
 
 
@@ -26,7 +25,7 @@
  *  @param action
  *  @param node
  */
-+ (void)runSoundAction:(SKAction *)action onNode:(SKNode *)node;
++ (void)runSoundAction:(SKAction *)action onNode:(SKNode *)node completion:(void (^)())completion;
 
 @end
 

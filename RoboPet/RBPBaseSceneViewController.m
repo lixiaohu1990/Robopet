@@ -32,7 +32,9 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+	[super viewDidLoad];
+	
+	self.view.contentMode = UIViewContentModeScaleAspectFill;
 	
 	
     CGSize sceneSize = CGSizeMake(self.view.bounds.size.width * [UIScreen mainScreen].scale,
@@ -43,8 +45,9 @@
 	NSAssert(sceneClass, @"sceneClass cannot be nil");
 	NSAssert([sceneClass isSubclassOfClass:[RBPBaseScene class]],
 			 ([NSString stringWithFormat:@"%@ must be subclass of %@", sceneClass, [RBPBaseScene class]]));
-    RBPBaseScene *scene = [sceneClass sceneWithSize:sceneSize];
-    scene.scaleMode = SKSceneScaleModeFill;
+	RBPBaseScene *scene = [sceneClass sceneWithSize:sceneSize];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+	scene.backgroundColor = [UIColor clearColor];
 	
 	
 //	[SKTexture preloadTextures:[self texturesToPreload] withCompletionHandler:^{

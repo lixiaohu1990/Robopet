@@ -30,10 +30,14 @@
 	[[NSUserDefaults standardUserDefaults] setBool:soundEnabled forKey:SOUND_ENABLED_DEFAULTS_KEY];
 }
 
-+ (void)runSoundAction:(SKAction *)action onNode:(SKNode *)node
++ (void)runSoundAction:(SKAction *)action onNode:(SKNode *)node completion:(void (^)())completion
 {
 	if ([RBPSoundManager soundEnabled]) {
-		[node runAction:action];
+		[node runAction:action completion:completion];
+	} else {
+		if (completion) {
+			completion();
+		}
 	}
 }
 

@@ -195,6 +195,9 @@
 			isa = PBXGroup;
 			children = (
 				2E8CA0291C5123D1009D9F1F /* src */,
+				2E23B92B1C8E391100F9E94E /* Main.storyboard */,
+				2EA20A991CA0AFC300213A75 /* LaunchScreen.xib */,
+				2E8CA0201C51238C009D9F1F /* Info.plist */,
 				2E8CA02A1C5123E4009D9F1F /* Resources */,
 				2E8CA00F1C51238C009D9F1F /* Supporting Files */,
 			);
@@ -243,10 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				2E8F19631CAA13460008B0AF /* Sounds */,
-				2E23B92B1C8E391100F9E94E /* Main.storyboard */,
-				2EA20A991CA0AFC300213A75 /* LaunchScreen.xib */,
 				2EA20A9B1CA0B0E900213A75 /* Assets.xcassets */,
-				2E8CA0201C51238C009D9F1F /* Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";

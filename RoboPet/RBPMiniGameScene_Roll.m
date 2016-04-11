@@ -538,7 +538,7 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 			
 			if ([pickup intersectsNode:self.player]) {
 				
-				[RBPSoundManager runSoundAction:self.action_PickupSound onNode:self.player];
+				[RBPSoundManager runSoundAction:self.action_PickupSound onNode:self.player completion:nil];
 				self.score += pickup.chargePercentage;
 				[pickup removeFromParent];
 				
@@ -592,10 +592,10 @@ typedef NS_OPTIONS(uint32_t, RBPCollisionCategory) {
 	self.player.physicsBody.linearDamping = MAX(1.0, self.player.physicsBody.linearDamping) * 3.0;
 	
 	if (otherBody.categoryBitMask == RBPCollisionCategoryWall) {
-		[RBPSoundManager runSoundAction:self.action_BumperCollisionSound onNode:self.player];
+		[RBPSoundManager runSoundAction:self.action_BumperCollisionSound onNode:self.player completion:nil];
 	} else if (otherBody.categoryBitMask == RBPCollisionCategoryBumper) {
 		[self pulseNode:otherBody.node scale:1.3 duration:0.4];
-		[RBPSoundManager runSoundAction:self.action_BumperCollisionSound onNode:self.player];
+		[RBPSoundManager runSoundAction:self.action_BumperCollisionSound onNode:self.player completion:nil];
 	}
 	
 	
