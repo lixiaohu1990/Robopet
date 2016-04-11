@@ -83,7 +83,7 @@
 		2E8CA0121C51238C009D9F1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2E8CA0131C51238C009D9F1F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2E8CA0151C51238C009D9F1F /* RBPMainMenuSceneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBPMainMenuSceneViewController.h; sourceTree = "<group>"; };
-		2E8CA0161C51238C009D9F1F /* RBPMainMenuSceneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RBPMainMenuSceneViewController.m; sourceTree = "<group>"; };
+		2E8CA0161C51238C009D9F1F /* RBPMainMenuSceneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RBPMainMenuSceneViewController.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; };
 		2E8CA0201C51238C009D9F1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E8CA0261C5123BB009D9F1F /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		2E8CA0321C51259D009D9F1F /* RBPMiniGameScene_Roll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameScene_Roll.h; sourceTree = "<group>"; };

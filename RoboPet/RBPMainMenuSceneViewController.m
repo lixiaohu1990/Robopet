@@ -156,8 +156,8 @@
 	[jumpButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
     [jumpButton setBackgroundImage:btnImage forState:UIControlStateNormal];
 	jumpButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [jumpButton setTitle:@"Leap Virus" forState:UIControlStateNormal];
-    [jumpButton setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+    [jumpButton setTitle:@"  Leap Virus" forState:UIControlStateNormal];
+    [jumpButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 	[self.view addSubview:jumpButton];
 	
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:jumpButton
@@ -199,8 +199,8 @@
 
 	musicButton.translatesAutoresizingMaskIntoConstraints = NO;
 	
-	[musicButton setTitle:@"Simoné Says" forState:UIControlStateNormal];
-    [musicButton setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+	[musicButton setTitle:@"   Simoné Says" forState:UIControlStateNormal];
+    [musicButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 	[self.view addSubview:musicButton];
 	
 	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:musicButton
@@ -240,8 +240,8 @@
 	[rollButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
     [rollButton setBackgroundImage:btnImage2 forState:UIControlStateNormal];
 	rollButton.translatesAutoresizingMaskIntoConstraints = NO;
-	[rollButton setTitle:@"Bumper Ball" forState:UIControlStateNormal];
-    [rollButton setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+	[rollButton setTitle:@"  Bumper Ball" forState:UIControlStateNormal];
+    [rollButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 
 
     
