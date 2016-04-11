@@ -216,7 +216,7 @@
 	return (self.progressFill.layer.animationKeys && self.progressFill.layer.animationKeys.count > 0);
 }
 
-#ifdef DEBUG
+//#ifdef DEBUG
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -228,7 +228,7 @@
 		[self setProgress:self.progress + 0.1 animated:YES];
 }
 
-#endif
+//#endif
 
 #pragma mark - Static
 

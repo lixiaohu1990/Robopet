@@ -150,7 +150,8 @@
 - (void)setupMiniGameButtons
 {
 	// Temporary buttons
-	UIButton *jumpButton = [[UIButton alloc] init];
+    UIButton *jumpButton = [[UIButton alloc] init];
+    jumpButton.tag = 0;
     UIImage *btnImage = [UIImage imageNamed:@"jump_button"];
 
 	[jumpButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -192,6 +193,7 @@
 	
 	
 	UIButton *musicButton = [[UIButton alloc] init];
+    musicButton.tag = 1;
     UIImage *btnImage1 = [UIImage imageNamed:@"music_button"];
 
 	[musicButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -234,7 +236,8 @@
 	
 	
 	
-	UIButton *rollButton = [[UIButton alloc] init];
+    UIButton *rollButton = [[UIButton alloc] init];
+    rollButton.tag = 2;
     UIImage *btnImage2 = [UIImage imageNamed:@"roll_button"];
 
 	[rollButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -290,14 +293,13 @@
 
 - (void)clickedLoadMiniGameButton:(UIButton *)button
 {
-	NSString *buttonTitle = [button titleForState:UIControlStateNormal];
-    RBPMiniGameSceneViewController *miniGameViewController = nil;
+	RBPMiniGameSceneViewController *miniGameViewController = nil;
     
-    if ([buttonTitle isEqualToString:@"Leap Virus"]) {
+    if (button.tag == 0) {
         miniGameViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RBPMiniGameSceneViewController_Jump"];
-    } else if ([buttonTitle isEqualToString:@"Simoné Says"]) {
+    } else if (button.tag == 1) {
         miniGameViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RBPMiniGameSceneViewController_Music"];
-    } else if ([buttonTitle isEqualToString:@"Bumper Ball"]) {
+    } else if (button.tag == 2) {
         miniGameViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RBPMiniGameSceneViewController_Roll"];
     }
     

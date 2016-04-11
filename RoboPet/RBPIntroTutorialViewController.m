@@ -124,7 +124,9 @@
 - (void)pushMainMenu
 {
 	if (!self.presentedViewController) {
+		
 		[self performSegueWithIdentifier:@"RBPMainMenuSceneViewController" sender:nil];
+		
 	}
 }
 
@@ -132,6 +134,7 @@
 {
 	[self.view layoutIfNeeded];
 	
+	self.robot.image = [UIImage imageNamed:@"robot_front_1"];
 	[self setText:STAGE_1_DETAIL_MESSAGE onLabel:self.labelDetail];
 	[self setText:self.labelBottom.text onLabel:self.labelBottom];
 	
@@ -176,7 +179,7 @@
 																   } completion:^(BOOL finished) {
 																	   
 																	   if (finished) {
-																		   
+																			
 																		   [self setText:STAGE_3_DETAIL_MESSAGE onLabel:self.labelDetail];
 																		   self.robot.image = [UIImage imageNamed:@"robot_front_3"];
 																		   [self performSelector:@selector(pushMainMenu) withObject:nil afterDelay:STAGE_3_ANIMATION_DELAY];

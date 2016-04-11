@@ -1,0 +1,20 @@
+App Name: 
+
+	Compubot
+
+App Categories:
+
+	Primary: Games
+	Secondary: Entertainment
+
+App Keywords:
+
+	game, robot, computer, pet
+
+App Description:
+
+	Help your new robot pet, compubot, stay happy, healthy and energized by playing 3 fun mini games!
+
+		- Jump over obstacles to increase compubot's wellness!
+		- Play music to increase compubot's happiness!
+		- Collect batters to increase compubot's energy!

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="P9b-na-dCu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="P9b-na-dCu">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -22,6 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.9509927611981297" blue="0.11180317392949013" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="NvZ-ys-0d5"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -115,7 +116,7 @@ Text</string>
                                 <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="robot_front_1" translatesAutoresizingMaskIntoConstraints="NO" id="gzw-p6-06o" userLabel="robot">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="robot_front_0" translatesAutoresizingMaskIntoConstraints="NO" id="gzw-p6-06o" userLabel="robot">
                                 <rect key="frame" x="52" y="162" width="215" height="380"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -157,8 +158,11 @@ Text</string>
                                     <constraint firstItem="6r6-m0-2EC" firstAttribute="width" secondItem="Uwf-d9-3Tu" secondAttribute="width" multiplier="1:4" id="yk4-Wl-OVL"/>
                                 </constraints>
                             </view>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="robot_front_2" translatesAutoresizingMaskIntoConstraints="NO" id="Rza-FG-xVy" userLabel="robot">
-                                <rect key="frame" x="78" y="2000" width="204" height="244"/>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="robot_front_1" translatesAutoresizingMaskIntoConstraints="NO" id="Rza-FG-xVy" userLabel="robot">
+                                <rect key="frame" x="88" y="2000" width="204" height="244"/>
+                            </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="robot_front_2" translatesAutoresizingMaskIntoConstraints="NO" id="Jvk-va-tXH" userLabel="robot">
+                                <rect key="frame" x="88" y="2000" width="204" height="244"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="robot_front_3" translatesAutoresizingMaskIntoConstraints="NO" id="Erp-O1-PTY" userLabel="robot">
                                 <rect key="frame" x="88" y="2000" width="204" height="244"/>
@@ -223,6 +227,7 @@ Text</string>
         <image name="battery_full" width="147" height="50"/>
         <image name="bulb-on" width="389" height="389"/>
         <image name="launch_screen_gradient" width="1" height="640"/>
+        <image name="robot_front_0" width="204" height="244"/>
         <image name="robot_front_1" width="204" height="244"/>
         <image name="robot_front_2" width="204" height="244"/>
         <image name="robot_front_3" width="204" height="244"/>
