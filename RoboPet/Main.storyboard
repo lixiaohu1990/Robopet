@@ -20,13 +20,42 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="jump_button" translatesAutoresizingMaskIntoConstraints="NO" id="tbI-5r-A4b">
+                                <rect key="frame" x="20" y="40" width="80" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="tbI-5r-A4b" secondAttribute="height" multiplier="77:25" id="YZB-aX-vae"/>
+                                </constraints>
+                            </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="music_button" translatesAutoresizingMaskIntoConstraints="NO" id="Dvv-sb-Ckt">
+                                <rect key="frame" x="120" y="40" width="80" height="26"/>
+                            </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="roll_button" translatesAutoresizingMaskIntoConstraints="NO" id="bpY-rm-Lqe">
+                                <rect key="frame" x="220" y="40" width="80" height="26"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="0.9509927611981297" blue="0.11180317392949013" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Dvv-sb-Ckt" firstAttribute="centerY" secondItem="tbI-5r-A4b" secondAttribute="centerY" id="1va-l6-HeQ"/>
+                            <constraint firstItem="bpY-rm-Lqe" firstAttribute="centerY" secondItem="tbI-5r-A4b" secondAttribute="centerY" id="7eE-2S-OGg"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="bpY-rm-Lqe" secondAttribute="trailing" id="9nA-xE-h5P"/>
+                            <constraint firstAttribute="leadingMargin" relation="lessThanOrEqual" secondItem="tbI-5r-A4b" secondAttribute="leading" id="AVJ-kW-x7K"/>
+                            <constraint firstItem="Dvv-sb-Ckt" firstAttribute="height" secondItem="tbI-5r-A4b" secondAttribute="height" id="HjU-xI-EUv"/>
+                            <constraint firstItem="bpY-rm-Lqe" firstAttribute="width" secondItem="tbI-5r-A4b" secondAttribute="width" id="Hxb-Fq-Mkv"/>
+                            <constraint firstItem="bpY-rm-Lqe" firstAttribute="height" secondItem="tbI-5r-A4b" secondAttribute="height" id="c8U-IR-u1u"/>
+                            <constraint firstItem="Dvv-sb-Ckt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hhg-vT-MOA"/>
+                            <constraint firstItem="tbI-5r-A4b" firstAttribute="top" secondItem="HmT-jR-GoA" secondAttribute="bottom" constant="40" id="l7L-m3-W3J"/>
+                            <constraint firstItem="Dvv-sb-Ckt" firstAttribute="width" secondItem="tbI-5r-A4b" secondAttribute="width" id="mTc-6Y-PAG"/>
+                            <constraint firstItem="tbI-5r-A4b" firstAttribute="trailing" secondItem="Dvv-sb-Ckt" secondAttribute="leading" constant="-20" id="ppO-3v-fMt"/>
+                            <constraint firstItem="bpY-rm-Lqe" firstAttribute="leading" secondItem="Dvv-sb-Ckt" secondAttribute="trailing" constant="20" id="xNt-24-RcL"/>
+                            <constraint firstItem="tbI-5r-A4b" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.25" id="zcR-iy-r63"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NvZ-ys-0d5"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-684.79999999999995" y="-519.72000000000003"/>
+            <point key="canvasLocation" x="-685" y="-520"/>
         </scene>
         <!--Mini Game Scene View Controller Jump-->
         <scene sceneID="Qag-Ui-OD7">
@@ -226,11 +255,14 @@ Text</string>
     <resources>
         <image name="battery_full" width="147" height="50"/>
         <image name="bulb-on" width="389" height="389"/>
+        <image name="jump_button" width="375" height="125"/>
         <image name="launch_screen_gradient" width="1" height="640"/>
+        <image name="music_button" width="375" height="125"/>
         <image name="robot_front_0" width="204" height="244"/>
         <image name="robot_front_1" width="204" height="244"/>
         <image name="robot_front_2" width="204" height="244"/>
         <image name="robot_front_3" width="204" height="244"/>
+        <image name="roll_button" width="375" height="125"/>
         <image name="transition_screen_gradient" width="1" height="640"/>
         <image name="virus" width="100" height="100"/>
     </resources>

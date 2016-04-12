@@ -195,7 +195,7 @@
 					 }];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	// Cancel our perform selector after delay to show main menu
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(pushMainMenu) object:nil];

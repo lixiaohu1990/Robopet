@@ -1,0 +1,25 @@
+App Name: 
+
+	Compubot
+
+App Categories:
+
+	Primary: Games
+	Secondary: Entertainment
+
+App Keywords:
+
+	game, robot, computer, pet
+
+App Description:
+
+	Help your cute new robot pet, Compubot stay happy, healthy and energized by playing 3 fun mini games! 
+	Have you always wanted to own a robot? If yes, Compubot is the pet for you! 
+	This 100% free game consists of three fun mini games to keep you glued to your screen:
+
+	•The roll game: to increase Compubot’s power level, collect batteries before it runs out of juice while avoiding bumpers. 
+	•The music game: to increase Compubot’s happiness level, click L.E.D lights on Compubot’s controller to complete a song. 
+	•The jump game: to increase Compubot’s wellness, level avoid viruses and boxes to keep the robot healthy and virus free.
+
+	Each mini game can be accessed through Compubot’s room which is the home screen.
+	Compubot is waiting for you!
