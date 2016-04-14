@@ -26,9 +26,9 @@
 		2EA20A981CA0A84D00213A75 /* RBPMiniGameJump_TutorialPages.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EA20A971CA0A84D00213A75 /* RBPMiniGameJump_TutorialPages.xib */; };
 		2EA20A9A1CA0AFC300213A75 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EA20A991CA0AFC300213A75 /* LaunchScreen.xib */; };
 		2EA20A9C1CA0B0E900213A75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA20A9B1CA0B0E900213A75 /* Assets.xcassets */; };
-		2EA8AE451CBC72CF0016E4AC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 2EA8AE441CBC72CF0016E4AC /* LICENSE */; };
 		2EABE63A1C9C9661006E4591 /* RBPMiniGameRollBumper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EABE6391C9C9661006E4591 /* RBPMiniGameRollBumper.m */; };
 		2EB192871C9E061B000440A7 /* RBPMiniGameRoll_TutorialPages.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EB192861C9E061B000440A7 /* RBPMiniGameRoll_TutorialPages.xib */; };
+		2EB66B021CBFFBF50024DD3C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 2EB66B011CBFFBF50024DD3C /* LICENSE */; };
 		2EC2F2B71C8E400600DDA995 /* RBPMiniGameSceneViewController_Jump.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC2F2B61C8E400600DDA995 /* RBPMiniGameSceneViewController_Jump.m */; };
 		2EC4B16B1C8513F900AB33CE /* RBPMiniGamePauseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4B16A1C8513F900AB33CE /* RBPMiniGamePauseViewController.m */; };
 		2EC4B18C1C8531F900AB33CE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2EC4B1711C8531F900AB33CE /* Info.plist */; };
@@ -94,10 +94,10 @@
 		2EA20A971CA0A84D00213A75 /* RBPMiniGameJump_TutorialPages.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RBPMiniGameJump_TutorialPages.xib; sourceTree = "<group>"; };
 		2EA20A991CA0AFC300213A75 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		2EA20A9B1CA0B0E900213A75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2EA8AE441CBC72CF0016E4AC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		2EABE6381C9C9661006E4591 /* RBPMiniGameRollBumper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGameRollBumper.h; sourceTree = "<group>"; };
 		2EABE6391C9C9661006E4591 /* RBPMiniGameRollBumper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameRollBumper.m; sourceTree = "<group>"; };
 		2EB192861C9E061B000440A7 /* RBPMiniGameRoll_TutorialPages.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RBPMiniGameRoll_TutorialPages.xib; sourceTree = "<group>"; };
+		2EB66B011CBFFBF50024DD3C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = RoboPet/LICENSE; sourceTree = "<group>"; };
 		2EC2F2B61C8E400600DDA995 /* RBPMiniGameSceneViewController_Jump.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGameSceneViewController_Jump.m; sourceTree = "<group>"; };
 		2EC4B1691C8513F900AB33CE /* RBPMiniGamePauseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPMiniGamePauseViewController.h; sourceTree = "<group>"; };
 		2EC4B16A1C8513F900AB33CE /* RBPMiniGamePauseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPMiniGamePauseViewController.m; sourceTree = "<group>"; };
@@ -311,7 +311,7 @@
 		2EA8AE461CBC72DD0016E4AC /* MZFormSheetController */ = {
 			isa = PBXGroup;
 			children = (
-				2EA8AE441CBC72CF0016E4AC /* LICENSE */,
+				2EB66B011CBFFBF50024DD3C /* LICENSE */,
 				2EC4B19F1C85337300AB33CE /* MZAppearance */,
 				2EC4B1701C8531F900AB33CE /* MZFormSheetPresentationController */,
 			);
@@ -455,9 +455,9 @@
 				2EB192871C9E061B000440A7 /* RBPMiniGameRoll_TutorialPages.xib in Resources */,
 				2EA20A981CA0A84D00213A75 /* RBPMiniGameJump_TutorialPages.xib in Resources */,
 				2EA20A9A1CA0AFC300213A75 /* LaunchScreen.xib in Resources */,
+				2EB66B021CBFFBF50024DD3C /* LICENSE in Resources */,
 				2EA20A9C1CA0B0E900213A75 /* Assets.xcassets in Resources */,
 				2EC4B18C1C8531F900AB33CE /* Info.plist in Resources */,
-				2EA8AE451CBC72CF0016E4AC /* LICENSE in Resources */,
 				2E23B92C1C8E391100F9E94E /* Main.storyboard in Resources */,
 				842B79EB1CADF2E3005EE6AE /* RBPMiniGameMusic_TutorialPages.xib in Resources */,
 			);
