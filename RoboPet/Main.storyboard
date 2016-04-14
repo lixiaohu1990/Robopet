@@ -21,39 +21,127 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CxR-H4-rtM" userLabel="wellnessBar_container">
+                                <rect key="frame" x="20" y="10" width="80" height="26"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="jump_button" translatesAutoresizingMaskIntoConstraints="NO" id="tbI-5r-A4b">
-                                <rect key="frame" x="20" y="40" width="80" height="26"/>
+                                <rect key="frame" x="20" y="46" width="80" height="26"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="tbI-5r-A4b" secondAttribute="height" multiplier="77:25" id="YZB-aX-vae"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="t3v-gw-qmI" appends="YES" id="Sgq-hD-YLh"/>
+                                </connections>
                             </imageView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="music_button" translatesAutoresizingMaskIntoConstraints="NO" id="Dvv-sb-Ckt">
-                                <rect key="frame" x="120" y="40" width="80" height="26"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leap Virus" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="59o-9i-rHQ">
+                                <rect key="frame" x="38" y="46" width="44" height="26"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fzj-H6-QJZ" userLabel="happinessBar_container">
+                                <rect key="frame" x="120" y="10" width="80" height="26"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleAspectFill" image="music_button" translatesAutoresizingMaskIntoConstraints="NO" id="Dvv-sb-Ckt">
+                                <rect key="frame" x="120" y="46" width="80" height="26"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="fFb-6J-Rf3" appends="YES" id="ntD-Qo-UoC"/>
+                                </connections>
                             </imageView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="roll_button" translatesAutoresizingMaskIntoConstraints="NO" id="bpY-rm-Lqe">
-                                <rect key="frame" x="220" y="40" width="80" height="26"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Simoné Says'" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="HIj-QJ-jVM">
+                                <rect key="frame" x="139" y="46" width="56" height="26"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xx0-0P-YPk" userLabel="energyBar_container">
+                                <rect key="frame" x="220" y="10" width="80" height="26"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleAspectFill" image="roll_button" translatesAutoresizingMaskIntoConstraints="NO" id="bpY-rm-Lqe">
+                                <rect key="frame" x="220" y="46" width="80" height="26"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="cQN-6d-dyP" appends="YES" id="n3S-VB-70U"/>
+                                </connections>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bumper Ball" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="rM0-Hc-byd">
+                                <rect key="frame" x="241" y="46" width="48" height="26"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.9509927611981297" blue="0.11180317392949013" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="rM0-Hc-byd" firstAttribute="height" secondItem="bpY-rm-Lqe" secondAttribute="height" id="18T-yw-tkz"/>
                             <constraint firstItem="Dvv-sb-Ckt" firstAttribute="centerY" secondItem="tbI-5r-A4b" secondAttribute="centerY" id="1va-l6-HeQ"/>
+                            <constraint firstItem="fzj-H6-QJZ" firstAttribute="centerY" secondItem="CxR-H4-rtM" secondAttribute="centerY" id="2uB-HB-eZG"/>
+                            <constraint firstItem="HIj-QJ-jVM" firstAttribute="width" secondItem="Dvv-sb-Ckt" secondAttribute="width" multiplier="0.7" id="2wf-or-gBs"/>
+                            <constraint firstItem="tbI-5r-A4b" firstAttribute="top" secondItem="CxR-H4-rtM" secondAttribute="bottom" constant="10" id="3ny-62-Rns"/>
+                            <constraint firstItem="CxR-H4-rtM" firstAttribute="centerX" secondItem="tbI-5r-A4b" secondAttribute="centerX" id="4XA-cP-1lK"/>
                             <constraint firstItem="bpY-rm-Lqe" firstAttribute="centerY" secondItem="tbI-5r-A4b" secondAttribute="centerY" id="7eE-2S-OGg"/>
+                            <constraint firstItem="rM0-Hc-byd" firstAttribute="centerX" secondItem="bpY-rm-Lqe" secondAttribute="centerX" multiplier="1.02" id="9LQ-dH-m2x"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="bpY-rm-Lqe" secondAttribute="trailing" id="9nA-xE-h5P"/>
+                            <constraint firstItem="Xx0-0P-YPk" firstAttribute="centerX" secondItem="bpY-rm-Lqe" secondAttribute="centerX" id="9vh-2i-kcW"/>
                             <constraint firstAttribute="leadingMargin" relation="lessThanOrEqual" secondItem="tbI-5r-A4b" secondAttribute="leading" id="AVJ-kW-x7K"/>
+                            <constraint firstItem="CxR-H4-rtM" firstAttribute="height" secondItem="tbI-5r-A4b" secondAttribute="height" id="EnM-3T-3Nh"/>
                             <constraint firstItem="Dvv-sb-Ckt" firstAttribute="height" secondItem="tbI-5r-A4b" secondAttribute="height" id="HjU-xI-EUv"/>
                             <constraint firstItem="bpY-rm-Lqe" firstAttribute="width" secondItem="tbI-5r-A4b" secondAttribute="width" id="Hxb-Fq-Mkv"/>
+                            <constraint firstItem="59o-9i-rHQ" firstAttribute="height" secondItem="tbI-5r-A4b" secondAttribute="height" id="LCM-We-bjE"/>
+                            <constraint firstItem="CxR-H4-rtM" firstAttribute="top" secondItem="HmT-jR-GoA" secondAttribute="bottom" constant="10" id="Oyf-Dn-gGL"/>
+                            <constraint firstItem="Xx0-0P-YPk" firstAttribute="width" secondItem="CxR-H4-rtM" secondAttribute="width" id="S0q-5g-3ee"/>
+                            <constraint firstItem="59o-9i-rHQ" firstAttribute="centerX" secondItem="tbI-5r-A4b" secondAttribute="centerX" id="WfS-Lt-Zxf"/>
+                            <constraint firstItem="59o-9i-rHQ" firstAttribute="centerY" secondItem="tbI-5r-A4b" secondAttribute="centerY" id="YQG-hN-Nuq"/>
+                            <constraint firstItem="Xx0-0P-YPk" firstAttribute="centerY" secondItem="CxR-H4-rtM" secondAttribute="centerY" id="aeU-Ur-7BI"/>
+                            <constraint firstItem="HIj-QJ-jVM" firstAttribute="height" secondItem="Dvv-sb-Ckt" secondAttribute="height" id="c3C-3m-8YN"/>
                             <constraint firstItem="bpY-rm-Lqe" firstAttribute="height" secondItem="tbI-5r-A4b" secondAttribute="height" id="c8U-IR-u1u"/>
+                            <constraint firstItem="HIj-QJ-jVM" firstAttribute="centerY" secondItem="Dvv-sb-Ckt" secondAttribute="centerY" id="cgS-GK-G0P"/>
+                            <constraint firstItem="CxR-H4-rtM" firstAttribute="width" secondItem="tbI-5r-A4b" secondAttribute="width" id="eTc-RY-qYU"/>
                             <constraint firstItem="Dvv-sb-Ckt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hhg-vT-MOA"/>
-                            <constraint firstItem="tbI-5r-A4b" firstAttribute="top" secondItem="HmT-jR-GoA" secondAttribute="bottom" constant="40" id="l7L-m3-W3J"/>
+                            <constraint firstItem="59o-9i-rHQ" firstAttribute="width" secondItem="tbI-5r-A4b" secondAttribute="width" multiplier="0.55" id="jAk-iF-pI9"/>
+                            <constraint firstItem="rM0-Hc-byd" firstAttribute="centerY" secondItem="bpY-rm-Lqe" secondAttribute="centerY" id="ls2-So-c3B"/>
                             <constraint firstItem="Dvv-sb-Ckt" firstAttribute="width" secondItem="tbI-5r-A4b" secondAttribute="width" id="mTc-6Y-PAG"/>
                             <constraint firstItem="tbI-5r-A4b" firstAttribute="trailing" secondItem="Dvv-sb-Ckt" secondAttribute="leading" constant="-20" id="ppO-3v-fMt"/>
+                            <constraint firstItem="fzj-H6-QJZ" firstAttribute="centerX" secondItem="Dvv-sb-Ckt" secondAttribute="centerX" id="sTj-Wi-u1Y"/>
+                            <constraint firstItem="HIj-QJ-jVM" firstAttribute="trailing" secondItem="Dvv-sb-Ckt" secondAttribute="trailing" constant="-5" id="vH7-FQ-Y7q"/>
+                            <constraint firstItem="fzj-H6-QJZ" firstAttribute="height" secondItem="CxR-H4-rtM" secondAttribute="height" id="vT5-D0-JQM"/>
+                            <constraint firstItem="Xx0-0P-YPk" firstAttribute="height" secondItem="CxR-H4-rtM" secondAttribute="height" id="w0o-Xm-ml5"/>
+                            <constraint firstItem="fzj-H6-QJZ" firstAttribute="width" secondItem="CxR-H4-rtM" secondAttribute="width" id="x9Z-sA-R8H"/>
                             <constraint firstItem="bpY-rm-Lqe" firstAttribute="leading" secondItem="Dvv-sb-Ckt" secondAttribute="trailing" constant="20" id="xNt-24-RcL"/>
+                            <constraint firstItem="rM0-Hc-byd" firstAttribute="width" secondItem="bpY-rm-Lqe" secondAttribute="width" multiplier="0.6" id="zVl-eA-gfd"/>
                             <constraint firstItem="tbI-5r-A4b" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.25" id="zcR-iy-r63"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NvZ-ys-0d5"/>
+                    <connections>
+                        <outlet property="energyBarContainer" destination="Xx0-0P-YPk" id="8co-za-qWB"/>
+                        <outlet property="happinessBarContainer" destination="fzj-H6-QJZ" id="a9x-0p-dRx"/>
+                        <outlet property="wellnessBarContainer" destination="CxR-H4-rtM" id="hXg-0w-LAJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="cQN-6d-dyP">
+                    <connections>
+                        <action selector="miniGameButtonTapped:" destination="BYZ-38-t0r" id="z3y-bE-KAk"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="fFb-6J-Rf3">
+                    <connections>
+                        <action selector="miniGameButtonTapped:" destination="BYZ-38-t0r" id="Nbi-zt-Dka"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="t3v-gw-qmI">
+                    <connections>
+                        <action selector="miniGameButtonTapped:" destination="BYZ-38-t0r" id="N3h-92-KsY"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-685" y="-520"/>
         </scene>

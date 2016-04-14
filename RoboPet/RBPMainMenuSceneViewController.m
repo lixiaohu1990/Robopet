@@ -24,6 +24,10 @@
 {
 }
 
+@property (strong, nonatomic) IBOutlet UIView *wellnessBarContainer;
+@property (strong, nonatomic) IBOutlet UIView *happinessBarContainer;
+@property (strong, nonatomic) IBOutlet UIView *energyBarContainer;
+
 @property (strong, nonatomic) RBPProgressView *wellnessBar;
 @property (strong, nonatomic) RBPProgressView *happinessBar;
 @property (strong, nonatomic) RBPProgressView *energyBar;
@@ -43,241 +47,111 @@
     [super viewDidLoad];
 	
 	[self setupProgressBars];
-	[self setupMiniGameButtons];
 }
 
 - (void)setupProgressBars
 {
+    self.wellnessBarContainer.backgroundColor = [UIColor clearColor];
+    self.happinessBarContainer.backgroundColor = [UIColor clearColor];
+    self.energyBarContainer.backgroundColor = [UIColor clearColor];
+    
 	self.wellnessBar = [RBPProgressView wellnessBar];
-	[self.view addSubview:self.wellnessBar];
+	[self.wellnessBarContainer addSubview:self.wellnessBar];
 	
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.wellnessBar
-														  attribute:NSLayoutAttributeCenterX
+	[self.wellnessBarContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.wellnessBar
+														  attribute:NSLayoutAttributeLeft
 														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.view
-														  attribute:NSLayoutAttributeCenterX
+															 toItem:self.wellnessBarContainer
+														  attribute:NSLayoutAttributeLeft
 														 multiplier:1.0
-														   constant:-200.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.wellnessBar
+														   constant:0.0]];
+	[self.wellnessBarContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.wellnessBar
+														  attribute:NSLayoutAttributeRight
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:self.wellnessBarContainer
+														  attribute:NSLayoutAttributeRight
+														 multiplier:1.0
+														   constant:0.0]];
+	[self.wellnessBarContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.wellnessBar
 														  attribute:NSLayoutAttributeTop
 														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.view
+															 toItem:self.wellnessBarContainer
 														  attribute:NSLayoutAttributeTop
 														 multiplier:1.0
-														   constant:PADDING]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.wellnessBar
-														  attribute:NSLayoutAttributeWidth
+														   constant:0.0]];
+	[self.wellnessBarContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.wellnessBar
+														  attribute:NSLayoutAttributeBottom
 														  relatedBy:NSLayoutRelationEqual
-															 toItem:nil
-														  attribute:NSLayoutAttributeNotAnAttribute
+															 toItem:self.wellnessBarContainer
+														  attribute:NSLayoutAttributeBottom
 														 multiplier:1.0
-														   constant:175.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.wellnessBar
-														  attribute:NSLayoutAttributeHeight
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:nil
-														  attribute:NSLayoutAttributeNotAnAttribute
-														 multiplier:1.0
-														   constant:40.0]];
+														   constant:0.0]];
 	
 	
 	self.happinessBar = [RBPProgressView happinessBar];
-	[self.view addSubview:self.happinessBar];
+	[self.happinessBarContainer addSubview:self.happinessBar];
 	
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.happinessBar
-														  attribute:NSLayoutAttributeCenterX
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.view
-														  attribute:NSLayoutAttributeCenterX
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.happinessBar
-														  attribute:NSLayoutAttributeTop
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.wellnessBar
-														  attribute:NSLayoutAttributeTop
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.happinessBar
-														  attribute:NSLayoutAttributeWidth
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.wellnessBar
-														  attribute:NSLayoutAttributeWidth
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.happinessBar
-														  attribute:NSLayoutAttributeHeight
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.wellnessBar
-														  attribute:NSLayoutAttributeHeight
-														 multiplier:1.0
-														   constant:0.0]];
+    [self.happinessBarContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.happinessBar
+                                                                          attribute:NSLayoutAttributeLeft
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self.happinessBarContainer
+                                                                          attribute:NSLayoutAttributeLeft
+                                                                         multiplier:1.0
+                                                                           constant:0.0]];
+    [self.happinessBarContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.happinessBar
+                                                                          attribute:NSLayoutAttributeRight
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self.happinessBarContainer
+                                                                          attribute:NSLayoutAttributeRight
+                                                                         multiplier:1.0
+                                                                           constant:0.0]];
+    [self.happinessBarContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.happinessBar
+                                                                          attribute:NSLayoutAttributeTop
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self.happinessBarContainer
+                                                                          attribute:NSLayoutAttributeTop
+                                                                         multiplier:1.0
+                                                                           constant:0.0]];
+    [self.happinessBarContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.happinessBar
+                                                                          attribute:NSLayoutAttributeBottom
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self.happinessBarContainer
+                                                                          attribute:NSLayoutAttributeBottom
+                                                                         multiplier:1.0
+                                                                           constant:0.0]];
 	
 	
 	self.energyBar = [RBPProgressView energyBar];
-	[self.view addSubview:self.energyBar];
+	[self.energyBarContainer addSubview:self.energyBar];
 	
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.energyBar
-														  attribute:NSLayoutAttributeCenterX
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.view
-														  attribute:NSLayoutAttributeCenterX
-														 multiplier:1.0
-														   constant:200.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.energyBar
-														  attribute:NSLayoutAttributeTop
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.wellnessBar
-														  attribute:NSLayoutAttributeTop
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.energyBar
-														  attribute:NSLayoutAttributeWidth
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.wellnessBar
-														  attribute:NSLayoutAttributeWidth
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.energyBar
-														  attribute:NSLayoutAttributeHeight
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.wellnessBar
-														  attribute:NSLayoutAttributeHeight
-														 multiplier:1.0
-														   constant:0.0]];
-}
-
-- (void)setupMiniGameButtons
-{
-	// Temporary buttons
-    UIButton *jumpButton = [[UIButton alloc] init];
-    jumpButton.tag = 0;
-    UIImage *btnImage = [UIImage imageNamed:@"jump_button"];
-
-	[jumpButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
-    [jumpButton setBackgroundImage:btnImage forState:UIControlStateNormal];
-	jumpButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [jumpButton setTitle:@"  Leap Virus" forState:UIControlStateNormal];
-    [jumpButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	[self.view addSubview:jumpButton];
-	
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:jumpButton
-														  attribute:NSLayoutAttributeCenterX
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.wellnessBar
-														  attribute:NSLayoutAttributeCenterX
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:jumpButton
-														  attribute:NSLayoutAttributeTop
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.wellnessBar
-														  attribute:NSLayoutAttributeBottom
-														 multiplier:1.0
-														   constant:PADDING]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:jumpButton
-														  attribute:NSLayoutAttributeWidth
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.wellnessBar
-														  attribute:NSLayoutAttributeWidth
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:jumpButton
-														  attribute:NSLayoutAttributeHeight
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.wellnessBar
-														  attribute:NSLayoutAttributeHeight
-														 multiplier:1.0
-														   constant:0.0]];
-	
-	
-	
-	UIButton *musicButton = [[UIButton alloc] init];
-    musicButton.tag = 1;
-    UIImage *btnImage1 = [UIImage imageNamed:@"music_button"];
-
-	[musicButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
-    [musicButton setBackgroundImage:btnImage1 forState:UIControlStateNormal];
-
-	musicButton.translatesAutoresizingMaskIntoConstraints = NO;
-	
-	[musicButton setTitle:@"   Simoné Says" forState:UIControlStateNormal];
-    [musicButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	[self.view addSubview:musicButton];
-	
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:musicButton
-														  attribute:NSLayoutAttributeCenterX
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.happinessBar
-														  attribute:NSLayoutAttributeCenterX
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:musicButton
-														  attribute:NSLayoutAttributeTop
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.happinessBar
-														  attribute:NSLayoutAttributeBottom
-														 multiplier:1.0
-														   constant:PADDING]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:musicButton
-														  attribute:NSLayoutAttributeWidth
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.happinessBar
-														  attribute:NSLayoutAttributeWidth
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:musicButton
-														  attribute:NSLayoutAttributeHeight
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.happinessBar
-														  attribute:NSLayoutAttributeHeight
-														 multiplier:1.0
-														   constant:0.0]];
-	
-	
-	
-    UIButton *rollButton = [[UIButton alloc] init];
-    rollButton.tag = 2;
-    UIImage *btnImage2 = [UIImage imageNamed:@"roll_button"];
-
-	[rollButton addTarget:self action:@selector(clickedLoadMiniGameButton:) forControlEvents:UIControlEventTouchUpInside];
-    [rollButton setBackgroundImage:btnImage2 forState:UIControlStateNormal];
-	rollButton.translatesAutoresizingMaskIntoConstraints = NO;
-	[rollButton setTitle:@"  Bumper Ball" forState:UIControlStateNormal];
-    [rollButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-
-
-    
-	[self.view addSubview:rollButton];
-	
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:rollButton
-														  attribute:NSLayoutAttributeCenterX
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.energyBar
-														  attribute:NSLayoutAttributeCenterX
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:rollButton
-														  attribute:NSLayoutAttributeTop
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.energyBar
-														  attribute:NSLayoutAttributeBottom
-														 multiplier:1.0
-														   constant:PADDING]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:rollButton
-														  attribute:NSLayoutAttributeWidth
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.energyBar
-														  attribute:NSLayoutAttributeWidth
-														 multiplier:1.0
-														   constant:0.0]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:rollButton
-														  attribute:NSLayoutAttributeHeight
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:self.energyBar
-														  attribute:NSLayoutAttributeHeight
-														 multiplier:1.0
-														   constant:0.0]];
+    [self.energyBarContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.energyBar
+                                                                          attribute:NSLayoutAttributeLeft
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self.energyBarContainer
+                                                                          attribute:NSLayoutAttributeLeft
+                                                                         multiplier:1.0
+                                                                           constant:0.0]];
+    [self.energyBarContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.energyBar
+                                                                          attribute:NSLayoutAttributeRight
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self.energyBarContainer
+                                                                          attribute:NSLayoutAttributeRight
+                                                                         multiplier:1.0
+                                                                           constant:0.0]];
+    [self.energyBarContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.energyBar
+                                                                          attribute:NSLayoutAttributeTop
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self.energyBarContainer
+                                                                          attribute:NSLayoutAttributeTop
+                                                                         multiplier:1.0
+                                                                           constant:0.0]];
+    [self.energyBarContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.energyBar
+                                                                          attribute:NSLayoutAttributeBottom
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self.energyBarContainer
+                                                                          attribute:NSLayoutAttributeBottom
+                                                                         multiplier:1.0
+                                                                           constant:0.0]];
 }
 
 - (void)viewDidLayoutSubviews
@@ -291,33 +165,33 @@
 
 #pragma mark - RBPMainMenuSceneViewController
 
-- (void)clickedLoadMiniGameButton:(UIButton *)button
+- (IBAction)miniGameButtonTapped:(UITapGestureRecognizer *)tap
 {
-	RBPMiniGameSceneViewController *miniGameViewController = nil;
+    RBPMiniGameSceneViewController *miniGameViewController = nil;
     
-    if (button.tag == 0) {
+    if (tap.view.tag == 0) {
         miniGameViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RBPMiniGameSceneViewController_Jump"];
-    } else if (button.tag == 1) {
+    } else if (tap.view.tag == 1) {
         miniGameViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RBPMiniGameSceneViewController_Music"];
-    } else if (button.tag == 2) {
+    } else if (tap.view.tag == 2) {
         miniGameViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RBPMiniGameSceneViewController_Roll"];
     }
     
     if (miniGameViewController) {
-		
-		miniGameViewController.delegate = self;
-		
-		MZFormSheetPresentationViewController *formSheet = [[MZFormSheetPresentationViewController alloc]
-															initWithContentViewController:miniGameViewController];
-		
-		// Full Screen and Centred
-		formSheet.presentationController.contentViewSize = self.view.bounds.size;
-		formSheet.presentationController.shouldCenterHorizontally = formSheet.presentationController.shouldCenterVertically = YES;
-		formSheet.contentViewControllerTransitionStyle =  MZFormSheetPresentationTransitionStyleDropDown;
-		formSheet.contentViewCornerRadius = 0.0;
-		
-		[self presentViewController:formSheet animated:YES completion:nil];
-		
+        
+        miniGameViewController.delegate = self;
+        
+        MZFormSheetPresentationViewController *formSheet = [[MZFormSheetPresentationViewController alloc]
+                                                            initWithContentViewController:miniGameViewController];
+        
+        // Full Screen and Centred
+        formSheet.presentationController.contentViewSize = self.view.bounds.size;
+        formSheet.presentationController.shouldCenterHorizontally = formSheet.presentationController.shouldCenterVertically = YES;
+        formSheet.contentViewControllerTransitionStyle =  MZFormSheetPresentationTransitionStyleDropDown;
+        formSheet.contentViewCornerRadius = 0.0;
+        
+        [self presentViewController:formSheet animated:YES completion:nil];
+        
     }
 }
 
